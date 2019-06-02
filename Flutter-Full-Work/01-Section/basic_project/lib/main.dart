@@ -36,6 +36,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String value = "Ibad siddiqui here";
+
+  @override
+  void initState() { 
+    super.initState();
+    print("state intiailized");  
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
