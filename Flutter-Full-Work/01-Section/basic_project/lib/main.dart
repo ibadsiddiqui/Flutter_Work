@@ -9,14 +9,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: FlatButton(
-            child: Text("Press Me"),
-            onPressed: (){
-              print("Salam");
-            },
-          )
-        )
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("Salam"),
+            Center(
+              child: FlatButton(
+                child: Text("Press Me",textScaleFactor: 1.2,),
+                onPressed: (){
+                  print("Salam");
+                },
+              )
+            ) 
+          ]
+        ),
       ),
     );
   }
