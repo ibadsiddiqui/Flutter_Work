@@ -20,7 +20,7 @@ void main(List<String> args) {
 //                   print("Salam");
 //                 },
 //               )
-//             ) 
+//             )
 //           ]
 //         ),
 //       ),
@@ -35,14 +35,27 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String value = "Ibad siddiqui here";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       home: Scaffold(
-         body: Center(
-           child: Text("Ibad here"),
-         ),
-       ) 
+      home: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: Text(value),
+            ),
+            FlatButton(child: Text("Press Me To Change"), 
+              onPressed: () {
+                value="Ibad here";
+                print(value);
+                setState(() {});
+              },
+            )
+          ],
+        )
+      )
     );
   }
 }
