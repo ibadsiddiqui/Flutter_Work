@@ -19,6 +19,9 @@ class MyAppState extends State<MyApp> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Center(child: Image.asset("assets/images/hug.png", width: 100.0,height: 100.0,)),
+            // Center(child: Image.network("https://previews.123rf.com/images/merkulovnik/merkulovnik1802/merkulovnik180200138/96702524-ink-drop-in-water-background.jpg", width: 100.0,height: 100.0,)),
+            
             Chip(
                 label: Text(str,
                     style: TextStyle(
