@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 // #docregion RWS-var
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final Set<WordPair> _saved = Set<WordPair>(); // Add this line.
+  final Set<WordPair> _saved = Set<WordPair>(); 
   final _biggerFont = const TextStyle(fontSize: 18.0);
   // #enddocregion RWS-var
 
@@ -42,17 +42,25 @@ class RandomWordsState extends State<RandomWords> {
 
   // #docregion _buildRow
   Widget _buildRow(WordPair pair) {
-    final bool alreadySaved = _saved.contains(pair); // Add this line.
+    final bool alreadySaved = _saved.contains(pair);
     return ListTile(
       title: Text(
         pair.asPascalCase,
         style: _biggerFont,
       ),
       trailing: Icon(
-        // Add the lines from here...
         alreadySaved ? Icons.favorite : Icons.favorite_border,
         color: alreadySaved ? Colors.red : null,
       ),
+      onTap: () {
+        setState(() {
+          if (alreadySaved) {
+            _saved.remove(pair);
+          } else {
+            _saved.add(pair);
+          }
+        });
+      },
     );
   }
   // #enddocregion _buildRow
