@@ -1,4 +1,4 @@
-package nbcreativestudio.test_drive
+package nbcreativestudio.startup_namer
 
 import android.os.Bundle
 
