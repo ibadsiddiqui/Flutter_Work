@@ -15,18 +15,13 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: ListView(
-          children: <Widget>[
-            ListTile(
-              title: Text("Ibad Siddiqui"),
-            ),
-            ListTile(
-              title: Text("Ibad Siddiqui"),
-            ),
-            ListTile(
-              title: Text("Ibad Siddiqui"),
-            )
-          ],
+        body: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text("Salam" + index.toString()),
+            );
+          },
+          itemCount: 20,
         ),
       ),
     );
