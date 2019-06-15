@@ -15,20 +15,23 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("The title of the app comes here"),
-          backgroundColor: Colors.teal,
-          elevation: 0.0,
-          centerTitle: true,
-          leading: Icon(Icons.access_time), // it is the left drawer icon on top
-          actions: <Widget>[Icon(Icons.mic),Icon(Icons.mic)], // icons on the right
+        body: Stack(
+          alignment: AlignmentDirectional.center,
+          fit: StackFit.expand,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Card(
+                elevation: 5.0,
+                child: Text("Ibad Siddiqui",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.teal, fontWeight: FontWeight.bold)),
+              ),
+            ),
+            FlutterLogo(),
+          ],
         ),
-        body: Center(child: Text("Ibad here")),
-        drawer: Drawer(
-          child: Text("ibad siddiqui"),
-        ),
-        endDrawer: Drawer(child: Text("asd"),),
-        floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: () {},),
       ),
     );
   }
