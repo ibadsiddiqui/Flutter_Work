@@ -17,9 +17,12 @@ class MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text("The title of the app comes here"),
+          backgroundColor: Colors.teal,
+          elevation: 0.0,
           centerTitle: true,
         ),
-        body: Container(),
+        body: Center(child: Text("Ibad here")),
+        // backgroundColor: Colors.white,
       ),
     );
   }
