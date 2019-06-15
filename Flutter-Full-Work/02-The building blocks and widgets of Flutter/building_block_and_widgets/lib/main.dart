@@ -15,15 +15,27 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text("Salam" + index.toString()),
-            );
-          },
-          itemCount: 20,
-        ),
-      ),
+          body: ListView.separated(
+              itemBuilder: (context, int index) {
+                return ListTile(
+                  leading: Icon(Icons.account_box),
+                  title: Text("Salam" + index.toString()),
+                  onTap: () {
+                    print(index);
+                  },
+                );
+              },
+              itemCount: 20,
+              separatorBuilder: (context, index) {
+                if ((index + 1) % 5 == 0) {
+                  return ListTile(
+                    title: Text((index + 1).toString()),
+                    selected: true,
+                  );
+                } else {
+                  return Container();
+                }
+              })),
     );
   }
 }
