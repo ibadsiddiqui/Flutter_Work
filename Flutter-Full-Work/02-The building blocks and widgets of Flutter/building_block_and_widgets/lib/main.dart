@@ -15,21 +15,17 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Stack(
-          alignment: AlignmentDirectional.center,
-          fit: StackFit.expand,
+        body: ListView(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Card(
-                elevation: 5.0,
-                child: Text("Ibad Siddiqui",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.teal, fontWeight: FontWeight.bold)),
-              ),
+            ListTile(
+              title: Text("Ibad Siddiqui"),
             ),
-            FlutterLogo(),
+            ListTile(
+              title: Text("Ibad Siddiqui"),
+            ),
+            ListTile(
+              title: Text("Ibad Siddiqui"),
+            )
           ],
         ),
       ),
