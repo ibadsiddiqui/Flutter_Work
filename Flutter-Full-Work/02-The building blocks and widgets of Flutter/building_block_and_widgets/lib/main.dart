@@ -22,20 +22,6 @@ class MyAppState extends State<MyApp> {
           centerTitle: true,
         ),
         body: Center(child: Text("Ibad here")),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          selectedItemColor: Colors.red,
-          currentIndex: 0,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text("home")),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text("home")),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text("home")),
-          ],
-        ),
-        // backgroundColor: Colors.white,
       ),
     );
   }
