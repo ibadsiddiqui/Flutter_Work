@@ -17,6 +17,7 @@ class MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text("The title of the app comes here"),
+          centerTitle: true,
         ),
         body: Container(),
       ),
