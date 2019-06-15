@@ -20,8 +20,15 @@ class MyAppState extends State<MyApp> {
           backgroundColor: Colors.teal,
           elevation: 0.0,
           centerTitle: true,
+          leading: Icon(Icons.access_time), // it is the left drawer icon on top
+          actions: <Widget>[Icon(Icons.mic),Icon(Icons.mic)], // icons on the right
         ),
         body: Center(child: Text("Ibad here")),
+        drawer: Drawer(
+          child: Text("ibad siddiqui"),
+        ),
+        endDrawer: Drawer(child: Text("asd"),),
+        floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: () {},),
       ),
     );
   }
