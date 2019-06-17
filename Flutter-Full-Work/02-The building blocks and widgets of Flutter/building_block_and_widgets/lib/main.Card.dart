@@ -31,7 +31,27 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(),
-    );
+        body: Center(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        color: Colors.amberAccent,
+        elevation: 20.0,
+        child: Padding(
+          padding: const EdgeInsets.all(100.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              FlutterLogo(
+                size: 75,
+              ),
+              Text("ibad here"),
+            ],
+          ),
+        ),
+      ),
+    ));
   }
 }
