@@ -30,21 +30,28 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
-        body: Container(
-            alignment: Alignment.center,
-            // color: Colors.teal,
-            child: Text('ibad'),
-            // constraints: BoxConstraints(maxHeight: height, maxWidth: width),
-            padding: EdgeInsets.all(10.0),
-            margin: EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-                // color: Colors.teal
-                // gradient: LinearGradient(colors: [Colors.teal, Colors.tealAccent])),
-                // gradient: RadialGradient(colors: [Colors.teal, Colors.tealAccent])),
-                )));
+        body: Center(
+      child: Card(
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(25.0),
+        // ),
+        color: Colors.amberAccent,
+        elevation: 20.0,
+        child: Padding(
+          padding: const EdgeInsets.all(100.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              FlutterLogo(
+                size: 75,
+              ),
+              Text("ibad here"),
+            ],
+          ),
+        ),
+      ),
+    ));
   }
 }
