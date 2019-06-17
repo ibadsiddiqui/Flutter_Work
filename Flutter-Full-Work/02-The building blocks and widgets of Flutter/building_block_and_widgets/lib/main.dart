@@ -33,9 +33,9 @@ class _HomeState extends State<Home> {
     return Scaffold(
         body: Center(
       child: Card(
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(25.0),
-        // ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25.0),
+        ),
         color: Colors.amberAccent,
         elevation: 20.0,
         child: Padding(
