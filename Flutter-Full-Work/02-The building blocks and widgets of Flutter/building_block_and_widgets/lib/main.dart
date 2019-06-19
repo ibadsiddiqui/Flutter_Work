@@ -32,14 +32,27 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FlatButton(
-          child: Text("Press me"),
+        // child: FlatButton(
+        //   child: FlatButton.icon(
+        //     icon: Icon(Icons.add),
+        //     label: Text("Ibad Here"),
+        //     onPressed: () {},
+        //   ),
+        //   onPressed: () {},
+        // child: OutlineButton(
+        //   child: Text("Press me "),
+        //   borderSide: BorderSide(color: Colors.red),
+        //   onPressed: () {},
+        // ),
+        // child: IconButton(
+        //   icon: Icon(Icons.my_location),
+        //   onPressed: () {},
+        //   iconSize: 100,
+        // ),
+        child: RaisedButton(
           onPressed: () {},
-          color: Colors.teal,
-          onHighlightChanged: (b) {print(b);},
-          colorBrightness: Brightness.dark,
-          // highlightColor: Colors.red,
-          splashColor: Colors.pink,
+          child: Text("Press Me"),
+          elevation: 10,
         ),
       ),
     );
