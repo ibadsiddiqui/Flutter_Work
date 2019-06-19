@@ -38,7 +38,8 @@ class _HomeState extends State<Home> {
           color: Colors.teal,
           onHighlightChanged: (b) {print(b);},
           colorBrightness: Brightness.dark,
-          highlightColor: Colors.red
+          // highlightColor: Colors.red,
+          splashColor: Colors.pink,
         ),
       ),
     );
