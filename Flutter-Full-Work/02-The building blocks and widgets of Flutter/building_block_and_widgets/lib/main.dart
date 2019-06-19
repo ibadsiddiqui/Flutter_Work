@@ -31,7 +31,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(),
+      body: Center(
+        child: FlatButton(
+          child: Text("Press me"),
+          onPressed: () {},
+          color: Colors.teal,
+          onHighlightChanged: (b) {print(b);},
+          colorBrightness: Brightness.dark,
+          highlightColor: Colors.red
+        ),
+      ),
     );
   }
 }
