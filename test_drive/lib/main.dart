@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,12 +19,10 @@ class MyApp extends StatelessWidget {
 
 // #docregion RWS-var
 class RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final Set<WordPair> _saved = Set<WordPair>(); 
-  final _biggerFont = const TextStyle(fontSize: 18.0);
-  // #enddocregion RWS-var
+  final List<WordPair> _suggestions = <WordPair>[];
+  final Set<WordPair> _saved = Set<WordPair>();
+  final TextStyle _biggerFont = TextStyle(fontSize: 18.0);
 
-  // #docregion _buildSuggestions
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
@@ -38,9 +36,7 @@ class RandomWordsState extends State<RandomWords> {
           return _buildRow(_suggestions[index]);
         });
   }
-  // #enddocregion _buildSuggestions
 
-  // #docregion _buildRow
   Widget _buildRow(WordPair pair) {
     final bool alreadySaved = _saved.contains(pair);
     return ListTile(
@@ -54,31 +50,22 @@ class RandomWordsState extends State<RandomWords> {
       ),
       onTap: () {
         setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
+          if (alreadySaved)
+            _saved.remove((pair));
+          else
             _saved.add(pair);
-          }
         });
       },
     );
   }
-  // #enddocregion _buildRow
 
-  // #docregion RWS-build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Startup Name Generator'),
-      ),
       body: _buildSuggestions(),
     );
   }
-  // #enddocregion RWS-build
-  // #docregion RWS-var
 }
-// #enddocregion RWS-var
 
 class RandomWords extends StatefulWidget {
   @override
