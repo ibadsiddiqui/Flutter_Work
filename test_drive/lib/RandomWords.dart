@@ -39,8 +39,9 @@ class RandomWordsState extends State<RandomWords> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: new AppBar(
         title: Text('Startup Name Generator'),
+        elevation: 0.0,
         actions: <Widget>[
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
         ],
@@ -70,8 +71,9 @@ class RandomWordsState extends State<RandomWords> {
 
           return Scaffold(
             // Add 6 lines from here...
-            appBar: AppBar(
+            appBar: new AppBar(
               title: Text('Saved Suggestions'),
+              elevation: 0.0,
             ),
             body: ListView(children: divided),
           ); // ... to here.

@@ -2,7 +2,6 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:startup_namer/src/component/listWithIcon/index.dart';
 import 'package:startup_namer/src/navigation/index.dart';
-import 'package:startup_namer/src/screens/SavedWord/index.dart';
 
 class RandomWordsState extends State<RandomWords> {
   final List<WordPair> _suggestions = <WordPair>[];
@@ -22,16 +21,12 @@ class RandomWordsState extends State<RandomWords> {
     return ListOfWords(_suggestions, _saved, this.updateSavedWords);
   }
 
-  Widget _buildRow(WordPair pair) {
-    final bool alreadySaved = _saved.contains(pair);
-    return rowBuilder(pair, alreadySaved, this.updateSavedWords);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Startup Name Generator'),
+        elevation: 0.0,
         actions: <Widget>[
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
         ],

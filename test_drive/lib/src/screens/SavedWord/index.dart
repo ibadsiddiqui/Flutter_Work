@@ -25,7 +25,8 @@ class SavedWordsScreen extends StatelessWidget {
     ).toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Saved Suggestions'),
+        title: new Text('Saved Suggestions'),
+        elevation: 0.0,
       ),
       body: ListView(children: divided),
     );
