@@ -23,10 +23,10 @@ class MapAPI {
         "&units=metric";
   }
 
-  // getWeather({double lat, double lon}) async {
-  //   var response = await client.get(
-  //       Uri.encodeFull(_apiCall(lat: lat, lon: lon)),
-  //       headers: {'Accept': 'application/json'});
-  //   return WeatherModel.deserialize(response.body);
-  // }
+  getWeather({double lat, double lon}) async {
+    var response = await client.get(
+        Uri.encodeFull(_apiCall(lat: lat, lon: lon)),
+        headers: {'Accept': 'application/json'});
+    return WeatherModel.deserialize(response.body);
+  }
 }
