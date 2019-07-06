@@ -12,9 +12,9 @@ class WeatherModel {
     JsonDecoder decoder = JsonDecoder();
     var map = await decoder.convert(json);
     String name = map['name'];
-    String icon = map['icon'];
-    String main = map['main'];
-    double temp = map['temp'];
+    String icon = ((map['weather'])[0])['icon'];
+    String main = ((map['weather'])[0])['main'];
+    double temp = double.parse((map['main'])['temp'].toString());
 
     return WeatherModel(name: name, icon: icon, main: main, temp: temp);
   }
