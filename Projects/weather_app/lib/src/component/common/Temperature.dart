@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-Widget TempSection(double temp, fontSize, String imgName) {
+Widget TempSection(String temp, fontSize, String imgName) {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 10.0),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          temp.toStringAsFixed(0),
+          temp,
           style: TextStyle(fontSize: fontSize),
         ),
         Expanded(
@@ -20,7 +20,7 @@ Widget TempSection(double temp, fontSize, String imgName) {
             ),
           ),
         ),
-        Image.asset(
+        Image.network(
           imgName,
           width: 100.0,
           height: 100.0,
