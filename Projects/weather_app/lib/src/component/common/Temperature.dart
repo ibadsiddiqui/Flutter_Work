@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-Widget TempSection(fontSize, imgName) {
+Widget TempSection(double temp, fontSize, String imgName) {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 10.0),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          '20',
+          temp.toStringAsFixed(0),
           style: TextStyle(fontSize: fontSize),
         ),
         Expanded(
