@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/ui/Weather.dart';
-import 'package:weather_app/src/model/Weather.model.dart';
 import 'package:weather_app/src/model/MapAPI.model.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:weather_app/src/model/Weather.model.dart';
+import 'package:weather_app/src/ui/Weather.dart';
+// import 'package:geolocator/geolocator.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);

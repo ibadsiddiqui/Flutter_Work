@@ -20,12 +20,16 @@ Widget TempSection(String temp, fontSize, String imgName) {
             ),
           ),
         ),
-        Image.network(
-          imgName,
-          width: 100.0,
-          height: 100.0,
-          fit: BoxFit.cover,
-        )
+        Expanded(
+            child: Container(
+          // padding: EdgeInsets.only(left: 2.0),
+          child: Image.network(
+            imgName,
+            width: 100.0,
+            height: 100.0,
+            fit: BoxFit.cover,
+          ),
+        ))
       ],
     ),
   );
