@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final DB_API = new DbAPI();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,9 +16,9 @@ class _HomePageState extends State<HomePage> {
           title: Text("E-Commerce"),
         ),
         body: ListView.builder(
-          itemCount: DbAPI.getCategories().length,
+          itemCount: DB_API.getCategories().length,
           itemBuilder: (context, int index) =>
-              Text(DbAPI.getCategories()[index].name),
+              Text(DB_API.getCategories()[index].name),
         ));
   }
 }
