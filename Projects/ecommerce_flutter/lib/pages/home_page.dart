@@ -28,14 +28,17 @@ class _HomePageState extends State<HomePage> {
               return ListView.builder(
                 itemCount: categories.data.length,
                 itemBuilder: (BuildContext context, index) {
-                  return Text(
-                    dbAPI.getCategories()[index].name,
-                    style: TextStyle(fontSize: 24.0),
+                  return ListTile(
+                    onTap: () {},
+                    title: Text(
+                      dbAPI.getCategories()[index].name,
+                      style: TextStyle(fontSize: 24.0),
+                    ),
                   );
                 },
               );
             } else {
-              return Container();
+              return SizedBox();
             }
           },
         ));
