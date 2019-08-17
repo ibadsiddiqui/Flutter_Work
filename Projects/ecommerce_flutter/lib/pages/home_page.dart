@@ -2,6 +2,7 @@ import 'package:ecommerce_flutter/api/db_api.dart';
 import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
 import 'package:ecommerce_flutter/blocs/category_bloc.dart';
 import 'package:ecommerce_flutter/models/Category.dart';
+import 'package:ecommerce_flutter/pages/selected_category_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,7 +30,9 @@ class _HomePageState extends State<HomePage> {
                 itemCount: categories.data.length,
                 itemBuilder: (BuildContext context, index) {
                   return ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      navigate(context);
+                    },
                     title: Text(
                       dbAPI.getCategories()[index].name,
                       style: TextStyle(fontSize: 24.0),
@@ -43,4 +46,8 @@ class _HomePageState extends State<HomePage> {
           },
         ));
   }
+
+  navigate(BuildContext context) async =>
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (BuildContext context) => SelectedCategoryPage()));
 }
