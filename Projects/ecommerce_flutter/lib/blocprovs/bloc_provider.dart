@@ -7,14 +7,14 @@ abstract class BlocBase {
 
 // Generic BLoC provider
 class BlocProvider<T extends BlocBase> extends StatefulWidget {
+  final T bloc;
+  final Widget child;
+
   BlocProvider({
     Key key,
     @required this.child,
     @required this.bloc,
   }) : super(key: key);
-
-  final T bloc;
-  final Widget child;
 
   _BlocProviderState<T> createState() => _BlocProviderState<T>();
 
@@ -25,12 +25,6 @@ class BlocProvider<T extends BlocBase> extends StatefulWidget {
   }
 
   static Type _typeOf<T>() => T;
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
-  }
 }
 
 class _BlocProviderState<T> extends State<BlocProvider<BlocBase>> {
@@ -42,7 +36,6 @@ class _BlocProviderState<T> extends State<BlocProvider<BlocBase>> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return widget.child;
   }
 }
