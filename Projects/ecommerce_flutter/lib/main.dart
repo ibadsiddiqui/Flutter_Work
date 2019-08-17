@@ -1,3 +1,5 @@
+import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
+import 'package:ecommerce_flutter/blocs/category_bloc.dart';
 import 'package:ecommerce_flutter/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +13,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: BlocProvider(
+        bloc: CategoriesBloc(),
+        child: HomePage(),
+      ),
     );
   }
 }

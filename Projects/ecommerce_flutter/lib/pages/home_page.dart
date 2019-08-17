@@ -18,7 +18,8 @@ class _HomePageState extends State<HomePage> {
         body: ListView.builder(
           itemCount: dbAPI.getCategories().length,
           itemBuilder: (context, int index) =>
-              Text(dbAPI.getCategories()[index].name),
+              Text(dbAPI.getCategories()[index].name,
+              style: TextStyle(fontSize: 24.0),),
         ));
   }
 }
