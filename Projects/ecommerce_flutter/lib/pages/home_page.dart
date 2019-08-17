@@ -1,4 +1,7 @@
 import 'package:ecommerce_flutter/api/db_api.dart';
+import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
+import 'package:ecommerce_flutter/blocs/category_bloc.dart';
+import 'package:ecommerce_flutter/models/Category.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,15 +14,30 @@ class _HomePageState extends State<HomePage> {
   final dbAPI = new DbAPI();
   @override
   Widget build(BuildContext context) {
+    final CategoriesBloc _categoriesBloc =
+        BlocProvider.of<CategoriesBloc>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text("E-Commerce"),
         ),
-        body: ListView.builder(
-          itemCount: dbAPI.getCategories().length,
-          itemBuilder: (context, int index) =>
-              Text(dbAPI.getCategories()[index].name,
-              style: TextStyle(fontSize: 24.0),),
+        body: StreamBuilder(
+          stream: _categoriesBloc.outCategories,
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Category>> categories) {
+            if (categories.hasData) {
+              return ListView.builder(
+                itemCount: categories.data.length,
+                itemBuilder: (BuildContext context, index) {
+                  return Text(
+                    dbAPI.getCategories()[index].name,
+                    style: TextStyle(fontSize: 24.0),
+                  );
+                },
+              );
+            } else {
+              return Container();
+            }
+          },
         ));
   }
 }
