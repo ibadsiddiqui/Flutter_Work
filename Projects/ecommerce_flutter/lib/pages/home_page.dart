@@ -1,8 +1,8 @@
 import 'package:ecommerce_flutter/api/db_api.dart';
 import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
 import 'package:ecommerce_flutter/blocs/category_bloc.dart';
+import 'package:ecommerce_flutter/blocs/products_bloc.dart';
 import 'package:ecommerce_flutter/models/Category.dart';
-import 'package:ecommerce_flutter/models/Product.dart';
 import 'package:ecommerce_flutter/pages/selected_category_page.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, index) {
                   return ListTile(
                     onTap: () {
-                      navigate(context);
+                      navigate(context, categories, index);
                     },
                     title: Text(
                       dbAPI.getCategories()[index].name,
@@ -48,14 +48,11 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  navigate(BuildContext context) async =>
+  navigate(BuildContext context, AsyncSnapshot<List<Category>> categories,
+          int index) async =>
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => SelectedCategoryPage(
-                products: [
-                  Product.create('product'),
-                  Product.create('product'),
-                  Product.create('product'),
-                  Product.create('product')
-                ],
+          builder: (BuildContext context) => BlocProvider(
+                bloc: ProductsBloc(categories.data[index]),
+                child: SelectedCategoryPage(),
               )));
 }
