@@ -22,9 +22,9 @@ class ProductsBloc implements BlocBase {
     _productsController.close();
   }
 
-  void getProducts(Category category) async {
+  void getProducts(Category category) {
     DbAPI dbAPI = DbAPI();
-    _products = await dbAPI.getProducts(category);
+    _products = dbAPI.getProducts(category);
     _intProducts.add(_products);
   }
 }
