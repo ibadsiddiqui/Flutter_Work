@@ -2,6 +2,7 @@ import 'package:ecommerce_flutter/api/db_api.dart';
 import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
 import 'package:ecommerce_flutter/blocs/category_bloc.dart';
 import 'package:ecommerce_flutter/models/Category.dart';
+import 'package:ecommerce_flutter/models/Product.dart';
 import 'package:ecommerce_flutter/pages/selected_category_page.dart';
 import 'package:flutter/material.dart';
 
@@ -49,5 +50,12 @@ class _HomePageState extends State<HomePage> {
 
   navigate(BuildContext context) async =>
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => SelectedCategoryPage()));
+          builder: (BuildContext context) => SelectedCategoryPage(
+                products: [
+                  Product.create('product'),
+                  Product.create('product'),
+                  Product.create('product'),
+                  Product.create('product')
+                ],
+              )));
 }

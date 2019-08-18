@@ -1,16 +1,19 @@
+import 'package:ecommerce_flutter/models/Product.dart';
 import 'package:flutter/material.dart';
 
-class SelectedCategoryPage extends StatefulWidget {
-  SelectedCategoryPage({Key key}) : super(key: key);
+class SelectedCategoryPage extends StatelessWidget {
+  final List<Product> products;
 
-  _SelectedCategoryPageState createState() => _SelectedCategoryPageState();
-}
+  SelectedCategoryPage({Key key, @required this.products}) : super(key: key);
 
-class _SelectedCategoryPageState extends State<SelectedCategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-    );
+        appBar: AppBar(),
+        body: ListView(
+          children: products.map(
+            (product) => Text(product.name)
+          ).toList(),
+        ));
   }
 }
