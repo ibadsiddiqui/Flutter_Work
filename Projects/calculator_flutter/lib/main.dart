@@ -44,6 +44,8 @@ class _MyHomePageState extends State<MainPage> {
               child: ClipPath(
                 clipper: BottomWaveClipper(),
                 child: Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.all(10.0),
                   width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   child: Column(
@@ -59,6 +61,12 @@ class _MyHomePageState extends State<MainPage> {
                             Text(
                               "20 + 80",
                               style: TextStyle(fontSize: 22.0),
+                            ),
+                            SizedBox(
+                              child: Text(
+                                "= 100",
+                                style: TextStyle(fontSize: 22.0),
+                              ),
                             )
                           ],
                         ),
