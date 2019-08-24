@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MainPage> {
                           Expanded(flex: 1, child: myButton("7")),
                           Expanded(flex: 1, child: myButton("4")),
                           Expanded(flex: 1, child: myButton("1")),
-                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("%")),
                         ],
                       ),
                     ),
@@ -103,10 +103,10 @@ class _MyHomePageState extends State<MainPage> {
                         children: <Widget>[
                           Expanded(
                               flex: 1, child: myIconButton(Icons.backspace)),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("8")),
+                          Expanded(flex: 1, child: myButton("5")),
+                          Expanded(flex: 1, child: myButton("2")),
+                          Expanded(flex: 1, child: myButton("0")),
                         ],
                       ),
                     ),
@@ -114,11 +114,11 @@ class _MyHomePageState extends State<MainPage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("/")),
+                          Expanded(flex: 1, child: myButton("9")),
+                          Expanded(flex: 1, child: myButton("6")),
+                          Expanded(flex: 1, child: myButton("3")),
+                          Expanded(flex: 1, child: myButton(".")),
                         ],
                       ),
                     ),
@@ -126,11 +126,10 @@ class _MyHomePageState extends State<MainPage> {
                       flex: 1,
                       child: Column(
                         children: <Widget>[
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
-                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 0, child: myButton("+")),
+                          Expanded(flex: 0, child: myButton("-")),
+                          Expanded(flex: 0, child: myButton("X")),
+                          Expanded(flex: 1, child: myButton("=")),
                         ],
                       ),
                     )
@@ -158,5 +157,10 @@ FlatButton myIconButton(IconData icon) {
 
 FlatButton myButton(String text) {
   return FlatButton(
-      child: Text(text), onPressed: () {}, color: Colors.transparent);
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 22.0, color: Colors.white),
+      ),
+      onPressed: () {},
+      color: Colors.transparent);
 }
