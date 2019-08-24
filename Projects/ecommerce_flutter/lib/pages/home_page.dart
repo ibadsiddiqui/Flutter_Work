@@ -3,6 +3,7 @@ import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
 import 'package:ecommerce_flutter/blocs/category_bloc.dart';
 import 'package:ecommerce_flutter/blocs/products_bloc.dart';
 import 'package:ecommerce_flutter/models/Category.dart';
+import 'package:ecommerce_flutter/models/Product.dart';
 import 'package:ecommerce_flutter/pages/selected_category_page.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +54,13 @@ class _HomePageState extends State<HomePage> {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (BuildContext context) => BlocProvider(
                 bloc: ProductsBloc(categories.data[index]),
-                child: SelectedCategoryPage(),
+                child: SelectedCategoryPage(
+                  products: [
+                    Product.create("product"),
+                    Product.create("product"),
+                    Product.create("product"),
+                    Product.create("product"),
+                  ],
+                ),
               )));
 }
