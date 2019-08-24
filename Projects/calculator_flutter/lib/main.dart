@@ -38,7 +38,43 @@ class _MyHomePageState extends State<MainPage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
-
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: ClipPath(
+                clipper: BottomWaveClipper(),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: SizedBox(),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              "20 + 80",
+                              style: TextStyle(fontSize: 22.0),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Text("data"),
+              ),
+            ),
+          ],
         ),
       ),
     );
