@@ -78,8 +78,64 @@ class _MyHomePageState extends State<MainPage> {
             ),
             Expanded(
               flex: 1,
-              child: Center(
-                child: Text("data"),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("7")),
+                          Expanded(flex: 1, child: myButton("4")),
+                          Expanded(flex: 1, child: myButton("1")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                              flex: 1, child: myIconButton(Icons.backspace)),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                          Expanded(flex: 1, child: myButton("AC")),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
@@ -87,4 +143,20 @@ class _MyHomePageState extends State<MainPage> {
       ),
     );
   }
+}
+
+FlatButton myIconButton(IconData icon) {
+  return FlatButton(
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: 30.0,
+      ),
+      onPressed: () {},
+      color: Colors.transparent);
+}
+
+FlatButton myButton(String text) {
+  return FlatButton(
+      child: Text(text), onPressed: () {}, color: Colors.transparent);
 }
