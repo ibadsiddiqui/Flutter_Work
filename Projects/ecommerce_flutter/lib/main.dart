@@ -1,9 +1,13 @@
 import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
+import 'package:ecommerce_flutter/blocs/cart_bloc.dart';
 import 'package:ecommerce_flutter/blocs/category_bloc.dart';
 import 'package:ecommerce_flutter/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(BlocProvider<CartBloc>(
+      child: MyApp(),
+      bloc: CartBloc(),
+    ));
 
 class MyApp extends StatelessWidget {
   @override
