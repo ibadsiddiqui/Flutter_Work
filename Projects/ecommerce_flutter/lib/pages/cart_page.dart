@@ -13,7 +13,7 @@ class CartPage extends StatelessWidget {
         title: Text("Cart"),
       ),
       body: StreamBuilder(
-        stream: _cartBloc.outCount,
+        stream: _cartBloc.outProducts,
         initialData: [],
         builder: (context, snapshot) {
           if (snapshot.data.isNotEmpty) {
