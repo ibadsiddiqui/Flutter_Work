@@ -21,4 +21,17 @@ class CartBloc implements BlocBase {
     _productController.close();
     _countController.close();
   }
+
+  void addProduct(Product product) {
+    final products = _cart.products;
+    if (products.contains(product)) {
+      products[products.indexOf(product)].amount++;
+    } else {
+      product.amount = 1;
+      products.add(product);
+    }
+    _cart.itemCount++;
+    _intCount.add(_cart.itemCount);
+    _intProducts.add(products);
+  }
 }
