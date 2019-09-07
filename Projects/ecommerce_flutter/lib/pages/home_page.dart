@@ -5,6 +5,7 @@ import 'package:ecommerce_flutter/blocs/products_bloc.dart';
 import 'package:ecommerce_flutter/models/Category.dart';
 import 'package:ecommerce_flutter/models/Product.dart';
 import 'package:ecommerce_flutter/pages/selected_category_page.dart';
+import 'package:ecommerce_flutter/widgets/containers/CartButton/index.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,6 +23,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text("E-Commerce"),
+          actions: <Widget>[
+            CartButton()
+          ],
         ),
         body: StreamBuilder(
           stream: _categoriesBloc.outCategories,
