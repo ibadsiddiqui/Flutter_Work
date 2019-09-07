@@ -18,8 +18,7 @@ class _HomePageState extends State<HomePage> {
   final dbAPI = new DbAPI();
   @override
   Widget build(BuildContext context) {
-    final CategoriesBloc _categoriesBloc =
-        BlocProvider.of<CategoriesBloc>(context);
+    final _categoriesBloc = BlocProvider.of<CategoriesBloc>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text("E-Commerce"),
