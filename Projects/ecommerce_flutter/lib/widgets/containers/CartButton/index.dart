@@ -14,10 +14,7 @@ class CartButton extends StatelessWidget {
       children: <Widget>[
         IconButton(
           icon: Icon(Icons.shopping_cart),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => CartPage()));
-          },
+          onPressed: () => navigateToCart(context),
         ),
         Positioned(
           top: 5,
@@ -37,5 +34,10 @@ class CartButton extends StatelessWidget {
         )
       ],
     );
+  }
+
+  navigateToCart(context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) => CartPage()));
   }
 }
