@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
 import 'package:ecommerce_flutter/blocs/products_bloc.dart';
 import 'package:ecommerce_flutter/models/Product.dart';
+import 'package:ecommerce_flutter/widgets/containers/CartButton/index.dart';
 import 'package:flutter/material.dart';
 
 class SelectedCategoryPage extends StatelessWidget {
@@ -12,7 +13,9 @@ class SelectedCategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProductsBloc _productBloc = BlocProvider.of<ProductsBloc>(context);
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          actions: <Widget>[CartButton()],
+        ),
         body: StreamBuilder<List<Product>>(
           stream: _productBloc.outProducts,
           builder: (context, snapshot) {
