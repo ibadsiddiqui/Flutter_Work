@@ -23,9 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text("E-Commerce"),
-          actions: <Widget>[
-            CartButton()
-          ],
+          actions: <Widget>[CartButton()],
         ),
         body: StreamBuilder(
           stream: _categoriesBloc.outCategories,
