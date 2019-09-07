@@ -24,18 +24,16 @@ class _HomePageState extends State<HomePage> {
           title: Text("E-Commerce"),
           actions: <Widget>[CartButton()],
         ),
-        body: StreamBuilder(
+        body: StreamBuilder<List<Category>>(
           stream: _categoriesBloc.outCategories,
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Category>> categories) {
-            if (categories.hasData) {
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
               return ListView.builder(
-                itemCount: categories.data.length,
+                itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, index) {
+                  final category = snapshot.data[index];
                   return ListTile(
-                    onTap: () {
-                      navigate(context, categories, index);
-                    },
+                    onTap: () => navigate(context, category, index),
                     title: Text(
                       dbAPI.getCategories()[index].name,
                       style: TextStyle(fontSize: 24.0),
@@ -50,18 +48,10 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  navigate(BuildContext context, AsyncSnapshot<List<Category>> categories,
-          int index) async =>
+  navigate(BuildContext context, Category category, int index) async =>
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => BlocProvider(
-                bloc: ProductsBloc(categories.data[index]),
-                child: SelectedCategoryPage(
-                  products: [
-                    Product.create("product"),
-                    Product.create("product"),
-                    Product.create("product"),
-                    Product.create("product"),
-                  ],
-                ),
+          builder: (BuildContext context) => BlocProvider<ProductsBloc>(
+                bloc: ProductsBloc(category),
+                child: SelectedCategoryPage(),
               )));
 }

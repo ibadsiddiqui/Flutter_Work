@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_flutter/blocs/cart_bloc.dart';
 
 class SelectedCategoryPage extends StatelessWidget {
-  final List<Product> products;
-
-  SelectedCategoryPage({Key key, @required this.products}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
