@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "699947509252",
+    "firebase_url": "https://quackittemplate.firebaseio.com",
+    "project_id": "quackittemplate",
+    "storage_bucket": "quackittemplate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699947509252:android:d301b8076ad6c82cefb751",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699947509252-i4irgll39a25sc6lenrgs3qc5sb4avn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb7JHpa1yzm9NC6xJUDsZXUDnLuHc9_98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699947509252-i4irgll39a25sc6lenrgs3qc5sb4avn3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
