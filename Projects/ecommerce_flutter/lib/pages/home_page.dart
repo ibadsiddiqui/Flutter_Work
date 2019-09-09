@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                   return ListTile(
                     onTap: () => navigate(context, category, index),
                     title: Text(
-                      dbAPI.getCategories()[index].name,
+                      category.name.toString(),
                       style: TextStyle(fontSize: 24.0),
                     ),
                   );
