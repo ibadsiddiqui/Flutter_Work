@@ -8,6 +8,6 @@ class Category {
   }
 
   Category.fromFirebase(Map<String, dynamic> json) {
-    name = json['name'];
+    name = json[NAME_KEY];
   }
 }
