@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_flutter/api/db_api.dart';
 import 'package:ecommerce_flutter/blocprovs/bloc_provider.dart';
 import 'package:ecommerce_flutter/models/Category.dart';
 
 class CategoriesBloc implements BlocBase {
-  List<Category> _categoryList;
+  List<Category> _categoryList = List();
 
   CategoriesBloc() {
     getCategories();
@@ -24,7 +25,24 @@ class CategoriesBloc implements BlocBase {
 
   void getCategories() {
     DbAPI dbAPI = DbAPI();
-    _categoryList = dbAPI.getCategories();
+    dbAPI.getCategories().listen((snapshot) {
+      List<Category> tempCategory = List();
+      for (DocumentSnapshot doc in snapshot.documents) {
+        Category category = Category.fromFirebase(doc.data);
+        category.id = doc.documentID;
+        tempCategory.add(category);
+      }
+      if (_categoryList.isEmpty)
+        addCategory(tempCategory);
+      else {
+        _categoryList.clear();
+        addCategory(tempCategory);
+      }
+    });
+  }
+
+  void addCategory(tempCat) {
+    _categoryList.addAll(tempCat);
     _intCategories.add(_categoryList);
   }
 }
