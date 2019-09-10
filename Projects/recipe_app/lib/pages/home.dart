@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:recipe_app/model/recipe.dart';
 import 'package:recipe_app/utils/store.dart';
+import 'package:recipe_app/widgets/Recipecards/RecipeCard.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -38,8 +39,10 @@ class _HomePageState extends State<HomePage> {
             child: ListView.builder(
               itemCount: recipesList.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(recipesList[index].name),
+                return new RecipeCard(
+                  recipe: recipesList[index],
+                  inFavorites: favRecipesIDs.contains(recipesList[index].id),
+                  onFavoriteButtonPressed: _handleFavoritesListChanged,
                 );
               },
             ),
