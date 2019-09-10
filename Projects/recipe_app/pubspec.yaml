@@ -45,10 +45,16 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
     - assets/brooke-lark-385507-unsplash.jpg
+    - assets/g-logo.png
   fonts: # New
     - family: Merriweather
       fonts:
         - asset: fonts/Merriweather-Regular.ttf
+
+    - family: Roboto-Medium
+      fonts:
+        - asset: fonts/Roboto-Medium.ttf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
