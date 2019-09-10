@@ -22,9 +22,10 @@ class RecipeCard extends StatelessWidget {
           // Conditional expression:
           // show "favorite" icon or "favorite border" icon depending on widget.inFavorites:
           inFavorites == true ? Icons.favorite : Icons.favorite_border,
+          color: Theme.of(context).iconTheme.color, // New code
         ),
         elevation: 2.0,
-        fillColor: Colors.white,
+        fillColor: Theme.of(context).buttonColor, // New code
         shape: CircleBorder(),
       );
     }
@@ -39,6 +40,7 @@ class RecipeCard extends StatelessWidget {
           children: <Widget>[
             Text(
               recipe.name,
+              style: Theme.of(context).textTheme.title, // New code
             ),
             // Empty space:
             SizedBox(height: 10.0),
@@ -48,6 +50,7 @@ class RecipeCard extends StatelessWidget {
                 SizedBox(width: 5.0),
                 Text(
                   recipe.getDurationString, // New code
+                  style: Theme.of(context).textTheme.caption,
                 ),
               ],
             ),
