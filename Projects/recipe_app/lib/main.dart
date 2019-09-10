@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/pages/login.dart';
+import 'package:recipe_app/ui/theme.dart';
 
 void main() => runApp(RecipeApp());
 
@@ -11,6 +12,7 @@ class RecipeApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
+      theme: buildTheme(),
       routes: {
         // If you're using navigation routes, Flutter needs a base route.
         // We're going to change this route once we're ready with
