@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:recipe_app/widgets/GoogleSignInButton/google_sign_in_button.dart';
 import 'package:recipe_app/widgets/backgroundImage/BackgroundImage.dart';
 import 'package:recipe_app/widgets/heading/HeadingWidget.dart';
 
@@ -21,10 +22,8 @@ class LoginPage extends StatelessWidget {
               buildText("Recipes", context),
               // Space between "Recipes" and the button:
               SizedBox(height: 50.0),
-              MaterialButton(
-                color: Colors.white,
-                child: Text("Sign In with Google"),
-                onPressed: () => print("Button pressed."),
+              GoogleSignInButton(
+                onPressed: () {},
               )
             ],
           ),
