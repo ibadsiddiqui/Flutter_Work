@@ -23,7 +23,8 @@ class LoginPage extends StatelessWidget {
               // Space between "Recipes" and the button:
               SizedBox(height: 50.0),
               GoogleSignInButton(
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.of(context).pushReplacementNamed('/'),
               )
             ],
           ),
