@@ -1,12 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+import 'package:recipe_app/model/recipe.dart';
+import 'package:recipe_app/utils/store.dart';
 
-  @override
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
+
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Recipe> recipes = getRecipes();
+  List<String> favRecipesIDs = getFavoritesIDs();
+
+// New method:
+  // Inactive widgets are going to call this method to
+  // signalize the parent widget HomeScreen to refresh the list view.
+  void _handleFavoritesListChanged(String recipeID) {
+    // Set new state and refresh the widget:
+    setState(() {
+      if (favRecipesIDs.contains(recipeID)) {
+        favRecipesIDs.remove(recipeID);
+      } else {
+        favRecipesIDs.add(recipeID);
+      }
+    });
+  }
+
   Widget build(BuildContext context) {
     double _iconSize = 20.0;
+
+    Column _buildRecipes(List<Recipe> recipesList) {
+      return Column(
+        children: <Widget>[
+          Expanded(
+            child: ListView.builder(
+              itemCount: recipesList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(recipesList[index].name),
+                );
+              },
+            ),
+          ),
+        ],
+      );
+    }
 
     return DefaultTabController(
       length: 4,
@@ -32,9 +72,15 @@ class HomePage extends StatelessWidget {
           child: TabBarView(
             // Placeholders for content of the tabs:
             children: [
-              Center(child: Icon(Icons.restaurant)),
-              Center(child: Icon(Icons.local_drink)),
-              Center(child: Icon(Icons.favorite)),
+              _buildRecipes(recipes
+                  .where((recipe) => recipe.type == RecipeType.food)
+                  .toList()),
+              _buildRecipes(recipes
+                  .where((recipe) => recipe.type == RecipeType.drink)
+                  .toList()),
+              _buildRecipes(recipes
+                  .where((recipe) => favRecipesIDs.contains(recipe.id))
+                  .toList()),
               Center(child: Icon(Icons.settings)),
             ],
           ),
