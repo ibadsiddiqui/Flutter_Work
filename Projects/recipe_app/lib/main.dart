@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/pages/home.dart';
 import 'package:recipe_app/pages/login.dart';
 import 'package:recipe_app/ui/theme.dart';
 
@@ -17,7 +18,7 @@ class RecipeApp extends StatelessWidget {
         // If you're using navigation routes, Flutter needs a base route.
         // We're going to change this route once we're ready with
         // implementation of HomeScreen.
-        '/': (context) => LoginPage(),
+        '/': (context) => HomePage(),
         '/login': (context) => LoginPage(),
       },
     );
