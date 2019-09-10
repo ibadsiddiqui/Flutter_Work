@@ -14,13 +14,23 @@ class DbAPI {
     }
   }
 
-  List<Product> getProducts(Category category) {
-    List<Product> tempList = [
-      Product.create("product"),
-      Product.create("product"),
-      Product.create("product"),
-      Product.create("product")
-    ];
-    return tempList;
+  Stream<QuerySnapshot> getProducts() {
+    Firestore db = Firestore.instance;
+    try {
+      return Stream<QuerySnapshot> db.collection('Products').snapshots();
+      // return querySnapshot;
+    } catch (e) {
+      throw e;
+    }
   }
+
+  // List<Product> getProducts(Category category) {
+  //   List<Product> tempList = [
+  //     Product.create("product"),
+  //     Product.create("product"),
+  //     Product.create("product"),
+  //     Product.create("product")
+  //   ];
+  //   return tempList;
+  // }
 }
