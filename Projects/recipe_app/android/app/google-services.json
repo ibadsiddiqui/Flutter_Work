@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "457686799132",
+    "firebase_url": "https://ibadsiddiqui.firebaseio.com",
+    "project_id": "firebase-ibadsiddiqui",
+    "storage_bucket": "firebase-ibadsiddiqui.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457686799132:android:9b3199d6c48b2ab3e960d9",
+        "android_client_info": {
+          "package_name": "com.example.recipe_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457686799132-k7mb9ld58cr6olbp6pliv8anbs30ipnh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgq6LKAeSgV-DXL_zW76-r_Rv7DWsqDpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457686799132-k7mb9ld58cr6olbp6pliv8anbs30ipnh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
