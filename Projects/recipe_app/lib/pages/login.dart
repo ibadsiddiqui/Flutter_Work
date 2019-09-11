@@ -7,6 +7,11 @@ import 'package:recipe_app/widgets/heading/HeadingWidget.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({Key key}) : super(key: key);
 
+  /*
+    * Todo:
+    * Implement Google sign in
+  */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +29,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 50.0),
               GoogleSignInButton(
                 onPressed: () =>
+                    // StateWidget.of(context).signInWithGoogle(),
                     Navigator.of(context).pushReplacementNamed('/'),
               )
             ],
