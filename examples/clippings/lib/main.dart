@@ -27,8 +27,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ClipOval(
-          child: Container(
+        child: renderOval(
+          Container(
             color: Colors.red,
             width: 150,
             height: 200,
@@ -37,4 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Widget renderOval(Widget child) {
+  return ClipOval(
+    child: child,
+  );
 }
