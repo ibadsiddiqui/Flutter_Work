@@ -27,12 +27,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        // child: ClipOval(
-        child: Container(
-          color: Colors.red,
-          width: 200.0,
-          height: 200.0,
-          // ),
+        child: ClipOval(
+          child: Container(
+            color: Colors.red,
+            width: 150,
+            height: 200,
+          ),
         ),
       ),
     );
