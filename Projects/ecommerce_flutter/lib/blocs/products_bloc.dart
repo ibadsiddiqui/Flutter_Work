@@ -24,7 +24,7 @@ class ProductsBloc implements BlocBase {
 
   void getProducts(Category category) {
     DbAPI dbAPI = DbAPI();
-    _products = dbAPI.getProducts(category);
+    _products = dbAPI.getProducts() as List<Product>;
     _intProducts.add(_products);
   }
 }
