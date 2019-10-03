@@ -9,7 +9,7 @@ class LoginStates = _LoginStates with _$LoginStates;
 // The store-class
 abstract class _LoginStates with Store {
   @observable
-  String _userEmail = "";
+  String _userEmail = "ibad siddiqui";
 
   @observable
   String _password = "";

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 Widget styledInput(String intialValue, String label,
-    Function handleChangedValue, TextInputType keyboardType) {
+    Function handleChangedValue, TextInputType keyboardType,
+    {bool secure = false}) {
   return new TextFormField(
     initialValue: intialValue,
     decoration: new InputDecoration(
@@ -19,7 +20,11 @@ Widget styledInput(String intialValue, String label,
       else
         return null;
     },
-    onChanged: (String value) => handleChangedValue(value),
+    obscureText: secure,
+    onChanged: (String value) {
+      print(value);
+      handleChangedValue(value);
+    },
     keyboardType: keyboardType,
     style: new TextStyle(
       fontFamily: "Poppins",
