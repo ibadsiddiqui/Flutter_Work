@@ -1,8 +1,9 @@
 import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import 'package:todos/model/task.dart';
 
-class TodosModel {
+class TodosModel extends ChangeNotifier {
   final List<TaskModel> _tasks = List();
 
   UnmodifiableListView<TaskModel> get allTask => UnmodifiableListView(_tasks);
@@ -19,11 +20,11 @@ class TodosModel {
   void toggleTodo(TaskModel task) {
     final taskIndex = _tasks.indexOf(task);
     _tasks[taskIndex].toggleCompleted();
-    // notifyListeners();
+    notifyListeners();
   }
 
   void deleteTodo(TaskModel task) {
     _tasks.remove(task);
-    // notifyListeners();
+    notifyListeners();
   }
 }
