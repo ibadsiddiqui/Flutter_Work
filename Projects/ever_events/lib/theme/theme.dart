@@ -7,17 +7,16 @@ ThemeData buildTheme() {
     return base.copyWith(
       headline: base.headline.copyWith(
         fontFamily: 'Merriweather',
-        fontSize: 40.0,
-        color: const Color(0xFF807A6B),
+        fontSize: 32.0,
+        color: Colors.amber,
       ),
       // New code:
-      // Used for the recipes' title:
       title: base.title.copyWith(
         fontFamily: 'Merriweather',
         fontSize: 15.0,
-        color: const Color(0xFF807A6B),
+        color: Colors.white54,
       ),
-      // Used for the recipes' duration:
+
       caption: base.caption.copyWith(
         color: const Color(0xFFCCC5AF),
       ),
