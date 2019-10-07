@@ -50,14 +50,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: const <Widget>[
-                    SizedBox(width: 100.0),
+                    SizedBox(width: 100.0, height: 50.0,),
                     Text("SIGN UP",
                         maxLines: 1,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                         )),
-                    SizedBox(width: 100.0),
+                    SizedBox(width: 100.0, height: 50.0,),
                   ],
                 ),
                 textColor: Colors.white,
