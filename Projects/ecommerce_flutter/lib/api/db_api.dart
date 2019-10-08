@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_flutter/models/Category.dart';
 // import 'package:ecommerce_flutter/models/Category.dart';
 // import 'package:ecommerce_flutter/models/Product.dart';
 
@@ -14,11 +15,11 @@ class DbAPI {
     }
   }
 
-  Stream<QuerySnapshot> getProducts() {
+  Stream<QuerySnapshot> getProducts(Category category) {
     Firestore db = Firestore.instance;
     try {
       Stream<QuerySnapshot> querySnapshot =
-          db.collection('Products').snapshots();
+          db.collection('Categories').document(category.id).collection("parts") as Stream<QuerySnapshot>;
       return querySnapshot;
     } catch (e) {
       throw e;
