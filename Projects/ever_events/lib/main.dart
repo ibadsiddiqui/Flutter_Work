@@ -1,4 +1,5 @@
 import 'package:ever_events/src/screens/login_screen/login.dart';
+import 'package:ever_events/src/screens/signup_screen/signup.dart';
 import 'package:ever_events/src/screens/splash_screen/splash.dart';
 import 'package:ever_events/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class EverEventsApp extends StatelessWidget {
         // implementation of HomeScreen.
         // "/splash": (context) => SplashScreen(),
         '/': (context) => SplashScreen(),
+        '/SignUp': (context) => SignUpScreen(),
         '/LoginScreen': (context) => LoginScreen(),
       },
     );
