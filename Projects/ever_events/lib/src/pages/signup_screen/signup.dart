@@ -1,7 +1,10 @@
+import 'package:ever_events/src/models/AuthModel.dart';
 import 'package:ever_events/src/navigator/auth_navigator.dart';
 import 'package:ever_events/src/widgets/auth/Buttons.dart';
 import 'package:ever_events/src/widgets/auth/Inputs.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       body: new Container(
         padding: EdgeInsets.only(top: 150),
         decoration: new BoxDecoration(
@@ -25,30 +29,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
             new Text("Ever Events",
                 style: Theme.of(context).textTheme.headline),
             new Padding(
-                padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-                child: authInput(
-                    label: "Username",
-                    validator: (String value) {},
-                    handleChange: (String value) {
-                      print(value);
-                    })),
+              padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+              child: authInput(
+                label: "Username",
+                validator: (String value) {},
+                handleChange: (String username) =>
+                    Provider.of<AuthModel>(context, listen: false)
+                        .setUsername(username),
+              ),
+            ),
             new Padding(
-                padding: EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
-                child: authInput(
-                    label: "Email",
-                    validator: (String value) {},
-                    keyboardType: TextInputType.emailAddress,
-                    handleChange: (String value) {
-                      print(value);
-                    })),
+              padding: EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
+              child: authInput(
+                label: "Email",
+                validator: (String value) {},
+                keyboardType: TextInputType.emailAddress,
+                handleChange: (String email) =>
+                    Provider.of<AuthModel>(context, listen: false)
+                        .setEmail(email),
+              ),
+            ),
             new Padding(
-                padding: EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
-                child: authInput(
-                  label: "Password",
-                  validator: (String value) {},
-                  handleChange: (String value) {},
-                  obsure: true,
-                )),
+              padding: EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
+              child: authInput(
+                label: "Password",
+                validator: (String value) {},
+                obsure: true,
+                handleChange: (String password) =>
+                    Provider.of<AuthModel>(context, listen: false)
+                        .setPassword(password),
+              ),
+            ),
             const SizedBox(height: 30),
             submitButton(title: "SIGN UP"),
             Container(

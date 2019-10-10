@@ -28,12 +28,8 @@ class _HomeScreenState extends State<HomeScreen>
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddTaskScreen(),
-                ),
-              );
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddTaskScreen()));
             },
           )
         ],
