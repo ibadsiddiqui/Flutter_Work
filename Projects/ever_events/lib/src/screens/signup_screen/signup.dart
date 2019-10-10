@@ -1,3 +1,5 @@
+import 'package:ever_events/src/navigator/auth_navigator.dart';
+import 'package:ever_events/src/widgets/auth/Buttons.dart';
 import 'package:ever_events/src/widgets/auth/Inputs.dart';
 import 'package:flutter/material.dart';
 
@@ -48,40 +50,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   obsure: true,
                 )),
             const SizedBox(height: 30),
-            new RaisedButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const <Widget>[
-                  SizedBox(width: 100.0, height: 57.5),
-                  Text("SIGN UP",
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      )),
-                  SizedBox(width: 100.0, height: 57.5),
-                ],
-              ),
-              textColor: Colors.white,
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              color: Colors.pinkAccent,
-              splashColor: Colors.pink,
-              shape: const StadiumBorder(),
-            ),
+            submitButton(title: "SIGN UP"),
             Container(
-              height: 220.0,
               alignment: Alignment.bottomCenter,
               child: FlatButton(
-                onPressed: () => Navigator.of(context).pushReplacementNamed("/LoginScreen"),
-                child: Text(
-                  "Already have an account? SIGN IN",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+                onPressed: () => pushLoginScreen(context),
+                child: Text("Already have an account? SIGN IN",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    textAlign: TextAlign.center),
               ),
             )
           ],
