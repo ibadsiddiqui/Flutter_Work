@@ -46,11 +46,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - asset/icons/app icon/app_icon.png
     - asset/images/splash/splash.png
     - asset/images/splash/2.0x/splash.png
     - asset/images/splash/3.0x/splash.png
-    # - asset/images/splashscreen.png
-    - asset/images/Auth_BG.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -64,10 +63,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Merriweather
+    - family: CreteRound
       fonts:
-        - asset: asset/fonts/Merriweather-Regular.ttf
-
+        - asset: asset/fonts/CreteRound-Regular.ttf
+    - family: Comfortaa
+      fonts:
+        - asset: asset/fonts/Comfortaa-Regular.ttf
     # - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
