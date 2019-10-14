@@ -11,16 +11,15 @@ class AuthForm extends StatelessWidget {
         AuthInput(
             label: "Email",
             validator: (String value) {},
-            handleChange: (String value) {
-              Provider.of<AuthModel>(context, listen: false).setEmail(value);
-              print(value);
-            }),
+            handleChange: (String value) =>
+                Provider.of<AuthModel>(context, listen: false).setEmail(value)),
         AuthInput(
-          label: "Password",
-          validator: (String value) {},
-          handleChange: (String value) {},
-          obsure: true,
-        ),
+            label: "Password",
+            validator: (String value) {},
+            obsure: true,
+            handleChange: (String value) =>
+                Provider.of<AuthModel>(context, listen: false)
+                    .setPassword(value)),
       ],
     );
   }

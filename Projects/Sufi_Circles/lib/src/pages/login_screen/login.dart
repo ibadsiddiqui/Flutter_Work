@@ -4,9 +4,11 @@ import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
 import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
+import 'package:Sufi_Circles/src/widgets/popup/Popup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -19,7 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    store.setupValidations();
   }
 
   @override
@@ -28,9 +29,29 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  void validateLogin(BuildContext context) {
+    final authModelProvider = Provider.of<AuthModel>(context);
+    authModelProvider.validateAll();
+    if (authModelProvider.canLogin)
+      ShowPopUp(context,
+          type: AlertType.success,
+          title: "Welcome Back",
+          desc: "See all the new events happening",
+          onPressed: () {},
+          label: "Ok");
+    else {
+      ShowPopUp(context,
+          type: AlertType.error,
+          title: "Incorrect Details",
+          label: "Try again",
+          desc:
+              "Your email or password is incorrect. Please enter correct details.",
+          onPressed: () => Navigator.pop(context));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final authModelProvider = Provider.of<AuthModel>(context);
     return new WillPopScope(
       onWillPop: () async => true,
       child: new Scaffold(
@@ -45,9 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 30),
               SubmitButton(
                 title: "SIGN IN",
-                onPressed: () {
-                  authModelProvider.validateAll();
-                },
+                onPressed: () => this.validateLogin(context),
               ),
               BottomButton(
                 onPressed: pushSignUpScreen,
