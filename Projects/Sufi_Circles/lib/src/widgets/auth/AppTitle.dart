@@ -4,7 +4,7 @@ class AppTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Text(
-      "Ever Events",
+      "Sufi Circles",
       style: TextStyle(
         fontSize: 40,
         fontFamily: "CreteRound",
