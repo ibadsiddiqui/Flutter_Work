@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'authmodel.dart';
+part of 'AuthFormModel.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -9,6 +9,12 @@ part of 'authmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AuthModel on _AuthModel, Store {
+  Computed<bool> _$canLoginComputed;
+
+  @override
+  bool get canLogin =>
+      (_$canLoginComputed ??= Computed<bool>(() => super.canLogin)).value;
+
   final _$emailAtom = Atom(name: '_AuthModel.email');
 
   @override
@@ -60,6 +66,26 @@ mixin _$AuthModel on _AuthModel, Store {
     final _$actionInfo = _$_AuthModelActionController.startAction();
     try {
       return super.setPassword(password);
+    } finally {
+      _$_AuthModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatePassword(String value) {
+    final _$actionInfo = _$_AuthModelActionController.startAction();
+    try {
+      return super.validatePassword(value);
+    } finally {
+      _$_AuthModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateEmail(String value) {
+    final _$actionInfo = _$_AuthModelActionController.startAction();
+    try {
+      return super.validateEmail(value);
     } finally {
       _$_AuthModelActionController.endAction(_$actionInfo);
     }
