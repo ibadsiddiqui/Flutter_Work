@@ -52,7 +52,7 @@ abstract class _AuthModel with Store {
   }
 
   void validateAll() {
-    validatePassword(password);
-    validateEmail(email);
+    validatePassword(this.password);
+    validateEmail(this.email);
   }
 }

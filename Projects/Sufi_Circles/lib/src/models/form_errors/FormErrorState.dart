@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:validators/validators.dart';
 
 part "FormErrorState.g.dart";
 
@@ -12,5 +13,5 @@ abstract class _FormErrorState with Store {
   String password;
 
   @computed
-  bool get hasErrors => email != "" && password != "";
+  bool get hasErrors => !isNull(email) || !isNull(password);
 }
