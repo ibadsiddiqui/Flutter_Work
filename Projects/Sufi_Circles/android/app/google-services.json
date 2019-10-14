@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "865588623248",
+    "firebase_url": "https://sufi-circles.firebaseio.com",
+    "project_id": "sufi-circles",
+    "storage_bucket": "sufi-circles.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865588623248:android:d5bdafe51203952c662515",
+        "android_client_info": {
+          "package_name": "com.example.Sufi_Circles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865588623248-m0g6jaep3e10vs5lstsfukaf1t0f5fim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-UiVZE8o1C_T6kf3qjPoZgGsFCuZqQRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865588623248-m0g6jaep3e10vs5lstsfukaf1t0f5fim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
