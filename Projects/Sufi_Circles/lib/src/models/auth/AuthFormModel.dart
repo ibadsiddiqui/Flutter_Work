@@ -20,7 +20,7 @@ abstract class _AuthModel with Store {
   void setEmail(String email) => this.email = email;
 
   @action
-  void setPassword(String password) => this.email = password;
+  void setPassword(String password) => this.password = password;
 
   @computed
   bool get canLogin => !error.hasErrors;
