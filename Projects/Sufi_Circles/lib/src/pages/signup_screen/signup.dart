@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
@@ -13,25 +14,36 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final AuthModel store = AuthModel();
+
+  @override
+  void initState() {
+    super.initState();
+    store.setupValidations();
+  }
+
+  @override
+  void dispose() {
+    store.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       resizeToAvoidBottomInset: false,
       body: new Container(
         padding: EdgeInsets.only(top: 75),
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-            image: AssetImage("asset/images/Auth_BG.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: new Column(
           children: <Widget>[
             AppIcon(),
             AppTitle(),
             AuthForm(),
             const SizedBox(height: 30),
-            SubmitButton(title: "SIGN UP"),
+            SubmitButton(
+              title: "SIGN UP",
+              onPressed: () {},
+            ),
             BottomButton(
               onPressed: pushLoginScreen,
             )
