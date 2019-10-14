@@ -17,8 +17,8 @@ class EverEventsApp extends StatelessWidget {
         // implementation of HomeScreen.
         // "/splash": (context) => SplashScreen(),
         '/': (context) => SplashScreen(),
-        '/SignUpScreen': (context) => SignUpScreen(),
         '/LoginScreen': (context) => LoginScreen(),
+        '/SignUpScreen': (context) => SignUpScreen(),
       },
     );
   }
