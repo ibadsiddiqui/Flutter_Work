@@ -1,5 +1,7 @@
 import 'package:Sufi_Circles/src/widgets/auth/AuthInput.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class AuthForm extends StatelessWidget {
   @override
@@ -10,6 +12,7 @@ class AuthForm extends StatelessWidget {
             label: "Email",
             validator: (String value) {},
             handleChange: (String value) {
+              Provider.of<AuthModel>(context, listen: false).setEmail(value);
               print(value);
             }),
         AuthInput(
