@@ -3,9 +3,9 @@ import 'package:Sufi_Circles/src/pages/signup_screen/signup.dart';
 import 'package:Sufi_Circles/src/pages/splash_screen/splash.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(EverEventsApp());
+void main() => runApp(SufiCirlces());
 
-class EverEventsApp extends StatelessWidget {
+class SufiCirlces extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

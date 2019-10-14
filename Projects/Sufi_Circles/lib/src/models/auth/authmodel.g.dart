@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'AuthModel.dart';
+part of 'authmodel.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -9,23 +9,6 @@ part of 'AuthModel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AuthModel on _AuthModel, Store {
-  final _$usernameAtom = Atom(name: '_AuthModel.username');
-
-  @override
-  String get username {
-    _$usernameAtom.context.enforceReadPolicy(_$usernameAtom);
-    _$usernameAtom.reportObserved();
-    return super.username;
-  }
-
-  @override
-  set username(String value) {
-    _$usernameAtom.context.conditionallyRunInAction(() {
-      super.username = value;
-      _$usernameAtom.reportChanged();
-    }, _$usernameAtom, name: '${_$usernameAtom.name}_set');
-  }
-
   final _$emailAtom = Atom(name: '_AuthModel.email');
 
   @override
@@ -61,16 +44,6 @@ mixin _$AuthModel on _AuthModel, Store {
   }
 
   final _$_AuthModelActionController = ActionController(name: '_AuthModel');
-
-  @override
-  void setUsername(String username) {
-    final _$actionInfo = _$_AuthModelActionController.startAction();
-    try {
-      return super.setUsername(username);
-    } finally {
-      _$_AuthModelActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void setEmail(String email) {
