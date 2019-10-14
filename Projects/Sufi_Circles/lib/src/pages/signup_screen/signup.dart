@@ -45,7 +45,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               onPressed: () {},
             ),
             BottomButton(
-              onPressed: pushLoginScreen,
+              title: "Already have an account? SIGN IN",
+              onPressed: () => pushLoginScreen(context),
             )
           ],
         ),

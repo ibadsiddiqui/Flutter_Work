@@ -69,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () => this.validateLogin(context),
               ),
               BottomButton(
+                title: "New here? SIGN UP",
                 onPressed: pushSignUpScreen,
               )
             ],
