@@ -9,17 +9,24 @@ class AuthForm extends StatelessWidget {
     return new Column(
       children: <Widget>[
         AuthInput(
-            label: "Email",
-            validator: (String value) {},
-            handleChange: (String value) =>
-                Provider.of<AuthModel>(context, listen: false).setEmail(value)),
+          label: "Email",
+          validator: (String value) {},
+          handleChange: (String value) =>
+              Provider.of<AuthModel>(context, listen: false).setEmail(value),
+          icon: Icon(Icons.alternate_email, color: Colors.white),
+          keyboardType: TextInputType.emailAddress,
+        ),
         AuthInput(
-            label: "Password",
-            validator: (String value) {},
-            obsure: true,
-            handleChange: (String value) =>
-                Provider.of<AuthModel>(context, listen: false)
-                    .setPassword(value)),
+          label: "Password",
+          validator: (String value) {},
+          obscure: true,
+          handleChange: (String value) =>
+              Provider.of<AuthModel>(context, listen: false).setPassword(value),
+          icon: Icon(
+            Icons.lock_open,
+            color: Colors.white,
+          ),
+        ),
       ],
     );
   }
