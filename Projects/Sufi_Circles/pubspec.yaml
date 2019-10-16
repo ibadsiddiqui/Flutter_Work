@@ -54,6 +54,7 @@ flutter:
     - asset/images/splash/splash.png
     - asset/images/splash/2.0x/splash.png
     - asset/images/splash/3.0x/splash.png
+    - asset/images/backgrounds/auth.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
