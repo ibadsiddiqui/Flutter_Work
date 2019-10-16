@@ -3,6 +3,7 @@ import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
+import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
 import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
@@ -48,8 +49,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future attemptSignup(String email, String password) async {
     try {
       FirebaseUser user = await _firebaseAuth.createUser(email, password);
-      print(user);
-      Provider.of<AuthModel>(context).setPassword("");
       showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {
       showPopUp.showFailedSignupPopUp(e.code, e.message, context);
@@ -58,25 +57,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: new Container(
-        padding: EdgeInsets.only(top: 75),
-        child: new Column(
-          children: <Widget>[
-            AppIcon(),
-            AppTitle(),
-            AuthForm(),
-            const SizedBox(height: 30),
-            SubmitButton(
-              title: "SIGN UP",
-              onPressed: validateCredentials,
-            ),
-            BottomButton(
-              title: "Already have an account? SIGN IN",
-              onPressed: pushLoginScreen,
-            )
-          ],
+    return WillPopScope(
+      onWillPop: () async => true,
+      child: new Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: new Container(
+          padding: EdgeInsets.only(top: 75),
+          decoration: buildAuthBackground(),
+          height: MediaQuery.of(context).size.height,
+          child: new Column(
+            children: <Widget>[
+              AppIcon(),
+              AppTitle(),
+              Consumer<AuthModel>(
+                  builder: (context, data, child) => AuthForm()),
+              const SizedBox(height: 30),
+              SubmitButton(
+                title: "SIGN UP",
+                onPressed: validateCredentials,
+              ),
+              new Expanded(child: Divider()),
+              BottomButton(
+                title: "Already have an account? SIGN IN",
+                onPressed: pushLoginScreen,
+              )
+            ],
+          ),
         ),
       ),
     );

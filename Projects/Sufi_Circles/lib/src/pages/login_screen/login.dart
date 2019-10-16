@@ -2,7 +2,9 @@ import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
+import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
+import 'package:Sufi_Circles/src/widgets/auth/ForgotPassword.dart';
 import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
 import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
@@ -57,11 +59,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
-      onWillPop: () async => true,
+      onWillPop: () async => false,
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
         body: new Container(
+          decoration: buildAuthBackground(),
           padding: EdgeInsets.only(top: 75),
+          height: MediaQuery.of(context).size.height,
           child: new Column(
             children: <Widget>[
               AppIcon(),
@@ -72,8 +76,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: "SIGN IN",
                 onPressed: () => this.validateLogin(context),
               ),
+              ForgotPasswordButton(),
+              new Expanded(child: Divider()),
               BottomButton(
-                title: "New here? SIGN UP",
+                title: "Don't have an account? Create One",
                 onPressed: pushSignUpScreen,
               )
             ],
