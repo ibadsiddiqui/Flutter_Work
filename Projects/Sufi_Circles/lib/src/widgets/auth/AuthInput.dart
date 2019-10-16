@@ -4,51 +4,59 @@ class AuthInput extends StatelessWidget {
   final String label;
   final Function validator;
   final Function handleChange;
-  final bool obsure;
+  final bool obscure;
   final TextInputType keyboardType;
-
+  final Icon icon;
   const AuthInput(
       {Key key,
       this.label,
       this.validator,
       this.handleChange,
-      this.obsure = false,
-      this.keyboardType = TextInputType.emailAddress})
+      this.obscure = false,
+      this.keyboardType = TextInputType.emailAddress,
+      this.icon})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
-      child: new TextFormField(
-        decoration: new InputDecoration(
-          enabledBorder: new OutlineInputBorder(
-            borderRadius: new BorderRadius.circular(25.0),
-            borderSide: const BorderSide(
-              color: Colors.black,
-              width: 0.0,
+    return new Container(
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+              color: Colors.white, width: 0.5, style: BorderStyle.solid),
+        ),
+      ),
+      padding: const EdgeInsets.only(left: 0.0, right: 10.0),
+      child: new Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          new Padding(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 00.0),
+            child: icon,
+          ),
+          new Expanded(
+            child: TextFormField(
+              validator: validator,
+              obscureText: obscure,
+              onChanged: handleChange,
+              keyboardType: keyboardType,
+              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: label,
+                hintStyle: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Comfortaa",
+                ),
+              ),
             ),
-          ), // focusColor: Colors.black,
-          labelStyle: TextStyle(color: Colors.black),
-          labelText: this.label,
-          fillColor: Colors.black,
-          prefixIcon: Icon(
-            Icons.person,
-            color: Colors.black,
           ),
-          border: new OutlineInputBorder(
-            borderRadius: new BorderRadius.circular(25.0),
-            borderSide: new BorderSide(),
-          ),
-        ),
-        validator: this.validator,
-        onChanged: this.handleChange,
-        obscureText: this.obsure,
-        keyboardType: this.keyboardType,
-        style: new TextStyle(
-          fontFamily: "Comfortaa",
-          color: Colors.black,
-        ),
+        ],
       ),
     );
   }
