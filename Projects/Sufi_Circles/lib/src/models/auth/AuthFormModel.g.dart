@@ -49,6 +49,23 @@ mixin _$AuthModel on _AuthModel, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
+  final _$userLoggedInAtom = Atom(name: '_AuthModel.userLoggedIn');
+
+  @override
+  bool get userLoggedIn {
+    _$userLoggedInAtom.context.enforceReadPolicy(_$userLoggedInAtom);
+    _$userLoggedInAtom.reportObserved();
+    return super.userLoggedIn;
+  }
+
+  @override
+  set userLoggedIn(bool value) {
+    _$userLoggedInAtom.context.conditionallyRunInAction(() {
+      super.userLoggedIn = value;
+      _$userLoggedInAtom.reportChanged();
+    }, _$userLoggedInAtom, name: '${_$userLoggedInAtom.name}_set');
+  }
+
   final _$_AuthModelActionController = ActionController(name: '_AuthModel');
 
   @override
@@ -66,6 +83,16 @@ mixin _$AuthModel on _AuthModel, Store {
     final _$actionInfo = _$_AuthModelActionController.startAction();
     try {
       return super.setPassword(password);
+    } finally {
+      _$_AuthModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLoginStatus(bool loggedIn) {
+    final _$actionInfo = _$_AuthModelActionController.startAction();
+    try {
+      return super.setLoginStatus(loggedIn);
     } finally {
       _$_AuthModelActionController.endAction(_$actionInfo);
     }

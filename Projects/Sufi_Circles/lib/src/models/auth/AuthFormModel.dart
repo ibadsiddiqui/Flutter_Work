@@ -4,7 +4,6 @@ import 'package:validators/validators.dart';
 
 part 'AuthFormModel.g.dart';
 
-
 class AuthModel = _AuthModel with _$AuthModel;
 
 abstract class _AuthModel with Store {
@@ -16,11 +15,17 @@ abstract class _AuthModel with Store {
   @observable
   String password = '';
 
+  @observable
+  bool userLoggedIn = false;
+
   @action
   void setEmail(String email) => this.email = email;
 
   @action
   void setPassword(String password) => this.password = password;
+
+  @action
+  void setLoginStatus(bool loggedIn) => this.userLoggedIn = loggedIn;
 
   @computed
   bool get canLogin => !error.hasErrors;
