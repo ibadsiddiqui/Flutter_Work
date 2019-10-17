@@ -1,5 +1,6 @@
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/pages/login_screen/login.dart';
+import 'package:Sufi_Circles/src/pages/onboarding_screen/onboarding.dart';
 import 'package:Sufi_Circles/src/pages/signup_screen/signup.dart';
 import 'package:Sufi_Circles/src/pages/splash_screen/splash.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
             // implementation of HomeScreen.
             // "/splash": (context) => SplashScreen(),
             '/': (context) => SplashScreen(),
+            '/OnBoardingScreen': (context) => OnBoardingScreen(),
             '/LoginScreen': (context) => LoginScreen(),
             '/SignUpScreen': (context) => SignUpScreen(),
           },
