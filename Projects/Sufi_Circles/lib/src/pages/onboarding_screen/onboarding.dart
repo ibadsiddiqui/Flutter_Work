@@ -23,13 +23,13 @@ class SlidingCardsView extends StatefulWidget {
 }
 
 class _SlidingCardsViewState extends State<SlidingCardsView> {
-  PageController pageController;
+  final pageController = PageController(initialPage: 1);
   double pageOffset = 0;
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController(viewportFraction: 0.8);
+    // pageController = PageController(viewportFraction: 0.8);
     pageController.addListener(() {
       setState(() => pageOffset = pageController.page);
     });
@@ -48,26 +48,63 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
       // width: MediaQuery.of(context).size.width,
       child: PageView(
         controller: pageController,
+        scrollDirection: Axis.horizontal,
         children: <Widget>[
-          SlidingCard(
-            name:
-                'Sufi Circles is a worldwide platform for encounters with Sufism and allows its users to form, share, discover sufi events that fuel their interests and improve their lives.',
-            date: '4.20-30',
-            assetName: 'images/onboard/onboard3.jpg',
-            offset: pageOffset,
+          // SlidingCard(
+          //   name:
+          //       'Sufi Circles is a worldwide platform for encounters with Sufism and allows its users to form, share, discover sufi events that fuel their interests and improve their lives.',
+          //   date: '4.20-30',
+          //   assetName: 'images/onboard/onboard3.jpg',
+          //   offset: pageOffset,
+          // ),
+          // SlidingCard(
+          //   name: 'Dawan District, Guangdong Hong Kong and Macao',
+          //   date: '4.28-31',
+          //   assetName: "images/onboard/onboard2.jpg",
+          //   offset: pageOffset - 1,
+          // ),
+          // SlidingCard(
+          //   name: 'Dawan District, Guangdong Hong Kong and Macao',
+          //   date: '4.28-31',
+          //   assetName: "images/onboard/onboard3.jpg",
+          //   offset: pageOffset - 1,
+          // ),
+          Container(
+            color: Colors.black,
+            width: 100,
+            height: 100,
           ),
-          SlidingCard(
-            name: 'Dawan District, Guangdong Hong Kong and Macao',
-            date: '4.28-31',
-            assetName: "images/onboard/onboard2.jpg",
-            offset: pageOffset - 1,
+          Container(
+            color: Colors.red,
+            width: 100,
+            height: 100,
           ),
-          SlidingCard(
-            name: 'Dawan District, Guangdong Hong Kong and Macao',
-            date: '4.28-31',
-            assetName: "images/onboard/onboard3.jpg",
-            offset: pageOffset - 1,
-          ),
+          Container(
+            color: Colors.blue,
+            width: 100,
+            height: 100,
+          )
+
+          // Image.asset(
+          //   'images/onboard/onboard3.jpg',
+          //   height: 100,
+          //   width: 100,
+          // ),
+          // Image.asset(
+          //   'images/onboard/onboard3.jpg',
+          //   height: 100,
+          //   width: 100,
+          // ),
+          // Image.asset(
+          //   'images/onboard/onboard3.jpg',
+          //   height: 100,
+          //   width: 100,
+          // ),
+          // Image.asset(
+          //   'images/onboard/onboard3.jpg',
+          //   height: 100,
+          //   width: 100,
+          // ),
         ],
       ),
     );
