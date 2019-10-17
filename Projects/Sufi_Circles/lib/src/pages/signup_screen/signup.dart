@@ -23,6 +23,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   AuthService _firebaseAuth = new AuthService();
   ShowPopUp showPopUp = ShowPopUp();
 
+  bool attempLogin = false;
+
   @override
   void initState() {
     super.initState();
@@ -35,10 +37,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
+  toggleLoader() => this.setState(() => attempLogin = !attempLogin);
+
   void validateCredentials() async {
     final authModelProvider = Provider.of<AuthModel>(context);
     authModelProvider.validateAll();
     if (authModelProvider.canLogin) {
+      toggleLoader();
       attemptSignup(authModelProvider.email, authModelProvider.password);
     } else {
       showPopUp.incorrectCredentials(context);
@@ -49,8 +54,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future attemptSignup(String email, String password) async {
     try {
       FirebaseUser user = await _firebaseAuth.createUser(email, password);
+      toggleLoader();
       showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {
+      toggleLoader();
       showPopUp.showFailedSignupPopUp(e.code, e.message, context);
     }
   }

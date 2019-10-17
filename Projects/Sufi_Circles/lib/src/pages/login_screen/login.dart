@@ -24,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final ShowPopUp showPopUp = ShowPopUp();
   AuthService _firebaseAuth = new AuthService();
 
+  bool attempLogin = false;
+
   @override
   void initState() {
     super.initState();
@@ -36,21 +38,28 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  toggleLoader() => this.setState(() => attempLogin = !attempLogin);
+
   void validateLogin(BuildContext context) async {
     final authModelProvider = Provider.of<AuthModel>(context);
     authModelProvider.validateAll();
     if (authModelProvider.canLogin) {
+      toggleLoader();
       attemptLogin(authModelProvider.email, authModelProvider.password);
-    } else
+    } else {
       showPopUp.incorrectCredentials(context);
+    }
   }
 
   void attemptLogin(String email, String password) async {
     try {
       var _user = await _firebaseAuth.signIn(email, password);
       IdTokenResult userToken = await _user.getIdToken();
+      print(_user);
       showPopUp.showSuccessFulSigninPopUp(context);
+      toggleLoader();
     } on PlatformException catch (e) {
+      toggleLoader();
       print(e);
       showPopUp.incorrectCredentials(context);
     }
@@ -75,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SubmitButton(
                 title: "SIGN IN",
                 onPressed: () => this.validateLogin(context),
+                isLoading: attempLogin,
               ),
               ForgotPasswordButton(),
               new Expanded(child: Divider()),
