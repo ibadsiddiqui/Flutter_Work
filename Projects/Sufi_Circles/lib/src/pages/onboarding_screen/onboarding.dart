@@ -59,7 +59,7 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
           SlidingCard(
             name: 'Dawan District, Guangdong Hong Kong and Macao',
             date: '4.28-31',
-            assetName: "images/onboard/onboard3.jpg",
+            assetName: "images/onboard/onboard2.jpg",
             offset: pageOffset - 1,
           ),
           SlidingCard(
@@ -157,40 +157,28 @@ class CardContent extends StatelessWidget {
           Spacer(),
           Row(
             children: <Widget>[
-              Transform.translate(
-                offset: Offset(48 * offset, 0),
-                child: RaisedButton(
-                  color: Color(0xFF162A49),
-                  child: Transform.translate(
-                    offset: Offset(24 * offset, 0),
-                    child: Text('Reserve'),
-                  ),
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  onPressed: () {},
-                ),
-              ),
+              // Transform.translate(
+              //   offset: Offset(48 * offset, 0),
+              //   child: RaisedButton(
+              //     color: Color(0xFF162A49),
+              //     child: Transform.translate(
+              //       offset: Offset(24 * offset, 0),
+              //       child: Text('Reserve'),
+              //     ),
+              //     textColor: Colors.white,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(32),
+              //     ),
+              //     onPressed: () {},
+              //   ),
+              // ),
               Spacer(),
               Transform.translate(
                 offset: Offset(32 * offset, 0),
-                // child: RaisedButton(
-                // color: Color(0xFF162A49),
                 child: Icon(
                   Icons.arrow_forward,
                   color: Color(0xFF162A49),
                 ),
-                // Transform.translate(
-                //   offset: Offset(24 * offset, 0),
-                //   child: Text('Reserve'),
-                // ),
-                // textColor: Colors.white,
-                // shape: RoundedRectangleBorder(
-                //   borderRadius: BorderRadius.circular(32),
-                // ),
-                // onPressed: () {},
-                // ),
               ),
               SizedBox(width: 16),
             ],
