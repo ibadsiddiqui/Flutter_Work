@@ -1,10 +1,11 @@
-import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
-import 'package:Sufi_Circles/src/pages/login_screen/login.dart';
-import 'package:Sufi_Circles/src/pages/onboarding_screen/onboarding.dart';
-import 'package:Sufi_Circles/src/pages/signup_screen/signup.dart';
-import 'package:Sufi_Circles/src/pages/splash_screen/splash.dart';
+import 'src/models/auth/AuthFormModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'src/pages/login_screen/login.dart';
+import 'src/pages/onboarding_screen/onboarding.dart';
+import 'src/pages/signup_screen/signup.dart';
+import 'src/pages/splash_screen/splash.dart';
 
 void main() => runApp(App());
 
