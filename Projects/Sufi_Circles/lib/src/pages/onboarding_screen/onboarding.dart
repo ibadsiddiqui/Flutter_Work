@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/page_view.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: Color.fromRGBO(8, 51, 88, 1),
         child: Center(
           child: OnboardPages(),
         ),
@@ -23,17 +26,22 @@ class OnboardPages extends StatefulWidget {
 
 class _OnboardPagesState extends State<OnboardPages> {
   final pageController = PageController(initialPage: 0);
+  bool _visible = false;
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  @protected
+  @mustCallSuper
+  void didChangeDependencies() =>
+      new Timer(Duration(seconds: 3), toggleOpacity);
 
   @override
   void dispose() {
     pageController.dispose();
     super.dispose();
   }
+
+  toggleOpacity() => setState(() {
+        _visible = !_visible;
+      });
 
   moveToNextPage() {
     pageController.nextPage(
@@ -44,7 +52,9 @@ class _OnboardPagesState extends State<OnboardPages> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return new AnimatedOpacity(
+      opacity: _visible ? 1.0 : 0.0,
+      duration: Duration(milliseconds: 500),
       child: PageView(
         controller: pageController,
         scrollDirection: Axis.horizontal,
