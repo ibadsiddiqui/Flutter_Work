@@ -27,8 +27,6 @@ dependencies:
   flutter_mobx:
   validators:
   rflutter_alert: ^1.0.2
-   # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
@@ -55,6 +53,7 @@ flutter:
     - asset/images/splash/2.0x/splash.png
     - asset/images/splash/3.0x/splash.png
     - asset/images/backgrounds/auth.png
+    - asset/images/backgrounds/onboard.jpg
     - asset/images/onboard/onboard1.jpg
     - asset/images/onboard/onboard2.jpg
     - asset/images/onboard/onboard3.jpg

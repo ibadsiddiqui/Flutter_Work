@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 
 class OnboardPageView extends StatelessWidget {
-  const OnboardPageView({Key key, this.assetPath, this.title, this.desc})
+  const OnboardPageView(
+      {Key key, this.assetPath, this.title, this.desc, this.onPressed})
       : super(key: key);
 
   final String assetPath;
   final String title;
   final String desc;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromRGBO(8, 51, 88, 1),
+      // color: Color.fromRGBO(8, 51, 88, 1),
+      // color: Color(0xFF072247),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("asset/images/backgrounds/onboard.jpg"),
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+          colorFilter: ColorFilter.srgbToLinearGamma()
+        ),
+      ),
       child: Column(
         children: <Widget>[
           Center(
@@ -51,7 +62,10 @@ class OnboardPageView extends StatelessWidget {
                     textAlign: TextAlign.justify,
                   ),
                 ),
-                Divider(height: title == "FEATURES" ? 60 : 100),
+                Divider(
+                    height: title == "FEATURES"
+                        ? 60
+                        : title == "STARTUP" ? 100 : 100),
                 Container(
                   alignment: Alignment.bottomRight,
                   child: FlatButton(
@@ -59,7 +73,7 @@ class OnboardPageView extends StatelessWidget {
                       Icons.arrow_forward,
                       color: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: onPressed,
                   ),
                 )
               ],
