@@ -17,11 +17,10 @@ class OnboardPageView extends StatelessWidget {
       // color: Color(0xFF072247),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("asset/images/backgrounds/onboard.jpg"),
-          fit: BoxFit.cover,
-          alignment: Alignment.center,
-          colorFilter: ColorFilter.srgbToLinearGamma()
-        ),
+            image: AssetImage("asset/images/backgrounds/onboard.jpg"),
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+            colorFilter: ColorFilter.srgbToLinearGamma()),
       ),
       child: Column(
         children: <Widget>[
@@ -64,15 +63,29 @@ class OnboardPageView extends StatelessWidget {
                 ),
                 Divider(
                     height: title == "FEATURES"
-                        ? 60
+                        ? 80
                         : title == "STARTUP" ? 100 : 100),
                 Container(
                   alignment: Alignment.bottomRight,
                   child: FlatButton(
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    ),
+                    child: title == "FEATURES"
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                                Text(
+                                  "Get Started",
+                                  style: TextStyle(
+                                      fontSize: 17, color: Colors.white),
+                                ),
+                                Icon(
+                                  Icons.arrow_right,
+                                  color: Colors.white,
+                                )
+                              ])
+                        : Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
                     onPressed: onPressed,
                   ),
                 )
