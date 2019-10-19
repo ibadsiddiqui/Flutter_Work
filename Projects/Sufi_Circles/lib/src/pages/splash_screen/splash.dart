@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
+import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -8,30 +11,42 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  startTime() async {
-    var _duration = new Duration(seconds: 2);
-    return new Timer(_duration, navigationPage);
-  }
-
-  void navigationPage() {
-    Navigator.of(context).pushReplacementNamed('/OnBoardingScreen');
-  }
-
   @override
   void initState() {
     super.initState();
     startTime();
   }
 
+  startTime() async {
+    var _duration = new Duration(seconds: 4);
+    return new Timer(_duration, naviagte);
+  }
+
+  void naviagte() {
+    Navigator.pushReplacement(
+        context, createRoute(screen: OnBoardingLoadingScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Container(
-        padding: EdgeInsets.only(top: 150),
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-            image: AssetImage("asset/images/splash/splash.png"),
-            fit: BoxFit.cover,
+      body: Container(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: Image.asset(
+                    "asset/icons/app icon/app_icon.png",
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                AppTitle(color: Color.fromRGBO(8, 51, 88, 1)),
+              ],
+            ),
           ),
         ),
       ),
