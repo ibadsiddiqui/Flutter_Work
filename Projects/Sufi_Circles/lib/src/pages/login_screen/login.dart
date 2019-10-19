@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: new Column(
             children: <Widget>[
               AppIcon(),
-              AppTitle(),
+              AppTitle(color: Colors.white),
               AuthForm(),
               const SizedBox(height: 30),
               SubmitButton(

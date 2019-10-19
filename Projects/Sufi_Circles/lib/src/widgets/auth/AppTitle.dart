@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppTitle extends StatelessWidget {
+  final Color color;
+
+  const AppTitle({Key key, this.color}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return new Padding(
@@ -8,7 +11,7 @@ class AppTitle extends StatelessWidget {
       child: new Text(
         "Sufi Circles",
         style: TextStyle(
-          color: Colors.white,
+          color: color,
           fontSize: 40,
           fontFamily: "CreteRound",
         ),

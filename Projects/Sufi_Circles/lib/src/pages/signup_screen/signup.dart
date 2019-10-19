@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: new Column(
             children: <Widget>[
               AppIcon(),
-              AppTitle(),
+              AppTitle(color: Colors.white),
               Consumer<AuthModel>(
                   builder: (context, data, child) => AuthForm()),
               const SizedBox(height: 30),
