@@ -1,12 +1,13 @@
 import 'src/models/auth/AuthFormModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'src/pages/login_screen/login.dart';
-import 'src/pages/onboarding_screen/onboarding.dart';
-import 'src/pages/signup_screen/signup.dart';
-import 'src/pages/splash_screen/splash.dart';
 import 'package:flutter/services.dart';
+
+import 'src/pages/splash_screen/splash.dart';
+import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
+import 'src/pages/onboarding_screen/onboarding.dart';
+import 'src/pages/login_screen/login.dart';
+import 'src/pages/signup_screen/signup.dart';
 
 void main() => runApp(App());
 
@@ -29,6 +30,7 @@ class App extends StatelessWidget {
           // implementation of HomeScreen.
           // "/splash": (context) => SplashScreen(),
           '/': (context) => SplashScreen(),
+          '/OnBoardingLoadingScreen': (context) => OnBoardingLoadingScreen(),
           '/OnBoardingScreen': (context) => OnBoardingScreen(),
           '/LoginScreen': (context) => LoginScreen(),
           '/SignUpScreen': (context) => SignUpScreen(),
