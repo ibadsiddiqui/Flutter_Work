@@ -1,7 +1,5 @@
+import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 
@@ -14,17 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    startTime();
-  }
-
-  startTime() async {
-    var _duration = new Duration(seconds: 4);
-    return new Timer(_duration, naviagte);
-  }
-
-  void naviagte() {
-    Navigator.pushReplacement(
-        context, createRoute(screen: OnBoardingLoadingScreen()));
+    TimeNavigation.navigate(context, OnBoardingLoadingScreen());
   }
 
   @override

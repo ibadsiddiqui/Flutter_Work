@@ -39,7 +39,7 @@ class OnboardPageView extends StatelessWidget {
                 OnBoardDescription(desc: desc),
                 Divider(
                     height: title == "FEATURES"
-                        ? 80
+                        ? 65
                         : title == "STARTUP" ? 100 : 100),
                 Container(
                   alignment: Alignment.bottomRight,
