@@ -1,5 +1,6 @@
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
+import 'package:Sufi_Circles/src/services/UserServices.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
@@ -52,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void attemptLogin(String email, String password) async {
+    UserServices();
     try {
       var _user = await _firebaseAuth.signIn(email, password);
       IdTokenResult userToken = await _user.getIdToken();
