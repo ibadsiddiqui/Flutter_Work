@@ -20,13 +20,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  bool attemptSignup = false;
   final AuthModel store = AuthModel();
+
   AuthService _firebaseAuth = new AuthService();
   UserServices userServices = UserServices();
-
   ShowPopUp showPopUp = ShowPopUp();
-
-  bool attempLogin = false;
 
   @override
   void initState() {
@@ -40,21 +39,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  toggleLoader() => this.setState(() => attempLogin = !attempLogin);
+  toggleLoader() => this.setState(() => attemptSignup = !attemptSignup);
 
-  void validateCredentials() async {
+  Future validateCredentials() async {
     final authModelProvider = Provider.of<AuthModel>(context);
     authModelProvider.validateAll();
     if (authModelProvider.canLogin) {
       toggleLoader();
-      attemptSignup(authModelProvider.authDetails);
+      signupUser(authModelProvider.authDetails);
     } else {
       showPopUp.incorrectCredentials(context);
       authModelProvider.setPassword("");
     }
   }
 
-  Future attemptSignup(Map<String, String> authDetails) async {
+  Future signupUser(Map<String, String> authDetails) async {
     try {
       FirebaseUser user = await _firebaseAuth.createUser(authDetails);
       print(user);
@@ -92,6 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SubmitButton(
                 title: "SIGN UP",
                 onPressed: validateCredentials,
+                isLoading: attemptSignup,
               ),
               new Expanded(child: Divider()),
               BottomButton(

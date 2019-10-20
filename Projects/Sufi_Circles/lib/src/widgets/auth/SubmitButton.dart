@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
     Key key,
-    this.title,
+    this.title = "",
     this.onPressed,
     this.isLoading = false,
   }) : super(key: key);
@@ -40,11 +40,9 @@ class SubmitButton extends StatelessWidget {
                         dotIcon: Icon(Icons.adjust),
                         duration: Duration(milliseconds: 750),
                       )
-                    : Text(
-                        this.title,
+                    : Text(this.title,
                         style: TextStyle(
-                            color: Colors.white, fontFamily: "Comfortaa")
-                      ),
+                            color: Colors.white, fontFamily: "Comfortaa")),
               ),
             ),
           ),
