@@ -1,6 +1,7 @@
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
+import 'package:Sufi_Circles/src/services/UserServices.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
@@ -21,6 +22,8 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final AuthModel store = AuthModel();
   AuthService _firebaseAuth = new AuthService();
+  UserServices userServices = UserServices();
+
   ShowPopUp showPopUp = ShowPopUp();
 
   bool attempLogin = false;
@@ -44,16 +47,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
     authModelProvider.validateAll();
     if (authModelProvider.canLogin) {
       toggleLoader();
-      attemptSignup(authModelProvider.email, authModelProvider.password);
+      attemptSignup(authModelProvider.authDetails);
     } else {
       showPopUp.incorrectCredentials(context);
       authModelProvider.setPassword("");
     }
   }
 
-  Future attemptSignup(String email, String password) async {
+  Future attemptSignup(Map<String, String> authDetails) async {
     try {
-      FirebaseUser user = await _firebaseAuth.createUser(email, password);
+      FirebaseUser user = await _firebaseAuth.createUser(authDetails);
+      print(user);
+      userServices.createUserInDB({
+        "uid": user.uid,
+        "email": user.email,
+        "isEmailVerified": user.isEmailVerified,
+        "creationTimeStamp": user.metadata.creationTime,
+      });
       toggleLoader();
       showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {
