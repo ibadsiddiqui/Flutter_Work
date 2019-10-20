@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/login_screen/login.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -76,7 +77,8 @@ class _OnboardPagesState extends State<OnboardPages> {
           OnboardPageView(
             assetPath: 'asset/images/onboard/onboard3.jpg',
             title: "FEATURES",
-            onPressed: () => pushLoginScreen(context),
+            onPressed: () => Navigator.pushReplacement(
+                context, createRoute(screen: LoginScreen())),
             desc:
                 "- Coverage of sufi events and activities across the globe.\n- Search for sufi circles around you.\n- View and share events.\n- Get notifications for events nearby.\n- Fun and easy to use.",
           ),
