@@ -46,16 +46,16 @@ class _LoginScreenState extends State<LoginScreen> {
     authModelProvider.validateAll();
     if (authModelProvider.canLogin) {
       toggleLoader();
-      attemptLogin(authModelProvider.email, authModelProvider.password);
+      attemptLogin(authModelProvider.authDetails);
     } else {
       showPopUp.incorrectCredentials(context);
     }
   }
 
-  void attemptLogin(String email, String password) async {
+  void attemptLogin(Map<String, String> authDetails) async {
     UserServices();
     try {
-      var _user = await _firebaseAuth.signIn(email, password);
+      var _user = await _firebaseAuth.signIn(authDetails);
       IdTokenResult userToken = await _user.getIdToken();
       print(_user);
       showPopUp.showSuccessFulSigninPopUp(context);

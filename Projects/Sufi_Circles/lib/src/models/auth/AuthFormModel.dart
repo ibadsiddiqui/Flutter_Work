@@ -60,4 +60,8 @@ abstract class _AuthModel with Store {
     validatePassword(this.password);
     validateEmail(this.email);
   }
+
+  @computed
+  Map<String, String> get authDetails =>
+      {"email": email, "password": password};
 }

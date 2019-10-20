@@ -14,6 +14,12 @@ mixin _$AuthModel on _AuthModel, Store {
   @override
   bool get canLogin =>
       (_$canLoginComputed ??= Computed<bool>(() => super.canLogin)).value;
+  Computed<Map<String, String>> _$authDetailsComputed;
+
+  @override
+  Map<String, String> get authDetails => (_$authDetailsComputed ??=
+          Computed<Map<String, String>>(() => super.authDetails))
+      .value;
 
   final _$emailAtom = Atom(name: '_AuthModel.email');
 
