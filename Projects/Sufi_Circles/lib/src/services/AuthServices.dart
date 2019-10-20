@@ -14,11 +14,11 @@ class AuthService {
     }
   }
 
-  Future<FirebaseUser> createUser(String email, String password) async {
+  Future<FirebaseUser> createUser(Map<String, String> authDetails) async {
     print("here");
     try {
       return (await _firebaseAuth.createUserWithEmailAndPassword(
-              email: email, password: password))
+              email: authDetails["email"], password: authDetails["password"]))
           .user;
     } catch (e) {
       throw e;

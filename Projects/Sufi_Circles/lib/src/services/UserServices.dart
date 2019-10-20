@@ -1,13 +1,16 @@
 import 'dart:async';
-import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class UserServices {
+  Map<String, String> user = Map();
   CollectionReference userDB = Firestore.instance.collection("user");
 
-  Map<String, UserModel> user;
-  UserServices() {
-    print(user);
+  Future<void> createUserInDB(Map<String, dynamic> user) async {
+    try {
+      return (await userDB.document(user["uid"]).setData(user));
+    } catch (e) {
+      print("error");
+      print(e);
+    }
   }
 }
