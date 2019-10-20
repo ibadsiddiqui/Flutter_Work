@@ -1,3 +1,6 @@
+import 'package:Sufi_Circles/src/widgets/onboard/background.dart';
+import 'package:Sufi_Circles/src/widgets/onboard/description.dart';
+import 'package:Sufi_Circles/src/widgets/onboard/heading.dart';
 import 'package:flutter/material.dart';
 
 class OnboardPageView extends StatelessWidget {
@@ -15,13 +18,7 @@ class OnboardPageView extends StatelessWidget {
     return Container(
       // color: Color.fromRGBO(8, 51, 88, 1),
       // color: Color(0xFF072247),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("asset/images/backgrounds/onboard.jpg"),
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-            colorFilter: ColorFilter.srgbToLinearGamma()),
-      ),
+      decoration: onBoardBackground(),
       child: Column(
         children: <Widget>[
           Center(
@@ -38,29 +35,8 @@ class OnboardPageView extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 25.0),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                        fontFamily: "CreteRound",
-                        fontSize: 30,
-                        color: Colors.white,
-                        decorationStyle: TextDecorationStyle.dashed,
-                        decoration: TextDecoration.underline),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    desc,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                        fontFamily: "Comfortaa"),
-                    textAlign: TextAlign.justify,
-                  ),
-                ),
+                OnBoardHeading(title: title),
+                OnBoardDescription(desc: desc),
                 Divider(
                     height: title == "FEATURES"
                         ? 80
