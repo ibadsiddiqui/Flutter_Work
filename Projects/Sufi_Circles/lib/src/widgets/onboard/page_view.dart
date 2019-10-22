@@ -1,4 +1,3 @@
-import 'package:Sufi_Circles/src/widgets/onboard/background.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/description.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/heading.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +15,7 @@ class OnboardPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Color.fromRGBO(8, 51, 88, 1),
-      // color: Color(0xFF072247),
-      decoration: onBoardBackground(),
+      color: Color(0xFF072247),
       child: Column(
         children: <Widget>[
           Center(
