@@ -48,7 +48,10 @@ class OnboardPageView extends StatelessWidget {
                                 Text(
                                   "Get Started",
                                   style: TextStyle(
-                                      fontSize: 17, color: Colors.white),
+                                    fontSize: 17,
+                                    fontFamily: "Comfortaa",
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 Icon(
                                   Icons.arrow_right,
