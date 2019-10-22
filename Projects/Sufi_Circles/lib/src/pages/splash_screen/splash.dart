@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
+import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
@@ -12,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    TimeNavigation.navigate(context, OnBoardingLoadingScreen());
+    TimeNavigation.navigate(context, DashboardScreen());
   }
 
   @override

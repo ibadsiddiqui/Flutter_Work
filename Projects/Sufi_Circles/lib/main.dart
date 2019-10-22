@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
@@ -37,6 +38,7 @@ class App extends StatelessWidget {
           '/LoginScreen': (context) => LoginScreen(),
           '/SignUpScreen': (context) => SignUpScreen(),
           '/LoadingScreen': (context) => LoadingScreen(),
+          '/DashboardScreen': (context) => DashboardScreen(),
         },
       ),
     );
