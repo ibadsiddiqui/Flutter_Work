@@ -5,32 +5,79 @@ class DashboardDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Color(0xFF072247),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Container(
-                // color: Colors.red,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("asset/icons/app icon/app_icon.png"),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
-                    repeat: ImageRepeat.noRepeat,
+            Container(
+              padding: EdgeInsets.only(top: 25, left: 20, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.red,
+                      width: 75,
+                      height: 75,
+                      child: Text(
+                        "F",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontFamily: "CreteRound",
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                constraints: BoxConstraints.expand(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  // child: Image.asset("asset/icons/app icon/app_icon.png"),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100.0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: Colors.red,
+                        width: 50,
+                        height: 50,
+                        child: Text(
+                          "F",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: "CreteRound"),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Text("ibasd"),
+            Padding(
+              padding: const EdgeInsets.only(left: 24, top: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Ibad Siddiqui",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: "Comforta",
+                    ),
+                  ),
+                  Text(
+                    "ibadsidiqui01@outloo.com",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: "Comforta",
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
