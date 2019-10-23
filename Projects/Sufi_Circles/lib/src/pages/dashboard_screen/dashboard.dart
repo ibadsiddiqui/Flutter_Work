@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
@@ -17,7 +18,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: DashboardDrawer(),
       appBar: dashboardAppBar(isSearching: isSearching, onPress: toggleSearch),
       body: Container(
         child: ListView(
