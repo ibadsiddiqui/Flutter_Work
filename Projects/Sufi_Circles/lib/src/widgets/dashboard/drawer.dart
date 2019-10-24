@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
 import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,10 @@ class DashboardDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  NamedCircle(size: "Large", title: "F"),
+                  NamedCircle(size: "Large", title: "I"),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: NamedCircle(size: "Small", title: "F"),
+                    child: NamedCircle(size: "Small", title: "S"),
                   ),
                 ],
               ),
@@ -31,21 +32,26 @@ class DashboardDrawer extends StatelessWidget {
                     "Ibad Siddiqui",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: "Comforta",
-                    ),
+                        fontSize: 22,
+                        fontFamily: "Comforta",
+                        color: Color(0xFF072247)),
                   ),
                   Text(
                     "ibadsidiqui01@outloo.com",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: "Comforta",
-                    ),
+                        fontSize: 16,
+                        fontFamily: "Comforta",
+                        color: Color(0xFF072247)),
                   ),
                 ],
               ),
             ),
+            SizedBox(height: 50),
+            DrawerItem(title: "Profile", leftIcon: Icon(Icons.person)),
+            DrawerItem(title: "Setting", leftIcon: Icon(Icons.settings)),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.5),
+            DrawerItem(title: "Sign out", leftIcon: Icon(Icons.exit_to_app)),
           ],
         ),
       ),
