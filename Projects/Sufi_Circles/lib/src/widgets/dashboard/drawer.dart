@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
 import 'package:flutter/material.dart';
 
 class DashboardDrawer extends StatelessWidget {
@@ -13,43 +14,10 @@ class DashboardDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      color: Colors.red,
-                      width: 75,
-                      height: 75,
-                      child: Text(
-                        "F",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontFamily: "CreteRound",
-                        ),
-                      ),
-                    ),
-                  ),
+                  NamedCircle(size: "Large", title: "F"),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100.0),
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Colors.red,
-                        width: 50,
-                        height: 50,
-                        child: Text(
-                          "F",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: "CreteRound"),
-                        ),
-                      ),
-                    ),
+                    child: NamedCircle(size: "Small", title: "F"),
                   ),
                 ],
               ),
