@@ -6,22 +6,20 @@ class DashboardTopTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Container(
         decoration: dashboardTopTabBackground(),
-        width: 175,
-        height: 175,
+        width: size.width * 0.45,
+        height: size.width * 0.5,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               "Come and Discover the cream of the crop",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "Comfortaa",
-              ),
+              style: TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -33,9 +31,7 @@ class DashboardTopTile extends StatelessWidget {
                   child: Text(
                     "Book Event",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "CreteRound",
-                    ),
+                        color: Colors.white, fontFamily: "CreteRound"),
                   ),
                 ),
               ),
