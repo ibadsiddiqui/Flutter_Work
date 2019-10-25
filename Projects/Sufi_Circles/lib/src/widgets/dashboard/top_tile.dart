@@ -2,7 +2,11 @@ import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
 import 'package:flutter/material.dart';
 
 class DashboardTopTile extends StatelessWidget {
-  const DashboardTopTile({Key key}) : super(key: key);
+  final String eventDesc;
+  final String eventCoverPhoto;
+
+  const DashboardTopTile({Key key, this.eventDesc, this.eventCoverPhoto})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +14,14 @@ class DashboardTopTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        decoration: dashboardTopTabBackground(),
+        decoration: dashboardTopTabBackground(path: eventCoverPhoto),
         width: size.width * 0.45,
         height: size.width * 0.5,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Come and Discover the cream of the crop",
+              eventDesc,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
             ),
