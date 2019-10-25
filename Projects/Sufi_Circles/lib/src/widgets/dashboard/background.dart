@@ -1,9 +1,9 @@
 import 'package:flutter/rendering.dart';
 
-BoxDecoration dashboardTopTabBackground() {
+BoxDecoration dashboardTopTabBackground({String path = ""}) {
   return new BoxDecoration(
     image: DecorationImage(
-      image: AssetImage("asset/images/backgrounds/onboard.jpg"),
+      image: AssetImage(path),
       fit: BoxFit.cover,
       repeat: ImageRepeat.noRepeat,
       colorFilter: ColorFilter.srgbToLinearGamma(),
