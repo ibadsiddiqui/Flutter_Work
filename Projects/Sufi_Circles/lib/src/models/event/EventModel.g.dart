@@ -9,17 +9,23 @@ part of 'EventModel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$EventModel on _EventModel, Store {
-  Computed<dynamic> _$isVenuePhotoEmptyComputed;
+  Computed<dynamic> _$isVenuePhotosEmptyComputed;
 
   @override
-  dynamic get isVenuePhotoEmpty => (_$isVenuePhotoEmptyComputed ??=
-          Computed<dynamic>(() => super.isVenuePhotoEmpty))
+  dynamic get isVenuePhotosEmpty => (_$isVenuePhotosEmptyComputed ??=
+          Computed<dynamic>(() => super.isVenuePhotosEmpty))
       .value;
   Computed<dynamic> _$getPhotosLengthComputed;
 
   @override
   dynamic get getPhotosLength => (_$getPhotosLengthComputed ??=
           Computed<dynamic>(() => super.getPhotosLength))
+      .value;
+  Computed<dynamic> _$getEventDetailComputed;
+
+  @override
+  dynamic get getEventDetail => (_$getEventDetailComputed ??=
+          Computed<dynamic>(() => super.getEventDetail))
       .value;
 
   final _$eventNameAtom = Atom(name: '_EventModel.eventName');

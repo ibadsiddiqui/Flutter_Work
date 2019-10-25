@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:mobx/mobx.dart';
 
 part 'EventModel.g.dart';
@@ -30,8 +31,16 @@ abstract class _EventModel with Store {
   void addEventVenuePhoto(String name) => this.eventVenuePhoto.add(name);
 
   @computed
-  get isVenuePhotoEmpty => eventVenuePhoto.isEmpty;
+  get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);
 
   @computed
   get getPhotosLength => eventVenuePhoto.length;
+
+  @computed
+  get getEventDetail => {
+        eventName = this.eventName,
+        eventDesc = this.eventDesc,
+        eventCoverPhoto = this.eventCoverPhoto,
+        eventVenuePhoto = List(),
+      };
 }
