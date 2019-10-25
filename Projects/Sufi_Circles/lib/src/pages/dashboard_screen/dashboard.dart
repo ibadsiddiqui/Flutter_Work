@@ -61,8 +61,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     RecommendedEventsModel recommendedEventsModel =
         Provider.of<RecommendedEventsModel>(context);
     return Scaffold(
-      drawer: DashboardDrawer(),
       appBar: dashboardAppBar(isSearching: isSearching, onPress: toggleSearch),
+      drawer: DashboardDrawer(),
       body: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,

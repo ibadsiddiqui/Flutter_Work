@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class DashboardDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Drawer(
       child: Container(
         child: Column(
@@ -47,10 +48,10 @@ class DashboardDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: size.height * 0.025),
             DrawerItem(title: "Profile", leftIcon: Icon(Icons.person)),
             DrawerItem(title: "Setting", leftIcon: Icon(Icons.settings)),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.5),
+            SizedBox(height: size.height * 0.5),
             DrawerItem(title: "Sign out", leftIcon: Icon(Icons.exit_to_app)),
           ],
         ),
