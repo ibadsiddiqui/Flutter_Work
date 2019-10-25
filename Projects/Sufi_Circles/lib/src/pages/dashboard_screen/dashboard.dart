@@ -1,7 +1,6 @@
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
-import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/lastest_events_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
@@ -46,64 +45,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildBody(recommendedEventsModel) {
-    final size = MediaQuery.of(context).size;
+  Widget _buildBody(recommendedEventsModel, size) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       height: size.height * 0.6,
       child: ListView.builder(
-        itemBuilder: (BuildContext context, int idx) {
-          if (recommendedEventsModel.recommendedEvents.length - 1 > idx) {
-            final detail = getEventDetailsUsingIndex(
-                recommendedEventsModel.recommendedEvents[idx]);
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  width: size.width * 0.9,
-                  height: size.height * 0.225,
-                  decoration: dashboardTopTabBackground(
-                      path: detail['eventCoverPhoto']),
-                  child: FlatButton(
-                    onPressed: () {},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.center,
-                          width: detail["eventName"].length.toDouble() * 20,
-                          child: Text(
-                            detail["eventName"],
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 22.0),
-                          ),
-                        ),
-                        Container(
-                          width: detail["eventName"].length.toDouble() * 10,
-                          child: Divider(
-                            color: Color(0xFFFC3C3C),
-                            thickness: 2,
-                            height: 1,
-                          ),
-                        ),
-                        Text(
-                          detail["eventDesc"],
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white
-                              // fontSize: 22.0,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            );
-          }
-        },
-      ),
+          itemCount: recommendedEventsModel.recommendedEvents.length,
+          itemBuilder: (context, int idx) => LatestEventTiles(index: idx)),
     );
   }
 
@@ -119,12 +67,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
+            child: DashboardHeadings(title: "Recommended Events"),
+          ),
           _buildHeader(recommendedEventsModel),
           Padding(
             padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
             child: DashboardHeadings(title: "Latest Events"),
           ),
-          _buildBody(recommendedEventsModel),
+          _buildBody(recommendedEventsModel, size),
         ],
       ),
     );
