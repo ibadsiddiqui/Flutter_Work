@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    TimeNavigation.navigate(context, ProfileScreen());
+    TimeNavigation.navigate(context, OnBoardingLoadingScreen());
   }
 
   @override

@@ -26,3 +26,7 @@ void pushLoginScreen(context) {
 void pushSignUpScreen(context) {
   Navigator.of(context).pushReplacementNamed("/SignUpScreen");
 }
+
+void pushProfileScreen(context, {Widget screen}) {
+  Navigator.push(context, createRoute(screen: screen));
+}

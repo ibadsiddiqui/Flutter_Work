@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:Sufi_Circles/src/pages/onboarding_screen/onboarding.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
@@ -14,7 +15,7 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
   @override
   void initState() {
     super.initState();
-    TimeNavigation.navigate(context, OnBoardingScreen());
+    TimeNavigation.navigate(context, DashboardScreen());
   }
 
   @override
