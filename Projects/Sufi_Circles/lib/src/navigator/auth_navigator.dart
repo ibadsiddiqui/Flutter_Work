@@ -30,3 +30,7 @@ void pushSignUpScreen(context) {
 void pushProfileScreen(context, {Widget screen}) {
   Navigator.push(context, createRoute(screen: screen));
 }
+
+void pushSettingsScreen(context, {Widget screen}) {
+  Navigator.push(context, createRoute(screen: screen));
+}
