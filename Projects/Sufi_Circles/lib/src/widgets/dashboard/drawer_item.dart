@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 class DrawerItem extends StatelessWidget {
   final Icon leftIcon;
   final String title;
-
-  const DrawerItem({Key key, this.leftIcon, this.title}) : super(key: key);
+  final Function onPress;
+  const DrawerItem({Key key, this.leftIcon, this.title, this.onPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: () {},
+      onPressed: onPress,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
