@@ -24,10 +24,9 @@ PreferredSizeWidget dashboardAppBar(
           ),
     actions: <Widget>[
       IconButton(
-        tooltip: "Seach Events",
-        icon: Icon(Icons.search, color: Colors.white),
-        onPressed: onPress,
-      ),
+          icon: Icon(Icons.search, color: Colors.white),
+          tooltip: "Seach Events",
+          onPressed: onPress),
       SizedBox(height: 10, width: 10)
     ],
   );

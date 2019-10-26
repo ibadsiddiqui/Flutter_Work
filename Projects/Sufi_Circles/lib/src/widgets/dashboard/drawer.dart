@@ -60,6 +60,13 @@ class DashboardDrawer extends StatelessWidget {
                   pushProfileScreen(context, screen: ProfileScreen());
                 }),
             DrawerItem(
+                title: "See All Events",
+                leftIcon: Icon(Icons.event),
+                onPress: () {
+                  Navigator.pop(context);
+                  pushSettingsScreen(context, screen: SettingScreen());
+                }),
+            DrawerItem(
                 title: "Setting",
                 leftIcon: Icon(Icons.settings),
                 onPress: () {
