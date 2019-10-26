@@ -63,7 +63,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 10.0),
-                      child: Text("Setting",
+                      child: Text("Settings",
                           style: TextStyle(
                               fontSize: 25.0, fontFamily: "CreteRound")),
                     ),
@@ -75,9 +75,15 @@ class _SettingScreenState extends State<SettingScreen> {
                   ],
                 ),
                 SizedBox(height: 20),
-                UserDetailItem(label: "Privacy Policy", value: "click to view them..."),
-                UserDetailItem(label: "Terms & Condition:", value: "click to view them..."),
-
+                UserDetailItem(
+                  label: "Privacy Policy",
+                  value: "click to view them...",
+                  screenName: "setting",
+                ),
+                UserDetailItem(
+                    label: "Terms & Condition:",
+                    value: "click to view them...",
+                    screenName: "setting"),
               ],
             ),
           )

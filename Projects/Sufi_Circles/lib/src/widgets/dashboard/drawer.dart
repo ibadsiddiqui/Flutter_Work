@@ -1,5 +1,6 @@
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
+import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
 import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
 import 'package:flutter/material.dart';
@@ -52,11 +53,19 @@ class DashboardDrawer extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.025),
             DrawerItem(
-              title: "Profile",
-              leftIcon: Icon(Icons.person),
-              onPress: () => pushProfileScreen(context, screen: ProfileScreen()),
-            ),
-            DrawerItem(title: "Setting", leftIcon: Icon(Icons.settings)),
+                title: "Profile",
+                leftIcon: Icon(Icons.person),
+                onPress: () {
+                  Navigator.pop(context);
+                  pushProfileScreen(context, screen: ProfileScreen());
+                }),
+            DrawerItem(
+                title: "Setting",
+                leftIcon: Icon(Icons.settings),
+                onPress: () {
+                  Navigator.pop(context);
+                  pushSettingsScreen(context, screen: SettingScreen());
+                }),
             SizedBox(height: size.height * 0.5),
             DrawerItem(title: "Sign out", leftIcon: Icon(Icons.exit_to_app)),
           ],
