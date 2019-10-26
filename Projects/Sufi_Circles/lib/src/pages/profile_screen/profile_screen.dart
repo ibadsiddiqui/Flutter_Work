@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.only(top: 5.0),
             child: Text(
               "Ibad Siddiqui",
-              style: TextStyle(fontSize: 20.0, fontFamily: "Comfortaa"),
+              style: TextStyle(fontSize: 20.0, fontFamily: "CreteRound"),
             ),
           )
         ],
@@ -57,9 +58,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //       vertical: 8.0, horizontal: 10.0),
                 Column(
                   children: <Widget>[
                     Container(
@@ -69,46 +67,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           style: TextStyle(
                               fontSize: 25.0, fontFamily: "CreteRound")),
                     ),
-                    Divider(color: Colors.black, thickness: 1, height: 0)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                          color: Colors.grey, thickness: 0.5, height: 0),
+                    )
                   ],
                 ),
                 SizedBox(height: 20),
-
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 10.0),
-                  width: size.width,
-                  child: Text(
-                    "Full Name:",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: "CreteRound",
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  width: size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text(
-                        "Ibad Siddiqui",
-                        style: TextStyle(fontFamily: "Comfortaa"),
-                      ),
-                      Icon(Icons.mode_edit, size: 20)
-                    ],
-                  ),
-                ),
-                // Text("Email:"),
-                // Text("ibadsiddiqui01@outlook.com"),
-                // Text("Password:"),
-                // Text("***************************"),
-                // Text("Change Password"),
+                UserDetailItem(label: "Full Name:", value: "Ibad Siddiqui"),
+                UserDetailItem(label: "Email:", value: "Ibadsiddiq@outook.com"),
+                UserDetailItem(label: "Password:", value: "***************"),
+                UserDetailItem(label: "Country:", value: "Pakistan"),
+                UserDetailItem(label: "City:", value: "Karachi"),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
