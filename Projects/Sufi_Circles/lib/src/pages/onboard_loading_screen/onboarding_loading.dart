@@ -16,7 +16,7 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
   @override
   void initState() {
     super.initState();
-    TimeNavigation.navigate(context, SettingScreen());
+    TimeNavigation.navigate(context, DashboardScreen());
   }
 
   @override
