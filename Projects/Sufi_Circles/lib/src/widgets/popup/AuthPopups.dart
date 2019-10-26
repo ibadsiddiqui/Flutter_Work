@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ShowPopUp {
-  incorrectCredentials(context) {
+  incorrectCredentials(context,
+      {String title = "Incorrect Details",
+      String msg = "Please enter details to login."}) {
     new Alert(
       context: context,
       type: AlertType.error,
-      title: "Incorrect credentials",
-      desc:
-          "Your email or password is incorrect. Please enter correct details.",
+      title: title,
+      desc: msg,
       buttons: [
         DialogButton(
           child: Text(
