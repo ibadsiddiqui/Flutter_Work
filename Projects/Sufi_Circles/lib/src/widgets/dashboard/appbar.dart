@@ -19,9 +19,12 @@ PreferredSizeWidget dashboardAppBar(
             cursorColor: Colors.white,
             style: TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
           )
-        : DashboardHeadings(title: "Sufi Circles",),
+        : DashboardHeadings(
+            title: "Sufi Circles",
+          ),
     actions: <Widget>[
       IconButton(
+        tooltip: "Seach Events",
         icon: Icon(Icons.search, color: Colors.white),
         onPressed: onPress,
       ),
