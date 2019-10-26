@@ -23,7 +23,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final AuthModel store = AuthModel();
   final ShowPopUp showPopUp = ShowPopUp();
+
   AuthService _firebaseAuth = new AuthService();
+  UserServices userServices = UserServices();
 
   bool attempLogin = false;
 
@@ -46,29 +48,31 @@ class _LoginScreenState extends State<LoginScreen> {
     authModelProvider.validateAll();
     if (authModelProvider.canLogin) {
       toggleLoader();
-      attemptLogin(authModelProvider.authDetails);
+      attemptLogin(authModelProvider);
     } else {
       showPopUp.incorrectCredentials(context);
+      authModelProvider.setPassword("");
     }
   }
 
-  void attemptLogin(Map<String, String> authDetails) async {
-    UserServices();
+  void attemptLogin(authModelProvider) async {
     try {
-      var _user = await _firebaseAuth.signIn(authDetails);
+      var _user = await _firebaseAuth.signIn(authModelProvider.authDetails);
       IdTokenResult userToken = await _user.getIdToken();
       print(_user);
       showPopUp.showSuccessFulSigninPopUp(context);
       toggleLoader();
     } on PlatformException catch (e) {
       toggleLoader();
-      print(e);
-      showPopUp.incorrectCredentials(context);
+      authModelProvider.setPassword("");
+      showPopUp.incorrectCredentials(context,
+          title: e.code.replaceAll("_", " "), msg: e.message);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final authDetails = Provider.of<AuthModel>(context);
     return new WillPopScope(
       onWillPop: () async => false,
       child: new Scaffold(
@@ -81,7 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
             children: <Widget>[
               AppIcon(),
               AppTitle(color: Colors.white),
-              AuthForm(),
+              Consumer<AuthModel>(
+                  builder: (context, data, child) => AuthForm()),
               const SizedBox(height: 30),
               SubmitButton(
                 title: "SIGN IN",
