@@ -1,7 +1,7 @@
+import 'package:Sufi_Circles/src/controllers/DB_Controller.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
-import 'package:Sufi_Circles/src/services/UserServices.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
@@ -24,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final AuthModel store = AuthModel();
 
   AuthService _firebaseAuth = new AuthService();
-  UserServices userServices = UserServices();
+  DB_Controller dbController = DB_Controller();
   ShowPopUp showPopUp = ShowPopUp();
 
   @override
@@ -56,13 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future signupUser(Map<String, String> authDetails) async {
     try {
       FirebaseUser user = await _firebaseAuth.createUser(authDetails);
-      print(user);
-      userServices.createUserInDB({
-        "uid": user.uid,
-        "email": user.email,
-        "isEmailVerified": user.isEmailVerified,
-        "creationTimeStamp": user.metadata.creationTime,
-      });
+      dbController.db_createUser(user);
       toggleLoader();
       showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {
@@ -85,8 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: <Widget>[
               AppIcon(),
               AppTitle(color: Colors.white),
-              Consumer<AuthModel>(
-                  builder: (context, data, child) => AuthForm()),
+              AuthForm(),
               const SizedBox(height: 30),
               SubmitButton(
                 title: "SIGN UP",
