@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:Sufi_Circles/src/controllers/AuthController.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
-import 'package:Sufi_Circles/src/services/AuthServices.dart';
-import 'package:Sufi_Circles/src/services/UserServices.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
@@ -9,10 +10,6 @@ import 'package:Sufi_Circles/src/widgets/auth/ForgotPassword.dart';
 import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
 import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,11 +18,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  AuthController _authController = AuthController();
+
   final AuthModel store = AuthModel();
   final ShowPopUp showPopUp = ShowPopUp();
-
-  AuthService _firebaseAuth = new AuthService();
-  UserServices userServices = UserServices();
 
   bool attempLogin = false;
 
@@ -48,31 +44,15 @@ class _LoginScreenState extends State<LoginScreen> {
     authModelProvider.validateAll();
     if (authModelProvider.canLogin) {
       toggleLoader();
-      attemptLogin(authModelProvider);
+      await _authController.userSignIn(context, toggleLoader: toggleLoader);
     } else {
       showPopUp.incorrectCredentials(context);
       authModelProvider.setPassword("");
     }
   }
 
-  void attemptLogin(authModelProvider) async {
-    try {
-      var _user = await _firebaseAuth.signIn(authModelProvider.authDetails);
-      IdTokenResult userToken = await _user.getIdToken();
-      print(_user);
-      showPopUp.showSuccessFulSigninPopUp(context);
-      toggleLoader();
-    } on PlatformException catch (e) {
-      toggleLoader();
-      authModelProvider.setPassword("");
-      showPopUp.incorrectCredentials(context,
-          title: e.code.replaceAll("_", " "), msg: e.message);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final authDetails = Provider.of<AuthModel>(context);
     return new WillPopScope(
       onWillPop: () async => false,
       child: new Scaffold(
