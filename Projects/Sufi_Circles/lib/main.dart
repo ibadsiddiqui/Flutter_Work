@@ -2,6 +2,7 @@ import 'package:Sufi_Circles/src/models/events_list/EventsListModel.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
@@ -32,25 +33,22 @@ class App extends StatelessWidget {
           builder: (_) => EventsListModel(),
         )
       ],
-      child: Consumer<AuthModel>(
-          builder: (context, value, _) => MaterialApp(
-                debugShowCheckedModeBanner: false,
-                initialRoute: '/',
-                routes: <String, WidgetBuilder>{
-                  // If you're using navigation routes, Flutter needs a base route.
-                  // We're going to change this route once we're ready with
-                  // implementation of HomeScreen.
-                  // "/splash": (context) => SplashScreen(),
-                  '/': (context) => SplashScreen(),
-                  '/OnBoardingLoadingScreen': (context) =>
-                      OnBoardingLoadingScreen(),
-                  '/OnBoardingScreen': (context) => OnBoardingScreen(),
-                  '/LoginScreen': (context) => LoginScreen(),
-                  '/SignUpScreen': (context) => SignUpScreen(),
-                  '/LoadingScreen': (context) => LoadingScreen(),
-                  '/DashboardScreen': (context) => DashboardScreen(),
-                },
-              )),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: <String, WidgetBuilder>{
+          // If you're using navigation routes, Flutter needs a base route.
+          // We're going to change this route once we're ready with
+          // implementation of HomeScreen.
+          '/': (context) => SplashScreen(),
+          '/OnBoardingLoadingScreen': (context) => OnBoardingLoadingScreen(),
+          '/OnBoardingScreen': (context) => OnBoardingScreen(),
+          '/LoginScreen': (context) => LoginScreen(),
+          '/SignUpScreen': (context) => SignUpScreen(),
+          '/LoadingScreen': (context) => LoadingScreen(),
+          '/DashboardScreen': (context) => DashboardScreen(),
+        },
+      ),
     );
   }
 }
