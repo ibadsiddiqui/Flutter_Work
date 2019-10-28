@@ -7,6 +7,7 @@ class AuthInput extends StatelessWidget {
   final bool obscure;
   final TextInputType keyboardType;
   final Icon icon;
+  final String initialValue;
   const AuthInput(
       {Key key,
       this.label,
@@ -14,7 +15,8 @@ class AuthInput extends StatelessWidget {
       this.handleChange,
       this.obscure = false,
       this.keyboardType = TextInputType.emailAddress,
-      this.icon})
+      this.icon,
+      this.initialValue})
       : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class AuthInput extends StatelessWidget {
               onChanged: handleChange,
               keyboardType: keyboardType,
               style: TextStyle(color: Colors.white),
+              initialValue: initialValue,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                 border: InputBorder.none,
