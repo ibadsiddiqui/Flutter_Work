@@ -1,6 +1,5 @@
+import 'package:Sufi_Circles/src/controllers/validate.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:Sufi_Circles/src/controllers/AuthController.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
@@ -9,21 +8,22 @@ import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
 import 'package:Sufi_Circles/src/widgets/auth/ForgotPassword.dart';
 import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
-import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class LoginScreen extends StatefulWidget {
+  final TextEditingController emailController = TextEditingController(text: "");
+  final TextEditingController passwordController =
+      TextEditingController(text: "");
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  AuthController _authController = AuthController();
-
-  final AuthModel store = AuthModel();
-  final ShowPopUp showPopUp = ShowPopUp();
-
   bool attempLogin = false;
+  final AuthModel store = AuthModel();
+
+  ValidateAPIControllers _validateAPIControllers = ValidateAPIControllers();
 
   @override
   void initState() {
@@ -34,21 +34,18 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     store.dispose();
+    widget.emailController.dispose();
+    widget.passwordController.dispose();
     super.dispose();
   }
 
-  toggleLoader() => this.setState(() => attempLogin = !attempLogin);
+  resetPassword() => widget.passwordController.text = "";
 
-  void validateLogin(BuildContext context) async {
-    final authModelProvider = Provider.of<AuthModel>(context);
-    authModelProvider.validateAll();
-    if (authModelProvider.canLogin) {
-      toggleLoader();
-      await _authController.userSignIn(context, toggleLoader: toggleLoader);
-    } else {
-      showPopUp.incorrectCredentials(context);
-      authModelProvider.setPassword("");
-    }
+  loader() => this.setState(() => attempLogin = !attempLogin);
+
+  void validateLogin() async {
+    _validateAPIControllers.validateLogin(context,
+        load: loader, resetPass: resetPassword);
   }
 
   @override
@@ -61,25 +58,30 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: buildAuthBackground(),
           padding: EdgeInsets.only(top: 75),
           height: MediaQuery.of(context).size.height,
-          child: new Column(
-            children: <Widget>[
-              AppIcon(),
-              AppTitle(color: Colors.white),
-              Consumer<AuthModel>(
-                  builder: (context, data, child) => AuthForm()),
-              const SizedBox(height: 30),
-              SubmitButton(
-                title: "SIGN IN",
-                onPressed: () => this.validateLogin(context),
-                isLoading: attempLogin,
-              ),
-              ForgotPasswordButton(),
-              new Expanded(child: Divider()),
-              BottomButton(
-                title: "Don't have an account? Create One",
-                onPressed: pushSignUpScreen,
-              )
-            ],
+          child: new GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: new Column(
+              children: <Widget>[
+                AppIcon(),
+                AppTitle(color: Colors.white),
+                AuthForm(
+                  passwordController: widget.passwordController,
+                  emailController: widget.emailController,
+                ),
+                const SizedBox(height: 30),
+                SubmitButton(
+                  title: "SIGN IN",
+                  onPressed: this.validateLogin,
+                  isLoading: attempLogin,
+                ),
+                ForgotPasswordButton(),
+                new Expanded(child: Divider()),
+                BottomButton(
+                  title: "Don't have an account? Create One",
+                  onPressed: pushSignUpScreen,
+                )
+              ],
+            ),
           ),
         ),
       ),
