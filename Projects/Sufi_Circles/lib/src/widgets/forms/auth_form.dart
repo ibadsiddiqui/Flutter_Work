@@ -1,14 +1,22 @@
 import 'package:Sufi_Circles/src/widgets/auth/AuthInput.dart';
+import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class AuthForm extends StatelessWidget {
   final emailController;
   final passwordController;
-
-  const AuthForm({Key key, this.emailController, this.passwordController})
+  final Function onPress;
+  final bool isLoading;
+  final String title;
+  const AuthForm(
+      {Key key,
+      this.emailController,
+      this.passwordController,
+      this.onPress,
+      this.isLoading,
+      this.title})
       : super(key: key);
 
   @override
@@ -34,6 +42,12 @@ class AuthForm extends StatelessWidget {
             Icons.lock_open,
             color: Colors.white,
           ),
+        ),
+        const SizedBox(height: 30),
+        SubmitButton(
+          title: title,
+          onPressed: onPress,
+          isLoading: isLoading,
         ),
       ],
     );

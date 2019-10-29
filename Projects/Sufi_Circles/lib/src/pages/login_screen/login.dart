@@ -6,24 +6,22 @@ import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
 import 'package:Sufi_Circles/src/widgets/auth/ForgotPassword.dart';
-import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class LoginScreen extends StatefulWidget {
-  final TextEditingController emailController = TextEditingController(text: "");
-  final TextEditingController passwordController =
-      TextEditingController(text: "");
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool attempLogin = false;
-  final AuthModel store = AuthModel();
-
   ValidateAPIControllers _validateAPIControllers = ValidateAPIControllers();
+
+  final AuthModel store = AuthModel();
+  final TextEditingController emailController = TextEditingController(text: "");
+  final TextEditingController passwordController =
+      TextEditingController(text: "");
+  bool attempLogin = false;
 
   @override
   void initState() {
@@ -31,15 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
     store.setupValidations();
   }
 
-  @override
-  void dispose() {
-    store.dispose();
-    widget.emailController.dispose();
-    widget.passwordController.dispose();
-    super.dispose();
-  }
-
-  resetPassword() => widget.passwordController.text = "";
+  resetPassword() => passwordController.text = "";
 
   loader() => this.setState(() => attempLogin = !attempLogin);
 
@@ -65,13 +55,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppIcon(),
                 AppTitle(color: Colors.white),
                 AuthForm(
-                  passwordController: widget.passwordController,
-                  emailController: widget.emailController,
-                ),
-                const SizedBox(height: 30),
-                SubmitButton(
                   title: "SIGN IN",
-                  onPressed: this.validateLogin,
+                  passwordController: passwordController,
+                  emailController: emailController,
+                  onPress: this.validateLogin,
                   isLoading: attempLogin,
                 ),
                 ForgotPasswordButton(),
@@ -86,5 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    store.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

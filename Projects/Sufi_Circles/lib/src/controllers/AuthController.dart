@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/controllers/DB_Controller.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
@@ -10,11 +11,12 @@ import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 class AuthController extends ChangeNotifier {
   AuthService _authService = new AuthService();
   ShowPopUp showPopUp = ShowPopUp();
+  DB_Controller dbController = DB_Controller();
 
   userSignIn(context, {Function toggle, Function resetPassword}) async {
+    final authModel = Provider.of<AuthModel>(context);
     try {
-      FirebaseUser _user = await _authService
-          .userSignIn(Provider.of<AuthModel>(context).authDetails);
+      FirebaseUser _user = await _authService.userSignIn(authModel.authDetails);
       IdTokenResult userToken = await _user.getIdToken();
       showPopUp.showSuccessFulSigninPopUp(context);
       toggle();
@@ -22,9 +24,24 @@ class AuthController extends ChangeNotifier {
     } on PlatformException catch (e) {
       resetPassword();
       toggle();
-      Provider.of<AuthModel>(context).setPassword("");
+      authModel.setPassword("");
       showPopUp.incorrectCredentials(context,
           title: replaceUnderscore(e.code), msg: e.message);
+    }
+  }
+
+  userSignup(context, {Function toggle, Function resetPassword}) async {
+    final authModel = Provider.of<AuthModel>(context);
+    try {
+      FirebaseUser user = await _authService.createUser(authModel.authDetails);
+      dbController.db_createUser(user);
+      toggle();
+      showPopUp.showSuccessFulSignupPopUp(context);
+    } on PlatformException catch (e) {
+      resetPassword();
+      toggle();
+      authModel.setPassword("");
+      showPopUp.showFailedSignupPopUp(e.code, e.message, context);
     }
   }
 }
