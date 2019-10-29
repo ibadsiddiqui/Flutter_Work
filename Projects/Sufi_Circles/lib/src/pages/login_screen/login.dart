@@ -33,9 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   loader() => this.setState(() => attempLogin = !attempLogin);
 
-  void validateLogin() async {
+  void validateLogin({Function resetPass}) async {
     _validateAPIControllers.validateLogin(context,
-        load: loader, resetPass: resetPassword);
+        load: loader, resetPass: resetPass);
   }
 
   @override
@@ -56,8 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppTitle(color: Colors.white),
                 AuthForm(
                   title: "SIGN IN",
-                  passwordController: passwordController,
-                  emailController: emailController,
                   onPress: this.validateLogin,
                   isLoading: attempLogin,
                 ),

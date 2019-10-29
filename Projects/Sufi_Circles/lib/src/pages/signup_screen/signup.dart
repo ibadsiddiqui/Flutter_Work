@@ -36,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   loader() => this.setState(() => attemptSignup = !attemptSignup);
 
-  Future validateSignup() async {
+  Future validateSignup({Function resetPass}) async {
     _validateAPIControllers.validateSignup(context,
         resetPass: resetPassword, load: loader);
   }
@@ -57,8 +57,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               AppTitle(color: Colors.white),
               AuthForm(
                 title: "SIGN UP",
-                passwordController: passwordController,
-                emailController: emailController,
                 onPress: validateSignup,
                 isLoading: attemptSignup,
               ),
