@@ -5,38 +5,37 @@ import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class AuthForm extends StatelessWidget {
+  final emailController;
+  final passwordController;
+
+  const AuthForm({Key key, this.emailController, this.passwordController})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthModel>(
-      builder: (_, data, __) => new Column(
-        children: <Widget>[
-          Observer(
-            builder: (_) => AuthInput(
-              label: "Email",
-              validator: (String value) {},
-              handleChange: (String value) =>
-                  Provider.of<AuthModel>(context).setEmail(value),
-              icon: Icon(Icons.alternate_email, color: Colors.white),
-              keyboardType: TextInputType.emailAddress,
-              initialValue: data.email,
-            ),
+    final authProvider = Provider.of<AuthModel>(context);
+    return new Column(
+      children: <Widget>[
+        AuthInput(
+          label: "Email",
+          validator: (String value) {},
+          handleChange: (String value) => authProvider.setEmail(value),
+          icon: Icon(Icons.alternate_email, color: Colors.white),
+          keyboardType: TextInputType.emailAddress,
+          controller: emailController,
+        ),
+        AuthInput(
+          label: "Password",
+          controller: passwordController,
+          validator: (String value) {},
+          obscure: true,
+          handleChange: (String value) => authProvider.setPassword(value),
+          icon: Icon(
+            Icons.lock_open,
+            color: Colors.white,
           ),
-          Observer(
-            builder: (_) => AuthInput(
-              label: "Password",
-              initialValue: data.password,
-              validator: (String value) {},
-              obscure: true,
-              handleChange: (String value) =>
-                  Provider.of<AuthModel>(context).setPassword(value),
-              icon: Icon(
-                Icons.lock_open,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

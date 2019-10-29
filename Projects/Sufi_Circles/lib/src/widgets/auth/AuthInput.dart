@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 
-class AuthInput extends StatelessWidget {
+class AuthInput extends StatefulWidget {
   final String label;
   final Function validator;
   final Function handleChange;
   final bool obscure;
   final TextInputType keyboardType;
   final Icon icon;
-  final String initialValue;
-  const AuthInput(
-      {Key key,
-      this.label,
-      this.validator,
-      this.handleChange,
-      this.obscure = false,
-      this.keyboardType = TextInputType.emailAddress,
-      this.icon,
-      this.initialValue})
-      : super(key: key);
+  final controller;
+  const AuthInput({
+    Key key,
+    this.label,
+    this.validator,
+    this.handleChange,
+    this.obscure = false,
+    this.keyboardType = TextInputType.emailAddress,
+    this.icon,
+    this.controller,
+  }) : super(key: key);
 
+  @override
+  _AuthInputState createState() => _AuthInputState();
+}
+
+class _AuthInputState extends State<AuthInput> {
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -38,20 +43,20 @@ class AuthInput extends StatelessWidget {
         children: <Widget>[
           new Padding(
             padding: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 00.0),
-            child: icon,
+            child: widget.icon,
           ),
           new Expanded(
             child: TextFormField(
-              validator: validator,
-              obscureText: obscure,
-              onChanged: handleChange,
-              keyboardType: keyboardType,
+              controller: widget.controller,
+              validator: widget.validator,
+              obscureText: widget.obscure,
+              onChanged: widget.handleChange,
+              keyboardType: widget.keyboardType,
               style: TextStyle(color: Colors.white),
-              initialValue: initialValue,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: label,
+                hintText: widget.label,
                 hintStyle: TextStyle(
                   color: Colors.white,
                   fontFamily: "Comfortaa",
