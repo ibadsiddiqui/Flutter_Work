@@ -11,24 +11,20 @@ class AuthController extends ChangeNotifier {
   AuthService _authService = new AuthService();
   ShowPopUp showPopUp = ShowPopUp();
 
-  userSignIn(
-    context, {
-    Function toggleLoader,
-  }) async {
+  userSignIn(context, {Function toggle, Function resetPassword}) async {
     try {
       FirebaseUser _user = await _authService
-          .signIn(Provider.of<AuthModel>(context).authDetails);
+          .userSignIn(Provider.of<AuthModel>(context).authDetails);
       IdTokenResult userToken = await _user.getIdToken();
-      print(_user);
       showPopUp.showSuccessFulSigninPopUp(context);
-      toggleLoader();
+      toggle();
+      resetPassword();
     } on PlatformException catch (e) {
-      print('here');
-      toggleLoader();
+      resetPassword();
+      toggle();
       Provider.of<AuthModel>(context).setPassword("");
       showPopUp.incorrectCredentials(context,
           title: replaceUnderscore(e.code), msg: e.message);
     }
-    notifyListeners();
   }
 }
