@@ -4,20 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
-class AuthForm extends StatelessWidget {
-  final emailController;
-  final passwordController;
+class AuthForm extends StatefulWidget {
   final Function onPress;
   final bool isLoading;
   final String title;
   const AuthForm(
       {Key key,
-      this.emailController,
-      this.passwordController,
       this.onPress,
       this.isLoading,
       this.title})
       : super(key: key);
+
+  @override
+  _AuthFormState createState() => _AuthFormState();
+}
+
+class _AuthFormState extends State<AuthForm> {
+  TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController passwordController = TextEditingController(text: "");
+
+  resetPassword() => passwordController.text = "";
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +51,18 @@ class AuthForm extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         SubmitButton(
-          title: title,
-          onPressed: onPress,
-          isLoading: isLoading,
+          title: widget.title,
+          onPressed: () => widget.onPress(resetPass: resetPassword),
+          isLoading: widget.isLoading,
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
