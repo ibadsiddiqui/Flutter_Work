@@ -1,5 +1,7 @@
+import 'package:Sufi_Circles/src/constants/keys.dart';
 import 'package:Sufi_Circles/src/controllers/DB_Controller.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
+import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,22 +12,25 @@ import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class AuthController extends ChangeNotifier {
   AuthService _authService = new AuthService();
-  ShowPopUp showPopUp = ShowPopUp();
-  DB_Controller dbController = DB_Controller();
+  ShowPopUp _showPopUp = ShowPopUp();
+  DB_Controller _dbController = DB_Controller();
+  ShareUtils utils = ShareUtils();
 
   userSignIn(context, {Function toggle, Function resetPassword}) async {
     final authModel = Provider.of<AuthModel>(context);
     try {
       FirebaseUser _user = await _authService.userSignIn(authModel.authDetails);
       IdTokenResult userToken = await _user.getIdToken();
-      showPopUp.showSuccessFulSigninPopUp(context);
+      utils.setUserTokenDetails(userToken);
+      _dbController.updateUserLastLogin(_user);
+      _showPopUp.showSuccessFulSigninPopUp(context);
       toggle();
       resetPassword();
     } on PlatformException catch (e) {
       resetPassword();
       toggle();
       authModel.setPassword("");
-      showPopUp.incorrectCredentials(context,
+      _showPopUp.incorrectCredentials(context,
           title: replaceUnderscore(e.code), msg: e.message);
     }
   }
@@ -34,14 +39,14 @@ class AuthController extends ChangeNotifier {
     final authModel = Provider.of<AuthModel>(context);
     try {
       FirebaseUser user = await _authService.createUser(authModel.authDetails);
-      dbController.db_createUser(user);
+      _dbController.createUserInDB(user);
       toggle();
-      showPopUp.showSuccessFulSignupPopUp(context);
+      _showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {
       resetPassword();
       toggle();
       authModel.setPassword("");
-      showPopUp.showFailedSignupPopUp(e.code, e.message, context);
+      _showPopUp.showFailedSignupPopUp(e.code, e.message, context);
     }
   }
 }
