@@ -14,6 +14,7 @@ class OnboardPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       color: Color(0xFF072247),
       child: Column(
@@ -23,8 +24,8 @@ class OnboardPageView extends StatelessWidget {
               child: Image.asset(
                 assetPath,
                 fit: BoxFit.fitHeight,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width * 0.8,
+                width: size.width,
+                height: size.width * 0.8,
               ),
             ),
           ),
@@ -36,8 +37,10 @@ class OnboardPageView extends StatelessWidget {
                 OnBoardDescription(desc: desc),
                 Divider(
                     height: title == "FEATURES"
-                        ? 65
-                        : title == "STARTUP" ? 80 : 100),
+                        ? size.width * 0.12
+                        : title == "STARTUP"
+                            ? size.width * 0.2
+                            : size.width * 0.2),
                 Container(
                   alignment: Alignment.bottomRight,
                   child: FlatButton(

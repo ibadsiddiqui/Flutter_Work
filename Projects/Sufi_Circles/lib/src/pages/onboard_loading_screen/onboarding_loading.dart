@@ -26,7 +26,7 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
   void checkUserSession() async {
     try {
       String time = await utils.getStringPreference(SET_TOKEN_EXPIRY);
-      if (time.isNotEmpty) {
+      if (time != null) {
         if (DateTime.now().compareTo(DateTime.parse(time)) != 0) {
           TimeNavigation.navigate(context, DashboardScreen());
         } else
