@@ -37,8 +37,13 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
   }
 
   void navigateToOnBoard() async {
-    utils.setBoolPreference("isInstalled", true);
-    TimeNavigation.navigate(context, OnBoardingScreen());
+    Future<bool> isInstalled = utils.getBoolPreference(IsInstalled);
+    if (isInstalled != null)
+      TimeNavigation.navigate(context, LoginScreen());
+    else {
+      utils.setBoolPreference(IsInstalled, true);
+      TimeNavigation.navigate(context, OnBoardingScreen());
+    }
   }
 
   @override

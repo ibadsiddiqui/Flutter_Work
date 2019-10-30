@@ -19,7 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+  flutter_localizations: # add this
+    sdk: flutter
+
   shared_preferences: ^0.4.0
   firebase_core: 
   cloud_firestore: 
@@ -34,6 +36,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+    
+  intl_translation:
   build_runner:
   mobx_codegen:
 
