@@ -1,13 +1,11 @@
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:Sufi_Circles/src/models/events_list/EventsListModel.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
-
 import 'src/models/auth/AuthFormModel.dart';
-
 import 'src/pages/splash_screen/splash.dart';
 import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
 import 'src/pages/onboarding_screen/onboarding.dart';

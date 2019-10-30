@@ -1,11 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/lastest_events_tiles.dart';
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/top_tile.dart';
-import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override

@@ -1,5 +1,4 @@
-import 'package:Sufi_Circles/src/controllers/AuthController.dart';
-import 'package:Sufi_Circles/src/controllers/DB_Controller.dart';
+import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/controllers/validate.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
@@ -7,10 +6,7 @@ import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
-import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
-import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
-import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override

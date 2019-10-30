@@ -1,7 +1,7 @@
 import 'package:Sufi_Circles/src/services/UserDBServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class DB_Controller {
+class DBController {
   UserDBServices _userDBServices = UserDBServices();
 
   createUserInDB(FirebaseUser user) async {

@@ -1,4 +1,3 @@
-import 'package:Sufi_Circles/src/constants/keys.dart';
 import 'package:Sufi_Circles/src/controllers/DB_Controller.dart';
 import 'package:Sufi_Circles/src/services/AuthServices.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
@@ -13,7 +12,7 @@ import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 class AuthController extends ChangeNotifier {
   AuthService _authService = new AuthService();
   ShowPopUp _showPopUp = ShowPopUp();
-  DB_Controller _dbController = DB_Controller();
+  DBController _dbController = DBController();
   ShareUtils utils = ShareUtils();
 
   userSignIn(context, {Function toggle, Function resetPassword}) async {
