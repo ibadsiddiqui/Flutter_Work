@@ -1,11 +1,14 @@
+import 'package:flutter/material.dart';
+import 'dart:core';
+
 import 'package:Sufi_Circles/src/constants/keys.dart';
+import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:Sufi_Circles/src/pages/login_screen/login.dart';
 import 'package:Sufi_Circles/src/pages/onboarding_screen/onboarding.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
-import 'package:flutter/material.dart';
 
 class OnBoardingLoadingScreen extends StatefulWidget {
   @override
@@ -18,21 +21,24 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
 
   @protected
   @mustCallSuper
-  Future didChangeDependencies() async => navigate();
+  Future didChangeDependencies() async => checkUserSession();
 
-  void navigate() async {
+  void checkUserSession() async {
     try {
-      bool isAppInstalled = await utils.getBoolPreference("isInstalled");
-      if (isAppInstalled != null && isAppInstalled == true)
-        TimeNavigation.navigate(context, LoginScreen());
-      else {
-        utils.setBoolPreference("isInstalled", true);
-        TimeNavigation.navigate(context, OnBoardingScreen());
-      }
-    } on NoSuchMethodError catch (e) {
-      utils.setBoolPreference(IsInstalled, true);
-      TimeNavigation.navigate(context, OnBoardingScreen());
-    }
+      String time = await utils.getStringPreference(SET_TOKEN_EXPIRY);
+      if (time.isNotEmpty) {
+        if (DateTime.now().compareTo(DateTime.parse(time)) != 0) {
+          TimeNavigation.navigate(context, DashboardScreen());
+        } else
+          TimeNavigation.navigate(context, LoginScreen());
+      } else
+        navigateToOnBoard();
+    } catch (e) {}
+  }
+
+  void navigateToOnBoard() async {
+    utils.setBoolPreference("isInstalled", true);
+    TimeNavigation.navigate(context, OnBoardingScreen());
   }
 
   @override

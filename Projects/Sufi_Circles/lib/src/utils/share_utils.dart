@@ -1,14 +1,13 @@
-import 'package:Sufi_Circles/src/constants/keys.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:Sufi_Circles/src/constants/keys.dart';
 
 class ShareUtils {
-  
   Future<void> setUserTokenDetails(IdTokenResult user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(SET_USER_TOKEN, user.token);
-    prefs.setString(SET_TOKEN_EXPIRY, user.token);
+    prefs.setString(SET_TOKEN_EXPIRY, user.expirationTime.toString());
   }
 
   Future<bool> setBoolPreference(key, value) async {
