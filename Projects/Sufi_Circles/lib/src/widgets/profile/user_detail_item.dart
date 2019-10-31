@@ -13,10 +13,10 @@ class UserDetailItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.symmetric( vertical: 10.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       width: size.width,
       child: FlatButton(
-        onPressed: (){},
+        onPressed: () {},
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -33,11 +33,11 @@ class UserDetailItem extends StatelessWidget {
                     screenName == "profile"
                         ? Icons.mode_edit
                         : Icons.arrow_right,
-                    size: 20)
+                    size: 20),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
               child: Divider(color: Colors.grey, thickness: 0.5, height: 0),
             ),
           ],
