@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LatestEventTiles extends StatelessWidget {
   final int index;

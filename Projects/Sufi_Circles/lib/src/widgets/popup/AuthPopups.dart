@@ -1,6 +1,6 @@
-import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 
 class ShowPopUp {
   incorrectCredentials(context,

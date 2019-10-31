@@ -1,9 +1,9 @@
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
 import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
 import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
-import 'package:flutter/material.dart';
 
 class DashboardDrawer extends StatelessWidget {
   @override

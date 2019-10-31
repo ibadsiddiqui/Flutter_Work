@@ -1,6 +1,6 @@
-import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 
 class Loader extends StatefulWidget {
 

@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/description.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/heading.dart';
-import 'package:flutter/material.dart';
 
 class OnboardPageView extends StatelessWidget {
   const OnboardPageView(

@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
-import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({

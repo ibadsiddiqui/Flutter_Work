@@ -1,5 +1,5 @@
-import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 import 'package:flutter/material.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 
 PreferredSizeWidget dashboardAppBar(
     {bool isSearching = false, Function onPress}) {
