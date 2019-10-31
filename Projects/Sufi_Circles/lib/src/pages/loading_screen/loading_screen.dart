@@ -26,6 +26,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Loader(),
+            SizedBox(height: 10),
             Text(
               "Loading all the good things happening around...",
               style: TextStyle(fontFamily: "Comfortaa"),
