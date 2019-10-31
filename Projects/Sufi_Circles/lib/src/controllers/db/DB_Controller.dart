@@ -24,7 +24,7 @@ class DBController {
     await _userDBServices.updateUserLastLogin(userJson);
   }
 
-  void setUserDetailsUsingID(
+  Future<void> setUserDetailsUsingID(
       context, String userID) async {
     try {
       Map<String, dynamic> data =

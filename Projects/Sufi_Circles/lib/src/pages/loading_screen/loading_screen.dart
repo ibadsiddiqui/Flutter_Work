@@ -21,6 +21,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void didChangeDependencies() async => getUserDetails();
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -39,8 +44,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 
-  void getUserDetails() {
-    _dbController.setUserDetailsUsingID(context, widget.uid);
+  void getUserDetails() async {
+    await _dbController.setUserDetailsUsingID(context, widget.uid);
     TimeNavigation.navigate(context, DashboardScreen());
   }
 }
