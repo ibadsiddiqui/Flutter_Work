@@ -1,5 +1,7 @@
-import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:Sufi_Circles/src/models/user/UserModel.dart';
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
 import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
@@ -8,7 +10,9 @@ import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
 class DashboardDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    UserModel userModel = Provider.of<UserModel>(context);
     final size = MediaQuery.of(context).size;
+    
     return Drawer(
       child: Container(
         child: Column(
@@ -19,10 +23,10 @@ class DashboardDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  NamedCircle(size: "Large", title: "I"),
+                  NamedCircle(size: "Large", title: ""),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: NamedCircle(size: "Small", title: "S"),
+                    child: NamedCircle(size: "Small", title: ""),
                   ),
                 ],
               ),
@@ -33,7 +37,7 @@ class DashboardDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Ibad Siddiqui",
+                    userModel.name,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontSize: 22,
@@ -41,7 +45,7 @@ class DashboardDrawer extends StatelessWidget {
                         color: Color(0xFF072247)),
                   ),
                   Text(
-                    "ibadsidiqui01@outloo.com",
+                    userModel.email,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontSize: 16,
@@ -73,7 +77,7 @@ class DashboardDrawer extends StatelessWidget {
                   Navigator.pop(context);
                   pushSettingsScreen(context, screen: SettingScreen());
                 }),
-            SizedBox(height: size.height * 0.5),
+            SizedBox(height: size.height * 0.45),
             DrawerItem(title: "Sign out", leftIcon: Icon(Icons.exit_to_app)),
           ],
         ),
