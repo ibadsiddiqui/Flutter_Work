@@ -11,15 +11,12 @@ Route createRoute({Widget screen}) {
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
+      return SlideTransition(position: animation.drive(tween), child: child);
     },
   );
 }
 
-void pushOnBoardLoadingScreen(context, {Widget screen}) {
+void pushDashboardScreens(context, {Widget screen}) {
   Navigator.push(context, createRoute(screen: screen));
 }
 

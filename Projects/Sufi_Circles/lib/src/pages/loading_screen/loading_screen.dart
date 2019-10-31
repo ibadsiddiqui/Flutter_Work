@@ -1,3 +1,5 @@
+import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
+import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
@@ -16,7 +18,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @protected
   @mustCallSuper
-  Future didChangeDependencies() async => getUserDetails();
+  void didChangeDependencies() async => getUserDetails();
 
   @override
   Widget build(BuildContext context) {
@@ -39,5 +41,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getUserDetails() {
     _dbController.setUserDetailsUsingID(context, widget.uid);
+    TimeNavigation.navigate(context, DashboardScreen());
   }
 }
