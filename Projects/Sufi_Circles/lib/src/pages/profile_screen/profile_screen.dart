@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
@@ -10,9 +11,11 @@ class ProfileScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          tooltip: "Upload Profile Picture",
-          onPressed: () {},
-          child: Icon(Icons.add_a_photo)),
+        backgroundColor: Color(0xFF072247),
+        tooltip: "Upload Profile Picture",
+        onPressed: () {},
+        child: Icon(Icons.add_a_photo),
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -30,9 +33,9 @@ class ProfileScreen extends StatelessWidget {
                     fontFamily: "CreteRound",
                   ),
                 ),
-                background: Image.network(
-                  "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
-                  fit: BoxFit.cover,
+                background: HeroAnimation(
+                  photoPath:
+                      "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
                 ),
               ),
             ),
