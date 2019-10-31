@@ -145,4 +145,14 @@ mixin _$UserModel on _UserModel, Store {
       _$_UserModelActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void setAllDetails(Map<String, dynamic> user) {
+    final _$actionInfo = _$_UserModelActionController.startAction();
+    try {
+      return super.setAllDetails(user);
+    } finally {
+      _$_UserModelActionController.endAction(_$actionInfo);
+    }
+  }
 }

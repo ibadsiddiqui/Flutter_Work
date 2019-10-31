@@ -35,4 +35,11 @@ abstract class _UserModel with Store {
   @action
   void setUserCity(String city) => this.city = city;
 
+  @action
+  void setAllDetails(Map<String, dynamic> user) {
+    setUserName(user["name"] != null ? user["name"] : "");
+    setUserEmail(user["email"]);
+    setUserCountry(user["country"] != null ? user["country"] : "");
+    setUserCity(user["city"] != null ? user["city"] : "");
+  }
 }

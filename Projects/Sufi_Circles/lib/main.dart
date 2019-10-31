@@ -1,3 +1,5 @@
+import 'package:Sufi_Circles/src/models/user/UserModel.dart';
+import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +13,6 @@ import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading
 import 'src/pages/onboarding_screen/onboarding.dart';
 import 'src/pages/login_screen/login.dart';
 import 'src/pages/signup_screen/signup.dart';
-import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 
 void main() => runApp(App());
 
@@ -29,6 +30,9 @@ class App extends StatelessWidget {
         ),
         Provider<EventsListModel>(
           builder: (_) => EventsListModel(),
+        ),
+        Provider<UserModel>(
+          builder: (_) => UserModel(),
         )
       ],
       child: MaterialApp(
@@ -38,13 +42,15 @@ class App extends StatelessWidget {
           // If you're using navigation routes, Flutter needs a base route.
           // We're going to change this route once we're ready with
           // implementation of HomeScreen.
-          '/': (context) => SplashScreen(),
-          '/OnBoardingLoadingScreen': (context) => OnBoardingLoadingScreen(),
-          '/OnBoardingScreen': (context) => OnBoardingScreen(),
-          '/LoginScreen': (context) => LoginScreen(),
-          '/SignUpScreen': (context) => SignUpScreen(),
-          '/LoadingScreen': (context) => LoadingScreen(),
-          '/DashboardScreen': (context) => DashboardScreen(),
+          '/': (_) => SplashScreen(),
+          '/OnBoardingLoadingScreen': (_) => OnBoardingLoadingScreen(),
+          '/OnBoardingScreen': (_) => OnBoardingScreen(),
+          '/LoginScreen': (_) => LoginScreen(),
+          '/SignUpScreen': (_) => SignUpScreen(),
+          '/LoadingScreen': (_) => LoadingScreen(
+                uid: "",
+              ),
+          '/DashboardScreen': (_) => DashboardScreen(),
         },
       ),
     );

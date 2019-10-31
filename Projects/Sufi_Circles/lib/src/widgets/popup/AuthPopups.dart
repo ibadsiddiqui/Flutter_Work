@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
@@ -49,7 +50,7 @@ class ShowPopUp {
     ).show();
   }
 
-  showSuccessFulSigninPopUp(context) {
+  showSuccessFulSigninPopUp(context, String uid) {
     new Alert(
       context: context,
       type: AlertType.success,
@@ -64,7 +65,10 @@ class ShowPopUp {
               fontSize: 20,
             ),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+            pushOnBoardLoadingScreen(context, screen: LoadingScreen(uid: uid));
+          },
           width: 120,
         )
       ],

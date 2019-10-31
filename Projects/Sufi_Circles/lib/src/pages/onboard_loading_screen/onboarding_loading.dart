@@ -1,8 +1,8 @@
+import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
 
 import 'package:Sufi_Circles/src/constants/keys.dart';
-import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:Sufi_Circles/src/pages/login_screen/login.dart';
 import 'package:Sufi_Circles/src/pages/onboarding_screen/onboarding.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
@@ -24,24 +24,23 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
   Future didChangeDependencies() async => checkUserSession();
 
   void checkUserSession() async {
-    try {
-      String time = await utils.getStringPreference(SET_TOKEN_EXPIRY);
-      if (time != null) {
-        if (DateTime.now().compareTo(DateTime.parse(time)) != 0) {
-          TimeNavigation.navigate(context, DashboardScreen());
-        } else
-          TimeNavigation.navigate(context, LoginScreen());
+    String time = await utils.getStringPreference(SET_TOKEN_EXPIRY);
+    if (time != null) {
+      if (DateTime.now().compareTo(DateTime.parse(time)) != 0) {
+        String uid = await utils.getStringPreference(SET_USER_ID);
+        TimeNavigation.navigate(context, LoadingScreen(uid: uid));
       } else
-        navigateToOnBoard();
-    } catch (e) {}
+        TimeNavigation.navigate(context, LoginScreen());
+    } else
+      navigateToOnBoard();
   }
 
   void navigateToOnBoard() async {
-    Future<bool> isInstalled = utils.getBoolPreference(IsInstalled);
+    bool isInstalled = await utils.getBoolPreference(IsInstalled);
     if (isInstalled != null)
       TimeNavigation.navigate(context, LoginScreen());
     else {
-      utils.setBoolPreference(IsInstalled, true);
+      await utils.setBoolPreference(IsInstalled, true);
       TimeNavigation.navigate(context, OnBoardingScreen());
     }
   }

@@ -19,6 +19,10 @@ Route createRoute({Widget screen}) {
   );
 }
 
+void pushOnBoardLoadingScreen(context, {Widget screen}) {
+  Navigator.push(context, createRoute(screen: screen));
+}
+
 void pushLoginScreen(context) {
   Navigator.of(context).pushReplacementNamed("/LoginScreen");
 }

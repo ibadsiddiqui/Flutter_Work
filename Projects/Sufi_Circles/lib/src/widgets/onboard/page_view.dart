@@ -37,7 +37,7 @@ class OnboardPageView extends StatelessWidget {
                 OnBoardDescription(desc: desc),
                 Divider(
                     height: title == "FEATURES"
-                        ? size.width * 0.12
+                        ? size.width * 0.15
                         : title == "STARTUP"
                             ? size.width * 0.2
                             : size.width * 0.2),

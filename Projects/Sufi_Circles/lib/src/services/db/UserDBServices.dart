@@ -21,4 +21,12 @@ class UserDBServices {
       throw e;
     }
   }
+
+  Future<Map<String, dynamic>> getUserDetailsUsingID(String userID) async {
+    try {
+      return (await userDB.document(userID).get()).data;
+    } catch (e) {
+      throw e;
+    }
+  }
 }

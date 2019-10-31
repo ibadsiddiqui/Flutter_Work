@@ -1,4 +1,4 @@
-import 'package:Sufi_Circles/src/controllers/AuthController.dart';
+import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
 import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';

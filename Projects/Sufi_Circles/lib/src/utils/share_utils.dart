@@ -4,15 +4,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:Sufi_Circles/src/constants/keys.dart';
 
 class ShareUtils {
-  Future<void> setUserTokenDetails(IdTokenResult user) async {
+  Future<void> setUserTokenDetails(FirebaseUser user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(SET_USER_TOKEN, user.token);
-    prefs.setString(SET_TOKEN_EXPIRY, user.expirationTime.toString());
+    IdTokenResult userToken = await user.getIdToken();
+
+    prefs.setString(SET_USER_ID, user.uid);
+    prefs.setString(SET_USER_TOKEN, userToken.token);
+    prefs.setString(SET_TOKEN_EXPIRY, userToken.expirationTime.toString());
   }
 
   Future<bool> setBoolPreference(key, value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setBool(key, value);
+    return await prefs.setBool(key, value);
   }
 
   Future<bool> getBoolPreference(key) async {

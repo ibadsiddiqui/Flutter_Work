@@ -1,5 +1,7 @@
-import 'package:Sufi_Circles/src/services/UserDBServices.dart';
+import 'package:Sufi_Circles/src/models/user/UserModel.dart';
+import 'package:Sufi_Circles/src/services/db/UserDBServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class DBController {
   UserDBServices _userDBServices = UserDBServices();
@@ -20,5 +22,17 @@ class DBController {
       "lastSignInTime": user.metadata.lastSignInTime,
     };
     await _userDBServices.updateUserLastLogin(userJson);
+  }
+
+  void setUserDetailsUsingID(
+      context, String userID) async {
+    try {
+      Map<String, dynamic> data =
+          await _userDBServices.getUserDetailsUsingID(userID);
+      UserModel userModel = Provider.of<UserModel>(context);
+      userModel.setAllDetails(data);
+    } catch (e) {
+      throw e;
+    }
   }
 }

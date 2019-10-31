@@ -1,5 +1,5 @@
-import 'package:Sufi_Circles/src/controllers/DB_Controller.dart';
-import 'package:Sufi_Circles/src/services/AuthServices.dart';
+import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
+import 'package:Sufi_Circles/src/services/api/AuthServices.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/popup/AuthPopups.dart';
@@ -19,10 +19,9 @@ class AuthController extends ChangeNotifier {
     final authModel = Provider.of<AuthModel>(context);
     try {
       FirebaseUser _user = await _authService.userSignIn(authModel.authDetails);
-      IdTokenResult userToken = await _user.getIdToken();
-      utils.setUserTokenDetails(userToken);
-      _dbController.updateUserLastLogin(_user);
-      _showPopUp.showSuccessFulSigninPopUp(context);
+      await utils.setUserTokenDetails(_user);
+      await _dbController.updateUserLastLogin(_user);
+      _showPopUp.showSuccessFulSigninPopUp(context, _user.uid);
       toggle();
       resetPassword();
     } on PlatformException catch (e) {
