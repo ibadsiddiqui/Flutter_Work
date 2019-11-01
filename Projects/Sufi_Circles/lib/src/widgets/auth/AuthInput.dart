@@ -25,6 +25,16 @@ class AuthInput extends StatefulWidget {
 
 class _AuthInputState extends State<AuthInput> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Container(
       width: MediaQuery.of(context).size.width,

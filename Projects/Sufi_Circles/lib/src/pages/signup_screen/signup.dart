@@ -28,6 +28,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     store.setupValidations();
   }
 
+  @override
+  void dispose() {
+    store.dispose();
+    passwordController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
+
   resetPassword() => passwordController.text = "";
 
   loader() => this.setState(() => attemptSignup = !attemptSignup);
@@ -66,13 +74,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    store.dispose();
-    passwordController.dispose();
-    emailController.dispose();
-    super.dispose();
   }
 }

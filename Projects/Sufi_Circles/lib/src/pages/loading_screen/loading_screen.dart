@@ -16,6 +16,11 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   DBController _dbController = DBController();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @protected
   @mustCallSuper
   void didChangeDependencies() async => getUserDetails();
@@ -46,6 +51,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getUserDetails() async {
     await _dbController.setUserDetailsUsingID(context, widget.uid);
-    TimeNavigation.navigate(context, DashboardScreen());
+    TimeNavigation.navigate(context, DashboardScreen(), second: 4);
   }
 }

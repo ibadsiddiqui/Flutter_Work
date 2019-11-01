@@ -29,16 +29,21 @@ class _OnboardPagesState extends State<OnboardPages> {
   final pageController = PageController(initialPage: 0);
   bool _visible = false;
 
-  @protected
-  @mustCallSuper
-  void didChangeDependencies() =>
-      new Timer(Duration(seconds: 3), toggleOpacity);
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
     pageController.dispose();
     super.dispose();
   }
+
+  @protected
+  @mustCallSuper
+  void didChangeDependencies() =>
+      new Timer(Duration(seconds: 3), toggleOpacity);
 
   toggleOpacity() => setState(() {
         _visible = !_visible;

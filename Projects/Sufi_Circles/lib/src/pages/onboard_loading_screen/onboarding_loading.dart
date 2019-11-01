@@ -19,6 +19,16 @@ class OnBoardingLoadingScreen extends StatefulWidget {
 class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
   ShareUtils utils = ShareUtils();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @protected
   @mustCallSuper
   Future didChangeDependencies() async => checkUserSession();

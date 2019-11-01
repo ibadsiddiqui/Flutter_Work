@@ -16,6 +16,16 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   bool isSearching = false;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   toggleSearch() => this.setState(() => isSearching = !isSearching);
 
   Widget _buildHeader(recommendedEventsModel) {

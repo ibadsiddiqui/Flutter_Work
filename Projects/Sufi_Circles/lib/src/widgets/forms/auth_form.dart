@@ -8,11 +8,7 @@ class AuthForm extends StatefulWidget {
   final Function onPress;
   final bool isLoading;
   final String title;
-  const AuthForm(
-      {Key key,
-      this.onPress,
-      this.isLoading,
-      this.title})
+  const AuthForm({Key key, this.onPress, this.isLoading, this.title})
       : super(key: key);
 
   @override
@@ -22,6 +18,18 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController passwordController = TextEditingController(text: "");
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   resetPassword() => passwordController.text = "";
 

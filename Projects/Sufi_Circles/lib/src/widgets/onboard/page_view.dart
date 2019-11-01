@@ -40,7 +40,7 @@ class OnboardPageView extends StatelessWidget {
                         ? size.width * 0.15
                         : title == "STARTUP"
                             ? size.width * 0.2
-                            : size.width * 0.2),
+                            : size.width * 0.25),
                 Container(
                   alignment: Alignment.bottomRight,
                   child: FlatButton(
