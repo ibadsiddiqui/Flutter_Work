@@ -1,8 +1,9 @@
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker_modern/image_picker_modern.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
-import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -30,6 +31,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
+  Future getImage() async {
+    // try {
+      
+    // }  on MissingPluginException catch (e) {
+    // }
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    print(image);
+    // setState(() {
+    //   _image = image;
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     UserModel userModel = Provider.of<UserModel>(context);
@@ -38,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF072247),
         tooltip: "Upload Profile Picture",
-        onPressed: () {},
+        onPressed: getImage,
         child: Icon(Icons.add_a_photo),
       ),
       body: NestedScrollView(
