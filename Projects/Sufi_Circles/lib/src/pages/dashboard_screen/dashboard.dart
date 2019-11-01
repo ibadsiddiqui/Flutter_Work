@@ -28,8 +28,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   toggleSearch() => this.setState(() => isSearching = !isSearching);
 
-  Widget _buildHeader(recommendedEventsModel) {
-    final size = MediaQuery.of(context).size;
+  Widget _buildHeader(recommendedEventsModel, size) {
     return Container(
       height: size.height * 0.475,
       child: GridView.count(
@@ -71,11 +70,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final size = MediaQuery.of(context).size;
     RecommendedEventsModel recommendedEventsModel =
         Provider.of<RecommendedEventsModel>(context);
-    UserModel authModel = Provider.of<UserModel>(context);
-    print(authModel.email);
+    UserModel userModel = Provider.of<UserModel>(context);
     return Scaffold(
       appBar: dashboardAppBar(isSearching: isSearching, onPress: toggleSearch),
-      drawer: DashboardDrawer(),
+      drawer: DashboardDrawer(email: userModel.email, name: userModel.name),
       body: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
@@ -84,7 +82,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
             child: DashboardHeadings(title: "Recommended Events"),
           ),
-          _buildHeader(recommendedEventsModel),
+          _buildHeader(recommendedEventsModel, size),
           Padding(
             padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
             child: DashboardHeadings(title: "Latest Events"),

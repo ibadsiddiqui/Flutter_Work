@@ -17,7 +17,7 @@ class PhotoHero extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            child: Image.network(
+            child: Image.asset(
               photo,
               fit: BoxFit.cover,
             ),
@@ -34,7 +34,7 @@ class HeroAnimation extends StatelessWidget {
   const HeroAnimation({Key key, this.photoPath}) : super(key: key);
 
   Widget build(BuildContext context) {
-    timeDilation = 5.0; // 1.0 means normal animation speed.
+    timeDilation = 1.0; // 1.0 means normal animation speed.
 
     return Scaffold(
       body: Center(

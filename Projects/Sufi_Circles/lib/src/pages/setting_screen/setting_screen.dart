@@ -86,12 +86,12 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 SizedBox(height: 20),
                 UserDetailItem(
-                  label: "Privacy Policy",
+                  inputLabel: "Privacy Policy",
                   value: "click to view them...",
                   screenName: "setting",
                 ),
                 UserDetailItem(
-                    label: "Terms & Condition:",
+                    inputLabel: "Terms & Condition:",
                     value: "click to view them...",
                     screenName: "setting"),
               ],
