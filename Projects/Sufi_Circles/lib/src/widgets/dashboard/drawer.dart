@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
 import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
@@ -8,11 +6,15 @@ import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
 import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
 
 class DashboardDrawer extends StatelessWidget {
+  final String name;
+  final String email;
+
+  const DashboardDrawer({Key key, this.name, this.email}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    UserModel userModel = Provider.of<UserModel>(context);
     final size = MediaQuery.of(context).size;
-    
+
     return Drawer(
       child: Container(
         child: Column(
@@ -37,7 +39,7 @@ class DashboardDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    userModel.name,
+                    name,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontSize: 22,
@@ -45,7 +47,7 @@ class DashboardDrawer extends StatelessWidget {
                         color: Color(0xFF072247)),
                   ),
                   Text(
-                    userModel.email,
+                    email,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontSize: 16,
