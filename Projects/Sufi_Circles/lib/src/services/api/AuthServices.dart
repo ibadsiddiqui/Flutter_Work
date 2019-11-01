@@ -15,7 +15,6 @@ class AuthService {
   }
 
   Future<FirebaseUser> createUser(Map<String, String> authDetails) async {
-    print("here");
     try {
       return (await _firebaseAuth.createUserWithEmailAndPassword(
               email: authDetails["email"], password: authDetails["password"]))

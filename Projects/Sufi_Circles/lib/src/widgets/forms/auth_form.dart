@@ -66,11 +66,4 @@ class _AuthFormState extends State<AuthForm> {
       ],
     );
   }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 }
