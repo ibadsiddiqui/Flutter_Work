@@ -15,7 +15,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isEmailEdit = false;
   bool isCountryEdit = false;
   bool isCityEdit = false;
-
+  String image = "asset/images/placeholder/cover/index.png";
   toggleNameEdit() => this.setState(() => isFullNameEdit = !isFullNameEdit);
   toggleEmailEdit() => this.setState(() => isEmailEdit = !isEmailEdit);
   toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
@@ -33,14 +33,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future getImage() async {
     // try {
-      
+
     // }  on MissingPluginException catch (e) {
     // }
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    print(image);
-    // setState(() {
-    //   _image = image;
-    // });
+    var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      image = _image.path;
+    });
   }
 
   @override
@@ -72,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 background: HeroAnimation(
-                  photoPath: "asset/images/dummy_events/event_4.png",
+                  photoPath: image,
                 ),
               ),
             ),

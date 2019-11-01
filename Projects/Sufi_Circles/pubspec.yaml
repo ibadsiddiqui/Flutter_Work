@@ -70,6 +70,7 @@ flutter:
     - asset/images/dummy_events/event_2.png
     - asset/images/dummy_events/event_3.png
     - asset/images/dummy_events/event_4.png
+    - asset/images/placeholder/cover/index.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

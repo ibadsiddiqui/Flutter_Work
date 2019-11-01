@@ -56,7 +56,6 @@ class UserDetailItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(isEditable);
     final size = MediaQuery.of(context).size;
     if (isEditable)
       return renderEditableInput(context, size);
