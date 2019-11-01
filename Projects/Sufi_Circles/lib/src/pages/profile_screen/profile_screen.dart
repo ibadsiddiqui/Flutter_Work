@@ -1,10 +1,35 @@
+import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
+import 'package:provider/provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool isFullNameEdit = false;
+  bool isEmailEdit = false;
+  bool isCountryEdit = false;
+  bool isCityEdit = false;
+
+  toggleNameEdit() => this.setState(() => isFullNameEdit = !isFullNameEdit);
+  toggleEmailEdit() => this.setState(() => isEmailEdit = !isEmailEdit);
+  toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
+  toggleCityEdit() => this.setState(() => isCityEdit = !isCityEdit);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     UserModel userModel = Provider.of<UserModel>(context);
@@ -34,8 +59,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 background: HeroAnimation(
-                  photoPath:
-                      "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
+                  photoPath: "asset/images/dummy_events/event_4.png",
                 ),
               ),
             ),
@@ -49,25 +73,34 @@ class ProfileScreen extends StatelessWidget {
               style: TextStyle(fontSize: 25.0, fontFamily: "CreteRound"),
             ),
             SizedBox(height: 20),
-            Container(
-              height: size.height * 0.12,
-              child:
-                  UserDetailItem(label: "Full Name:", value: "Ibad Siddiqui"),
+            // Container(
+            //   height: size.height * 0.12,
+            //   child:
+            UserDetailItem(
+              isEditable: isFullNameEdit,
+              inputLabel: "Enter Full Name:",
+              value: "Ibad Siddiqui",
+              toggleEdit: toggleNameEdit,
             ),
-            Container(
-              height: size.height * 0.12,
-              child: UserDetailItem(label: "Email:", value: userModel.email),
+            UserDetailItem(
+              isEditable: isEmailEdit,
+              inputLabel: "Email:",
+              value: userModel.email,
+              toggleEdit: toggleEmailEdit,
             ),
-            Container(
-              height: size.height * 0.12,
-              child:
-                  UserDetailItem(label: "Country:", value: userModel.country),
+
+            UserDetailItem(
+              isEditable: isCountryEdit,
+              inputLabel: "Country:",
+              value: "userModel.country",
+              toggleEdit: toggleCountryEdit,
             ),
-            Container(
-              height: size.height * 0.12,
-              child: UserDetailItem(label: "City:", value: userModel.city),
+            UserDetailItem(
+              isEditable: isCityEdit,
+              inputLabel: "City:",
+              value: "userModel.city",
+              toggleEdit: toggleCityEdit,
             ),
-            // SizedBox(height: size.height * 0.4),
           ],
         ),
       ),
