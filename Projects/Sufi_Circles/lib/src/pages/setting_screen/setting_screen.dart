@@ -88,12 +88,11 @@ class _SettingScreenState extends State<SettingScreen> {
                 UserDetailItem(
                   inputLabel: "Privacy Policy",
                   value: "click to view them...",
-                  screenName: "setting",
                 ),
                 UserDetailItem(
-                    inputLabel: "Terms & Condition:",
-                    value: "click to view them...",
-                    screenName: "setting"),
+                  inputLabel: "Terms & Condition:",
+                  value: "click to view them...",
+                ),
               ],
             ),
           )

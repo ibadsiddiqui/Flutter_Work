@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class EditDetailsField extends StatelessWidget {
   final String label;
   final Function edit;
-  const EditDetailsField({Key key, this.label, this.edit}) : super(key: key);
+  final Function onSubmit;
+  const EditDetailsField({Key key, this.label, this.edit, this.onSubmit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +19,10 @@ class EditDetailsField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        onFieldSubmitted: onSubmit,
         style: TextStyle(color: Colors.black),
         textAlign: TextAlign.left,
+        textInputAction: TextInputAction.done,
         decoration: InputDecoration(
           border: InputBorder.none,
           hasFloatingPlaceholder: true,
@@ -30,7 +34,7 @@ class EditDetailsField extends StatelessWidget {
             padding: EdgeInsets.only(top: 20, left: 20),
             tooltip: "Save",
             onPressed: edit,
-            icon: Icon(Icons.save, color: Colors.black),
+            icon: Icon(Icons.close, color: Colors.black),
           ),
         ),
       ),

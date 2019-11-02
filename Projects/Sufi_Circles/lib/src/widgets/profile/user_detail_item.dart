@@ -8,19 +8,23 @@ class UserDetailItem extends StatelessWidget {
   final String inputLabel;
   final String value;
   final Function toggleEdit;
+  final Function onSubmit;
+
   const UserDetailItem({
     Key key,
     this.value,
     this.inputLabel,
     this.isEditable = false,
     this.toggleEdit,
+    this.onSubmit,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     if (isEditable)
-      return EditDetailsField(label: inputLabel, edit: toggleEdit);
+      return EditDetailsField(
+          label: inputLabel, onSubmit: onSubmit, edit: toggleEdit);
     else
       return Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
