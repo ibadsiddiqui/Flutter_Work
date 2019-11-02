@@ -1,5 +1,8 @@
+import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
+import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatefulWidget {
   SettingScreen({Key key}) : super(key: key);
@@ -19,84 +22,52 @@ class _SettingScreenState extends State<SettingScreen> {
     super.dispose();
   }
 
-  Widget _buildHeader(size) {
-    return Container(
-      height: size.height * 0.25,
-      color: Colors.blue,
-      padding: EdgeInsets.only(top: 70),
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50.0),
-              child: Container(
-                height: size.height * 0.1,
-                width: size.height * 0.1,
-                color: Colors.white,
-                alignment: Alignment.center,
-                child: Text(
-                  "I",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 33, fontFamily: "Comfortaa"),
+  @override
+  Widget build(BuildContext context) {
+    UserModel userModel = Provider.of<UserModel>(context);
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: size.height * 0.35,
+              pinned: true,
+              backgroundColor: Color(0xFF072247),
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: Text(
+                  "Settings",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontFamily: "CreteRound",
+                  ),
+                ),
+                background: Consumer<UserModel>(
+                  builder: (_, data, __) =>
+                      HeroAnimation(photoPath: data.profilePicture),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: Text(
-              "Ibad Siddiqui",
-              style: TextStyle(fontSize: 20.0, fontFamily: "CreteRound"),
+          ];
+        },
+        body: Column(
+          children: <Widget>[
+            SizedBox(height: 20),
+            UserDetailItem(
+              inputLabel: "Privacy Policy",
+              value: "click to view them...",
+              toggleEdit: (){},
             ),
-          )
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _buildHeader(size),
-          Container(
-            height: size.height * 0.75,
-            width: size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 10.0),
-                      child: Text("Settings",
-                          style: TextStyle(
-                              fontSize: 25.0, fontFamily: "CreteRound")),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Divider(
-                          color: Colors.grey, thickness: 0.5, height: 0),
-                    )
-                  ],
-                ),
-                SizedBox(height: 20),
-                UserDetailItem(
-                  inputLabel: "Privacy Policy",
-                  value: "click to view them...",
-                ),
-                UserDetailItem(
-                  inputLabel: "Terms & Condition:",
-                  value: "click to view them...",
-                ),
-              ],
+            UserDetailItem(
+              inputLabel: "Terms & Condition:",
+              value: "click to view them...",
+              toggleEdit: (){},
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

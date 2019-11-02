@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
@@ -27,10 +28,12 @@ class DashboardDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  NamedCircle(size: "Large", title: ""),
+                  NamedCircle(size: "Large", title: getFirstChar(name)),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: NamedCircle(size: "Small", title: ""),
+                    child: NamedCircle(
+                        size: "Small",
+                        title: getCharAfterSpace(name)),
                   ),
                 ],
               ),
