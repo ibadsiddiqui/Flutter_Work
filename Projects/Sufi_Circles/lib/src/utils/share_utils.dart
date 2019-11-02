@@ -4,6 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:Sufi_Circles/src/constants/keys.dart';
 
 class ShareUtils {
+  Future<void> clearAll() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
   Future<void> setUserTokenDetails(FirebaseUser user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     IdTokenResult userToken = await user.getIdToken();
