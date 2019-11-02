@@ -9,6 +9,23 @@ part of 'UserModel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserModel on _UserModel, Store {
+  final _$userIDAtom = Atom(name: '_UserModel.userID');
+
+  @override
+  String get userID {
+    _$userIDAtom.context.enforceReadPolicy(_$userIDAtom);
+    _$userIDAtom.reportObserved();
+    return super.userID;
+  }
+
+  @override
+  set userID(String value) {
+    _$userIDAtom.context.conditionallyRunInAction(() {
+      super.userID = value;
+      _$userIDAtom.reportChanged();
+    }, _$userIDAtom, name: '${_$userIDAtom.name}_set');
+  }
+
   final _$nameAtom = Atom(name: '_UserModel.name');
 
   @override
@@ -41,6 +58,23 @@ mixin _$UserModel on _UserModel, Store {
       super.email = value;
       _$emailAtom.reportChanged();
     }, _$emailAtom, name: '${_$emailAtom.name}_set');
+  }
+
+  final _$passwordAtom = Atom(name: '_UserModel.password');
+
+  @override
+  String get password {
+    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
+    _$passwordAtom.reportObserved();
+    return super.password;
+  }
+
+  @override
+  set password(String value) {
+    _$passwordAtom.context.conditionallyRunInAction(() {
+      super.password = value;
+      _$passwordAtom.reportChanged();
+    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
   final _$isEmailVerifiedAtom = Atom(name: '_UserModel.isEmailVerified');
@@ -94,7 +128,43 @@ mixin _$UserModel on _UserModel, Store {
     }, _$cityAtom, name: '${_$cityAtom.name}_set');
   }
 
+  final _$profilePictureAtom = Atom(name: '_UserModel.profilePicture');
+
+  @override
+  String get profilePicture {
+    _$profilePictureAtom.context.enforceReadPolicy(_$profilePictureAtom);
+    _$profilePictureAtom.reportObserved();
+    return super.profilePicture;
+  }
+
+  @override
+  set profilePicture(String value) {
+    _$profilePictureAtom.context.conditionallyRunInAction(() {
+      super.profilePicture = value;
+      _$profilePictureAtom.reportChanged();
+    }, _$profilePictureAtom, name: '${_$profilePictureAtom.name}_set');
+  }
+
+  final _$setAllDetailsAsyncAction = AsyncAction('setAllDetails');
+
+  @override
+  void setAllDetails(Map<String, dynamic> user) {
+    _$setAllDetailsAsyncAction.run(() {
+      super.setAllDetails(user);
+    });
+  }
+
   final _$_UserModelActionController = ActionController(name: '_UserModel');
+
+  @override
+  void setUserID(String userID) {
+    final _$actionInfo = _$_UserModelActionController.startAction();
+    try {
+      return super.setUserID(userID);
+    } finally {
+      _$_UserModelActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setUserName(String name) {
@@ -111,6 +181,16 @@ mixin _$UserModel on _UserModel, Store {
     final _$actionInfo = _$_UserModelActionController.startAction();
     try {
       return super.setUserEmail(email);
+    } finally {
+      _$_UserModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setUserPassword(String password) {
+    final _$actionInfo = _$_UserModelActionController.startAction();
+    try {
+      return super.setUserPassword(password);
     } finally {
       _$_UserModelActionController.endAction(_$actionInfo);
     }
@@ -147,10 +227,10 @@ mixin _$UserModel on _UserModel, Store {
   }
 
   @override
-  void setAllDetails(Map<String, dynamic> user) {
+  void setUserProfilePic(String picture) {
     final _$actionInfo = _$_UserModelActionController.startAction();
     try {
-      return super.setAllDetails(user);
+      return super.setUserProfilePic(picture);
     } finally {
       _$_UserModelActionController.endAction(_$actionInfo);
     }

@@ -64,6 +64,6 @@ abstract class _UserModel with Store {
     setUserCountry(user["country"] != null ? user["country"] : "");
     setUserCity(user["city"] != null ? user["city"] : "");
     setUserProfilePic(
-        user["profile_picture"] != null ? user["profile_picture"] : "");
+        user["profile_picture"] != null ? user["profile_picture"] : profilePicture);
   }
 }

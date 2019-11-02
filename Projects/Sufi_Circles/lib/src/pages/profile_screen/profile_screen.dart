@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
+import 'package:Sufi_Circles/src/services/storage/ImageStorage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
@@ -16,12 +17,12 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   DBController dbController = DBController();
   AuthController authController = AuthController();
+  ImageStorage imageStorage = ImageStorage();
 
   bool isFullNameEdit = false;
   bool isEmailEdit = false;
   bool isCountryEdit = false;
   bool isCityEdit = false;
-  String image = "asset/images/placeholder/cover/index.png";
 
   @override
   void initState() {
@@ -42,25 +43,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
   //   final userModel = Provider.of<UserModel>(context);
   // }
 
-  void getImage() async {
+  void getImage(UserModel userModel) async {
     var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    String strImg = base64Encode(_image.readAsBytesSync());
-    print(strImg);
-    // setState(() {
-    //   image = ;
-    // });
+    String filePath = _image.path;
+    await imageStorage.uploadUserProfilePicture(userModel, filePath);
   }
 
   @override
   Widget build(BuildContext context) {
     UserModel userModel = Provider.of<UserModel>(context);
     final size = MediaQuery.of(context).size;
+    print("asdasd" + userModel.profilePicture);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF072247),
         tooltip: "Upload Profile Picture",
-        onPressed: getImage,
+        onPressed: () => getImage(userModel),
         child: Icon(Icons.add_a_photo),
       ),
       body: NestedScrollView(
@@ -80,7 +79,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontFamily: "CreteRound",
                   ),
                 ),
-                background: HeroAnimation(photoPath: image),
+                background: Consumer<UserModel>(
+                  builder: (_, data, __) =>
+                      HeroAnimation(photoPath: data.profilePicture),
+                ),
               ),
             ),
           ];

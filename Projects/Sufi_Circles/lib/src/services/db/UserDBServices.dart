@@ -60,4 +60,12 @@ class UserDBServices {
       throw e;
     }
   }
+
+  Future<void> updateUserProfilePicture(String uid, String url) async {
+    try {
+      return (await userDB.document(uid).updateData({"profile_picture": url}));
+    } catch (e) {
+      throw e;
+    }
+  }
 }
