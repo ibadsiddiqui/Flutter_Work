@@ -25,9 +25,10 @@ dependencies:
   cupertino_icons: ^0.1.2
   image_picker_modern:
   shared_preferences: ^0.4.0
-  firebase_core: 
-  cloud_firestore: 
-  firebase_auth: 
+  firebase_core:
+  cloud_firestore:
+  firebase_auth:
+  firebase_storage:
   provider: 
   mobx:
   flutter_mobx:
