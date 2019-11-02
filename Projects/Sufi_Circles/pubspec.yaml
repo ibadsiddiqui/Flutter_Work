@@ -32,6 +32,7 @@ dependencies:
   mobx:
   flutter_mobx:
   validators:
+  flutter_string_encryption:
   rflutter_alert: ^1.0.2
 
 dev_dependencies:
