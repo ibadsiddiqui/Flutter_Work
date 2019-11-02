@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
@@ -16,6 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isCountryEdit = false;
   bool isCityEdit = false;
   String image = "asset/images/placeholder/cover/index.png";
+  
   toggleNameEdit() => this.setState(() => isFullNameEdit = !isFullNameEdit);
   toggleEmailEdit() => this.setState(() => isEmailEdit = !isEmailEdit);
   toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
@@ -31,15 +33,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  Future getImage() async {
-    // try {
-
-    // }  on MissingPluginException catch (e) {
-    // }
+  void getImage() async {
     var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      image = _image.path;
-    });
+    String strImg = base64Encode(_image.readAsBytesSync());
+    print(strImg);
+    // setState(() {
+    //   image = ;
+    // });
   }
 
   @override
@@ -47,6 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     UserModel userModel = Provider.of<UserModel>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF072247),
         tooltip: "Upload Profile Picture",
@@ -63,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text(
-                  "Ibad siddiqui",
+                  userModel.name,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
@@ -85,12 +86,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               style: TextStyle(fontSize: 25.0, fontFamily: "CreteRound"),
             ),
             SizedBox(height: 20),
-            // Container(
-            //   height: size.height * 0.12,
-            //   child:
             UserDetailItem(
               isEditable: isFullNameEdit,
-              inputLabel: "Enter Full Name:",
+              inputLabel: "Full Name:",
               value: "Ibad Siddiqui",
               toggleEdit: toggleNameEdit,
             ),
@@ -100,7 +98,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               value: userModel.email,
               toggleEdit: toggleEmailEdit,
             ),
-
             UserDetailItem(
               isEditable: isCountryEdit,
               inputLabel: "Country:",
