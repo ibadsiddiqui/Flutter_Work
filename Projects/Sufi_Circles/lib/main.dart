@@ -47,9 +47,7 @@ class App extends StatelessWidget {
           '/OnBoardingScreen': (_) => OnBoardingScreen(),
           '/LoginScreen': (_) => LoginScreen(),
           '/SignUpScreen': (_) => SignUpScreen(),
-          '/LoadingScreen': (_) => LoadingScreen(
-                uid: "",
-              ),
+          '/LoadingScreen': (_) => LoadingScreen(),
           '/DashboardScreen': (_) => DashboardScreen(),
         },
       ),

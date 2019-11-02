@@ -6,6 +6,9 @@ class UserModel = _UserModel with _$UserModel;
 
 abstract class _UserModel with Store {
   @observable
+  String userID = '';
+
+  @observable
   String name = '';
 
   @observable
@@ -19,6 +22,9 @@ abstract class _UserModel with Store {
 
   @observable
   String city = '';
+
+  @action
+  void setUserID(String userID) => this.userID = userID;
 
   @action
   void setUserName(String name) => this.name = name;
@@ -37,6 +43,7 @@ abstract class _UserModel with Store {
 
   @action
   void setAllDetails(Map<String, dynamic> user) {
+    setUserID(user["uid"] != null ? user["uid"] : "");
     setUserName(user["name"] != null ? user["name"] : "");
     setUserEmail(user["email"]);
     setUserCountry(user["country"] != null ? user["country"] : "");

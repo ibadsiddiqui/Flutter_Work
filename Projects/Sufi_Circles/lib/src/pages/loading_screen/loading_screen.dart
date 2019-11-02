@@ -7,7 +7,7 @@ import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 class LoadingScreen extends StatefulWidget {
   final String uid;
 
-  const LoadingScreen({Key key, this.uid}) : super(key: key);
+  const LoadingScreen({Key key, this.uid = ""}) : super(key: key);
 
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
