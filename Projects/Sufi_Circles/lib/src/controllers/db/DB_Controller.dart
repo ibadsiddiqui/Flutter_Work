@@ -1,15 +1,19 @@
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/services/db/UserDBServices.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 
 class DBController {
   UserDBServices _userDBServices = UserDBServices();
 
-  createUserInDB(FirebaseUser user) async {
+  createUserInDB(FirebaseUser user, AuthModel authModel) async {
+    final String encryptedPassword = await encryptKey(authModel.password);
     Map<String, dynamic> userJson = {
       "uid": user.uid,
       "email": user.email,
+      "password": encryptedPassword,
       "isEmailVerified": user.isEmailVerified,
       "creationTimeStamp": user.metadata.creationTime,
     };
@@ -24,8 +28,7 @@ class DBController {
     await _userDBServices.updateUserLastLogin(userJson);
   }
 
-  Future<void> setUserDetailsUsingID(
-      context, String userID) async {
+  Future<void> setUserDetailsUsingID(context, String userID) async {
     try {
       Map<String, dynamic> data =
           await _userDBServices.getUserDetailsUsingID(userID);
@@ -34,5 +37,26 @@ class DBController {
     } catch (e) {
       throw e;
     }
+  }
+
+  Future<void> updateUserName(context) async {
+    UserModel userModel = Provider.of<UserModel>(context);
+    await _userDBServices.updateUserName(userModel.userID, userModel.name);
+  }
+
+  Future<void> updateUserEmail(context) async {
+    UserModel userModel = Provider.of(context);
+    await _userDBServices.updateUserEmail(userModel.userID, userModel.email);
+  }
+
+  Future<void> updateUserCountry(context) async {
+    UserModel userModel = Provider.of(context);
+    await _userDBServices.updateUserCountry(
+        userModel.userID, userModel.country);
+  }
+
+  Future<void> updateUserCity(context) async {
+    UserModel userModel = Provider.of(context);
+    await _userDBServices.updateUserCity(userModel.userID, userModel.city);
   }
 }

@@ -26,7 +26,7 @@ class ValidateAPIControllers {
     authModel.validateAll();
     if (authModel.canLogin) {
       load();
-      _authController.userSignup(context, toggle: load);
+      _authController.userSignup(context, toggle: load, resetPassword: resetPass);
     } else {
       showPopUp.incorrectCredentials(context);
       authModel.setPassword("");

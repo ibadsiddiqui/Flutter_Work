@@ -45,17 +45,17 @@ class UserDBServices {
     }
   }
 
-  Future<void> updateUserCountry(String uid, String email) async {
+  Future<void> updateUserCountry(String uid, String country) async {
     try {
-      return (await userDB.document(uid).updateData({"country": email}));
+      return (await userDB.document(uid).updateData({"country": country}));
     } catch (e) {
       throw e;
     }
   }
 
-  Future<void> updateUserCity(String uid, String email) async {
+  Future<void> updateUserCity(String uid, String city) async {
     try {
-      return (await userDB.document(uid).updateData({"city": email}));
+      return (await userDB.document(uid).updateData({"city": city}));
     } catch (e) {
       throw e;
     }
