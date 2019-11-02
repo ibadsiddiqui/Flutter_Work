@@ -1,5 +1,6 @@
 import 'package:Sufi_Circles/src/constants/keys.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_string_encryption/flutter_string_encryption.dart';
 
 String replaceUnderscore(String str) => str.replaceAll("_", " ");
@@ -21,5 +22,7 @@ Future<String> decryptKey(String password) async {
     return decrypted; // - A string to encrypt.
   } on MacMismatchException {
     return null; // unable to decrypt (wrong key or forged data)
+  } on PlatformException {
+    return password;
   }
 }

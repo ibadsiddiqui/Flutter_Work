@@ -27,6 +27,9 @@ abstract class _UserModel with Store {
   @observable
   String city = '';
 
+  @observable
+  String profilePicture = 'asset/images/placeholder/cover/index.png';
+
   @action
   void setUserID(String userID) => this.userID = userID;
 
@@ -49,6 +52,9 @@ abstract class _UserModel with Store {
   void setUserCity(String city) => this.city = city;
 
   @action
+  void setUserProfilePic(String picture) => this.profilePicture = picture;
+
+  @action
   void setAllDetails(Map<String, dynamic> user) async {
     String decryptedPassword = await decryptKey(user["password"]);
     setUserID(user["uid"] != null ? user["uid"] : "");
@@ -57,5 +63,7 @@ abstract class _UserModel with Store {
     setUserPassword(decryptedPassword);
     setUserCountry(user["country"] != null ? user["country"] : "");
     setUserCity(user["city"] != null ? user["city"] : "");
+    setUserProfilePic(
+        user["profile_picture"] != null ? user["profile_picture"] : "");
   }
 }
