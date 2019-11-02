@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
+import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
@@ -12,16 +14,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  DBController dbController = DBController();
+  AuthController authController = AuthController();
+
   bool isFullNameEdit = false;
   bool isEmailEdit = false;
   bool isCountryEdit = false;
   bool isCityEdit = false;
   String image = "asset/images/placeholder/cover/index.png";
-  
-  toggleNameEdit() => this.setState(() => isFullNameEdit = !isFullNameEdit);
-  toggleEmailEdit() => this.setState(() => isEmailEdit = !isEmailEdit);
-  toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
-  toggleCityEdit() => this.setState(() => isCityEdit = !isCityEdit);
 
   @override
   void initState() {
@@ -32,6 +32,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void dispose() {
     super.dispose();
   }
+
+  toggleNameEdit() => this.setState(() => isFullNameEdit = !isFullNameEdit);
+  toggleEmailEdit() => this.setState(() => isEmailEdit = !isEmailEdit);
+  toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
+  toggleCityEdit() => this.setState(() => isCityEdit = !isCityEdit);
+
+  // setName(String name) {
+  //   final userModel = Provider.of<UserModel>(context);
+  // }
 
   void getImage() async {
     var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -71,9 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontFamily: "CreteRound",
                   ),
                 ),
-                background: HeroAnimation(
-                  photoPath: image,
-                ),
+                background: HeroAnimation(photoPath: image),
               ),
             ),
           ];
@@ -87,28 +94,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SizedBox(height: 20),
             UserDetailItem(
-              isEditable: isFullNameEdit,
-              inputLabel: "Full Name:",
-              value: "Ibad Siddiqui",
-              toggleEdit: toggleNameEdit,
-            ),
+                isEditable: isFullNameEdit,
+                inputLabel: "Full Name",
+                value: userModel.name,
+                toggleEdit: toggleNameEdit,
+                onSubmit: (String name) async {
+                  userModel.setUserName(name);
+                  await dbController.updateUserName(context);
+                  toggleNameEdit();
+                }),
             UserDetailItem(
               isEditable: isEmailEdit,
-              inputLabel: "Email:",
+              inputLabel: "Email",
               value: userModel.email,
               toggleEdit: toggleEmailEdit,
+              onSubmit: (String email) async {
+                userModel.setUserEmail(email);
+                await dbController.updateUserEmail(context);
+                await authController.updateFirebaseUserEmail(email, context);
+                toggleEmailEdit();
+              },
             ),
             UserDetailItem(
               isEditable: isCountryEdit,
-              inputLabel: "Country:",
-              value: "userModel.country",
+              inputLabel: "Country",
+              value: userModel.country,
               toggleEdit: toggleCountryEdit,
+              onSubmit: (String country) async {
+                userModel.setUserCountry(country);
+                await dbController.updateUserCountry(context);
+                toggleCountryEdit();
+              },
             ),
             UserDetailItem(
               isEditable: isCityEdit,
-              inputLabel: "City:",
-              value: "userModel.city",
+              inputLabel: "City",
+              value: userModel.city,
               toggleEdit: toggleCityEdit,
+              onSubmit: (String city) async {
+                userModel.setUserCity(city);
+                await dbController.updateUserCity(context);
+                toggleCityEdit();
+              },
             ),
           ],
         ),
