@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
@@ -6,10 +7,11 @@ import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
 import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
 
 class DashboardDrawer extends StatelessWidget {
+  final AuthController authController = AuthController();
   final String name;
   final String email;
 
-  const DashboardDrawer({Key key, this.name, this.email}) : super(key: key);
+  DashboardDrawer({Key key, this.name, this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,14 @@ class DashboardDrawer extends StatelessWidget {
                   pushSettingsScreen(context, screen: SettingScreen());
                 }),
             SizedBox(height: size.height * 0.45),
-            DrawerItem(title: "Sign out", leftIcon: Icon(Icons.exit_to_app)),
+            DrawerItem(
+              title: "Sign out",
+              leftIcon: Icon(Icons.exit_to_app),
+              onPress: () {
+                authController.signOutUser();
+                pushLoginScreen(context);
+              },
+            ),
           ],
         ),
       ),
