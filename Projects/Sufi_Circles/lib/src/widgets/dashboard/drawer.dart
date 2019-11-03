@@ -1,6 +1,6 @@
-import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
-import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:Sufi_Circles/src/pages/create_event/create_event.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
 import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
@@ -8,7 +8,6 @@ import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
 import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
 
 class DashboardDrawer extends StatelessWidget {
-  final AuthController authController = AuthController();
   final String name;
   final String email;
 
@@ -32,8 +31,7 @@ class DashboardDrawer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: NamedCircle(
-                        size: "Small",
-                        title: getCharAfterSpace(name)),
+                        size: "Small", title: getCharAfterSpace(name)),
                   ),
                 ],
               ),
@@ -68,31 +66,29 @@ class DashboardDrawer extends StatelessWidget {
                 leftIcon: Icon(Icons.person),
                 onPress: () {
                   Navigator.pop(context);
-                  pushProfileScreen(context, screen: ProfileScreen());
+                  pushScreen(context, screen: ProfileScreen());
+                }),
+            DrawerItem(
+                title: "Create Event",
+                leftIcon: Icon(Icons.event),
+                onPress: () {
+                  Navigator.pop(context);
+                  pushScreen(context, screen: CreateEvent());
                 }),
             DrawerItem(
                 title: "See All Events",
                 leftIcon: Icon(Icons.event),
                 onPress: () {
                   Navigator.pop(context);
-                  pushSettingsScreen(context, screen: SettingScreen());
+                  pushScreen(context, screen: SettingScreen());
                 }),
             DrawerItem(
                 title: "Setting",
                 leftIcon: Icon(Icons.settings),
                 onPress: () {
                   Navigator.pop(context);
-                  pushSettingsScreen(context, screen: SettingScreen());
+                  pushScreen(context, screen: SettingScreen());
                 }),
-            SizedBox(height: size.height * 0.45),
-            DrawerItem(
-              title: "Sign out",
-              leftIcon: Icon(Icons.exit_to_app),
-              onPress: () {
-                authController.signOutUser();
-                pushLoginScreen(context);
-              },
-            ),
           ],
         ),
       ),

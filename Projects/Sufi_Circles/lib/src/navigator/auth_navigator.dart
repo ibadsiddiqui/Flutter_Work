@@ -16,10 +16,6 @@ Route createRoute({Widget screen}) {
   );
 }
 
-void pushDashboardScreens(context, {Widget screen}) {
-  Navigator.push(context, createRoute(screen: screen));
-}
-
 void pushLoginScreen(context) {
   Navigator.of(context).pushReplacementNamed("/LoginScreen");
 }
@@ -28,10 +24,6 @@ void pushSignUpScreen(context) {
   Navigator.of(context).pushReplacementNamed("/SignUpScreen");
 }
 
-void pushProfileScreen(context, {Widget screen}) {
-  Navigator.push(context, createRoute(screen: screen));
-}
-
-void pushSettingsScreen(context, {Widget screen}) {
+void pushScreen(context, {Widget screen}) {
   Navigator.push(context, createRoute(screen: screen));
 }

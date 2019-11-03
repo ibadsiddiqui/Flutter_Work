@@ -67,7 +67,7 @@ class ShowPopUp {
           ),
           onPressed: () {
             Navigator.pop(context);
-            pushDashboardScreens(context, screen: LoadingScreen(uid: uid));
+            pushScreen(context, screen: LoadingScreen(uid: uid));
           },
           width: 120,
         )

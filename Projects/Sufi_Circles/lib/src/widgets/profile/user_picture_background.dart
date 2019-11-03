@@ -47,6 +47,7 @@ class HeroAnimation extends StatelessWidget {
               return Scaffold(
                 body: Container(
                   alignment: Alignment.center,
+                  color: Colors.black,
                   child: PhotoHero(
                     photo: photoPath,
                     onTap: () {
