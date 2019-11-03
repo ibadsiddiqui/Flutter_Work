@@ -1,4 +1,5 @@
-import 'package:Sufi_Circles/main.dart';
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/add_event_details/add_details.dart';
 import 'package:flutter/material.dart';
 
 class CreateEvent extends StatelessWidget {
@@ -23,7 +24,7 @@ class CreateEvent extends StatelessWidget {
           ),
           FlatButton(
             color: Color(0xFFFC3C3C),
-            onPressed: () {},
+            onPressed: () => pushScreen(context, screen: AddEventDetails()),
             child: Text(
               "Click here to start",
               style: TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
