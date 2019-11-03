@@ -10,10 +10,8 @@ class CreateEvent extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(
-          color: Color(0xFF072247),
-        ),
         elevation: 0,
+        iconTheme: IconThemeData(color: Color(0xFF072247)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
