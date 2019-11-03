@@ -1,4 +1,6 @@
+import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  final AuthController authController = AuthController();
+
   @override
   void initState() {
     super.initState();
@@ -57,14 +61,22 @@ class _SettingScreenState extends State<SettingScreen> {
           children: <Widget>[
             SizedBox(height: 20),
             UserDetailItem(
-              inputLabel: "Privacy Policy",
+              inputLabel: "Terms and Conditions",
               value: "click to view them...",
-              toggleEdit: (){},
+              toggleEdit: () {},
             ),
             UserDetailItem(
-              inputLabel: "Terms & Condition:",
+              inputLabel: "Contact Us",
               value: "click to view them...",
-              toggleEdit: (){},
+              toggleEdit: () {},
+            ),
+            UserDetailItem(
+              inputLabel: "Sign out",
+              value: "clear my session.",
+              toggleEdit: () {
+                authController.signOutUser();
+                pushLoginScreen(context);
+              },
             ),
           ],
         ),
