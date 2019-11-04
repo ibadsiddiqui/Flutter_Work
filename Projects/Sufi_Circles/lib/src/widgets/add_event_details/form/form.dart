@@ -3,12 +3,23 @@ import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
 
 class EventDetailForm extends StatelessWidget {
-  final Function onFieldSubmit;
-  final TextEditingController controller;
   final String hint;
   final String title;
+  final TextEditingController controller;
+  final Function onFieldSubmit;
+  final int maxLine;
+  final int minLines;
+  final int maxLength;
+
   const EventDetailForm(
-      {Key key, this.onFieldSubmit, this.controller, this.hint, this.title})
+      {Key key,
+      this.onFieldSubmit,
+      this.controller,
+      this.hint,
+      this.title,
+      this.maxLine,
+      this.minLines,
+      this.maxLength})
       : super(key: key);
 
   @override
@@ -17,9 +28,9 @@ class EventDetailForm extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       alignment: Alignment.centerLeft,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: 100),
           Text(
             title,
             textAlign: TextAlign.left,
@@ -31,12 +42,12 @@ class EventDetailForm extends StatelessWidget {
             ),
           ),
           MultiLineInput(
-            maxLines: 2,
-            minLines: 1,
-            maxLength: 10,
-            hintText: hint,
             controller: controller,
             onFieldSubmit: onFieldSubmit,
+            hintText: hint,
+            maxLines: maxLine,
+            minLines: minLines,
+            maxLength: maxLength,
           ),
           RoundClippedButton(isMain: false, onPress: () {}),
         ],
