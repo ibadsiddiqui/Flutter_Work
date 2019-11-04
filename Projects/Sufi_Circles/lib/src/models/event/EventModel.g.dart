@@ -96,6 +96,142 @@ mixin _$EventModel on _EventModel, Store {
     }, _$eventVenuePhotoAtom, name: '${_$eventVenuePhotoAtom.name}_set');
   }
 
+  final _$dateFromAtom = Atom(name: '_EventModel.dateFrom');
+
+  @override
+  String get dateFrom {
+    _$dateFromAtom.context.enforceReadPolicy(_$dateFromAtom);
+    _$dateFromAtom.reportObserved();
+    return super.dateFrom;
+  }
+
+  @override
+  set dateFrom(String value) {
+    _$dateFromAtom.context.conditionallyRunInAction(() {
+      super.dateFrom = value;
+      _$dateFromAtom.reportChanged();
+    }, _$dateFromAtom, name: '${_$dateFromAtom.name}_set');
+  }
+
+  final _$dateToAtom = Atom(name: '_EventModel.dateTo');
+
+  @override
+  String get dateTo {
+    _$dateToAtom.context.enforceReadPolicy(_$dateToAtom);
+    _$dateToAtom.reportObserved();
+    return super.dateTo;
+  }
+
+  @override
+  set dateTo(String value) {
+    _$dateToAtom.context.conditionallyRunInAction(() {
+      super.dateTo = value;
+      _$dateToAtom.reportChanged();
+    }, _$dateToAtom, name: '${_$dateToAtom.name}_set');
+  }
+
+  final _$timeFromAtom = Atom(name: '_EventModel.timeFrom');
+
+  @override
+  String get timeFrom {
+    _$timeFromAtom.context.enforceReadPolicy(_$timeFromAtom);
+    _$timeFromAtom.reportObserved();
+    return super.timeFrom;
+  }
+
+  @override
+  set timeFrom(String value) {
+    _$timeFromAtom.context.conditionallyRunInAction(() {
+      super.timeFrom = value;
+      _$timeFromAtom.reportChanged();
+    }, _$timeFromAtom, name: '${_$timeFromAtom.name}_set');
+  }
+
+  final _$timeToAtom = Atom(name: '_EventModel.timeTo');
+
+  @override
+  String get timeTo {
+    _$timeToAtom.context.enforceReadPolicy(_$timeToAtom);
+    _$timeToAtom.reportObserved();
+    return super.timeTo;
+  }
+
+  @override
+  set timeTo(String value) {
+    _$timeToAtom.context.conditionallyRunInAction(() {
+      super.timeTo = value;
+      _$timeToAtom.reportChanged();
+    }, _$timeToAtom, name: '${_$timeToAtom.name}_set');
+  }
+
+  final _$addressDetailsAtom = Atom(name: '_EventModel.addressDetails');
+
+  @override
+  Map<String, dynamic> get addressDetails {
+    _$addressDetailsAtom.context.enforceReadPolicy(_$addressDetailsAtom);
+    _$addressDetailsAtom.reportObserved();
+    return super.addressDetails;
+  }
+
+  @override
+  set addressDetails(Map<String, dynamic> value) {
+    _$addressDetailsAtom.context.conditionallyRunInAction(() {
+      super.addressDetails = value;
+      _$addressDetailsAtom.reportChanged();
+    }, _$addressDetailsAtom, name: '${_$addressDetailsAtom.name}_set');
+  }
+
+  final _$locationDetailsAtom = Atom(name: '_EventModel.locationDetails');
+
+  @override
+  Map<String, dynamic> get locationDetails {
+    _$locationDetailsAtom.context.enforceReadPolicy(_$locationDetailsAtom);
+    _$locationDetailsAtom.reportObserved();
+    return super.locationDetails;
+  }
+
+  @override
+  set locationDetails(Map<String, dynamic> value) {
+    _$locationDetailsAtom.context.conditionallyRunInAction(() {
+      super.locationDetails = value;
+      _$locationDetailsAtom.reportChanged();
+    }, _$locationDetailsAtom, name: '${_$locationDetailsAtom.name}_set');
+  }
+
+  final _$organiserDetailsAtom = Atom(name: '_EventModel.organiserDetails');
+
+  @override
+  Map<String, dynamic> get organiserDetails {
+    _$organiserDetailsAtom.context.enforceReadPolicy(_$organiserDetailsAtom);
+    _$organiserDetailsAtom.reportObserved();
+    return super.organiserDetails;
+  }
+
+  @override
+  set organiserDetails(Map<String, dynamic> value) {
+    _$organiserDetailsAtom.context.conditionallyRunInAction(() {
+      super.organiserDetails = value;
+      _$organiserDetailsAtom.reportChanged();
+    }, _$organiserDetailsAtom, name: '${_$organiserDetailsAtom.name}_set');
+  }
+
+  final _$additionalLinksAtom = Atom(name: '_EventModel.additionalLinks');
+
+  @override
+  Map<String, String> get additionalLinks {
+    _$additionalLinksAtom.context.enforceReadPolicy(_$additionalLinksAtom);
+    _$additionalLinksAtom.reportObserved();
+    return super.additionalLinks;
+  }
+
+  @override
+  set additionalLinks(Map<String, String> value) {
+    _$additionalLinksAtom.context.conditionallyRunInAction(() {
+      super.additionalLinks = value;
+      _$additionalLinksAtom.reportChanged();
+    }, _$additionalLinksAtom, name: '${_$additionalLinksAtom.name}_set');
+  }
+
   final _$_EventModelActionController = ActionController(name: '_EventModel');
 
   @override

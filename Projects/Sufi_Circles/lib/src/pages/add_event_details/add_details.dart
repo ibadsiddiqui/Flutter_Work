@@ -69,7 +69,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
                       maxLines: 2,
                       minLines: 1,
                       maxLength: 10,
-                      hintText: "Please add a name for the event."),
+                      hintText: "Please add a name for the event.(mandatory)"),
                   RoundClippedButton(isMain: false, onPress: () {}),
                 ],
               ),
@@ -96,7 +96,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
                       minLines: 2,
                       maxLength: 250,
                       hintText:
-                          "Enter a brief summary of your event so guests know what to expect."),
+                          "Enter a brief summary of your event so guests know what to expect.(Optional)"),
                   RoundClippedButton(isMain: false, onPress: () {}),
                 ],
               ),

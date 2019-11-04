@@ -18,6 +18,34 @@ abstract class _EventModel with Store {
   @observable
   List<String> eventVenuePhoto = List();
 
+  @observable
+  String dateFrom = DateTime.now().toLocal().toString();
+
+  @observable
+  String dateTo = DateTime.now().toLocal().toString();
+
+  @observable
+  String timeFrom = DateTime.now().toLocal().toString();
+
+  @observable
+  String timeTo = DateTime.now().toLocal().toString();
+
+  @observable
+  Map<String, dynamic> addressDetails = {
+    "venue": "",
+    "city": "",
+    "country": "",
+  };
+
+  @observable
+  Map<String, dynamic> locationDetails = {};
+
+  @observable
+  Map<String, dynamic> organiserDetails = {};
+
+  @observable
+  Map<String, String> additionalLinks = {};
+
   @action
   void setEventName(String name) => this.eventName = name;
 
