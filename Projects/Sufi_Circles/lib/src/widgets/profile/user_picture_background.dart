@@ -13,14 +13,29 @@ class PhotoHero extends StatelessWidget {
     return SizedBox(
       width: size.width,
       child: Hero(
-        tag: photo,
+        tag: "profile_pic",
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
             child: photo.contains('asset/images/placeholder/cover/index.png')
                 ? Image.asset(photo, fit: BoxFit.cover)
-                : Image.network(photo, fit: BoxFit.cover),
+                : Image.network(
+                    photo,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
           ),
         ),
       ),
