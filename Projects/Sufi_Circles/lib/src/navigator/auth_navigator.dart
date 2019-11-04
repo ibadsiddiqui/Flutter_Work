@@ -27,3 +27,7 @@ void pushSignUpScreen(context) {
 void pushScreen(context, {Widget screen}) {
   Navigator.push(context, createRoute(screen: screen));
 }
+
+void startRouteWihLoading(context) {
+  Navigator.of(context).pushReplacementNamed('/LoadingScreen');
+}
