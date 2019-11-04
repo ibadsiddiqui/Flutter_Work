@@ -1,5 +1,5 @@
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
-import 'package:Sufi_Circles/src/pages/add_details/add_name.dart';
+import 'package:Sufi_Circles/src/pages/add_details/add_details.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
 
