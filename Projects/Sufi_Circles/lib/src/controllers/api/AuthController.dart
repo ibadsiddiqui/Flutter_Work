@@ -1,5 +1,4 @@
 import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
-import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/services/api/AuthServices.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';

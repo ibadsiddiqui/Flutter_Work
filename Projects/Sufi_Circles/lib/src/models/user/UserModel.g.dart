@@ -148,8 +148,8 @@ mixin _$UserModel on _UserModel, Store {
   final _$setAllDetailsAsyncAction = AsyncAction('setAllDetails');
 
   @override
-  void setAllDetails(Map<String, dynamic> user) {
-    _$setAllDetailsAsyncAction.run(() {
+  Future setAllDetails(Map<String, dynamic> user) {
+    return _$setAllDetailsAsyncAction.run(() {
       super.setAllDetails(user);
     });
   }

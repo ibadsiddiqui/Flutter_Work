@@ -1,4 +1,3 @@
-import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
