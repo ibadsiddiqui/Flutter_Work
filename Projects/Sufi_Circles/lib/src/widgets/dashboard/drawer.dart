@@ -27,12 +27,12 @@ class DashboardDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  NamedCircle(size: "Large", title: getFirstChar(name)),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: NamedCircle(
-                        size: "Small", title: getCharAfterSpace(name)),
-                  ),
+                        NamedCircle(size: "Large", title: getFirstChar(name)),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: NamedCircle(
+                              size: "Small", title: getCharAfterSpace(name)),
+                        ),
                 ],
               ),
             ),
