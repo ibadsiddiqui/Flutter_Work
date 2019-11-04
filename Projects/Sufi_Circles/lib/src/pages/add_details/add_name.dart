@@ -1,5 +1,6 @@
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:Sufi_Circles/src/widgets/create_event/multiline_input.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/form/multiline_input.dart';
 import 'package:flutter/material.dart';
 
 class AddEventDetails extends StatefulWidget {
@@ -48,32 +49,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
           scrollDirection: Axis.horizontal,
           // physics: new NeverScrollableScrollPhysics(),
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.centerLeft,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Event name.",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      color: Color(0xFF072247),
-                      fontFamily: "CreteRound",
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  MultiLineInput(
-                      maxLines: 2,
-                      minLines: 1,
-                      maxLength: 10,
-                      hintText: "Please add a name for the event.(mandatory)"),
-                  RoundClippedButton(isMain: false, onPress: () {}),
-                ],
-              ),
-            ),
+            DetailForm(),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               alignment: Alignment.centerLeft,

@@ -5,14 +5,25 @@ class MultiLineInput extends StatelessWidget {
   final int maxLines;
   final int minLines;
   final String hintText;
+  final TextEditingController controller;
 
-  const MultiLineInput(
-      {Key key, this.maxLines, this.minLines, this.hintText, this.maxLength})
-      : super(key: key);
+  final Function onFieldSubmit;
+
+  const MultiLineInput({
+    Key key,
+    this.maxLines,
+    this.minLines,
+    this.hintText,
+    this.maxLength,
+    this.controller,
+    this.onFieldSubmit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: controller,
+      onFieldSubmitted: onFieldSubmit,
       keyboardType: TextInputType.multiline,
       maxLines: maxLines,
       minLines: minLines,
