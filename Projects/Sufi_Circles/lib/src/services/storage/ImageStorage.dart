@@ -8,10 +8,10 @@ class ImageStorage {
   StorageReference storageRef = FirebaseStorage.instance.ref();
   UserDBServices userDBServices = UserDBServices();
 
-  Future<void> uploadUserProfilePicture(
-      UserModel userModel, String filePath) async {
+  Future<String> uploadUserProfilePicture(
+      String userID, String filePath) async {
     final StorageUploadTask uploadTask =
-        storageRef.child("profile_pictures").child(userModel.userID).putFile(
+        storageRef.child("profile_pictures").child(userID).putFile(
               File(filePath),
               StorageMetadata(
                 contentType: "image" + '/' + "jpg",
@@ -19,8 +19,7 @@ class ImageStorage {
             );
     final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
     final String url = (await downloadUrl.ref.getDownloadURL());
-    userModel.setUserProfilePic(url);
-    userDBServices.updateUserProfilePicture(userModel.userID, url);
+    userDBServices.updateUserProfilePicture(userID, url);
     return url;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_cover_photo.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
               inputHint:
                   "Enter a brief summary of your event so guests know what to expect.(Optional)",
             ),
+            AddEventCoverPhoto(),
           ],
         ),
       ),

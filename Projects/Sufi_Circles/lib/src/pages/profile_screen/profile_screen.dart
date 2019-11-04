@@ -1,6 +1,11 @@
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/services/storage/ImageStorage.dart';
+import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
+import 'package:Sufi_Circles/src/widgets/profile/fab.dart';
+import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
@@ -22,6 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isEmailEdit = false;
   bool isCountryEdit = false;
   bool isCityEdit = false;
+  bool isUploading = false;
 
   @override
   void initState() {
@@ -38,14 +44,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
   toggleCityEdit() => this.setState(() => isCityEdit = !isCityEdit);
 
-  // setName(String name) {
-  //   final userModel = Provider.of<UserModel>(context);
-  // }
-
   void getImage(UserModel userModel) async {
     var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    String filePath = _image.path;
-    await imageStorage.uploadUserProfilePicture(userModel, filePath);
+    if (_image != null) {
+      this.setState(() => isUploading = !isUploading);
+      String filePath = _image.path;
+      String url = await imageStorage.uploadUserProfilePicture(
+          userModel.userID, filePath);
+      userModel.setUserProfilePic(url);
+      this.setState(() => isUploading = !isUploading);
+    }
   }
 
   @override
@@ -55,12 +63,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     print("asdasd" + userModel.profilePicture);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF072247),
-        tooltip: "Upload Profile Picture",
-        onPressed: () => getImage(userModel),
-        child: Icon(Icons.add_a_photo),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Color(0xFF072247),
+      //   child: Icon(Icons.add_a_photo),
+      //   heroTag: "btn1",
+      //   onPressed: () async {
+      //     final cameras = await availableCameras();
+      //     pushScreen(context, screen: TakePictureScreen(camera: cameras.first));
+      //   },
+      // ),
+
+      // FAB(
+      // getCamera: () => pushScreen(context, screen: CameraApp),
+      // getImage: () => getImage(userModel),
+      // ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -70,17 +86,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               backgroundColor: Color(0xFF072247),
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                title: Text(
-                  userModel.name,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontFamily: "CreteRound",
-                  ),
-                ),
                 background: Consumer<UserModel>(
-                  builder: (_, data, __) =>
-                      HeroAnimation(photoPath: data.profilePicture),
+                  builder: (_, data, __) => isUploading
+                      ? Loader()
+                      : HeroAnimation(photoPath: data.profilePicture),
                 ),
               ),
             ),
@@ -93,7 +102,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 25.0, fontFamily: "CreteRound"),
             ),
-            SizedBox(height: 20),
             UserDetailItem(
                 isEditable: isFullNameEdit,
                 inputLabel: "Full Name",
@@ -101,8 +109,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 toggleEdit: toggleNameEdit,
                 onSubmit: (String name) async {
                   userModel.setUserName(name);
-                  await dbController.updateUserName(context);
                   toggleNameEdit();
+                  await dbController.updateUserName(context);
                 }),
             UserDetailItem(
               isEditable: isEmailEdit,
@@ -111,9 +119,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               toggleEdit: toggleEmailEdit,
               onSubmit: (String email) async {
                 userModel.setUserEmail(email);
+                toggleEmailEdit();
                 await dbController.updateUserEmail(context);
                 await authController.updateFirebaseUserEmail(email, context);
-                toggleEmailEdit();
               },
             ),
             UserDetailItem(
@@ -123,8 +131,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               toggleEdit: toggleCountryEdit,
               onSubmit: (String country) async {
                 userModel.setUserCountry(country);
-                await dbController.updateUserCountry(context);
                 toggleCountryEdit();
+                await dbController.updateUserCountry(context);
               },
             ),
             UserDetailItem(
@@ -134,8 +142,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               toggleEdit: toggleCityEdit,
               onSubmit: (String city) async {
                 userModel.setUserCity(city);
-                await dbController.updateUserCity(context);
                 toggleCityEdit();
+                await dbController.updateUserCity(context);
               },
             ),
           ],
