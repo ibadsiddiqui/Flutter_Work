@@ -35,6 +35,9 @@ dependencies:
   validators:
   flutter_string_encryption:
   rflutter_alert: ^1.0.2
+  camera:
+  path_provider:
+  path:
 
 dev_dependencies:
   flutter_test:
