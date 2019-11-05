@@ -1,6 +1,6 @@
-import 'package:Sufi_Circles/src/widgets/add_event_details/form/form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/form/form.dart';
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 
 class AddEventDescDetail extends StatefulWidget {
