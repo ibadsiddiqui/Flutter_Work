@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.only(top: 75),
           height: MediaQuery.of(context).size.height,
           child: new GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
+            onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: new Column(
               children: <Widget>[
                 AppIcon(),
