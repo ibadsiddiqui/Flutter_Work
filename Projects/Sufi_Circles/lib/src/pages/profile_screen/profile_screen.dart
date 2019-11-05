@@ -44,13 +44,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
   toggleCityEdit() => this.setState(() => isCityEdit = !isCityEdit);
 
-  void getImage(UserModel userModel) async {
-    var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    if (_image != null) {
+  void setImage(context, String from, {String cameraPath = ""}) async {
+    UserModel userModel = Provider.of<UserModel>(context);
+    if (from == "media") {
+      var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
+      if (_image != null) {
+        this.setState(() => isUploading = !isUploading);
+        String filePath = _image.path;
+        String url = await imageStorage.uploadUserProfilePicture(
+            userModel.userID, filePath);
+        userModel.setUserProfilePic(url);
+        this.setState(() => isUploading = !isUploading);
+      }
+    } else {
+      Navigator.of(context).pop();
       this.setState(() => isUploading = !isUploading);
-      String filePath = _image.path;
+
       String url = await imageStorage.uploadUserProfilePicture(
-          userModel.userID, filePath);
+          userModel.userID, cameraPath);
       userModel.setUserProfilePic(url);
       this.setState(() => isUploading = !isUploading);
     }
@@ -69,11 +80,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           toolTip2: "Add profile image from Camera",
           icon1: Icon(Icons.add_photo_alternate),
           icon2: Icon(Icons.camera),
-          onPress1: () => getImage(userModel),
+          onPress1: () => setImage(context, "media"),
           onPress2: () async {
             final cameras = await availableCameras();
             pushScreen(context,
-                screen: TakePictureScreen(camera: cameras.first));
+                screen: TakePictureScreen(
+                  camera: cameras.first,
+                  setImage: (String path) =>
+                      setImage(context, "camera", cameraPath: path),
+                ));
           }),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
