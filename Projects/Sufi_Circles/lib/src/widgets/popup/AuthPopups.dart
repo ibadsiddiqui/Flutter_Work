@@ -66,7 +66,7 @@ class ShowPopUp {
           ),
           onPressed: () {
             Navigator.pop(context);
-            startRouteWihLoading(context);
+            startRouteWihLoading(context, uid);
           },
           width: 120,
         )
