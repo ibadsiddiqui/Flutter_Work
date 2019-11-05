@@ -3,8 +3,8 @@ import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/services/storage/ImageStorage.dart';
+import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
-import 'package:Sufi_Circles/src/widgets/profile/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -63,20 +63,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     print("asdasd" + userModel.profilePicture);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Color(0xFF072247),
-      //   child: Icon(Icons.add_a_photo),
-      //   heroTag: "btn1",
-      //   onPressed: () async {
-      //     final cameras = await availableCameras();
-      //     pushScreen(context, screen: TakePictureScreen(camera: cameras.first));
-      //   },
-      // ),
-
-      // FAB(
-      // getCamera: () => pushScreen(context, screen: CameraApp),
-      // getImage: () => getImage(userModel),
-      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: BottomFABs(
+          toolTip1: "Add profile image from Photos",
+          toolTip2: "Add profile image from Camera",
+          icon1: Icon(Icons.add_photo_alternate),
+          icon2: Icon(Icons.camera),
+          onPress1: () => getImage(userModel),
+          onPress2: () async {
+            final cameras = await availableCameras();
+            pushScreen(context,
+                screen: TakePictureScreen(camera: cameras.first));
+          }),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[

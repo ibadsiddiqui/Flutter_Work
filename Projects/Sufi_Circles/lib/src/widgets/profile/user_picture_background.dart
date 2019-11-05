@@ -8,7 +8,6 @@ class PhotoHero extends StatelessWidget {
   final VoidCallback onTap;
 
   Widget build(BuildContext context) {
-    print(photo.contains('asset/images/placeholder/cover/index.png'));
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width: size.width,
