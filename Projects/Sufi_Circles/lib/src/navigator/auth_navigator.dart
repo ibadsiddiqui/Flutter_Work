@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 import 'package:flutter/material.dart';
 
 Route createRoute({Widget screen}) {
@@ -28,6 +29,6 @@ void pushScreen(context, {Widget screen}) {
   Navigator.push(context, createRoute(screen: screen));
 }
 
-void startRouteWihLoading(context) {
-  Navigator.of(context).pushReplacementNamed('/LoadingScreen');
+void startRouteWihLoading(context, uid) {
+  Navigator.push(context, createRoute(screen: LoadingScreen(uid: uid,)));
 }
