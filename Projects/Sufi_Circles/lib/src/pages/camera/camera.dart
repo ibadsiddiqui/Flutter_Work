@@ -10,8 +10,10 @@ import 'package:path_provider/path_provider.dart';
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
+  final Function setImage;
 
-  const TakePictureScreen({Key key, @required this.camera}) : super(key: key);
+  const TakePictureScreen({Key key, @required this.camera, this.setImage})
+      : super(key: key);
 
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
@@ -41,15 +43,14 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
       await _controller.takePicture(path);
       this.setState(() => imagePath = path);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   resetTakePhoto() => this.setState(() => imagePath = "");
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BottomFABs(
@@ -59,7 +60,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             imagePath == "" ? Navigator.of(context).pop() : resetTakePhoto(),
         toolTip2: "Take Photo",
         icon2: imagePath == "" ? Icon(Icons.add_a_photo) : Icon(Icons.check),
-        onPress2: imagePath == "" ? takePhoto : resetTakePhoto,
+        onPress2: () =>
+            imagePath == "" ? takePhoto() : widget.setImage(imagePath),
       ),
       body: imagePath == ""
           ? FutureBuilder<void>(
@@ -72,10 +74,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               },
             )
           : Container(
-              color: Colors.black,
-              child: Center(
-                child: Image.file(File(imagePath)),
-              ),
+              width: size.width,
+              height: size.height,
+              child: Image.file(File(imagePath), fit: BoxFit.cover),
             ),
     );
   }
