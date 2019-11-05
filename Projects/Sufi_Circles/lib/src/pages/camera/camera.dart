@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:Sufi_Circles/src/pages/camera/display_picture.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
-
+  String imagePath = "";
   @override
   void initState() {
     super.initState();
@@ -34,44 +34,49 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     super.dispose();
   }
 
+  takePhoto() async {
+    try {
+      await _initializeControllerFuture;
+      final path =
+          join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
+      await _controller.takePicture(path);
+      this.setState(() => imagePath = path);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  resetTakePhoto() => this.setState(() => imagePath = "");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done)
-            return CameraPreview(_controller);
-          else
-            return Center(child: CircularProgressIndicator());
-        },
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BottomFABs(
-          toolTip1: "Cancel Camera",
-          icon1: Icon(Icons.close),
-          onPress1: () => Navigator.of(context).pop(),
-          toolTip2: "Take Photo",
-          icon2: Icon(Icons.add_a_photo),
-          onPress2: () async {
-            try {
-              await _initializeControllerFuture;
-              final path = join((await getTemporaryDirectory()).path,
-                  '${DateTime.now()}.png');
-
-              // Attempt to take a picture and log where it's been saved.
-              await _controller.takePicture(path);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DisplayPictureScreen(imagePath: path),
-                ),
-              );
-            } catch (e) {
-              // If an error occurs, log the error to the console.
-              print(e);
-            }
-          }),
+        toolTip1: "Cancel Camera",
+        icon1: Icon(Icons.close),
+        onPress1: () =>
+            imagePath == "" ? Navigator.of(context).pop() : resetTakePhoto(),
+        toolTip2: "Take Photo",
+        icon2: imagePath == "" ? Icon(Icons.add_a_photo) : Icon(Icons.check),
+        onPress2: imagePath == "" ? takePhoto : resetTakePhoto,
+      ),
+      body: imagePath == ""
+          ? FutureBuilder<void>(
+              future: _initializeControllerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done)
+                  return CameraPreview(_controller);
+                else
+                  return Center(child: CircularProgressIndicator());
+              },
+            )
+          : Container(
+              color: Colors.black,
+              child: Center(
+                child: Image.file(File(imagePath)),
+              ),
+            ),
     );
   }
 }
