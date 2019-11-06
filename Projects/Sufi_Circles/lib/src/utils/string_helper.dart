@@ -5,19 +5,12 @@ import 'package:flutter_string_encryption/flutter_string_encryption.dart';
 
 String replaceUnderscore(String str) => str.replaceAll("_", " ");
 
-String getFirstChar(String str) {
+String getFirstChars(String str) {
   try {
-    return str.substring(0, 1).toUpperCase();
-  } on RangeError {
-    return "";
-  }
-}
-
-String getCharAfterSpace(String str) {
-  try {
-    return str
-        .substring(str.indexOf(r" ") + 1, str.indexOf(r" ") + 2)
-        .toUpperCase();
+    return str.substring(0, 1).toUpperCase() +
+        str
+            .substring(str.indexOf(r" ") + 1, str.indexOf(r" ") + 2)
+            .toUpperCase();
   } on RangeError {
     return "";
   }
