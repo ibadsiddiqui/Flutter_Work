@@ -10,10 +10,7 @@ class DashboardHeadings extends StatelessWidget {
     return Container(
       child: Text(
         title,
-        style: TextStyle(
-          fontFamily: "CreteRound",
-          fontSize: 25,
-        ),
+        style: TextStyle(fontFamily: "CreteRound", fontSize: 25),
         textAlign: TextAlign.center,
       ),
     );

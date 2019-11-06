@@ -14,14 +14,11 @@ PreferredSizeWidget dashboardAppBar(
               hintText: "Search...",
               hintStyle: TextStyle(color: Colors.white),
             ),
-            strutStyle: StrutStyle(),
             textAlign: TextAlign.center,
             cursorColor: Colors.white,
             style: TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
           )
-        : DashboardHeadings(
-            title: "Sufi Circles",
-          ),
+        : DashboardHeadings(title: "Sufi Circles"),
     actions: <Widget>[
       IconButton(
           icon: Icon(Icons.search, color: Colors.white),

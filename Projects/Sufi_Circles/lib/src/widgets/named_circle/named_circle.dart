@@ -13,8 +13,8 @@ class NamedCircle extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         color: Colors.red,
-        width: size == "Large" ? 75 : 50,
-        height: size == "Large" ? 75 : 50,
+        width: size == "Large" ? 100 : 50,
+        height: size == "Large" ? 100 : 50,
         child: Text(
           title,
           textAlign: TextAlign.center,

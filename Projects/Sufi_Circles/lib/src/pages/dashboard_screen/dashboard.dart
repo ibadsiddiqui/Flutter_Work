@@ -1,4 +1,3 @@
-import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
@@ -70,10 +69,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final size = MediaQuery.of(context).size;
     RecommendedEventsModel recommendedEventsModel =
         Provider.of<RecommendedEventsModel>(context);
-    UserModel userModel = Provider.of<UserModel>(context);
     return Scaffold(
       appBar: dashboardAppBar(isSearching: isSearching, onPress: toggleSearch),
-      drawer: DashboardDrawer(email: userModel.email, name: userModel.name),
+      drawer: DashboardDrawer(),
       body: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
