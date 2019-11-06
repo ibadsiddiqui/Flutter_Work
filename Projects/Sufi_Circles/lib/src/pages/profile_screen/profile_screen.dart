@@ -99,6 +99,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               backgroundColor: Color(0xFF072247),
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
+                title: Text("Profile Information",
+                    style: TextStyle(fontSize: 20.0, fontFamily: "CreteRound")),
                 background: Consumer<UserModel>(
                   builder: (_, data, __) => isUploading
                       ? Loader()
@@ -110,11 +112,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
         body: Column(
           children: <Widget>[
-            Text(
-              "Profile Information",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25.0, fontFamily: "CreteRound"),
-            ),
             UserDetailItem(
                 isEditable: isFullNameEdit,
                 inputLabel: "Full Name",
