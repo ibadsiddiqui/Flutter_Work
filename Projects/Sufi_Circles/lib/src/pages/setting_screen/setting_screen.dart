@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SettingScreen extends StatefulWidget {
   SettingScreen({Key key}) : super(key: key);
@@ -24,6 +25,14 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  openURI(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -68,7 +77,54 @@ class _SettingScreenState extends State<SettingScreen> {
             UserDetailItem(
               inputLabel: "Contact Us",
               value: "click to view them...",
-              toggleEdit: () {},
+              toggleEdit: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Container(
+                          height: 200,
+                          width: 400,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Email:',
+                                style: TextStyle(
+                                    fontFamily: "CreteRound", fontSize: 18),
+                              ),
+                              FlatButton(
+                                child: Text(
+                                  'sufi.circles@gmail.com',
+                                  style: TextStyle(fontFamily: 'Comfortaa'),
+                                ),
+                                onPressed: () async {
+                                  await openURI(
+                                      'mailto:sufi.circles@gmail.com');
+                                },
+                              ),
+                              SizedBox(height: 40),
+                              Text(
+                                'Facebook:',
+                                style: TextStyle(
+                                    fontFamily: "CreteRound", fontSize: 18),
+                              ),
+                              FlatButton(
+                                child: Text(
+                                    'https://www.facebook.com/suficirclesapp',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontFamily: 'Comfortaa')),
+                                onPressed: () async {
+                                  await openURI(
+                                      'https://www.facebook.com/suficirclesapp');
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    });
+              },
             ),
             UserDetailItem(
               inputLabel: "Sign out",
