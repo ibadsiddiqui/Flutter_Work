@@ -7,28 +7,28 @@ class EventModel = _EventModel with _$EventModel;
 
 abstract class _EventModel with Store {
   @observable
-  String eventName = "";
+  Observable<String> eventName = Observable("");
 
   @observable
-  String eventDesc = "";
+  Observable<String> eventDesc = Observable("");
 
   @observable
   String eventCoverPhoto = 'asset/images/placeholder/cover/index.png';
 
   @observable
-  List<String> eventVenuePhoto = List();
+  ObservableList<String> eventVenuePhoto = ObservableList<String>();
 
   @observable
-  String dateFrom = DateTime.now().toLocal().toString();
+  Observable<String> dateFrom = Observable(DateTime.now().toLocal().toString());
 
   @observable
-  String dateTo = DateTime.now().toLocal().toString();
+  Observable<String> dateTo = Observable(DateTime.now().toLocal().toString());
 
   @observable
-  String timeFrom = DateTime.now().toLocal().toString();
+  Observable<String> timeFrom = Observable(DateTime.now().toLocal().toString());
 
   @observable
-  String timeTo = DateTime.now().toLocal().toString();
+  Observable<String> timeTo = Observable(DateTime.now().toLocal().toString());
 
   @observable
   Map<String, dynamic> addressDetails = {
@@ -47,10 +47,10 @@ abstract class _EventModel with Store {
   Map<String, String> additionalLinks = {};
 
   @action
-  void setEventName(String name) => this.eventName = name;
+  void setEventName(String name) => this.eventName = name as Observable<String>;
 
   @action
-  void setEventDesc(String name) => this.eventDesc = name;
+  void setEventDesc(String name) => this.eventDesc = name as Observable<String>;
 
   @action
   void setEventCoverPhoto(String name) => this.eventCoverPhoto = name;
@@ -61,6 +61,10 @@ abstract class _EventModel with Store {
 
   @action
   void addEventVenuePhoto(String name) => this.eventVenuePhoto.add(name);
+
+  @action
+  void resetEventVenuePhoto() =>
+      this.eventVenuePhoto = ObservableList<String>();
 
   @computed
   get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);

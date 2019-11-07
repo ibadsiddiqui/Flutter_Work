@@ -31,14 +31,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$eventNameAtom = Atom(name: '_EventModel.eventName');
 
   @override
-  String get eventName {
+  Observable<String> get eventName {
     _$eventNameAtom.context.enforceReadPolicy(_$eventNameAtom);
     _$eventNameAtom.reportObserved();
     return super.eventName;
   }
 
   @override
-  set eventName(String value) {
+  set eventName(Observable<String> value) {
     _$eventNameAtom.context.conditionallyRunInAction(() {
       super.eventName = value;
       _$eventNameAtom.reportChanged();
@@ -48,14 +48,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$eventDescAtom = Atom(name: '_EventModel.eventDesc');
 
   @override
-  String get eventDesc {
+  Observable<String> get eventDesc {
     _$eventDescAtom.context.enforceReadPolicy(_$eventDescAtom);
     _$eventDescAtom.reportObserved();
     return super.eventDesc;
   }
 
   @override
-  set eventDesc(String value) {
+  set eventDesc(Observable<String> value) {
     _$eventDescAtom.context.conditionallyRunInAction(() {
       super.eventDesc = value;
       _$eventDescAtom.reportChanged();
@@ -82,14 +82,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$eventVenuePhotoAtom = Atom(name: '_EventModel.eventVenuePhoto');
 
   @override
-  List<String> get eventVenuePhoto {
+  ObservableList<String> get eventVenuePhoto {
     _$eventVenuePhotoAtom.context.enforceReadPolicy(_$eventVenuePhotoAtom);
     _$eventVenuePhotoAtom.reportObserved();
     return super.eventVenuePhoto;
   }
 
   @override
-  set eventVenuePhoto(List<String> value) {
+  set eventVenuePhoto(ObservableList<String> value) {
     _$eventVenuePhotoAtom.context.conditionallyRunInAction(() {
       super.eventVenuePhoto = value;
       _$eventVenuePhotoAtom.reportChanged();
@@ -99,14 +99,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$dateFromAtom = Atom(name: '_EventModel.dateFrom');
 
   @override
-  String get dateFrom {
+  Observable<String> get dateFrom {
     _$dateFromAtom.context.enforceReadPolicy(_$dateFromAtom);
     _$dateFromAtom.reportObserved();
     return super.dateFrom;
   }
 
   @override
-  set dateFrom(String value) {
+  set dateFrom(Observable<String> value) {
     _$dateFromAtom.context.conditionallyRunInAction(() {
       super.dateFrom = value;
       _$dateFromAtom.reportChanged();
@@ -116,14 +116,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$dateToAtom = Atom(name: '_EventModel.dateTo');
 
   @override
-  String get dateTo {
+  Observable<String> get dateTo {
     _$dateToAtom.context.enforceReadPolicy(_$dateToAtom);
     _$dateToAtom.reportObserved();
     return super.dateTo;
   }
 
   @override
-  set dateTo(String value) {
+  set dateTo(Observable<String> value) {
     _$dateToAtom.context.conditionallyRunInAction(() {
       super.dateTo = value;
       _$dateToAtom.reportChanged();
@@ -133,14 +133,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$timeFromAtom = Atom(name: '_EventModel.timeFrom');
 
   @override
-  String get timeFrom {
+  Observable<String> get timeFrom {
     _$timeFromAtom.context.enforceReadPolicy(_$timeFromAtom);
     _$timeFromAtom.reportObserved();
     return super.timeFrom;
   }
 
   @override
-  set timeFrom(String value) {
+  set timeFrom(Observable<String> value) {
     _$timeFromAtom.context.conditionallyRunInAction(() {
       super.timeFrom = value;
       _$timeFromAtom.reportChanged();
@@ -150,14 +150,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$timeToAtom = Atom(name: '_EventModel.timeTo');
 
   @override
-  String get timeTo {
+  Observable<String> get timeTo {
     _$timeToAtom.context.enforceReadPolicy(_$timeToAtom);
     _$timeToAtom.reportObserved();
     return super.timeTo;
   }
 
   @override
-  set timeTo(String value) {
+  set timeTo(Observable<String> value) {
     _$timeToAtom.context.conditionallyRunInAction(() {
       super.timeTo = value;
       _$timeToAtom.reportChanged();
@@ -279,6 +279,16 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.addEventVenuePhoto(name);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void resetEventVenuePhoto() {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.resetEventVenuePhoto();
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
