@@ -55,7 +55,7 @@ abstract class _UserModel with Store {
   void setUserProfilePic(String picture) => this.profilePicture = picture;
 
   @action
-  void setAllDetails(Map<String, dynamic> user) async {
+  Future setAllDetails(Map<String, dynamic> user) async {
     String decryptedPassword = await decryptKey(user["password"]);
     setUserID(user["uid"] != null ? user["uid"] : "");
     setUserName(user["name"] != null ? user["name"] : "");
@@ -63,7 +63,8 @@ abstract class _UserModel with Store {
     setUserPassword(decryptedPassword);
     setUserCountry(user["country"] != null ? user["country"] : "");
     setUserCity(user["city"] != null ? user["city"] : "");
-    setUserProfilePic(
-        user["profile_picture"] != null ? user["profile_picture"] : profilePicture);
+    setUserProfilePic(user["profile_picture"] != null
+        ? user["profile_picture"]
+        : profilePicture);
   }
 }

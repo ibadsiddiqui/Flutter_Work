@@ -13,7 +13,7 @@ abstract class _EventModel with Store {
   String eventDesc = "";
 
   @observable
-  String eventCoverPhoto = "";
+  String eventCoverPhoto = 'asset/images/placeholder/cover/index.png';
 
   @observable
   List<String> eventVenuePhoto = List();
@@ -54,6 +54,10 @@ abstract class _EventModel with Store {
 
   @action
   void setEventCoverPhoto(String name) => this.eventCoverPhoto = name;
+
+  @action
+  void resetEventCoverPhoto() =>
+      this.eventCoverPhoto = 'asset/images/placeholder/cover/index.png';
 
   @action
   void addEventVenuePhoto(String name) => this.eventVenuePhoto.add(name);

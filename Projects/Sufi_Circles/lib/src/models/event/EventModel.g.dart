@@ -265,6 +265,16 @@ mixin _$EventModel on _EventModel, Store {
   }
 
   @override
+  void resetEventCoverPhoto() {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.resetEventCoverPhoto();
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addEventVenuePhoto(String name) {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
