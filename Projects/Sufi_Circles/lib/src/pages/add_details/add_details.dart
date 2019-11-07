@@ -1,6 +1,8 @@
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_cover_photo.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_desc.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_organiser_name.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
 import 'package:flutter/material.dart';
 
 class AddEventDetails extends StatefulWidget {
@@ -50,6 +52,10 @@ class _AddEventDetailsState extends State<AddEventDetails> {
           scrollDirection: Axis.horizontal,
           // physics: new NeverScrollableScrollPhysics(),
           children: <Widget>[
+            AddEventOrganiserName(
+              title: "Who is the organiser?",
+              inputHint: "Enter name please. (mandatory)",
+            ),
             AddEventNameDetail(
               title: "Tell us your event name.",
               inputHint: "Enter a good name for the event. (mandatory)",
@@ -60,6 +66,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
                   "Enter a brief summary of your event so guests know what to expect.(Optional)",
             ),
             AddEventCoverPhoto(),
+            AddVenuePhotos()
           ],
         ),
       ),
