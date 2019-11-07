@@ -38,7 +38,7 @@ dependencies:
   camera:
   path_provider:
   path:
-  url_launcher:
+  url_launcher: ^5.2.5
 
 dev_dependencies:
   flutter_test:
