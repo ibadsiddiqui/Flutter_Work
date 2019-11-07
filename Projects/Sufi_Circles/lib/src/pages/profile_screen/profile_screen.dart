@@ -71,7 +71,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     UserModel userModel = Provider.of<UserModel>(context);
     final size = MediaQuery.of(context).size;
-    print("asdasd" + userModel.profilePicture);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -101,11 +100,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 centerTitle: true,
                 title: Text("Profile Information",
                     style: TextStyle(fontSize: 20.0, fontFamily: "CreteRound")),
-                background: Consumer<UserModel>(
-                  builder: (_, data, __) => isUploading
-                      ? Loader()
-                      : HeroAnimation(photoPath: data.profilePicture),
-                ),
+                background: isUploading
+                    ? Loader()
+                    : HeroAnimation(photoPath: userModel.profilePicture),
               ),
             ),
           ];
