@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NamedCircle extends StatelessWidget {
-  final String size;
   final String title;
-  const NamedCircle({Key key, this.size = "Large", this.title})
-      : super(key: key);
+  const NamedCircle({Key key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +11,13 @@ class NamedCircle extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         color: Colors.red,
-        width: size == "Large" ? 100 : 50,
-        height: size == "Large" ? 100 : 50,
+        width: 100,
+        height: 100,
         child: Text(
           title,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white,
-            fontSize: size == "Large" ? 30 : 20,
-            fontFamily: "CreteRound",
-          ),
+              color: Colors.white, fontSize: 30, fontFamily: "CreteRound"),
         ),
       ),
     );

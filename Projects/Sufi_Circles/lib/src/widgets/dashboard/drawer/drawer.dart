@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/circles/profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/pages/create_event/create_event.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
@@ -6,7 +7,7 @@ import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
 import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
-import 'package:Sufi_Circles/src/widgets/named_circle/named_circle.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/circles/named_circle.dart';
 import 'package:provider/provider.dart';
 
 class DashboardDrawer extends StatelessWidget {
@@ -17,31 +18,17 @@ class DashboardDrawer extends StatelessWidget {
       child: Container(
         child: Consumer<UserModel>(
           builder: (context, data, _) {
-            bool profilePicFromNetwork = data.profilePicture ==
-                "asset/images/placeholder/cover/index.png";
+            bool isProfilePic = isPicPlaceholder(data.profilePicture);
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.only(top: 30, left: 15, right: 20),
-                  child: profilePicFromNetwork
-                      ? NamedCircle(
-                          size: "Large", title: getFirstChars(data.name))
-                      : (data.profilePicture.isNotEmpty &&
-                              !profilePicFromNetwork
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Container(
-                                height: 100,
-                                width: 100,
-                                child: Image.network(
-                                  data.profilePicture,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            )
-                          : NamedCircle(
-                              size: "Large", title: getFirstChars(data.name))),
+                  child: isProfilePic
+                      ? NamedCircle(title: getFirstChars(data.name))
+                      : (data.profilePicture.isNotEmpty && !isProfilePic
+                          ? RoundProfileImage(image: data.profilePicture)
+                          : NamedCircle(title: getFirstChars(data.name))),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 24, top: 15),
