@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form.dart';
-import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 
 class AddEventDescDetail extends StatefulWidget {
   final String inputHint;
@@ -24,7 +24,7 @@ class _AddEventDescDetailState extends State<AddEventDescDetail> {
 
   @override
   Widget build(BuildContext context) {
-    EventModel eventModel = Provider.of<EventModel>(context);
+    // EventModel eventModel = Provider.of<EventModel>(context);
     return EventDetailForm(
       maxLength: 500,
       maxLine: 15,
