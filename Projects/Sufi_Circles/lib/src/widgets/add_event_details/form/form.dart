@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/multiline_input.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
@@ -31,16 +32,7 @@ class EventDetailForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 100),
-          Text(
-            title,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 22.0,
-              color: Color(0xFF072247),
-              fontFamily: "CreteRound",
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          FormHeading(heading: title),
           MultiLineInput(
             controller: controller,
             onFieldSubmit: onFieldSubmit,

@@ -3,6 +3,7 @@ import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -54,16 +55,7 @@ class _AddEventCoverStatePhoto extends State<AddEventCoverPhoto> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Text(
-                "Add a cover photo for the event.",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 22.0,
-                  color: Color(0xFF072247),
-                  fontFamily: "CreteRound",
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: FormHeading(heading: "Add a cover photo for the event."),
             ),
             Observer(
               builder: (_) => Container(
