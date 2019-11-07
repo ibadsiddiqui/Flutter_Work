@@ -37,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // UserModel userModel = Provider.of<UserModel>(context);
+    UserModel userModel = Provider.of<UserModel>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -58,10 +58,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     fontFamily: "CreteRound",
                   ),
                 ),
-                background: Consumer<UserModel>(
-                  builder: (_, data, __) =>
-                      HeroAnimation(photoPath: data.profilePicture),
-                ),
+                background: HeroAnimation(photoPath: userModel.profilePicture),
               ),
             ),
           ];
