@@ -16,6 +16,10 @@ String getFirstChars(String str) {
   }
 }
 
+bool isPicPlaceholder(String str) {
+  return str == 'asset/images/placeholder/cover/index.png';
+}
+
 Future<String> encryptKey(String password) async {
   final cryptor = new PlatformStringCryptor();
   final String salt = await cryptor.generateSalt();
