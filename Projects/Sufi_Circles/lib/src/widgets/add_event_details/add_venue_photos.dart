@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
-import 'package:Sufi_Circles/src/utils/string_helper.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -34,85 +34,100 @@ class _AddVenuePhotosState extends State<AddVenuePhotos> {
       var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
       if (_image != null) {
         String filePath = _image.path;
-        eventModel.setEventCoverPhoto(filePath);
+        eventModel.addEventVenuePhoto(filePath);
       }
     } else {
       Navigator.of(context).pop();
-      eventModel.setEventCoverPhoto(cameraPath);
+      eventModel.addEventVenuePhoto(cameraPath);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Consumer<EventModel>(
-      builder: (_, data, __) => Container(
-        padding: EdgeInsets.only(left: 2, right: 2),
-        child: Column(
+    return Container(
+      padding: EdgeInsets.only(left: 2, right: 2),
+      child: Consumer<EventModel>(
+        builder: (_, data, __) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Text(
-                "Add a cover photo for the event.",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 22.0,
-                  color: Color(0xFF072247),
-                  fontFamily: "CreteRound",
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: FormHeading(heading: "Add photos for the venue."),
             ),
             Observer(
               builder: (_) => Container(
-                child: isPicPlaceholder(data.eventCoverPhoto)
-                    ? Image.asset(
-                        data.eventCoverPhoto,
-                        height: size.height * 0.7,
-                        // width: 200,
-                        width: size.width,
+                child: data.eventVenuePhoto.isNotEmpty  
+                    ? Image.file(
+                        File(data.eventVenuePhoto[0]),
+                        height: size.height * 0.5,
+                        // width: size.width * 0.9,
                         fit: BoxFit.cover,
                       )
-                    : Image.file(
-                        File(data.eventCoverPhoto),
-                        height: size.height * 0.7,
-                        // width: 200,
-                        width: size.width,
-                        fit: BoxFit.cover,
-                      ),
+                    : Container(),
               ),
             ),
-            Observer(
-              builder: (_) => BottomFABs(
-                toolTip1: isPicPlaceholder(data.eventCoverPhoto)
-                    ? "Add photo image from Photos"
-                    : "Cancel",
-                toolTip2: isPicPlaceholder(data.eventCoverPhoto)
-                    ? "Add photo image from Camera"
-                    : "Confirm",
-                icon1: isPicPlaceholder(data.eventCoverPhoto)
-                    ? Icon(Icons.add_photo_alternate)
-                    : Icon(Icons.close),
-                icon2: isPicPlaceholder(data.eventCoverPhoto)
-                    ? Icon(Icons.camera)
-                    : Icon(Icons.check),
-                onPress1: () => isPicPlaceholder(data.eventCoverPhoto)
-                    ? setImage(context, "media")
-                    : data.resetEventCoverPhoto(),
-                onPress2: () async {
-                  final cameras = await availableCameras();
-                  pushScreen(
-                    context,
-                    screen: TakePictureScreen(
-                      camera: cameras.first,
-                      setImage: (String path) =>
-                          setImage(context, "camera", cameraPath: path),
-                    ),
-                  );
-                },
+            Container(
+              child: Observer(
+                builder: (_) => Column(
+                  children: <Widget>[
+                    data.eventVenuePhoto.isEmpty
+                        ? Image.asset(
+                            data.eventCoverPhoto,
+                            height: size.height * 0.7,
+                            width: size.width,
+                            fit: BoxFit.cover,
+                          )
+                        : Container(
+                            margin: EdgeInsets.only(top: 20.0),
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            alignment: Alignment.center,
+                            height: 75,
+                            child: new ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: data.eventVenuePhoto.length,
+                              itemBuilder: (context, int idx) {
+                                return Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 2),
+                                  child: Image.file(
+                                    File(data.eventVenuePhoto[idx]),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                    data.eventVenuePhoto.isNotEmpty
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(Icons.arrow_left, size: 30),
+                              Text('move'),
+                              Icon(Icons.arrow_right, size: 30)
+                            ],
+                          )
+                        : SizedBox(),
+                  ],
+                ),
               ),
+            ),
+            BottomFABs(
+              toolTip1: "Add photo image from Photos",
+              toolTip2: "Add photo image from Camera",
+              icon1: Icon(Icons.add_photo_alternate),
+              icon2: Icon(Icons.camera),
+              onPress1: () => setImage(context, "media"),
+              onPress2: () async {
+                final cameras = await availableCameras();
+                pushScreen(
+                  context,
+                  screen: TakePictureScreen(
+                    camera: cameras.first,
+                    setImage: (String path) =>
+                        setImage(context, "camera", cameraPath: path),
+                  ),
+                );
+              },
             ),
           ],
         ),
