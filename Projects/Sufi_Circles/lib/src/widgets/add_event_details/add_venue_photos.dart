@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
@@ -50,7 +49,6 @@ class _AddVenuePhotosState extends State<AddVenuePhotos> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.only(left: 2, right: 2),
       child: Consumer<EventModel>(
