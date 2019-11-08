@@ -3,6 +3,8 @@ import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/venue_photos_widgets/image_viewer.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/venue_photos_widgets/photos_list.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ class AddVenuePhotos extends StatefulWidget {
 }
 
 class _AddVenuePhotosState extends State<AddVenuePhotos> {
+  String selectedPhoto = "";
+
   @override
   void initState() {
     super.initState();
@@ -27,6 +31,8 @@ class _AddVenuePhotosState extends State<AddVenuePhotos> {
   void dispose() {
     super.dispose();
   }
+
+  selectPhoto(String path) => this.setState(() => selectedPhoto = path);
 
   void setImage(context, String from, {String cameraPath = ""}) async {
     EventModel eventModel = Provider.of<EventModel>(context);
@@ -57,46 +63,19 @@ class _AddVenuePhotosState extends State<AddVenuePhotos> {
               child: FormHeading(heading: "Add photos for the venue."),
             ),
             Observer(
-              builder: (_) => Container(
-                child: data.eventVenuePhoto.isNotEmpty  
-                    ? Image.file(
-                        File(data.eventVenuePhoto[0]),
-                        height: size.height * 0.5,
-                        // width: size.width * 0.9,
-                        fit: BoxFit.cover,
-                      )
-                    : Container(),
-              ),
+              builder: (_) => ImageViewer(imagePath: selectedPhoto),
             ),
             Container(
               child: Observer(
                 builder: (_) => Column(
                   children: <Widget>[
-                    data.eventVenuePhoto.isEmpty
-                        ? Image.asset(
-                            data.eventCoverPhoto,
-                            height: size.height * 0.7,
-                            width: size.width,
-                            fit: BoxFit.cover,
+                    data.eventVenuePhoto.isNotEmpty
+                        ? PhotosListView(
+                            photos: data.eventVenuePhoto,
+                            selectedPhoto: selectedPhoto,
+                            selectPhoto: selectPhoto,
                           )
-                        : Container(
-                            margin: EdgeInsets.only(top: 20.0),
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            alignment: Alignment.center,
-                            height: 75,
-                            child: new ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: data.eventVenuePhoto.length,
-                              itemBuilder: (context, int idx) {
-                                return Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2),
-                                  child: Image.file(
-                                    File(data.eventVenuePhoto[idx]),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                        : Container(),
                     data.eventVenuePhoto.isNotEmpty
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
