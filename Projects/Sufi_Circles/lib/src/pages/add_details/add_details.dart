@@ -1,5 +1,6 @@
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_cover_photo.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_desc.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_dates.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_organiser_name.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
@@ -63,10 +64,11 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             AddEventDescDetail(
               title: "Describe your event.",
               inputHint:
-                  "Enter a brief summary of your event so guests know what to expect.(Optional)",
+                  "Enter a brief summary of your event so guests know what to expect. (optional)",
             ),
             AddEventCoverPhoto(),
-            AddVenuePhotos()
+            AddVenuePhotos(),
+            AddEventDate(),
           ],
         ),
       ),
