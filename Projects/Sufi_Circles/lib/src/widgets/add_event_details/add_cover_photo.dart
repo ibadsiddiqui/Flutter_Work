@@ -55,22 +55,21 @@ class _AddEventCoverStatePhoto extends State<AddEventCoverPhoto> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: FormHeading(heading: "Add a cover photo for the event."),
+              child: FormHeading(
+                  heading: "Add a cover photo for the event.(optional)"),
             ),
             Observer(
               builder: (_) => Container(
                 child: isPicPlaceholder(data.eventCoverPhoto)
                     ? Image.asset(
                         data.eventCoverPhoto,
-                        height: size.height * 0.7,
-                        // width: 200,
+                        height: size.height * 0.64,
                         width: size.width,
                         fit: BoxFit.cover,
                       )
                     : Image.file(
                         File(data.eventCoverPhoto),
-                        height: size.height * 0.7,
-                        // width: 200,
+                        height: size.height * 0.64,
                         width: size.width,
                         fit: BoxFit.cover,
                       ),

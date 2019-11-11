@@ -2,6 +2,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/add_cover_photo.dart'
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_dates.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_organiser_name.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_time.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,6 @@ class _AddEventDetailsState extends State<AddEventDetails> {
         child: PageView(
           controller: pageController,
           scrollDirection: Axis.horizontal,
-          // physics: new NeverScrollableScrollPhysics(),
           children: <Widget>[
             AddEventOrganiserName(
               title: "Who is the organiser?",
@@ -69,6 +69,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             AddEventCoverPhoto(),
             AddVenuePhotos(),
             AddEventDate(),
+            AddEventTime(),
           ],
         ),
       ),
