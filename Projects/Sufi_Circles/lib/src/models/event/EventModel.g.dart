@@ -293,4 +293,24 @@ mixin _$EventModel on _EventModel, Store {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void setEventFromDate(String date) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventFromDate(date);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventToDate(String date) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventToDate(date);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
 }

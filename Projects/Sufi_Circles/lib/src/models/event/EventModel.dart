@@ -19,16 +19,16 @@ abstract class _EventModel with Store {
   ObservableList<String> eventVenuePhoto = ObservableList<String>();
 
   @observable
-  Observable<String> dateFrom = Observable(DateTime.now().toLocal().toString());
+  Observable<String> dateFrom = Observable<String>("");
 
   @observable
-  Observable<String> dateTo = Observable(DateTime.now().toLocal().toString());
+  Observable<String> dateTo = Observable<String>("");
 
   @observable
-  Observable<String> timeFrom = Observable(DateTime.now().toLocal().toString());
+  Observable<String> timeFrom = Observable<String>("");
 
   @observable
-  Observable<String> timeTo = Observable(DateTime.now().toLocal().toString());
+  Observable<String> timeTo = Observable<String>("");
 
   @observable
   Map<String, dynamic> addressDetails = {
@@ -65,6 +65,13 @@ abstract class _EventModel with Store {
   @action
   void resetEventVenuePhoto() =>
       this.eventVenuePhoto = ObservableList<String>();
+
+  @action
+  void setEventFromDate(String date) =>
+      this.dateFrom = Observable<String>(date);
+
+  @action
+  void setEventToDate(String date) => this.dateTo = Observable<String>(date);
 
   @computed
   get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);
