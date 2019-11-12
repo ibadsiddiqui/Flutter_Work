@@ -13,12 +13,11 @@ class AddEventTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.3),
       padding: EdgeInsets.only(left: 2, right: 2),
       child: Consumer<EventModel>(
         builder: (_, data, __) {
           return Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
@@ -26,7 +25,7 @@ class AddEventTime extends StatelessWidget {
                 child: FormHeading(heading: "Add time of the event."),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 18, top: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10.0),
                 child: Text(
                   "At what time will it start?",
                   style: TextStyle(fontSize: 18.0, fontFamily: "CreteRound"),
@@ -46,8 +45,9 @@ class AddEventTime extends StatelessWidget {
                           locale: LocaleType.en,
                         )),
               ),
+              SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 18, top: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10.0),
                 child: Text(
                   "At what time will it end?",
                   style: TextStyle(fontSize: 18.0, fontFamily: "CreteRound"),
@@ -67,6 +67,7 @@ class AddEventTime extends StatelessWidget {
                           locale: LocaleType.en,
                         )),
               ),
+              SizedBox(height: 20),
               RoundClippedButton(isMain: false, onPress: () {}),
             ],
           );

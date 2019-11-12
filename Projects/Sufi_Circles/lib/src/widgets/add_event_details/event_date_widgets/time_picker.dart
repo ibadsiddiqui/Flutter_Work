@@ -10,7 +10,7 @@ class TimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         elevation: 4.0,
@@ -53,7 +53,7 @@ class TimePicker extends StatelessWidget {
             ],
           ),
         ),
-      color: Colors.white,
+        color: Colors.white,
       ),
     );
   }
