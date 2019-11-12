@@ -184,14 +184,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$locationDetailsAtom = Atom(name: '_EventModel.locationDetails');
 
   @override
-  Map<String, dynamic> get locationDetails {
+  Observable<Map<String, dynamic>> get locationDetails {
     _$locationDetailsAtom.context.enforceReadPolicy(_$locationDetailsAtom);
     _$locationDetailsAtom.reportObserved();
     return super.locationDetails;
   }
 
   @override
-  set locationDetails(Map<String, dynamic> value) {
+  set locationDetails(Observable<Map<String, dynamic>> value) {
     _$locationDetailsAtom.context.conditionallyRunInAction(() {
       super.locationDetails = value;
       _$locationDetailsAtom.reportChanged();
@@ -201,14 +201,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$organiserDetailsAtom = Atom(name: '_EventModel.organiserDetails');
 
   @override
-  Map<String, dynamic> get organiserDetails {
+  Observable<Map<String, dynamic>> get organiserDetails {
     _$organiserDetailsAtom.context.enforceReadPolicy(_$organiserDetailsAtom);
     _$organiserDetailsAtom.reportObserved();
     return super.organiserDetails;
   }
 
   @override
-  set organiserDetails(Map<String, dynamic> value) {
+  set organiserDetails(Observable<Map<String, dynamic>> value) {
     _$organiserDetailsAtom.context.conditionallyRunInAction(() {
       super.organiserDetails = value;
       _$organiserDetailsAtom.reportChanged();

@@ -27,14 +27,14 @@ abstract class _EventModel with Store {
   @observable
   Observable<Map<String, dynamic>> startTime =
       Observable<Map<String, dynamic>>({
-    "hour": DateTime.now().hour,
-    "minute": DateTime.now().minute,
+    "hour": 0,
+    "minute": 0,
   });
 
   @observable
   Observable<Map<String, dynamic>> endTime = Observable<Map<String, dynamic>>({
-    "hour": DateTime.now().hour,
-    "minute": DateTime.now().minute,
+    "hour": 0,
+    "minute": 0,
   });
 
   @observable
@@ -45,10 +45,10 @@ abstract class _EventModel with Store {
   };
 
   @observable
-  Map<String, dynamic> locationDetails = {};
+  Observable<Map<String, dynamic>> locationDetails = Observable<Map<String, dynamic>>({});
 
   @observable
-  Map<String, dynamic> organiserDetails = {};
+  Observable<Map<String, dynamic>> organiserDetails = Observable<Map<String, dynamic>>({});
 
   @observable
   Map<String, String> additionalLinks = {};
