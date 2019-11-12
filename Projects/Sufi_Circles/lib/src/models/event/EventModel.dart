@@ -25,10 +25,17 @@ abstract class _EventModel with Store {
   Observable<String> dateTo = Observable<String>("");
 
   @observable
-  Observable<String> timeFrom = Observable<String>("");
+  Observable<Map<String, dynamic>> startTime =
+      Observable<Map<String, dynamic>>({
+    "hour": DateTime.now().hour,
+    "minute": DateTime.now().minute,
+  });
 
   @observable
-  Observable<String> timeTo = Observable<String>("");
+  Observable<Map<String, dynamic>> endTime = Observable<Map<String, dynamic>>({
+    "hour": DateTime.now().hour,
+    "minute": DateTime.now().minute,
+  });
 
   @observable
   Map<String, dynamic> addressDetails = {
@@ -72,6 +79,20 @@ abstract class _EventModel with Store {
 
   @action
   void setEventToDate(String date) => this.dateTo = Observable<String>(date);
+
+  @action
+  void setEventStartTime(int hour, int minute) {
+    this.startTime.value = {
+      "hour": hour,
+      "minute": minute,
+    };
+  }
+
+  @action
+  void setEventEndTime(int hour, int minute) => this.endTime.value = {
+        "hour": hour,
+        "minute": minute,
+      };
 
   @computed
   get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);

@@ -130,38 +130,38 @@ mixin _$EventModel on _EventModel, Store {
     }, _$dateToAtom, name: '${_$dateToAtom.name}_set');
   }
 
-  final _$timeFromAtom = Atom(name: '_EventModel.timeFrom');
+  final _$startTimeAtom = Atom(name: '_EventModel.startTime');
 
   @override
-  Observable<String> get timeFrom {
-    _$timeFromAtom.context.enforceReadPolicy(_$timeFromAtom);
-    _$timeFromAtom.reportObserved();
-    return super.timeFrom;
+  Observable<Map<String, dynamic>> get startTime {
+    _$startTimeAtom.context.enforceReadPolicy(_$startTimeAtom);
+    _$startTimeAtom.reportObserved();
+    return super.startTime;
   }
 
   @override
-  set timeFrom(Observable<String> value) {
-    _$timeFromAtom.context.conditionallyRunInAction(() {
-      super.timeFrom = value;
-      _$timeFromAtom.reportChanged();
-    }, _$timeFromAtom, name: '${_$timeFromAtom.name}_set');
+  set startTime(Observable<Map<String, dynamic>> value) {
+    _$startTimeAtom.context.conditionallyRunInAction(() {
+      super.startTime = value;
+      _$startTimeAtom.reportChanged();
+    }, _$startTimeAtom, name: '${_$startTimeAtom.name}_set');
   }
 
-  final _$timeToAtom = Atom(name: '_EventModel.timeTo');
+  final _$endTimeAtom = Atom(name: '_EventModel.endTime');
 
   @override
-  Observable<String> get timeTo {
-    _$timeToAtom.context.enforceReadPolicy(_$timeToAtom);
-    _$timeToAtom.reportObserved();
-    return super.timeTo;
+  Observable<Map<String, dynamic>> get endTime {
+    _$endTimeAtom.context.enforceReadPolicy(_$endTimeAtom);
+    _$endTimeAtom.reportObserved();
+    return super.endTime;
   }
 
   @override
-  set timeTo(Observable<String> value) {
-    _$timeToAtom.context.conditionallyRunInAction(() {
-      super.timeTo = value;
-      _$timeToAtom.reportChanged();
-    }, _$timeToAtom, name: '${_$timeToAtom.name}_set');
+  set endTime(Observable<Map<String, dynamic>> value) {
+    _$endTimeAtom.context.conditionallyRunInAction(() {
+      super.endTime = value;
+      _$endTimeAtom.reportChanged();
+    }, _$endTimeAtom, name: '${_$endTimeAtom.name}_set');
   }
 
   final _$addressDetailsAtom = Atom(name: '_EventModel.addressDetails');
@@ -309,6 +309,26 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.setEventToDate(date);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventStartTime(int hour, int minute) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventStartTime(hour, minute);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventEndTime(int hour, int minute) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventEndTime(hour, minute);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
