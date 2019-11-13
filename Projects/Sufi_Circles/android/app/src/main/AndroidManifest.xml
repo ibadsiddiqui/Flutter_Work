@@ -10,6 +10,11 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Sufi Circles"
         android:icon="@mipmap/icon">
+        <!-- API - Key =>  AIzaSyBDr4FQWfKStucaqrUhmjcnJJHqWt3rO0g -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBDr4FQWfKStucaqrUhmjcnJJHqWt3rO0g"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
