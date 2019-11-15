@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/description.dart';
 import 'package:Sufi_Circles/src/widgets/onboard/heading.dart';
+import 'package:flutter/material.dart';
 
 class OnboardPageView extends StatelessWidget {
   const OnboardPageView(
@@ -35,12 +35,6 @@ class OnboardPageView extends StatelessWidget {
               children: <Widget>[
                 OnBoardHeading(title: title),
                 OnBoardDescription(desc: desc),
-                Divider(
-                    height: title == "FEATURES"
-                        ? size.width * 0.15
-                        : title == "STARTUP"
-                            ? size.width * 0.2
-                            : size.width * 0.25),
                 Container(
                   alignment: Alignment.bottomRight,
                   child: FlatButton(

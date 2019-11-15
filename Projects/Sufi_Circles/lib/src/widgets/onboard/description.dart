@@ -7,8 +7,9 @@ class OnBoardDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: padding.flipped,
       child: Text(
         desc,
         style: TextStyle(

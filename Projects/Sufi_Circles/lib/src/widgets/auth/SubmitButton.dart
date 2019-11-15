@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
+import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
@@ -18,7 +18,7 @@ class SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 30.0),
+      margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 15.0),
       alignment: Alignment.center,
       child: new Row(
         children: <Widget>[

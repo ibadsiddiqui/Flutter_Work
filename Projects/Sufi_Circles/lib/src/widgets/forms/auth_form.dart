@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AuthInput.dart';
 import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
-import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthForm extends StatefulWidget {
   final Function onPress;
@@ -57,7 +57,6 @@ class _AuthFormState extends State<AuthForm> {
             color: Colors.white,
           ),
         ),
-        const SizedBox(height: 30),
         SubmitButton(
           title: widget.title,
           onPressed: () => widget.onPress(resetPass: resetPassword),

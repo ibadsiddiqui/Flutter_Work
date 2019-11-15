@@ -45,10 +45,12 @@ abstract class _EventModel with Store {
   };
 
   @observable
-  Observable<Map<String, dynamic>> locationDetails = Observable<Map<String, dynamic>>({});
+  Observable<Map<String, dynamic>> locationDetails =
+      Observable<Map<String, dynamic>>({});
 
   @observable
-  Observable<Map<String, dynamic>> organiserDetails = Observable<Map<String, dynamic>>({});
+  Observable<Map<String, dynamic>> organiserDetails =
+      Observable<Map<String, dynamic>>({});
 
   @observable
   Map<String, String> additionalLinks = {};
@@ -74,11 +76,10 @@ abstract class _EventModel with Store {
       this.eventVenuePhoto = ObservableList<String>();
 
   @action
-  void setEventFromDate(String date) =>
-      this.dateFrom = Observable<String>(date);
+  void setEventFromDate(String date) => this.dateFrom.value = date;
 
   @action
-  void setEventToDate(String date) => this.dateTo = Observable<String>(date);
+  void setEventToDate(String date) => this.dateTo.value = date;
 
   @action
   void setEventStartTime(int hour, int minute) {

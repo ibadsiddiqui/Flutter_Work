@@ -1,5 +1,5 @@
 import 'package:Sufi_Circles/src/controllers/validate.dart';
-import 'package:flutter/material.dart';
+import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
@@ -7,7 +7,7 @@ import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
 import 'package:Sufi_Circles/src/widgets/auth/ForgotPassword.dart';
 import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
-import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
+import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -48,14 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return new WillPopScope(
       onWillPop: () async => false,
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
         body: new Container(
           decoration: buildAuthBackground(),
-          padding: EdgeInsets.only(top: 75),
-          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.only(top: size.height * 0.075),
+          height: size.height,
           child: new GestureDetector(
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: new Column(
