@@ -1,3 +1,5 @@
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/map_view/MapView.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +32,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0)),
               elevation: 4.0,
-              onPressed: () {},
+              onPressed: () => pushScreen(context, screen: MapView()),
               child: Container(
                 alignment: Alignment.center,
                 height: 50.0,
@@ -39,7 +41,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                   children: <Widget>[
                     Icon(Icons.map, size: 20.0, color: Color(0xFF072247)),
                     Text(
-                      " Add using map ",
+                      " Add using map",
                       style: TextStyle(
                           color: Color(0xFF072247),
                           fontWeight: FontWeight.bold,
