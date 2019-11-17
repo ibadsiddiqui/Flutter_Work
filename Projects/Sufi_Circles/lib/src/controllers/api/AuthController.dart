@@ -1,4 +1,4 @@
-import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
+import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/services/api/AuthServices.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
@@ -12,7 +12,7 @@ import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 class AuthController extends ChangeNotifier {
   AuthService _authService = new AuthService();
   ShowPopUp _showPopUp = ShowPopUp();
-  DBController _dbController = DBController();
+  UserDBController _UserDBController = UserDBController();
   ShareUtils utils = ShareUtils();
 
   Future<void> userSignIn(context,
@@ -21,7 +21,7 @@ class AuthController extends ChangeNotifier {
     try {
       FirebaseUser _user = await _authService.userSignIn(authModel.authDetails);
       await utils.setUserTokenDetails(_user);
-      await _dbController.updateUserLastLogin(_user);
+      await _UserDBController.updateUserLastLogin(_user);
       _showPopUp.showSuccessFulSigninPopUp(context, _user.uid);
       toggle();
       resetPassword();
@@ -38,7 +38,7 @@ class AuthController extends ChangeNotifier {
     AuthModel authModel = Provider.of<AuthModel>(context);
     try {
       FirebaseUser user = await _authService.createUser(authModel.authDetails);
-      await _dbController.createUserInDB(user, authModel);
+      await _UserDBController.createUserInDB(user, authModel);
       toggle();
       _showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {

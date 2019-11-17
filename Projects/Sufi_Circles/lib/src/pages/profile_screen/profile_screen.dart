@@ -1,5 +1,5 @@
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
-import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
+import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/services/storage/ImageStorage.dart';
@@ -19,7 +19,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  DBController dbController = DBController();
+  UserDBController userDBController = UserDBController();
   AuthController authController = AuthController();
   ImageStorage imageStorage = ImageStorage();
 
@@ -117,7 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onSubmit: (String name) async {
                   userModel.setUserName(name);
                   toggleNameEdit();
-                  await dbController.updateUserName(context);
+                  await userDBController.updateUserName(context);
                 }),
             UserDetailItem(
               isEditable: isEmailEdit,
@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onSubmit: (String email) async {
                 userModel.setUserEmail(email);
                 toggleEmailEdit();
-                await dbController.updateUserEmail(context);
+                await userDBController.updateUserEmail(context);
                 await authController.updateFirebaseUserEmail(email, context);
               },
             ),
@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onSubmit: (String country) async {
                 userModel.setUserCountry(country);
                 toggleCountryEdit();
-                await dbController.updateUserCountry(context);
+                await userDBController.updateUserCountry(context);
               },
             ),
             UserDetailItem(
@@ -150,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onSubmit: (String city) async {
                 userModel.setUserCity(city);
                 toggleCityEdit();
-                await dbController.updateUserCity(context);
+                await userDBController.updateUserCity(context);
               },
             ),
           ],

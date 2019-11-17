@@ -5,7 +5,7 @@ import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/services/db/UserDBServices.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 
-class DBController {
+class UserDBController {
   UserDBServices _userDBServices = UserDBServices();
 
   createUserInDB(FirebaseUser user, AuthModel authModel) async {

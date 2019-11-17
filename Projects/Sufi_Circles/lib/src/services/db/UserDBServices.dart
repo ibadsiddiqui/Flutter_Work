@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserDBServices {
-  CollectionReference userDB = Firestore.instance.collection("user");
+  CollectionReference userDB = Firestore.instance.collection("sufi_circles");
   Future<void> createUserInDB(Map<String, dynamic> user) async {
     try {
-      return (await userDB.document(user["uid"]).setData(user));
+      return (await userDB.firestore.collection("user").document(user["uid"]).setData(user));
     } catch (e) {
       throw e;
     }
@@ -13,7 +13,7 @@ class UserDBServices {
 
   Future<void> updateUserLastLogin(Map<String, dynamic> user) async {
     try {
-      return (await userDB
+      return (await userDB.firestore.collection("user")
           .document(user["uid"])
           .updateData({"lastSignInTime": user["lastSignInTime"]}));
     } catch (e) {
@@ -23,7 +23,7 @@ class UserDBServices {
 
   Future<Map<String, dynamic>> getUserDetailsUsingID(String userID) async {
     try {
-      return (await userDB.document(userID).get()).data;
+      return (await userDB.firestore.collection("user").document(userID).get()).data;
     } catch (e) {
       throw e;
     }
@@ -31,7 +31,7 @@ class UserDBServices {
 
   Future<void> updateUserName(String uid, String name) async {
     try {
-      return (await userDB.document(uid).updateData({"name": name}));
+      return (await userDB.firestore.collection("user").document(uid).updateData({"name": name}));
     } catch (e) {
       throw e;
     }
@@ -39,7 +39,7 @@ class UserDBServices {
 
   Future<void> updateUserEmail(String uid, String email) async {
     try {
-      return (await userDB.document(uid).updateData({"email": email}));
+      return (await userDB.firestore.collection("user").document(uid).updateData({"email": email}));
     } catch (e) {
       throw e;
     }
@@ -47,7 +47,7 @@ class UserDBServices {
 
   Future<void> updateUserCountry(String uid, String country) async {
     try {
-      return (await userDB.document(uid).updateData({"country": country}));
+      return (await userDB.firestore.collection("user").document(uid).updateData({"country": country}));
     } catch (e) {
       throw e;
     }
@@ -55,7 +55,7 @@ class UserDBServices {
 
   Future<void> updateUserCity(String uid, String city) async {
     try {
-      return (await userDB.document(uid).updateData({"city": city}));
+      return (await userDB.firestore.collection("user").document(uid).updateData({"city": city}));
     } catch (e) {
       throw e;
     }
@@ -63,7 +63,7 @@ class UserDBServices {
 
   Future<void> updateUserProfilePicture(String uid, String url) async {
     try {
-      return (await userDB.document(uid).updateData({"profile_picture": url}));
+      return (await userDB.firestore.collection("user").document(uid).updateData({"profile_picture": url}));
     } catch (e) {
       throw e;
     }

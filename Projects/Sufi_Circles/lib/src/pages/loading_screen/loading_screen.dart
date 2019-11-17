@@ -1,7 +1,7 @@
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:Sufi_Circles/src/controllers/db/DB_Controller.dart';
+import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  DBController _dbController = DBController();
+  UserDBController _UserDBController = UserDBController();
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getUserDetails() async {
-    await _dbController.setUserDetailsUsingID(context, widget.uid);
+    await _UserDBController.setUserDetailsUsingID(context, widget.uid);
     TimeNavigation.navigate(context, DashboardScreen(), second: 4);
   }
 }
