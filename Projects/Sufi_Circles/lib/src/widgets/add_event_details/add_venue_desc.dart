@@ -41,6 +41,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
               ),
             ),
             RaisedButton(
+              color: Colors.white,
               elevation: 4.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0)),
