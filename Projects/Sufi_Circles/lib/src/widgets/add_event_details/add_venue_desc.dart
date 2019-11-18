@@ -1,9 +1,12 @@
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/map_view/MapView.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/picker_text.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 
 class AddVenueDesc extends StatefulWidget {
   @override
@@ -13,7 +16,15 @@ class AddVenueDesc extends StatefulWidget {
 class _AddVenueDescState extends State<AddVenueDesc> {
   String selectionType = "none";
   String dropdownValue = "One";
+
+  void setVenueDetails(Position position, Placemark placemark) {
+    EventModel eventModel = Provider.of<EventModel>(context);
+    eventModel.setEventVenueDetails(position, placemark);
+    Navigator.of(context).pop();
+  }
+
   Widget buildSelectionForVeneue(context, size) {
+    final size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(top: size.width * 0.3),
       child: Padding(
@@ -30,14 +41,16 @@ class _AddVenueDescState extends State<AddVenueDesc> {
               ),
             ),
             RaisedButton(
+              elevation: 4.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0)),
-              elevation: 4.0,
-              color: Colors.white,
-              onPressed: () => pushScreen(context, screen: MapView()),
+              onPressed: () => pushScreen(context,
+                  screen: MapView(
+                      onCancel: () => Navigator.of(context).pop(),
+                      onSubmit: (pos, place) => setVenueDetails(pos, place))),
               child: Container(
-                alignment: Alignment.center,
                 height: 50.0,
+                alignment: Alignment.center,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -133,7 +146,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                   isExpanded: true,
                   icon: Icon(Icons.arrow_downward),
                   // iconSize: 24,
-                    style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black),
                   underline: Container(
                     height: 2,
                     color: Colors.grey,
@@ -158,7 +171,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric( horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 alignment: Alignment.center,
                 child: DropdownButton<String>(
                   value: dropdownValue,

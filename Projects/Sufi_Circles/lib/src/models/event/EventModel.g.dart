@@ -333,4 +333,14 @@ mixin _$EventModel on _EventModel, Store {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void setEventVenueDetails(Position position, Placemark placemark) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventVenueDetails(position, placemark);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
 }
