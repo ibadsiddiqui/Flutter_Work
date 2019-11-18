@@ -1,6 +1,7 @@
+import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 // TODO: Add loader
 // TODO : add current location name on pin
@@ -32,7 +33,8 @@ class _MapViewState extends State<MapView> {
     setState(() {
       currentLocation = position;
     });
-    List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(52.2165157, 6.9437819);
+    List<Placemark> placemark =
+        await Geolocator().placemarkFromCoordinates(52.2165157, 6.9437819);
     print(placemark);
   }
 
@@ -45,7 +47,6 @@ class _MapViewState extends State<MapView> {
           title: 'Historical City',
           snippet: '5 Star Rating',
         ),
-
         icon: BitmapDescriptor.defaultMarker,
       ));
     });
@@ -55,6 +56,17 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: BottomFABs(
+          toolTip1: "Cancel",
+          icon1: Icon(Icons.close),
+          onPress1: () {},
+          // imagePath == "" ? Navigator.of(context).pop() : resetTakePhoto(),
+          toolTip2: "Set location",
+          icon2: Icon(Icons.check),
+          onPress2: () {}
+          // imagePath == "" ? takePhoto() : widget.setImage(imagePath),
+          ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
