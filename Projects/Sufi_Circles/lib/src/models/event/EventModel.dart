@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 
 part 'EventModel.g.dart';
@@ -94,6 +95,24 @@ abstract class _EventModel with Store {
         "hour": hour,
         "minute": minute,
       };
+
+  @action
+  void setEventVenueDetails(Position position, Placemark placemark) {
+    this.locationDetails.value = {
+      "lat": position.latitude,
+      "long": position.longitude,
+      "name": placemark.name.isEmpty ? "" : placemark.name,
+      "area": placemark.subLocality.isEmpty ? "" : placemark.subLocality,
+      "road": placemark.thoroughfare.isEmpty ? "" : placemark.thoroughfare,
+      "city": placemark.subAdministrativeArea.isEmpty
+          ? ""
+          : placemark.subAdministrativeArea,
+      "province": placemark.subAdministrativeArea.isEmpty
+          ? ""
+          : placemark.subAdministrativeArea,
+      "country": placemark.subAdministrativeArea,
+    };
+  }
 
   @computed
   get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);
