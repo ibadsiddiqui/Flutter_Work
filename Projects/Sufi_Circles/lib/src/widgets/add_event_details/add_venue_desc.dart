@@ -1,7 +1,10 @@
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/map_view/MapView.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 
 class AddVenueDesc extends StatefulWidget {
   @override
@@ -9,10 +12,15 @@ class AddVenueDesc extends StatefulWidget {
 }
 
 class _AddVenueDescState extends State<AddVenueDesc> {
+  setVenueDetails(Position position, Placemark placemark) {
+    EventModel eventModel = Provider.of<EventModel>(context);
+    eventModel.setEventVenueDetails(position, placemark);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // EventModel eventModel = Provider.of<EventModel>(context);
     return Container(
       margin: EdgeInsets.only(top: size.width * 0.3),
       child: Padding(
@@ -29,13 +37,16 @@ class _AddVenueDescState extends State<AddVenueDesc> {
               ),
             ),
             RaisedButton(
+              elevation: 4.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0)),
-              elevation: 4.0,
-              onPressed: () => pushScreen(context, screen: MapView()),
+              onPressed: () => pushScreen(context,
+                  screen: MapView(
+                      onCancel: () => Navigator.of(context).pop(),
+                      onSubmit: (pos, place) => setVenueDetails(pos, place))),
               child: Container(
-                alignment: Alignment.center,
                 height: 50.0,
+                alignment: Alignment.center,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
