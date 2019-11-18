@@ -1,23 +1,35 @@
+import 'package:Sufi_Circles/src/services/maps/MapSerivce.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
+import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
+import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-// TODO: Add loader
-// TODO : add current location name on pin
-// TODO : make PIN draggable
-// TODO : Pick PIN location on PIN drop
-// TODO : Add dont button to select current location
+// TODO: Add loader                         -Done
+// TODO : add current location name on pin  -Done
+// TODO : make PIN draggable                -Done
+// TODO : Pick PIN location on PIN drop     -Done
+// TODO : Add dont button to select current location -Done
 
 class MapView extends StatefulWidget {
+  final Function onSubmit;
+  final Function onCancel;
+
+  MapView({Key key, this.onSubmit, this.onCancel}) : super(key: key);
+
   @override
   _MapViewState createState() => _MapViewState();
 }
 
 class _MapViewState extends State<MapView> {
-  GoogleMapController myMapController;
+  MapServices _mapServices = MapServices();
   final Set<Marker> _markers = new Set();
-  Position currentLocation;
+  bool _isPickingLocation = false;
+
+  GoogleMapController myMapController;
+  Placemark _placemark;
+  Position _currentLocation;
 
   @override
   void initState() {
@@ -27,25 +39,47 @@ class _MapViewState extends State<MapView> {
   @protected
   @mustCallSuper
   void didChangeDependencies() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print(position);
-    setState(() {
-      currentLocation = position;
+    this.setState(() => _isPickingLocation = true);
+    Position position = await _mapServices.getCurrentLocation();
+    await setPlaceMarks(position.latitude, position.longitude);
+
+    this.setState(() {
+      _isPickingLocation = false;
+      _currentLocation = position;
     });
-    List<Placemark> placemark =
-        await Geolocator().placemarkFromCoordinates(52.2165157, 6.9437819);
-    print(placemark);
+  }
+
+  setPlaceMarks(double lat, double long, {dragOn = false}) async {
+    List<Placemark> placemarks =
+        await _mapServices.getCurrentPlacemark(lat, long);
+    if (dragOn)
+      this.setState(() {
+        _placemark = placemarks[0];
+        _currentLocation = placemarks[0].position;
+      });
+    else
+      this.setState(() => _placemark = placemarks[0]);
   }
 
   Set<Marker> myMarker() {
     setState(() {
       _markers.add(Marker(
-        markerId: MarkerId(currentLocation.toString()),
-        position: LatLng(currentLocation.latitude, currentLocation.longitude),
+        draggable: true,
+        onDragEnd: (latlong) =>
+            setPlaceMarks(latlong.latitude, latlong.longitude, dragOn: true),
+        markerId: MarkerId("EventLocation"),
+        position: LatLng(_currentLocation.latitude, _currentLocation.longitude),
         infoWindow: InfoWindow(
-          title: 'Historical City',
-          snippet: '5 Star Rating',
+          title: _placemark.name,
+          snippet: _placemark.subLocality +
+              " " +
+              _placemark.thoroughfare +
+              " " +
+              _placemark.subAdministrativeArea +
+              " " +
+              _placemark.administrativeArea +
+              " " +
+              _placemark.country,
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
@@ -57,38 +91,49 @@ class _MapViewState extends State<MapView> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: BottomFABs(
-          toolTip1: "Cancel",
-          icon1: Icon(Icons.close),
-          onPress1: () {},
-          // imagePath == "" ? Navigator.of(context).pop() : resetTakePhoto(),
-          toolTip2: "Set location",
-          icon2: Icon(Icons.check),
-          onPress2: () {}
-          // imagePath == "" ? takePhoto() : widget.setImage(imagePath),
-          ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target:
-                    LatLng(currentLocation.latitude, currentLocation.longitude),
-                // zoom: 10.0,
-              ),
-              markers: this.myMarker(),
-              mapType: MapType.normal,
-              zoomGesturesEnabled: true,
-              onMapCreated: (controller) {
-                setState(() {
-                  myMapController = controller;
-                });
-              },
+      floatingActionButton: _isPickingLocation
+          ? null
+          : BottomFABs(
+              toolTip1: "Cancel",
+              icon1: Icon(Icons.close),
+              onPress1: () => widget.onCancel(),
+              toolTip2: "Set location",
+              icon2: Icon(Icons.check),
+              onPress2: () => widget.onSubmit(_currentLocation, _placemark),
             ),
-          ),
-        ],
-      ),
+      body: _isPickingLocation
+          ? Container(
+              alignment: Alignment.center,
+              child: Loader(
+                dotOneColor: Colors.redAccent,
+                dotTwoColor: Colors.blueAccent,
+                dotThreeColor: Colors.greenAccent,
+                dotType: DotType.circle,
+                dotIcon: Icon(Icons.adjust),
+                duration: Duration(milliseconds: 1000),
+              ))
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: LatLng(_currentLocation.latitude,
+                          _currentLocation.longitude),
+                      // zoom: 10.0,
+                    ),
+                    markers: this.myMarker(),
+                    mapType: MapType.normal,
+                    zoomGesturesEnabled: true,
+                    onMapCreated: (controller) {
+                      setState(() {
+                        myMapController = controller;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
