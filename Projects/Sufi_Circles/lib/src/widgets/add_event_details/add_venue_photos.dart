@@ -58,11 +58,10 @@ class _AddVenuePhotosState extends State<AddVenuePhotos> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: FormHeading(heading: "Add photos for the venue. (optional)"),
+              child:
+                  FormHeading(heading: "Add photos for the venue. (optional)"),
             ),
-            Observer(
-              builder: (_) => ImageViewer(imagePath: selectedPhoto),
-            ),
+            ImageViewer(imagePath: selectedPhoto),
             Container(
               child: Observer(
                 builder: (_) => Column(
