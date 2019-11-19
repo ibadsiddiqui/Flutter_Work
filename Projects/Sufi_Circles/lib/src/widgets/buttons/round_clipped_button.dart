@@ -4,9 +4,10 @@ class RoundClippedButton extends StatelessWidget {
   final String title;
   final Function onPress;
   final bool isMain;
+  final Widget child;
 
-  const RoundClippedButton(
-      {Key key, this.title="", this.onPress, this.isMain = true})
+  RoundClippedButton(
+      {Key key, this.title = "", this.onPress, this.isMain = true, this.child})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -14,13 +15,7 @@ class RoundClippedButton extends StatelessWidget {
       return ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: FlatButton(
-          color: Color(0xFFFC3C3C),
-          onPressed: onPress,
-          child: Text(
-            title,
-            style: TextStyle(color: Colors.white, fontFamily: "CreteRound"),
-          ),
-        ),
+            color: Color(0xFFFC3C3C), child: child, onPressed: onPress),
       );
     } else {
       return Container(

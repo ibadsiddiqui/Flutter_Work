@@ -22,6 +22,7 @@ class CreateEvent extends StatelessWidget {
                 style: TextStyle(fontFamily: "Comfortaa")),
           ),
           RoundClippedButton(
+            isMain: false,
             title: "Start",
             onPress: () => pushScreen(context, screen: AddEventDetails()),
           )

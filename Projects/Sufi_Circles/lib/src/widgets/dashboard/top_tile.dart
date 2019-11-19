@@ -1,6 +1,6 @@
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
+import 'package:flutter/material.dart';
 
 class DashboardTopTile extends StatelessWidget {
   final String eventDesc;
@@ -28,7 +28,16 @@ class DashboardTopTile extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: RoundClippedButton(title: "Book Event", onPress: () {}),
+              child: RoundClippedButton(
+                  isMain: true,
+                  child: Text(
+                    "Book Event",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
+                  ),
+                  onPress: () {}),
             )
           ],
         ),

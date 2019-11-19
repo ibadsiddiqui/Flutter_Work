@@ -6,7 +6,8 @@ class ShowTypeSelectionForVenue extends StatelessWidget {
   final Function onPress1;
   final Function onPress2;
 
-  const ShowTypeSelectionForVenue({Key key, this.onPress1, this.onPress2}) : super(key: key);
+  ShowTypeSelectionForVenue({Key key, this.onPress1, this.onPress2})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
