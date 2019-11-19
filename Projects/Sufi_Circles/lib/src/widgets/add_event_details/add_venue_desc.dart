@@ -1,9 +1,12 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/map_view/MapView.dart';
+import 'package:Sufi_Circles/src/utils/countries_city_list.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/picker_text.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/show_type_selection_for_venue.dart';
+import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
+import 'package:Sufi_Circles/src/widgets/dropdown/dropdown.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -16,19 +19,30 @@ class AddVenueDesc extends StatefulWidget {
 
 class _AddVenueDescState extends State<AddVenueDesc> {
   String selectionType = "none";
-  String dropdownValue = "One";
+  final List<String> countriesList = getCountriesList();
+  String selectedCountry = (getCountriesList())[0];
+  String selectedCity = "les Escaldes";
 
   void setVenueDetails(Position position, Placemark placemark) {
     EventModel eventModel = Provider.of<EventModel>(context);
     eventModel.setEventVenueDetails(position, placemark);
     Navigator.of(context).pop();
-    this.setState(() => selectionType = "View Details From Maps");
+    setSelectionType("View Details From Maps");
   }
+
+  setSelectionType(text) => this.setState(() => selectionType = text);
+
+  _setCountrySelection(text) {
+    String city = (getCitiesUsingCountry(text))[1];
+    _setCitySelection(city);
+    this.setState(() => selectedCountry = text);
+  }
+
+  _setCitySelection(text) => this.setState(() => selectedCity = text);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     switch (selectionType) {
       case "View Details From Maps":
         return Container();
@@ -55,93 +69,60 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                   onSubmit: (String name) async {},
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                  alignment: Alignment.center,
-                  child: DropdownButton<String>(
-                    value: dropdownValue,
-                    isExpanded: true,
-                    icon: Icon(Icons.arrow_downward),
-                    // iconSize: 24,
-                    style: TextStyle(color: Colors.black),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.grey,
-                    ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['One', 'Two', 'Free', 'Four']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.center,
+                    child: DropDown(
+                      list: countriesList,
+                      onChanged: this._setCountrySelection,
+                      value: this.selectedCountry,
+                    )),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   alignment: Alignment.center,
-                  child: DropdownButton<String>(
-                    value: dropdownValue,
-                    isExpanded: true,
-                    icon: Icon(Icons.arrow_downward),
-                    style: TextStyle(color: Colors.black),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.grey,
-                    ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['One', 'Two', 'Free', 'Four']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                  child: DropDown(
+                    list: getCitiesUsingCountry(this.selectedCountry),
+                    onChanged: this._setCitySelection,
+                    value: this.selectedCity,
                   ),
+                  //  DropdownButton<String>(
+                  //   value: this.selectedCity,
+                  //   isExpanded: true,
+                  //   icon: Icon(Icons.arrow_downward),
+                  //   // iconSize: 24,
+                  //   style: TextStyle(color: Colors.black),
+                  //   underline: Container(
+                  //     height: 2,
+                  //     color: Colors.grey,
+                  //   ),
+                  //   onChanged: this._setCitySelection,
+                  //   items: getCitiesUsingCountry(this.selectedCountry)
+                  //       .map<DropdownMenuItem<String>>(
+                  //     (String value) {
+                  //       return DropdownMenuItem<String>(
+                  //         value: value,
+                  //         child: Text(
+                  //           value,
+                  //           style: TextStyle(
+                  //             fontSize: 15.0,
+                  //           ),
+                  //         ),
+                  //       );
+                  //     },
+                  //   ).toList(),
+                  // ),
                 ),
-                RaisedButton(
-                  elevation: 4.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0)),
-                  onPressed: () => this.setState(() {
-                    selectionType = "Inputs";
-                  }),
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.white,
-                    height: 50.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(Icons.map, size: 20.0, color: Color(0xFF072247)),
-                        Text(
-                          " Submit",
-                          style: TextStyle(
-                              color: Color(0xFF072247),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0),
-                        ),
-                      ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RoundClippedButton(
+                      isMain: true,
+                      onPress: () {},
+                      title: "cancel",
+                      child: Icon(Icons.close, color: Colors.white),
                     ),
-                  ),
+                    SizedBox(width: size.width * .2),
+                    RoundClippedButton(isMain: false, onPress: () {}),
+                  ],
                 ),
               ],
             ),
