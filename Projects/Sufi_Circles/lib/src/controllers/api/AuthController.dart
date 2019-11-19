@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
+import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/services/api/AuthServices.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
@@ -7,12 +8,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class AuthController extends ChangeNotifier {
   AuthService _authService = new AuthService();
   ShowPopUp _showPopUp = ShowPopUp();
-  UserDBController _UserDBController = UserDBController();
+  UserDBController _userDBController = UserDBController();
   ShareUtils utils = ShareUtils();
 
   Future<void> userSignIn(context,
@@ -21,7 +21,7 @@ class AuthController extends ChangeNotifier {
     try {
       FirebaseUser _user = await _authService.userSignIn(authModel.authDetails);
       await utils.setUserTokenDetails(_user);
-      await _UserDBController.updateUserLastLogin(_user);
+      await _userDBController.updateUserLastLogin(_user);
       _showPopUp.showSuccessFulSigninPopUp(context, _user.uid);
       toggle();
       resetPassword();
@@ -38,14 +38,15 @@ class AuthController extends ChangeNotifier {
     AuthModel authModel = Provider.of<AuthModel>(context);
     try {
       FirebaseUser user = await _authService.createUser(authModel.authDetails);
-      await _UserDBController.createUserInDB(user, authModel);
+      await _userDBController.createUserInDB(user, authModel);
       toggle();
       _showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {
       resetPassword();
       toggle();
       authModel.setPassword("");
-      _showPopUp.showFailedSignupPopUp(e.code, e.message, context);
+      _showPopUp.showFailedSignupPopUp(
+          replaceUnderscore(e.code), e.message, context);
     }
   }
 

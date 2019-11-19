@@ -1,8 +1,7 @@
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
-// import 'package:Sufi_Circles/src/utils/share_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
+import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,11 +9,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // ShareUtils shareUtils = ShareUtils();
   @override
   void initState() {
     super.initState();
-    // shareUtils.clearAll();
     TimeNavigation.navigate(context, OnBoardingLoadingScreen());
   }
 
