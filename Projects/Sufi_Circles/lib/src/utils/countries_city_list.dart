@@ -1,3 +1,15 @@
+List<String> getCountriesList() {
+   List list = COUNTRIES_LIST.map((Map<String, dynamic> data) => data["country"].toString())
+    .toSet().toList();
+    return list;
+}
+
+List<String> getCitiesUsingCountry(country) => COUNTRIES_LIST
+    .where((Map<String, dynamic> data) =>
+        data["country"] == country).map((data)=> data["name"].toString())
+    .toSet()
+    .toList();
+
 const List<Map<String, dynamic>> COUNTRIES_LIST = [
   {
     "country": "Andorra",
