@@ -84,32 +84,6 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                     onChanged: this._setCitySelection,
                     value: this.selectedCity,
                   ),
-                  //  DropdownButton<String>(
-                  //   value: this.selectedCity,
-                  //   isExpanded: true,
-                  //   icon: Icon(Icons.arrow_downward),
-                  //   // iconSize: 24,
-                  //   style: TextStyle(color: Colors.black),
-                  //   underline: Container(
-                  //     height: 2,
-                  //     color: Colors.grey,
-                  //   ),
-                  //   onChanged: this._setCitySelection,
-                  //   items: getCitiesUsingCountry(this.selectedCountry)
-                  //       .map<DropdownMenuItem<String>>(
-                  //     (String value) {
-                  //       return DropdownMenuItem<String>(
-                  //         value: value,
-                  //         child: Text(
-                  //           value,
-                  //           style: TextStyle(
-                  //             fontSize: 15.0,
-                  //           ),
-                  //         ),
-                  //       );
-                  //     },
-                  //   ).toList(),
-                  // ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -130,13 +104,11 @@ class _AddVenueDescState extends State<AddVenueDesc> {
         );
       default:
         return ShowTypeSelectionForVenue(
+          onPress2: () => this.setState(() => selectionType = "Inputs"),
           onPress1: () => pushScreen(context,
               screen: MapView(
                   onCancel: () => Navigator.of(context).pop(),
                   onSubmit: (pos, place) => setVenueDetails(pos, place))),
-          onPress2: () => this.setState(() {
-            selectionType = "Inputs";
-          }),
         );
     }
   }
