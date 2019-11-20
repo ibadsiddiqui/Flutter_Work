@@ -8,6 +8,9 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/sh
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/dropdown/dropdown.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
+import 'package:Sufi_Circles/src/widgets/profile/user_details/edit_details_field.dart';
+import 'package:Sufi_Circles/src/widgets/profile/user_details/label.dart';
+import 'package:Sufi_Circles/src/widgets/profile/user_details/user_value.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +22,11 @@ class AddVenueDesc extends StatefulWidget {
 
 class _AddVenueDescState extends State<AddVenueDesc> {
   String selectionType = "none";
-  final List<String> countriesList = getCountriesList();
   String selectedCountry = (getCountriesList())[0];
   String selectedCity = "les Escaldes";
+  String selectedState = "Escaldes-Engordany";
+
+  final List<String> countriesList = getCountriesList();
 
   void setVenueDetails(Position position, Placemark placemark) {
     EventModel eventModel = Provider.of<EventModel>(context);
@@ -40,6 +45,8 @@ class _AddVenueDescState extends State<AddVenueDesc> {
 
   _setCitySelection(text) => this.setState(() => selectedCity = text);
 
+  _setStateOnSelection(text) => this.setState(() => selectedState = text);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -48,7 +55,10 @@ class _AddVenueDescState extends State<AddVenueDesc> {
         return Container();
       case "Inputs":
         return Container(
-          margin: EdgeInsets.only(top: size.width * 0.3),
+          margin: EdgeInsets.only(
+              top: selectionType == "Inputs"
+                  ? size.width * 0.1
+                  : size.width * 0.3),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: Column(
@@ -56,35 +66,70 @@ class _AddVenueDescState extends State<AddVenueDesc> {
               children: <Widget>[
                 FormHeading(heading: "Add venue details."),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18, vertical: 20.0),
+                  padding: EdgeInsets.symmetric(horizontal: 18),
                   child: PickerText(
                     text: "Please venues details in following below...",
                   ),
                 ),
-                UserDetailItem(
-                  isEditable: true,
-                  inputLabel: "Venue",
-                  value: "",
-                  toggleEdit: () {},
-                  onSubmit: (String name) async {},
-                ),
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    alignment: Alignment.center,
-                    child: DropDown(
-                      list: countriesList,
-                      onChanged: this._setCountrySelection,
-                      value: this.selectedCountry,
-                    )),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   alignment: Alignment.center,
-                  child: DropDown(
-                    list: getCitiesUsingCountry(this.selectedCountry),
-                    onChanged: this._setCitySelection,
-                    value: this.selectedCity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Add country from below:",
+                        style:
+                            TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
+                      ),
+                      DropDown(
+                        list: countriesList,
+                        onChanged: this._setCountrySelection,
+                        value: this.selectedCountry,
+                      ),
+                    ],
                   ),
                 ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  alignment: Alignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Add country state from below:",
+                        style:
+                            TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
+                      ),
+                      DropDown(
+                        list: getStateUsingCountry(this.selectedCountry),
+                        onChanged: this._setStateOnSelection,
+                        value: this.selectedState,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  alignment: Alignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Add city from below:",
+                        style:
+                            TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
+                      ),
+                      DropDown(
+                        list: getCitiesUsingCountry(this.selectedCountry),
+                        onChanged: this._setCitySelection,
+                        value: this.selectedCity,
+                      ),
+                    ],
+                  ),
+                ),
+                EditDetailsField(
+                    label: "Address", onSubmit: (String data) {}, edit: () {}),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
