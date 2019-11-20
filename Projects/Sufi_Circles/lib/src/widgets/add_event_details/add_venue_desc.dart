@@ -128,8 +128,40 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                     ],
                   ),
                 ),
-                EditDetailsField(
-                    label: "Address", onSubmit: (String data) {}, edit: () {}),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Enter location/address:",
+                        style:
+                            TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(hintText: 'Enter here ...'),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Enter venue name:",
+                        style:
+                            TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(hintText: 'Enter here ...'),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
