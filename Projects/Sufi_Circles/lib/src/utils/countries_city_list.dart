@@ -4,6 +4,13 @@ List<String> getCountriesList() {
     return list;
 }
 
+List<String> getStateUsingCountry(country) => COUNTRIES_LIST
+    .where((Map<String, dynamic> data) =>
+        data["country"] == country).map((data)=> data["subcountry"].toString())
+    .toSet()
+    .toList();
+
+
 List<String> getCitiesUsingCountry(country) => COUNTRIES_LIST
     .where((Map<String, dynamic> data) =>
         data["country"] == country).map((data)=> data["name"].toString())
