@@ -97,7 +97,7 @@ abstract class _EventModel with Store {
       };
 
   @action
-  void setEventVenueDetails(Position position, Placemark placemark) {
+  void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
     this.locationDetails.value = {
       "lat": position.latitude,
       "long": position.longitude,
@@ -107,10 +107,21 @@ abstract class _EventModel with Store {
       "city": placemark.subAdministrativeArea.isEmpty
           ? ""
           : placemark.subAdministrativeArea,
-      "province": placemark.subAdministrativeArea.isEmpty
+      "state": placemark.subAdministrativeArea.isEmpty
           ? ""
           : placemark.subAdministrativeArea,
       "country": placemark.subAdministrativeArea,
+    };
+  }
+
+  @action
+  void setEventVenueDetails(Map<String, String> data) {
+    this.locationDetails.value = {
+      "country": data["country"],
+      "state": data["state"],
+      "city": data['city'],
+      "address": data['address'],
+      "name": data['name'],
     };
   }
 

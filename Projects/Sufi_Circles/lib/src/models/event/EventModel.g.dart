@@ -335,10 +335,20 @@ mixin _$EventModel on _EventModel, Store {
   }
 
   @override
-  void setEventVenueDetails(Position position, Placemark placemark) {
+  void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
-      return super.setEventVenueDetails(position, placemark);
+      return super.setEventVenueDetailsUsingMap(position, placemark);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventVenueDetails(Map<String, String> data) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventVenueDetails(data);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }

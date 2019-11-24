@@ -30,7 +30,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
 
   void setVenueDetails(Position position, Placemark placemark) {
     EventModel eventModel = Provider.of<EventModel>(context);
-    eventModel.setEventVenueDetails(position, placemark);
+    eventModel.setEventVenueDetailsUsingMap(position, placemark);
     Navigator.of(context).pop();
     setSelectionType("View Details From Maps");
   }
