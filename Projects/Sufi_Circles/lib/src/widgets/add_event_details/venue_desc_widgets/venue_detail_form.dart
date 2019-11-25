@@ -1,9 +1,11 @@
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/utils/countries_city_list.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/picker_text.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/dropdown/dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class VenueDetailForm extends StatefulWidget {
   const VenueDetailForm({Key key}) : super(key: key);
@@ -21,7 +23,26 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
 
   String selectedState = "Escaldes-Engordany";
 
+  String address = "";
+
+  String venueName = "";
+
   final List<String> countriesList = getCountriesList();
+
+  @protected
+  @mustCallSuper
+  void didChangeDependencies() async {
+    Map details = Provider.of<EventModel>(context).locationDetails.value;
+    if (details.isEmpty)
+      return;
+    else {
+      _setCountrySelection(details["country"]);
+      _setStateOnSelection(details["state"]);
+      _setCitySelection(details["city"]);
+      _setAddress(details["address"]);
+      _setVenueName(details["name"]);
+    }
+  }
 
   _setCountrySelection(text) {
     String city = (getCitiesUsingCountry(text))[1];
@@ -35,6 +56,10 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
   _setCitySelection(text) => this.setState(() => selectedCity = text);
 
   _setStateOnSelection(text) => this.setState(() => selectedState = text);
+
+  _setAddress(address) => this.setState(() => address = address);
+
+  _setVenueName(name) => this.setState(() => venueName = name);
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +145,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                     style: TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
                   ),
                   TextField(
+                    onChanged: _setAddress,
                     decoration: InputDecoration(hintText: 'Enter here ...'),
                   ),
                 ],
@@ -135,6 +161,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                     style: TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
                   ),
                   TextField(
+                    onChanged: _setVenueName,
                     decoration: InputDecoration(hintText: 'Enter here ...'),
                   ),
                 ],
