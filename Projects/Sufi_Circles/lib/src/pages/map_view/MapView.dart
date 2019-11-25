@@ -52,13 +52,15 @@ class _MapViewState extends State<MapView> {
   setPlaceMarks(double lat, double long, {dragOn = false}) async {
     List<Placemark> placemarks =
         await _mapServices.getCurrentPlacemark(lat, long);
-    if (dragOn)
-      this.setState(() {
-        _placemark = placemarks[0];
-        _currentLocation = placemarks[0].position;
-      });
-    else
-      this.setState(() => _placemark = placemarks[0]);
+    if (placemarks.isNotEmpty) {
+      if (dragOn)
+        this.setState(() {
+          _placemark = placemarks[0];
+          _currentLocation = placemarks[0].position;
+        });
+      else
+        this.setState(() => _placemark = placemarks[0]);
+    }
   }
 
   Set<Marker> myMarker() {
