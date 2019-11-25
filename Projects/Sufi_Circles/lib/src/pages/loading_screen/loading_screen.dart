@@ -14,7 +14,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  UserDBController _UserDBController = UserDBController();
+  UserDBController _userDBController = UserDBController();
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getUserDetails() async {
-    await _UserDBController.setUserDetailsUsingID(context, widget.uid);
+    await _userDBController.setUserDetailsUsingID(context, widget.uid);
     TimeNavigation.navigate(context, DashboardScreen(), second: 4);
   }
 }

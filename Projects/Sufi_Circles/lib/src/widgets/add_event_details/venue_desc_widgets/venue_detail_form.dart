@@ -25,7 +25,10 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
 
   _setCountrySelection(text) {
     String city = (getCitiesUsingCountry(text))[1];
+    String state = (getStateUsingCountry(text))[1];
+
     _setCitySelection(city);
+    _setStateOnSelection(state);
     this.setState(() => selectedCountry = text);
   }
 
