@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VenueDetailForm extends StatefulWidget {
-  const VenueDetailForm({Key key}) : super(key: key);
+  final Function toggleSelectionType;
+
+  VenueDetailForm({Key key, this.toggleSelectionType}) : super(key: key);
 
   @override
   _VenueDetailFormState createState() => _VenueDetailFormState();
@@ -172,7 +174,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
               children: <Widget>[
                 RoundClippedButton(
                   isMain: true,
-                  onPress: () {},
+                  onPress: () => widget.toggleSelectionType(""),
                   title: "cancel",
                   child: Icon(Icons.close, color: Colors.white),
                 ),

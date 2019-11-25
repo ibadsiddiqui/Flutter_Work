@@ -30,7 +30,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
       case "View Details From Maps":
         return Container();
       case "Inputs":
-        return VenueDetailForm();
+        return VenueDetailForm(toggleSelectionType: setSelectionType);
       default:
         return ShowTypeSelectionForVenue(
           onPress2: () => this.setState(() => selectionType = "Inputs"),
