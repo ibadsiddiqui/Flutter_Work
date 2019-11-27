@@ -4,6 +4,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_dates.dart'
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_organiser_name.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_time.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_organisers_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             AddEventDate(),
             AddEventTime(),
             AddVenueDesc(),
+            AddOrganisersDetails(),
           ],
         ),
       ),
