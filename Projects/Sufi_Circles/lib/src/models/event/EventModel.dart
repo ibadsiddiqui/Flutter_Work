@@ -98,19 +98,15 @@ abstract class _EventModel with Store {
 
   @action
   void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
+    print(placemark);
     this.locationDetails.value = {
       "lat": position.latitude,
       "long": position.longitude,
-      "name": placemark.name.isEmpty ? "" : placemark.name,
-      "area": placemark.subLocality.isEmpty ? "" : placemark.subLocality,
-      "road": placemark.thoroughfare.isEmpty ? "" : placemark.thoroughfare,
-      "city": placemark.subAdministrativeArea.isEmpty
-          ? ""
-          : placemark.subAdministrativeArea,
-      "state": placemark.subAdministrativeArea.isEmpty
-          ? ""
-          : placemark.subAdministrativeArea,
-      "country": placemark.subAdministrativeArea,
+      "name": placemark.name,
+      "area": placemark.thoroughfare,
+      "city": placemark.locality,
+      "state": placemark.administrativeArea,
+      "country": placemark.country,
     };
   }
 
@@ -124,6 +120,8 @@ abstract class _EventModel with Store {
       "name": data['name'],
     };
   }
+
+  // TODO: add reset model state
 
   @computed
   get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);
