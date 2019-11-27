@@ -13,7 +13,7 @@ class ShowTypeSelectionForVenue extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.width * 0.3),
+      margin: EdgeInsets.only(top: size.height * 0.1),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(

@@ -17,17 +17,15 @@ class VenueDetailForm extends StatefulWidget {
 }
 
 class _VenueDetailFormState extends State<VenueDetailForm> {
-  String selectionType = "none";
+  String _selectedCountry = (getCountriesList())[0];
 
-  String selectedCountry = (getCountriesList())[0];
+  String _selectedCity = "les Escaldes";
 
-  String selectedCity = "les Escaldes";
+  String _selectedState = "Escaldes-Engordany";
 
-  String selectedState = "Escaldes-Engordany";
+  String _address = "";
 
-  String address = "";
-
-  String venueName = "";
+  String _venueName = "";
 
   final List<String> countriesList = getCountriesList();
 
@@ -35,9 +33,12 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
   @mustCallSuper
   void didChangeDependencies() async {
     Map details = Provider.of<EventModel>(context).locationDetails.value;
-    if (details.isEmpty)
-      return;
-    else {
+    if (details.isEmpty) {
+      this.setState(() {
+        _selectedState = (getStateUsingCountry(_selectedCountry))[1];
+        _selectedCity = (getCitiesUsingCountry(_selectedState))[1];
+      });
+    } else {
       _setCountrySelection(details["country"]);
       _setStateOnSelection(details["state"]);
       _setCitySelection(details["city"]);
@@ -47,30 +48,27 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
   }
 
   _setCountrySelection(text) {
-    String city = (getCitiesUsingCountry(text))[1];
+    this.setState(() => _selectedCountry = text);
     String state = (getStateUsingCountry(text))[1];
+    String city = (getCitiesUsingCountry(text))[1];
 
-    _setCitySelection(city);
     _setStateOnSelection(state);
-    this.setState(() => selectedCountry = text);
+    _setCitySelection(city);
   }
 
-  _setCitySelection(text) => this.setState(() => selectedCity = text);
+  _setCitySelection(text) => this.setState(() => _selectedCity = text);
 
-  _setStateOnSelection(text) => this.setState(() => selectedState = text);
+  _setStateOnSelection(text) => this.setState(() => _selectedState = text);
 
-  _setAddress(address) => this.setState(() => address = address);
+  _setAddress(address) => this.setState(() => _address = address);
 
-  _setVenueName(name) => this.setState(() => venueName = name);
+  _setVenueName(name) => this.setState(() => _venueName = name);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(
-        // top: selectionType == "Inputs" ? size.width * 0.1 : size.width * 0.3,
-        top: size.width * 0.1,
-      ),
+      margin: EdgeInsets.only(top: size.width * 0.1),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(
@@ -96,7 +94,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                   DropDown(
                     list: countriesList,
                     onChanged: this._setCountrySelection,
-                    value: this.selectedCountry,
+                    value: this._selectedCountry,
                   ),
                 ],
               ),
@@ -112,9 +110,9 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                     style: TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
                   ),
                   DropDown(
-                    list: getStateUsingCountry(this.selectedCountry),
+                    list: getStateUsingCountry(this._selectedCountry),
                     onChanged: this._setStateOnSelection,
-                    value: this.selectedState,
+                    value: this._selectedState,
                   ),
                 ],
               ),
@@ -130,9 +128,9 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                     style: TextStyle(fontSize: 15.0, fontFamily: "CreteRound"),
                   ),
                   DropDown(
-                    list: getCitiesUsingCountry(this.selectedCountry),
+                    list: getCitiesUsingCountry(this._selectedCountry),
                     onChanged: this._setCitySelection,
-                    value: this.selectedCity,
+                    value: this._selectedCity,
                   ),
                 ],
               ),

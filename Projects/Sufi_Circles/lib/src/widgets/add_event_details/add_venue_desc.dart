@@ -7,6 +7,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/sh
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/venue_detail_form.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
@@ -47,50 +48,97 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                   child:
                       PickerText(text: "following is the data from the map..."),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    // crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text(
-                        "Lat/Long",
-                        style:
-                            TextStyle(fontSize: 17.0, fontFamily: "CreteRound"),
-                      ),
-                      Text(
-                        venueDetails.locationDetails.value["lat"].toString() +
-                            " / " +
-                            venueDetails.locationDetails.value["long"]
-                                .toString(),
-                        style:
-                            TextStyle(fontSize: 17.0, fontFamily: "CreteRound"),
-                      ),
-                    ],
+                Observer(
+                  builder: (context) => Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "Venue Name:",
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                            Text(
+                              venueDetails.locationDetails.value["name"],
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "Area:",
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                            Text(
+                              venueDetails.locationDetails.value["area"],
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "City:",
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                            Text(
+                              venueDetails.locationDetails.value["city"],
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "State:",
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                            Text(
+                              venueDetails.locationDetails.value["state"],
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "Country:",
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                            Text(
+                              venueDetails.locationDetails.value["country"],
+                              style: TextStyle(
+                                  fontSize: 17.0, fontFamily: "CreteRound"),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  margin: EdgeInsets.only(top: 25),
                   alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    // crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text(
-                        "Lat/Long",
-                        style:
-                            TextStyle(fontSize: 17.0, fontFamily: "CreteRound"),
-                      ),
-                      Text(
-                        venueDetails.locationDetails.value["lat"].toString() +
-                            " / " +
-                            venueDetails.locationDetails.value["long"]
-                                .toString(),
-                        style:
-                            TextStyle(fontSize: 17.0, fontFamily: "CreteRound"),
-                      ),
-                    ],
+                  child: Text(
+                    "Are you sure about this?",
+                    style: TextStyle(fontSize: 17.0, fontFamily: "CreteRound"),
                   ),
                 ),
                 Row(
@@ -98,8 +146,8 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                   children: <Widget>[
                     RoundClippedButton(
                       isMain: true,
-                      onPress: () => {},
                       title: "cancel",
+                      onPress: () => setSelectionType(""),
                       child: Icon(Icons.close, color: Colors.white),
                     ),
                     SizedBox(width: size.width * .2),
