@@ -16,8 +16,7 @@ class NamedCircle extends StatelessWidget {
         child: Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Colors.white, fontSize: 30, fontFamily: "CreteRound"),
+          style: Theme.of(context).textTheme.title,
         ),
       ),
     );

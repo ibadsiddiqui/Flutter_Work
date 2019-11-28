@@ -15,7 +15,10 @@ class RoundClippedButton extends StatelessWidget {
       return ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: FlatButton(
-            color: Color(0xFFFC3C3C), child: child, onPressed: onPress),
+          child: child,
+          onPressed: onPress,
+          color: Theme.of(context).buttonColor,
+        ),
       );
     } else {
       return Container(
@@ -26,8 +29,7 @@ class RoundClippedButton extends StatelessWidget {
             right: Radius.circular(100),
           ),
           child: RaisedButton(
-            color: Color(0xFF072247),
-            splashColor: Color(0xFFFC3C3C),
+            color: Theme.of(context).backgroundColor,
             elevation: 5,
             child: Icon(
               Icons.arrow_forward,

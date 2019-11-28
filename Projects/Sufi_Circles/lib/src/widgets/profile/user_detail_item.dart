@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_details/edit_details_field.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_details/label.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_details/user_value.dart';
+import 'package:flutter/material.dart';
 
 class UserDetailItem extends StatelessWidget {
   final bool isEditable;

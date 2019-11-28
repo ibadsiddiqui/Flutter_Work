@@ -1,17 +1,17 @@
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
+import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/services/storage/ImageStorage.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
+import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
+import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:camera/camera.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
-import 'package:Sufi_Circles/src/models/user/UserModel.dart';
-import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
-import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -98,8 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               backgroundColor: Color(0xFF072247),
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                title: Text("Profile Information",
-                    style: TextStyle(fontSize: 20.0, fontFamily: "CreteRound")),
+                title: Text("Profile Information"),
                 background: isUploading
                     ? Loader()
                     : HeroAnimation(photoPath: userModel.profilePicture),

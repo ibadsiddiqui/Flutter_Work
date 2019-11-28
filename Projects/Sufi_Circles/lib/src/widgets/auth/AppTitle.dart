@@ -8,14 +8,18 @@ class AppTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Padding(
       padding: const EdgeInsets.only(bottom: 16.0, top: 5.0),
-      child: new Text(
-        "Sufi Circles",
-        style: TextStyle(
-          color: color,
-          fontSize: 40,
-          fontFamily: "CreteRound",
-        ),
-      ),
+      child: color != null
+          ? new Text(
+              "Sufi Circles",
+              style: Theme.of(context).textTheme.headline,
+            )
+          : new Text(
+              "Sufi Circles",
+              style: TextStyle(
+                  color: Color.fromRGBO(8, 51, 88, 1),
+                  fontSize: 40,
+                  fontFamily: "CreteRound"),
+            ),
     );
   }
 }

@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 class DashboardHeadings extends StatelessWidget {
   final String title;
-
-  const DashboardHeadings({Key key, this.title}) : super(key: key);
+  final Color color;
+  const DashboardHeadings({Key key, this.title, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Text(
         title,
-        style: TextStyle(fontFamily: "CreteRound", fontSize: 25),
         textAlign: TextAlign.center,
+        style: color != null
+            ? TextStyle(fontFamily: "CreteRound", fontSize: 25, color: color)
+            : Theme.of(context).textTheme.title,
       ),
     );
   }

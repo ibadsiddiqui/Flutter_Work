@@ -6,7 +6,7 @@ class DashboardTopTile extends StatelessWidget {
   final String eventDesc;
   final String eventCoverPhoto;
 
-  const DashboardTopTile({Key key, this.eventDesc, this.eventCoverPhoto})
+  DashboardTopTile({Key key, this.eventDesc, this.eventCoverPhoto})
       : super(key: key);
 
   @override
@@ -17,26 +17,21 @@ class DashboardTopTile extends StatelessWidget {
       child: Container(
         decoration: dashboardTopTabBackground(path: eventCoverPhoto),
         width: size.width * 0.45,
-        height: size.width * 0.5,
+        height: size.width * 0.45,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               eventDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
+              style: Theme.of(context).textTheme.display3,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RoundClippedButton(
                   isMain: true,
-                  child: Text(
-                    "Book Event",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12),
-                  ),
+                  child: Text("Book Event",
+                      style: Theme.of(context).textTheme.button),
                   onPress: () {}),
             )
           ],

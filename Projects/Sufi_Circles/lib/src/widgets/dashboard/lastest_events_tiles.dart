@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LatestEventTiles extends StatelessWidget {
   final int index;
@@ -20,21 +20,21 @@ class LatestEventTiles extends StatelessWidget {
     );
   }
 
-  Widget _buildDivider(String title) {
+  Widget _buildDivider(context, String title) {
     return Container(
       width: title.length.toDouble() * 11,
       child: Divider(
-        color: Color(0xFFFC3C3C),
+        color: Theme.of(context).backgroundColor,
         thickness: 2,
         height: 1,
       ),
     );
   }
 
-  Widget _buildEventDesc(String desc) {
+  Widget _buildEventDesc(context, String desc) {
     return Text(
       desc,
-      style: TextStyle(color: Colors.white),
+      style: Theme.of(context).textTheme.body2,
       textAlign: TextAlign.center,
     );
   }
@@ -64,14 +64,15 @@ class LatestEventTiles extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   _buildEventHeading(detail['eventName']),
-                  _buildDivider(detail['eventName']),
-                  _buildEventDesc(detail['eventDesc']),
+                  _buildDivider(context, detail['eventName']),
+                  _buildEventDesc(context, detail['eventDesc']),
                 ],
               ),
             ),
           ),
         ),
       );
-    }else return Container();
+    } else
+      return Container();
   }
 }

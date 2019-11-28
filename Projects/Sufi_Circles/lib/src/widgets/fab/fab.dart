@@ -26,7 +26,7 @@ class BottomFABs extends StatelessWidget {
           Align(
             alignment: Alignment.bottomLeft,
             child: FloatingActionButton(
-              backgroundColor: Color(0xFF072247),
+              backgroundColor: Theme.of(context).backgroundColor,
               heroTag: toolTip1,
               tooltip: toolTip1,
               child: icon1,
@@ -38,7 +38,7 @@ class BottomFABs extends StatelessWidget {
             child: FloatingActionButton(
               heroTag: toolTip2,
               tooltip: toolTip2,
-              backgroundColor: Color(0xFF072247),
+              backgroundColor: Theme.of(context).backgroundColor,
               child: icon2,
               onPressed: onPress2,
             ),

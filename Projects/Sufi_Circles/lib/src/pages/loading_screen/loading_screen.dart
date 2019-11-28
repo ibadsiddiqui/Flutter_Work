@@ -1,8 +1,8 @@
+import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
-import 'package:flutter/material.dart';
-import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
+import 'package:flutter/material.dart';
 
 class LoadingScreen extends StatefulWidget {
   final String uid;
@@ -34,6 +34,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: Theme.of(context).backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -41,7 +42,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
             SizedBox(height: 10),
             Text(
               "Loading all the good things happening around...",
-              style: TextStyle(fontFamily: "Comfortaa"),
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: Theme.of(context).textTheme.body1.fontFamily,
+              ),
             )
           ],
         ),

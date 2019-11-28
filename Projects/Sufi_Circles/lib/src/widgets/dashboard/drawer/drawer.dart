@@ -1,13 +1,13 @@
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/circles/profile_image.dart';
-import 'package:flutter/material.dart';
-import 'package:Sufi_Circles/src/pages/create_event/create_event.dart';
-import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/create_event/create_event.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
 import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/circles/named_circle.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/circles/profile_image.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/drawer_item.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DashboardDrawer extends StatelessWidget {
@@ -38,18 +38,12 @@ class DashboardDrawer extends StatelessWidget {
                       Text(
                         data.name,
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 22,
-                            fontFamily: "Comforta",
-                            color: Color(0xFF072247)),
+                        style: Theme.of(context).textTheme.title,
                       ),
                       Text(
                         data.email,
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: "Comforta",
-                            color: Color(0xFF072247)),
+                        style: Theme.of(context).textTheme.display4,
                       ),
                     ],
                   ),

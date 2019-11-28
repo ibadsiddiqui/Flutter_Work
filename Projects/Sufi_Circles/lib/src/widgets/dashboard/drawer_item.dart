@@ -20,8 +20,7 @@ class DrawerItem extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 10),
                 child: leftIcon,
               ),
-              Text(title,
-                  style: TextStyle(color: Color(0xFF072247), fontSize: 20)),
+              Text(title, style: Theme.of(context).textTheme.display4),
             ],
           ),
           Icon(Icons.arrow_right, color: Color(0xFF072247))

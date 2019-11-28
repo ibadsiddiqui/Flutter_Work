@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                AppTitle(color: Color.fromRGBO(8, 51, 88, 1)),
+                AppTitle(),
               ],
             ),
           ),

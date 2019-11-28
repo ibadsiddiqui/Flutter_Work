@@ -1,11 +1,11 @@
+import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/lastest_events_tiles.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/top_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/lastest_events_tiles.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/top_tile.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildHeader(recommendedEventsModel, size) {
     return Container(
-      height: size.height * 0.475,
+      height: size.height * 0.5,
       child: GridView.count(
         crossAxisCount: 2,
         mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
@@ -70,7 +70,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     RecommendedEventsModel recommendedEventsModel =
         Provider.of<RecommendedEventsModel>(context);
     return Scaffold(
-      appBar: dashboardAppBar(isSearching: isSearching, onPress: toggleSearch),
+      appBar: dashboardAppBar(context,
+          isSearching: isSearching, onPress: toggleSearch),
       drawer: DashboardDrawer(),
       body: ListView(
         scrollDirection: Axis.vertical,

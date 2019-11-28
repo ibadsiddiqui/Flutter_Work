@@ -27,8 +27,9 @@ class EditDetailsField extends StatelessWidget {
           border: InputBorder.none,
           hasFloatingPlaceholder: true,
           alignLabelWithHint: true,
+          contentPadding: EdgeInsets.all(0),
           labelText: label,
-          labelStyle: TextStyle(fontSize: 20.0, fontFamily: "CreteRound"),
+          labelStyle: Theme.of(context).textTheme.subhead,
           hintMaxLines: 1,
           suffixIcon: IconButton(
             padding: EdgeInsets.only(top: 20, left: 20),

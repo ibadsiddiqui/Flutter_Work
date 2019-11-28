@@ -34,18 +34,20 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            FormHeading(heading: "Add Organiser's details."),
+            FormHeading(heading: "Add Organiser's details. (optional)"),
             Observer(
               builder: (context) => Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 alignment: Alignment.center,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    SizedBox(height: 20),
                     TextField(
                       decoration: InputDecoration(
                           hintText: "Enter Organiser's email:..."),
                     ),
+                    SizedBox(height: 20),
                     TextField(
                       decoration: InputDecoration(
                           hintText: "Enter Organiser's contact number:..."),

@@ -8,7 +8,7 @@ class UserDetailLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: TextStyle(fontSize: 20.0, fontFamily: "CreteRound"),
+      style: Theme.of(context).textTheme.subhead,
       textAlign: TextAlign.left,
     );
   }
