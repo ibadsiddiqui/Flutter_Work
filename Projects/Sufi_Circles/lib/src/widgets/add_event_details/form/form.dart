@@ -30,6 +30,7 @@ class EventDetailForm extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(height: 100),
           FormHeading(heading: title),

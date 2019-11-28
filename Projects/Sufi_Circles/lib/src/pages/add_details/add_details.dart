@@ -58,7 +58,6 @@ class _AddEventDetailsState extends State<AddEventDetails> {
           children: <Widget>[
             AddEventOrganiserName(
               title: "Who is the organiser?",
-              inputHint: "Enter name please. (mandatory)",
             ),
             AddEventNameDetail(
               title: "Tell us your event name.",
