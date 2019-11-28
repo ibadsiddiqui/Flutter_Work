@@ -5,6 +5,7 @@ import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
+import 'package:Sufi_Circles/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
+        theme: generateTheme(),
         routes: <String, WidgetBuilder>{
           // If you're using navigation routes, Flutter needs a base route.
           // We're going to change this route once we're ready with
