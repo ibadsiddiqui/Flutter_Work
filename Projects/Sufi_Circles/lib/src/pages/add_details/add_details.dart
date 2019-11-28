@@ -7,6 +7,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_organisers_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_web_urls.dart';
 import 'package:flutter/material.dart';
 
 class AddEventDetails extends StatefulWidget {
@@ -74,6 +75,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             AddEventTime(),
             AddVenueDesc(),
             AddOrganisersDetails(),
+            AddEventWebURLs(),
           ],
         ),
       ),
