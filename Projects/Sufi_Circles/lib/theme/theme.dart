@@ -34,6 +34,7 @@ ThemeData generateTheme() {
             fontFamily: "Comfortaa", color: Color.fromRGBO(8, 51, 88, 1)),
         body2: TextStyle(
             fontFamily: "Comfortaa", color: Colors.white, fontSize: 14),
+        display2: TextStyle(fontFamily: "CreteRound", fontSize: 15),
         display3: TextStyle(
             fontFamily: "Comfortaa", fontSize: 15, color: Colors.white),
         display4: TextStyle(

@@ -43,14 +43,28 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(height: 20),
+                    Text(
+                      "Organiser's Email:",
+                      style: Theme.of(context).textTheme.display2,
+                    ),
                     TextField(
+                      style: Theme.of(context).textTheme.display2,
                       decoration: InputDecoration(
-                          hintText: "Enter Organiser's email:..."),
+                        hintText: "Enter here...",
+                        hintStyle: TextStyle(fontSize: 17),
+                      ),
                     ),
                     SizedBox(height: 20),
+                    Text(
+                      "Organiser's Contact#:",
+                      style: Theme.of(context).textTheme.display2,
+                    ),
                     TextField(
+                      style: Theme.of(context).textTheme.display2,
                       decoration: InputDecoration(
-                          hintText: "Enter Organiser's contact number:..."),
+                        hintText: "Enter here...",
+                        hintStyle: TextStyle(fontSize: 17),
+                      ),
                     ),
                   ],
                 ),

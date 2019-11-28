@@ -10,7 +10,7 @@ class PickerText extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 7.5),
       child: Text(
         text,
-        style: TextStyle(fontSize: 18.0, fontFamily: "CreteRound"),
+        style: Theme.of(context).textTheme.display2,
       ),
     );
   }
