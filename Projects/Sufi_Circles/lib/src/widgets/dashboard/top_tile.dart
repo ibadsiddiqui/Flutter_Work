@@ -24,7 +24,7 @@ class DashboardTopTile extends StatelessWidget {
             Text(
               eventDesc,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.display3,
+              style: Theme.of(context).textTheme.body1,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

@@ -31,6 +31,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Container(
       height: size.height * 0.5,
       child: GridView.count(
+        scrollDirection: Axis.horizontal,
         crossAxisCount: 2,
         mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
         crossAxisSpacing: MediaQuery.of(context).size.height * 0.015,
@@ -41,17 +42,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   List<Widget> _generateHeaderList(recommendedEventsModel) {
-    return List.generate(
-      recommendedEventsModel.recommendedEvents.length - 1,
-      (idx) {
-        String desc = recommendedEventsModel.getEventDesc(idx);
-        String coverPhoto = recommendedEventsModel.getEventCoverPhoto(idx);
-        return DashboardTopTile(
-          eventDesc: desc,
-          eventCoverPhoto: coverPhoto,
-        );
-      },
-    );
+    return List.generate(recommendedEventsModel.recommendedEvents.length - 1,
+        (idx) {
+      String desc = recommendedEventsModel.getEventDesc(idx);
+      String coverPhoto = recommendedEventsModel.getEventCoverPhoto(idx);
+      return DashboardTopTile(
+        eventDesc: desc,
+        eventCoverPhoto: coverPhoto,
+      );
+    }, growable: true);
   }
 
   Widget _buildBody(recommendedEventsModel, size) {

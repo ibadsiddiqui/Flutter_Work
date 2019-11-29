@@ -11,13 +11,13 @@ ThemeData generateTheme() {
     backgroundColor: Color.fromRGBO(7, 104, 159, 1),
     disabledColor: Color.fromRGBO(201, 214, 223, 1),
     buttonColor: Color.fromRGBO(17, 211, 188, 1),
-    // fontFamily: "CreteRound",
-
-    // colorScheme: colorScheme,
-
     textTheme: TextTheme(
         body1: TextStyle(fontFamily: "Comfortaa", color: Colors.white),
         // display2: TextStyle(fontFamily: "CreteRound", fontSize: 15),
+        display1: TextStyle(
+            fontSize: 25,
+            fontFamily: "CreteRound",
+            color: Color.fromRGBO(8, 51, 88, 1)),
         display3: TextStyle(
             color: Color.fromRGBO(8, 51, 88, 1), fontFamily: "Comfortaa"),
         button: TextStyle(

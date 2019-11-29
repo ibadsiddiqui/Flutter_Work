@@ -13,7 +13,7 @@ class DashboardHeadings extends StatelessWidget {
         textAlign: TextAlign.center,
         style: color != null
             ? TextStyle(fontFamily: "CreteRound", fontSize: 25, color: color)
-            : Theme.of(context).textTheme.title,
+            : Theme.of(context).textTheme.display1,
       ),
     );
   }

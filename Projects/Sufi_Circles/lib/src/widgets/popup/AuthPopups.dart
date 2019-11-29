@@ -59,10 +59,7 @@ class ShowPopUp {
         DialogButton(
           child: Text(
             "Ok",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-            ),
+            style: Theme.of(context).textTheme.button,
           ),
           onPressed: () {
             Navigator.pop(context);

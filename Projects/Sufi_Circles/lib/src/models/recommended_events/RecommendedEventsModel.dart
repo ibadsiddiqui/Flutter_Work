@@ -8,7 +8,7 @@ class RecommendedEventsModel = _RecommendedEventsModel
 
 abstract class _RecommendedEventsModel with Store {
   @observable
-  List<Map<String, dynamic>> recommendedEvents =[
+  List<Map<String, dynamic>> recommendedEvents = [
     {
       "eventName": "New Event 1",
       "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
@@ -25,6 +25,30 @@ abstract class _RecommendedEventsModel with Store {
       "eventName": "New Event 3",
       "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
       "eventCoverPhoto": "asset/images/dummy_events/event_3.png",
+      "eventVenuePhoto": List(),
+    },
+    {
+      "eventName": "New Event 4",
+      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
+      "eventCoverPhoto": "asset/images/dummy_events/event_4.png",
+      "eventVenuePhoto": List(),
+    },
+    {
+      "eventName": "New Event 4",
+      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
+      "eventCoverPhoto": "asset/images/dummy_events/event_4.png",
+      "eventVenuePhoto": List(),
+    },
+    {
+      "eventName": "New Event 4",
+      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
+      "eventCoverPhoto": "asset/images/dummy_events/event_4.png",
+      "eventVenuePhoto": List(),
+    },
+    {
+      "eventName": "New Event 4",
+      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
+      "eventCoverPhoto": "asset/images/dummy_events/event_4.png",
       "eventVenuePhoto": List(),
     },
     {

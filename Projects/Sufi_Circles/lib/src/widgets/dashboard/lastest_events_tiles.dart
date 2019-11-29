@@ -9,13 +9,13 @@ class LatestEventTiles extends StatelessWidget {
 
   const LatestEventTiles({Key key, this.index}) : super(key: key);
 
-  Widget _buildEventHeading(String title) {
+  Widget _buildEventHeading(context, String title) {
     return Container(
       alignment: Alignment.center,
       width: title.length.toDouble() * 20,
       child: Text(
         title,
-        style: TextStyle(color: Colors.white, fontSize: 22.0),
+        style: Theme.of(context).textTheme.display1.apply(color: Colors.white),
       ),
     );
   }
@@ -24,7 +24,7 @@ class LatestEventTiles extends StatelessWidget {
     return Container(
       width: title.length.toDouble() * 11,
       child: Divider(
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).errorColor,
         thickness: 2,
         height: 1,
       ),
@@ -34,7 +34,7 @@ class LatestEventTiles extends StatelessWidget {
   Widget _buildEventDesc(context, String desc) {
     return Text(
       desc,
-      style: Theme.of(context).textTheme.body2,
+      style: Theme.of(context).textTheme.body1,
       textAlign: TextAlign.center,
     );
   }
@@ -63,7 +63,7 @@ class LatestEventTiles extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  _buildEventHeading(detail['eventName']),
+                  _buildEventHeading(context, detail['eventName']),
                   _buildDivider(context, detail['eventName']),
                   _buildEventDesc(context, detail['eventDesc']),
                 ],
