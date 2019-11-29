@@ -31,19 +31,22 @@ class DashboardDrawer extends StatelessWidget {
                           : NamedCircle(title: getFirstChars(data.name))),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 24, top: 15),
+                  padding: EdgeInsets.only(left: 24, top: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         data.name,
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.display1,
                       ),
                       Text(
                         data.email,
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.display4,
+                        style: Theme.of(context)
+                            .textTheme
+                            .body1
+                            .apply(color: Colors.black),
                       ),
                     ],
                   ),
