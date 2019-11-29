@@ -43,10 +43,19 @@ class _AddEventDetailsState extends State<AddEventDetails> {
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.close, color: Color(0xFF072247)),
-          onPressed: () => Navigator.pop(context),
-        ),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 22.0),
+            child: Text(
+              "Click to cancel",
+              style: Theme.of(context).textTheme.body2,
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.close, color: Color(0xFF072247)),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -60,8 +69,8 @@ class _AddEventDetailsState extends State<AddEventDetails> {
               title: "Who is the organiser?",
             ),
             AddEventNameDetail(
-              title: "Tell us your event name.",
-              inputHint: "Enter a good name for the event. (mandatory)",
+              title: "Tell us your event name.*",
+              inputHint: "Enter a good name for the event.",
             ),
             AddEventDescDetail(
               title: "Describe your event.",

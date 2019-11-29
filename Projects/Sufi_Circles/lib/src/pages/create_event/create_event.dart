@@ -19,7 +19,10 @@ class CreateEvent extends StatelessWidget {
         children: <Widget>[
           Center(
             child: Text('Create something that people remember',
-                style: TextStyle(fontFamily: "Comfortaa")),
+                style: Theme.of(context)
+                    .textTheme
+                    .body1
+                    .apply(color: Colors.black)),
           ),
           RoundClippedButton(
             isMain: false,

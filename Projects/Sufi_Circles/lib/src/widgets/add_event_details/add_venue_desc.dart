@@ -42,7 +42,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                FormHeading(heading: "Add venue details."),
+                FormHeading(heading: "Add venue details.*"),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 18),
                   child:

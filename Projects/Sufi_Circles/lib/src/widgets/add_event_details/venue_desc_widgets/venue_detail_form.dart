@@ -74,7 +74,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            FormHeading(heading: "Add venue details."),
+            FormHeading(heading: "Add venue details.*"),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 18),
               child: PickerText(
@@ -89,7 +89,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                 children: <Widget>[
                   Text(
                     "Add country from below:",
-                    style: Theme.of(context).textTheme.display2,
+                    style: Theme.of(context).textTheme.body2,
                   ),
                   DropDown(
                     list: countriesList,
@@ -107,7 +107,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                 children: <Widget>[
                   Text(
                     "Add state from below:",
-                    style: Theme.of(context).textTheme.display2,
+                    style: Theme.of(context).textTheme.body2,
                   ),
                   DropDown(
                     list: getStateUsingCountry(this._selectedCountry),
@@ -125,7 +125,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                 children: <Widget>[
                   Text(
                     "Add city from below:",
-                    style: Theme.of(context).textTheme.display2,
+                    style: Theme.of(context).textTheme.body2,
                   ),
                   DropDown(
                     list: getCitiesUsingCountry(this._selectedCountry),
@@ -142,10 +142,10 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                 children: <Widget>[
                   Text(
                     "Enter location/address:",
-                    style: Theme.of(context).textTheme.display2,
+                    style: Theme.of(context).textTheme.body2,
                   ),
                   TextField(
-                    style: Theme.of(context).textTheme.display2,
+                    style: Theme.of(context).textTheme.body2,
                     onChanged: _setAddress,
                     decoration: InputDecoration(
                       hintText: "Enter here...",
@@ -162,10 +162,10 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                 children: <Widget>[
                   Text(
                     "Enter venue name:",
-                    style: Theme.of(context).textTheme.display2,
+                    style: Theme.of(context).textTheme.body2,
                   ),
                   TextField(
-                    style: Theme.of(context).textTheme.display2,
+                    style: Theme.of(context).textTheme.body2,
                     onChanged: _setVenueName,
                     decoration: InputDecoration(
                       hintText: "Enter here...",

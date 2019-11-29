@@ -22,7 +22,7 @@ class AddEventTime extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: FormHeading(heading: "Add time of the event."),
+                child: FormHeading(heading: "Add time of the event.*"),
               ),
               Observer(
                 builder: (_) => TimePicker(

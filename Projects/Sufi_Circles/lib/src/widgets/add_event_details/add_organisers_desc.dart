@@ -45,10 +45,10 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                     SizedBox(height: 20),
                     Text(
                       "Organiser's Email:",
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
                         hintStyle: TextStyle(fontSize: 17),
@@ -57,10 +57,10 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                     SizedBox(height: 20),
                     Text(
                       "Organiser's Contact#:",
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
                         hintStyle: TextStyle(fontSize: 17),

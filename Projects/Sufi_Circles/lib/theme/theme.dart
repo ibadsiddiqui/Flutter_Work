@@ -13,6 +13,7 @@ ThemeData generateTheme() {
     buttonColor: Color.fromRGBO(17, 211, 188, 1),
     textTheme: TextTheme(
         body1: TextStyle(fontFamily: "Comfortaa", color: Colors.white),
+        body2: TextStyle(fontFamily: "Comfortaa"),
         // display2: TextStyle(fontFamily: "CreteRound", fontSize: 15),
         display1: TextStyle(
             fontSize: 25,

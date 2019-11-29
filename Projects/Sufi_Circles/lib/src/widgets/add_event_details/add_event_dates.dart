@@ -29,7 +29,7 @@ class AddEventDate extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
-                  child: FormHeading(heading: "Add dates of the event."),
+                  child: FormHeading(heading: "Add dates of the event.*"),
                 ),
                 EventDatePicker(
                   heading: "At what date will it start?",

@@ -10,7 +10,7 @@ class PickerText extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 7.5),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.display2,
+        style: Theme.of(context).textTheme.body2,
       ),
     );
   }

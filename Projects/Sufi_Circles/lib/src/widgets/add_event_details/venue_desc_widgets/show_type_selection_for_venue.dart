@@ -19,7 +19,7 @@ class ShowTypeSelectionForVenue extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            FormHeading(heading: "Add venue details."),
+            FormHeading(heading: "Add venue details.*"),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 18, vertical: 20.0),
               child: PickerText(
