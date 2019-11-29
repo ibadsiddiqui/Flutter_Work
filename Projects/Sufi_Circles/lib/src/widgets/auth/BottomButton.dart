@@ -3,25 +3,26 @@ import 'package:flutter/material.dart';
 class BottomButton extends StatelessWidget {
   final Function onPressed;
   final String title;
-  const BottomButton({Key key, this.onPressed, this.title}) : super(key: key);
+  BottomButton({Key key, this.onPressed, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.only(
-          left: 40.0, right: 40.0, top: 10.0, bottom: 20.0),
+      margin: EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0, bottom: 20.0),
       alignment: Alignment.center,
-      child: new Row(
+      child: Row(
         children: <Widget>[
-          new Expanded(
-            child: new FlatButton(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              color: Colors.transparent,
+          Expanded(
+            child: FlatButton(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
               onPressed: () => onPressed(context),
               child: Text(
                 title,
-                style: TextStyle(color: Colors.white, fontFamily: "Comfortaa"),
+                style: Theme.of(context)
+                    .textTheme
+                    .button
+                    .apply(fontFamily: "Comfortta"),
               ),
             ),
           ),

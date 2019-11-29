@@ -12,7 +12,7 @@ class AppTitle extends StatelessWidget {
       child: new Text(
         "Sufi Circles",
         style: color == null
-            ? Theme.of(context).textTheme.headline
+            ? Theme.of(context).textTheme.display3
             : TextStyle(color: color, fontSize: 40, fontFamily: "CreteRound"),
       ),
     );

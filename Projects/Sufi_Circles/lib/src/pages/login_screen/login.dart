@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   isLoading: attempLogin,
                 ),
                 ForgotPasswordButton(),
-                new Expanded(child: Divider()),
+                Expanded(child: Divider()),
                 BottomButton(
                   title: "Don't have an account? Create One",
                   onPressed: pushSignUpScreen,

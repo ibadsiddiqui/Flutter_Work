@@ -47,12 +47,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => true,
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
         body: new Container(
-          padding: EdgeInsets.only(top: 75),
+          padding: EdgeInsets.only(top: size.height * 0.075),
           decoration: buildAuthBackground(),
           height: MediaQuery.of(context).size.height,
           child: new Column(
