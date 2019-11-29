@@ -23,11 +23,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   AuthController authController = AuthController();
   ImageStorage imageStorage = ImageStorage();
 
-  bool isFullNameEdit = false;
-  bool isEmailEdit = false;
-  bool isCountryEdit = false;
-  bool isCityEdit = false;
-  bool isUploading = false;
+  bool _isFullNameEdit = false;
+  bool _isEmailEdit = false;
+  bool _isCountryEdit = false;
+  bool _isCityEdit = false;
+  bool _isUploading = false;
 
   @override
   void initState() {
@@ -39,31 +39,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  toggleNameEdit() => this.setState(() => isFullNameEdit = !isFullNameEdit);
-  toggleEmailEdit() => this.setState(() => isEmailEdit = !isEmailEdit);
-  toggleCountryEdit() => this.setState(() => isCountryEdit = !isCountryEdit);
-  toggleCityEdit() => this.setState(() => isCityEdit = !isCityEdit);
+  _toggleNameEdit() => this.setState(() => _isFullNameEdit = !_isFullNameEdit);
+  _toggleEmailEdit() => this.setState(() => _isEmailEdit = !_isEmailEdit);
+  _toggleCountryEdit() => this.setState(() => _isCountryEdit = !_isCountryEdit);
+  _toggleCityEdit() => this.setState(() => _isCityEdit = !_isCityEdit);
 
   void setImage(context, String from, {String cameraPath = ""}) async {
     UserModel userModel = Provider.of<UserModel>(context);
     if (from == "media") {
       var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
       if (_image != null) {
-        this.setState(() => isUploading = !isUploading);
+        this.setState(() => _isUploading = !_isUploading);
         String filePath = _image.path;
         String url = await imageStorage.uploadUserProfilePicture(
             userModel.userID, filePath);
         userModel.setUserProfilePic(url);
-        this.setState(() => isUploading = !isUploading);
+        this.setState(() => _isUploading = !_isUploading);
       }
     } else {
       Navigator.of(context).pop();
-      this.setState(() => isUploading = !isUploading);
+      this.setState(() => _isUploading = !_isUploading);
 
       String url = await imageStorage.uploadUserProfilePicture(
           userModel.userID, cameraPath);
       userModel.setUserProfilePic(url);
-      this.setState(() => isUploading = !isUploading);
+      this.setState(() => _isUploading = !_isUploading);
     }
   }
 
@@ -98,8 +98,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               backgroundColor: Color(0xFF072247),
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                title: Text("Profile Information"),
-                background: isUploading
+                title: Text(
+                  "Profile Information",
+                  style: Theme.of(context)
+                      .textTheme
+                      .title
+                      .apply(color: Colors.white, fontFamily: "CreteRound"),
+                ),
+                background: _isUploading
                     ? Loader()
                     : HeroAnimation(photoPath: userModel.profilePicture),
               ),
@@ -109,46 +115,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: Column(
           children: <Widget>[
             UserDetailItem(
-                isEditable: isFullNameEdit,
+                isEditable: _isFullNameEdit,
                 inputLabel: "Full Name",
                 value: userModel.name,
-                toggleEdit: toggleNameEdit,
+                toggleEdit: _toggleNameEdit,
                 onSubmit: (String name) async {
                   userModel.setUserName(name);
-                  toggleNameEdit();
+                  _toggleNameEdit();
                   await userDBController.updateUserName(context);
                 }),
             UserDetailItem(
-              isEditable: isEmailEdit,
+              isEditable: _isEmailEdit,
               inputLabel: "Email",
               value: userModel.email,
-              toggleEdit: toggleEmailEdit,
+              toggleEdit: _toggleEmailEdit,
               onSubmit: (String email) async {
                 userModel.setUserEmail(email);
-                toggleEmailEdit();
+                _toggleEmailEdit();
                 await userDBController.updateUserEmail(context);
                 await authController.updateFirebaseUserEmail(email, context);
               },
             ),
             UserDetailItem(
-              isEditable: isCountryEdit,
+              isEditable: _isCountryEdit,
               inputLabel: "Country",
               value: userModel.country,
-              toggleEdit: toggleCountryEdit,
+              toggleEdit: _toggleCountryEdit,
               onSubmit: (String country) async {
                 userModel.setUserCountry(country);
-                toggleCountryEdit();
+                _toggleCountryEdit();
                 await userDBController.updateUserCountry(context);
               },
             ),
             UserDetailItem(
-              isEditable: isCityEdit,
+              isEditable: _isCityEdit,
               inputLabel: "City",
               value: userModel.city,
-              toggleEdit: toggleCityEdit,
+              toggleEdit: _toggleCityEdit,
               onSubmit: (String city) async {
                 userModel.setUserCity(city);
-                toggleCityEdit();
+                _toggleCityEdit();
                 await userDBController.updateUserCity(context);
               },
             ),
