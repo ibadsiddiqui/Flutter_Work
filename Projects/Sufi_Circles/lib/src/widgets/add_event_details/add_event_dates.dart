@@ -14,8 +14,7 @@ class AddEventDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 2, right: 2),
-      margin: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.3),
+      alignment: Alignment.center,
       child: Consumer<EventModel>(
         builder: (_, data, __) {
           var parsedDateFrom = DateTime.now();

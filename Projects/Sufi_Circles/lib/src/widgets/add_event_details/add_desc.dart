@@ -24,7 +24,6 @@ class _AddEventDescDetailState extends State<AddEventDescDetail> {
 
   @override
   Widget build(BuildContext context) {
-    // EventModel eventModel = Provider.of<EventModel>(context);
     return EventDetailForm(
       maxLength: 500,
       maxLine: 15,

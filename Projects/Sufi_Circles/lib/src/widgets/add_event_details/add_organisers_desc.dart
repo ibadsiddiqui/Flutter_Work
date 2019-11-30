@@ -25,14 +25,12 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    // final venueDetails = Provider.of<EventModel>(context);
     return Container(
-      margin: EdgeInsets.only(top: size.width * 0.3),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FormHeading(heading: "Add Organiser's details. (optional)"),
             Observer(

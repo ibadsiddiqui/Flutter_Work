@@ -4,6 +4,7 @@ import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/venue_photos_widgets/image_viewer.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -61,18 +62,8 @@ class _AddEventCoverStatePhoto extends State<AddEventCoverPhoto> {
             Observer(
               builder: (_) => Container(
                 child: isPicPlaceholder(data.eventCoverPhoto)
-                    ? Image.asset(
-                        data.eventCoverPhoto,
-                        height: size.height * 0.64,
-                        width: size.width,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.file(
-                        File(data.eventCoverPhoto),
-                        height: size.height * 0.64,
-                        width: size.width,
-                        fit: BoxFit.cover,
-                      ),
+                    ? ImageViewer(imagePath: "")
+                    : ImageViewer(imagePath: data.eventCoverPhoto),
               ),
             ),
             Observer(

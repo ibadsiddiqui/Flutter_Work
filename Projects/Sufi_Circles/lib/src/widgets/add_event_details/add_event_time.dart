@@ -13,12 +13,11 @@ class AddEventTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.3),
-      padding: EdgeInsets.only(left: 2, right: 2),
       child: Consumer<EventModel>(
         builder: (_, data, __) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),

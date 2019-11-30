@@ -29,10 +29,9 @@ class EventDetailForm extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       alignment: Alignment.centerLeft,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: 100),
           FormHeading(heading: title),
           MultiLineInput(
             controller: controller,

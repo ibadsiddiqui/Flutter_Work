@@ -68,11 +68,11 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.width * 0.1),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FormHeading(heading: "Add venue details.*"),
             Padding(
@@ -149,7 +149,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                     onChanged: _setAddress,
                     decoration: InputDecoration(
                       hintText: "Enter here...",
-                      hintStyle: TextStyle(fontSize: 17),
+                      hintStyle: Theme.of(context).textTheme.body2,
                     ),
                   ),
                 ],
@@ -169,7 +169,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
                     onChanged: _setVenueName,
                     decoration: InputDecoration(
                       hintText: "Enter here...",
-                      hintStyle: TextStyle(fontSize: 17),
+                      hintStyle: Theme.of(context).textTheme.body2,
                     ),
                   ),
                 ],

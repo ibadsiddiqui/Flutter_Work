@@ -25,13 +25,12 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.width * 0.3),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FormHeading(heading: "Add Event URLs. (optional)"),
             Observer(
@@ -44,10 +43,10 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
                     SizedBox(height: 20),
                     Text(
                       "Facebook URL:",
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
                         hintStyle: TextStyle(fontSize: 17),
@@ -56,10 +55,10 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
                     SizedBox(height: 20),
                     Text(
                       "Website URL:",
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
                         hintStyle: TextStyle(fontSize: 17),
@@ -68,10 +67,10 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
                     SizedBox(height: 20),
                     Text(
                       "Instagram URL:",
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
                         hintStyle: TextStyle(fontSize: 17),
