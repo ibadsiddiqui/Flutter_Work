@@ -5,6 +5,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_organiser_n
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_time.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_name.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_organisers_desc.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/add_targetted_audience_limit.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_web_urls.dart';
@@ -77,6 +78,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
               inputHint:
                   "Enter a brief summary of your event so guests know what to expect. (optional)",
             ),
+            AddTargettedAudienceLimit(),
             AddEventCoverPhoto(),
             AddVenuePhotos(),
             AddEventDate(),
