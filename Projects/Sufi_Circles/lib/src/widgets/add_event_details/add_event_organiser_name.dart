@@ -4,14 +4,29 @@ import 'package:flutter/material.dart';
 
 class AddEventOrganiserName extends StatefulWidget {
   final String title;
+  final String value;
+  final Function onChange;
 
-  const AddEventOrganiserName({Key key, this.title}) : super(key: key);
+  AddEventOrganiserName({Key key, this.title, this.value, this.onChange})
+      : super(key: key);
   @override
   _AddEventOrganiserNameState createState() => _AddEventOrganiserNameState();
 }
 
 class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
-  TextEditingController eventNameController = TextEditingController(text: "");
+  TextEditingController eventNameController;
+
+  @override
+  void initState() {
+    super.initState();
+    eventNameController.text = widget.value;
+  }
+
+  @override
+  void dispose() {
+    eventNameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +40,7 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
           Container(
             child: TextField(
               style: Theme.of(context).textTheme.body2,
+              onChanged: widget.onChange,
               controller: eventNameController,
               decoration: InputDecoration(
                 hintText: "Enter name here...",

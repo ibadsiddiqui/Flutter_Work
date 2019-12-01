@@ -57,7 +57,11 @@ abstract class _EventModel with Store {
   Map<String, String> additionalLinks = {};
 
   @action
-  void setEventName(String name) => this.eventName = name as Observable<String>;
+  void setEventOrganiserName(String name) =>
+      this.locationDetails.value = {"organiser_name": name};
+
+  @action
+  void setEventName(String name) => this.eventName.value = name;
 
   @action
   void setEventDesc(String name) => this.eventDesc = name as Observable<String>;

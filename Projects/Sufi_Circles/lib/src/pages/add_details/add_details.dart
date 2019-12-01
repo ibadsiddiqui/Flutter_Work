@@ -10,6 +10,8 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_web_urls.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 
 class AddEventDetails extends StatefulWidget {
   AddEventDetails({Key key}) : super(key: key);
@@ -41,6 +43,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
 
   @override
   Widget build(BuildContext context) {
+    EventModel eventModel = Provider.of<EventModel>(context);
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -68,6 +71,8 @@ class _AddEventDetailsState extends State<AddEventDetails> {
           children: <Widget>[
             AddEventOrganiserName(
               title: "Who is the organiser?",
+              value: eventModel.organiserDetails.value["organiser_name"],
+              onChange: eventModel.setEventOrganiserName,
             ),
             AddEventNameDetail(
               title: "Tell us your event name.*",
