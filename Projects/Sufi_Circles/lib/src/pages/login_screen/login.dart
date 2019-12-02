@@ -70,10 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 ForgotPasswordButton(),
                 Expanded(child: Divider()),
-                BottomButton(
-                  title: "Don't have an account? Create One",
-                  onPressed: pushSignUpScreen,
-                )
+                new GestureDetector(
+                  onTap: () =>
+                      FocusScope.of(context).requestFocus(new FocusNode()),
+                  child: BottomButton(
+                    title: "Don't have an account? Create One",
+                    onPressed: pushSignUpScreen,
+                  ),
+                ),
               ],
             ),
           ),

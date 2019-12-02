@@ -6,7 +6,7 @@ class AddEventNameDetail extends StatefulWidget {
   final String inputHint;
   final String title;
   final String value;
-  final String onChange;
+  final Function onChange;
   AddEventNameDetail(
       {Key key, this.inputHint, this.title, this.value, this.onChange})
       : super(key: key);
@@ -16,7 +16,13 @@ class AddEventNameDetail extends StatefulWidget {
 }
 
 class _AddEventNameDetailState extends State<AddEventNameDetail> {
-  TextEditingController eventNameController = TextEditingController(text: "");
+  TextEditingController eventNameController;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    eventNameController = TextEditingController(text: widget.value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +37,7 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
             child: TextField(
               style: Theme.of(context).textTheme.body2,
               controller: eventNameController,
+              onChanged: widget.onChange,
               decoration: InputDecoration(
                 hintText: widget.inputHint,
                 hintStyle: Theme.of(context).textTheme.body2,

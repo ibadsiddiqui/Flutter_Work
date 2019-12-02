@@ -18,11 +18,12 @@ class CreateEvent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Center(
-            child: Text('Create something that people remember',
-                style: Theme.of(context)
-                    .textTheme
-                    .body1
-                    .apply(color: Colors.black)),
+            child: Text(
+              'Create something that people remember.\nIt will just take 11 steps.',
+              textAlign: TextAlign.center,
+              style:
+                  Theme.of(context).textTheme.body1.apply(color: Colors.black),
+            ),
           ),
           RoundClippedButton(
             isMain: false,

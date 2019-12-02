@@ -78,6 +78,8 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             AddEventNameDetail(
               title: "Tell us your event name.*",
               inputHint: "Enter a good name for the event.",
+              value: eventModel.eventName.value,
+              onChange: eventModel.setEventName,
             ),
             AddEventDescDetail(
               title: "Describe your event.",
