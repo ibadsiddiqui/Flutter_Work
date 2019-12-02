@@ -41,3 +41,12 @@ Future<String> decryptKey(String password) async {
     return password;
   }
 }
+
+Future<bool> validateName(String name) async {
+  RegExp regExp = RegExp(
+    r"/^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/g",
+    caseSensitive: false,
+    multiLine: false,
+  );
+  return regExp.hasMatch(name);
+}
