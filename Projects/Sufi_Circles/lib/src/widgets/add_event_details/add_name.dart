@@ -1,6 +1,8 @@
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddEventNameDetail extends StatefulWidget {
   final String inputHint;
@@ -26,6 +28,9 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
 
   @override
   Widget build(BuildContext context) {
+    EventModel eventModel = Provider.of<EventModel>(context);
+
+    print(eventModel.organiserDetails);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(

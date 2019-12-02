@@ -1,14 +1,18 @@
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
+import 'package:Sufi_Circles/src/widgets/popup/dialog_show.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddEventOrganiserName extends StatefulWidget {
   final String title;
-  final String value;
-  final Function onChange;
+  final Function moveToNextPage;
 
-  AddEventOrganiserName({Key key, this.title, this.value, this.onChange})
+  AddEventOrganiserName({Key key, this.title, this.moveToNextPage})
       : super(key: key);
+
   @override
   _AddEventOrganiserNameState createState() => _AddEventOrganiserNameState();
 }
@@ -19,7 +23,9 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    eventNameController = TextEditingController(text: widget.value);
+    Map eventModel = Provider.of<EventModel>(context).organiserDetails.value;
+    String organiserName = eventModel["organiserName"];
+    eventNameController = TextEditingController(text: organiserName);
   }
 
   @override
@@ -30,6 +36,7 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
 
   @override
   Widget build(BuildContext context) {
+    EventModel eventModel = Provider.of<EventModel>(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
@@ -40,7 +47,7 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
           Container(
             child: TextField(
               style: Theme.of(context).textTheme.body2,
-              onChanged: widget.onChange,
+              onChanged: eventModel.setEventOrganiserName,
               controller: eventNameController,
               decoration: InputDecoration(
                 hintText: "Enter name here...",
@@ -48,7 +55,22 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
               ),
             ),
           ),
-          RoundClippedButton(isMain: false, onPress: () {}),
+          Container(
+            child: !eventNameController.text.isNotEmpty
+                ? RoundClippedButton(
+                    isMain: false,
+                    onPress: () async {
+                      print(eventModel.organiserDetails.value["organiserName"]);
+                      bool isValid =
+                          await validateName(eventNameController.text);
+                      if (isValid)
+                        widget.moveToNextPage();
+                      else
+                        showDialogForWrongName(context);
+                    },
+                  )
+                : null,
+          ),
         ],
       ),
     );

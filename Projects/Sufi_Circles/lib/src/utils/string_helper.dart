@@ -43,8 +43,7 @@ Future<String> decryptKey(String password) async {
 }
 
 Future<bool> validateName(String name) async {
-  RegExp regExp = RegExp(
-    r"/^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/g",
+  RegExp regExp = new RegExp(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
     caseSensitive: false,
     multiLine: false,
   );
