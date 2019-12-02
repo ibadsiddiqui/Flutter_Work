@@ -62,7 +62,7 @@ abstract class _EventModel with Store {
 
   @action
   void setEventOrganiserName(String name) =>
-      this.locationDetails.value = {"organiser_name": name};
+      this.locationDetails.value = {"organiserName": name};
 
   @action
   void setEventName(String name) => this.eventName.value = name;
