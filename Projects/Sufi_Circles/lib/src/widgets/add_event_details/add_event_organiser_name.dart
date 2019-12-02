@@ -17,9 +17,9 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
   TextEditingController eventNameController;
 
   @override
-  void initState() {
-    super.initState();
-    eventNameController.text = widget.value;
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    eventNameController = TextEditingController(text: widget.value);
   }
 
   @override
