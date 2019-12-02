@@ -1,70 +1,88 @@
-import 'package:Sufi_Circles/src/widgets/onboard/description.dart';
-import 'package:Sufi_Circles/src/widgets/onboard/heading.dart';
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-class OnboardPageView extends StatelessWidget {
-  const OnboardPageView(
-      {Key key, this.assetPath, this.title, this.desc, this.onPressed})
-      : super(key: key);
-
-  final String assetPath;
-  final String title;
-  final String desc;
-  final Function onPressed;
+class SlidingCard extends StatelessWidget {
+  final String name;
+  final String assetName;
+  final double offset;
+  final Function onPress;
+  SlidingCard({
+    Key key,
+    @required this.name,
+    @required this.assetName,
+    @required this.offset,
+    this.onPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      color: Color(0xFF072247),
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: Container(
+    double gauss = math.exp(-(math.pow((offset.abs() - 0.5), 2) / 0.08));
+    return Transform.translate(
+      offset: Offset(-32 * gauss * offset.sign, 0),
+      child: Card(
+        color: Theme.of(context).backgroundColor,
+        margin: EdgeInsets.only(left: 8, right: 8, bottom: 24),
+        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
               child: Image.asset(
-                assetPath,
-                fit: BoxFit.fitHeight,
-                width: size.width,
-                height: size.width * 0.8,
+                'asset/$assetName',
+                height: MediaQuery.of(context).size.height * 0.4,
+                alignment: Alignment(-offset.abs(), 0),
+                fit: BoxFit.none,
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: <Widget>[
-                OnBoardHeading(title: title),
-                OnBoardDescription(desc: desc),
-                Container(
-                  alignment: Alignment.bottomRight,
-                  child: FlatButton(
-                    child: title == "FEATURES"
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                                Text(
-                                  "Get Started",
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontFamily: "Comfortaa",
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.arrow_right,
-                                  color: Colors.white,
-                                )
-                              ])
-                        : Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
-                          ),
-                    onPressed: onPressed,
-                  ),
-                )
-              ],
+            SizedBox(height: 8),
+            Expanded(
+              child: CardContent(name: name, offset: gauss, onPress: onPress),
             ),
-          )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CardContent extends StatelessWidget {
+  final String name;
+  final Function onPress;
+  final double offset;
+
+  CardContent(
+      {Key key,
+      @required this.name,
+      @required this.offset,
+      @required this.onPress})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Transform.translate(
+            offset: Offset(8 * offset, 0),
+            child: Text(name, style: Theme.of(context).textTheme.body1),
+          ),
+          SizedBox(height: 8),
+          Spacer(),
+          Container(
+            alignment: Alignment.center,
+            child: Transform.translate(
+              offset: Offset(32 * offset, 0),
+              child: IconButton(
+                  onPressed: this.onPress,
+                  icon: Icon(Icons.arrow_forward, color: Colors.white)),
+            ),
+          ),
+          SizedBox(width: 16),
         ],
       ),
     );
