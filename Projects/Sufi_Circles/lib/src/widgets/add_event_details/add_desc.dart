@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form.dart';
+import 'package:flutter/material.dart';
 
 class AddEventDescDetail extends StatefulWidget {
   final String inputHint;
@@ -18,7 +16,6 @@ class _AddEventDescDetailState extends State<AddEventDescDetail> {
   TextEditingController eventNameController = TextEditingController(text: "");
 
   onNameSubmit(String name) {
-    print("name");
     print(name);
   }
 

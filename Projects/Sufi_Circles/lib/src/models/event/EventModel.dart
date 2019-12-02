@@ -50,8 +50,12 @@ abstract class _EventModel with Store {
       Observable<Map<String, dynamic>>({});
 
   @observable
-  Observable<Map<String, dynamic>> organiserDetails =
-      Observable<Map<String, dynamic>>({});
+  Observable<Map<String, String>> organiserDetails =
+      Observable<Map<String, String>>({
+    "organiserName": "",
+    "organiserEmail": "",
+    "organiserContactNo": "",
+  });
 
   @observable
   Map<String, String> additionalLinks = {};

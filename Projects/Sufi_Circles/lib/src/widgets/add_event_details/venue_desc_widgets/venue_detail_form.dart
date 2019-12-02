@@ -32,6 +32,7 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
   @protected
   @mustCallSuper
   void didChangeDependencies() async {
+    super.didChangeDependencies();
     Map details = Provider.of<EventModel>(context).locationDetails.value;
     if (details.isEmpty) {
       this.setState(() {

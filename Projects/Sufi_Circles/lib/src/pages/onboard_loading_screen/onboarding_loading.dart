@@ -31,9 +31,12 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
 
   @protected
   @mustCallSuper
-  Future didChangeDependencies() async => checkUserSession();
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    checkUserSession();
+  }
 
-  void checkUserSession() async {
+  Future<void> checkUserSession() async {
     String time = await utils.getStringPreference(SET_TOKEN_EXPIRY);
     if (time != null) {
       if (DateTime.now().compareTo(DateTime.parse(time)) != 0) {
@@ -45,9 +48,9 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
       navigateToOnBoard();
   }
 
-  void navigateToOnBoard() async {
+  Future<void> navigateToOnBoard() async {
     bool isInstalled = await utils.getBoolPreference(IsInstalled);
-    if (isInstalled != null)
+    if (isInstalled == null)
       TimeNavigation.navigate(context, LoginScreen(), second: 2);
     else {
       await utils.setBoolPreference(IsInstalled, true);

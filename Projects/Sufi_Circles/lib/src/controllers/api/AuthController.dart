@@ -55,7 +55,6 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> signOutUser() async {
-    print('asdasd');
     await _authService.signOut();
   }
 }

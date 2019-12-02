@@ -201,14 +201,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$organiserDetailsAtom = Atom(name: '_EventModel.organiserDetails');
 
   @override
-  Observable<Map<String, dynamic>> get organiserDetails {
+  Observable<Map<String, String>> get organiserDetails {
     _$organiserDetailsAtom.context.enforceReadPolicy(_$organiserDetailsAtom);
     _$organiserDetailsAtom.reportObserved();
     return super.organiserDetails;
   }
 
   @override
-  set organiserDetails(Observable<Map<String, dynamic>> value) {
+  set organiserDetails(Observable<Map<String, String>> value) {
     _$organiserDetailsAtom.context.conditionallyRunInAction(() {
       super.organiserDetails = value;
       _$organiserDetailsAtom.reportChanged();
@@ -233,6 +233,16 @@ mixin _$EventModel on _EventModel, Store {
   }
 
   final _$_EventModelActionController = ActionController(name: '_EventModel');
+
+  @override
+  void setEventOrganiserName(String name) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventOrganiserName(name);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setEventName(String name) {

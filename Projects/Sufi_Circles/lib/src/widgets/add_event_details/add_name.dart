@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 class AddEventNameDetail extends StatefulWidget {
   final String inputHint;
   final String title;
-
-  const AddEventNameDetail({Key key, this.inputHint, this.title})
+  final String value;
+  final String onChange;
+  AddEventNameDetail(
+      {Key key, this.inputHint, this.title, this.value, this.onChange})
       : super(key: key);
 
   @override
@@ -15,11 +17,6 @@ class AddEventNameDetail extends StatefulWidget {
 
 class _AddEventNameDetailState extends State<AddEventNameDetail> {
   TextEditingController eventNameController = TextEditingController(text: "");
-
-  onNameSubmit(String name) {
-    print("name");
-    print(name);
-  }
 
   @override
   Widget build(BuildContext context) {

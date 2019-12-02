@@ -39,6 +39,7 @@ class _MapViewState extends State<MapView> {
   @protected
   @mustCallSuper
   void didChangeDependencies() async {
+    super.didChangeDependencies();
     this.setState(() => _isPickingLocation = true);
     Position position = await _mapServices.getCurrentLocation();
     await setPlaceMarks(position.latitude, position.longitude);

@@ -23,7 +23,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @protected
   @mustCallSuper
-  void didChangeDependencies() async => getUserDetails();
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    getUserDetails();
+  }
 
   @override
   void dispose() {
