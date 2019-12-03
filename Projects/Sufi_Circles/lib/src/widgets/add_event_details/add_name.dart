@@ -1,16 +1,16 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
+import 'package:Sufi_Circles/src/widgets/popup/dialog_show.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class AddEventNameDetail extends StatefulWidget {
-  final String inputHint;
   final String title;
-  final String value;
-  final Function onChange;
-  AddEventNameDetail(
-      {Key key, this.inputHint, this.title, this.value, this.onChange})
+  final Function moveToNextPage;
+  AddEventNameDetail({Key key, this.title, this.moveToNextPage})
       : super(key: key);
 
   @override
@@ -23,14 +23,19 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    eventNameController = TextEditingController(text: widget.value);
+    String eventName = Provider.of<EventModel>(context).eventName.value;
+    eventNameController = TextEditingController(text: eventName);
+  }
+
+  @override
+  void dispose() {
+    eventNameController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     EventModel eventModel = Provider.of<EventModel>(context);
-
-    print(eventModel.organiserDetails);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
@@ -42,14 +47,24 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
             child: TextField(
               style: Theme.of(context).textTheme.body2,
               controller: eventNameController,
-              onChanged: widget.onChange,
+              onChanged: eventModel.setEventName,
               decoration: InputDecoration(
-                hintText: widget.inputHint,
+                hintText: "Enter name here...",
                 hintStyle: Theme.of(context).textTheme.body2,
               ),
             ),
           ),
-          RoundClippedButton(isMain: false, onPress: () {}),
+          Observer(
+            builder: (_) => eventModel.eventName.value.isNotEmpty
+                ? GestureDetector(
+                    onTap: () =>
+                        FocusScope.of(context).requestFocus(FocusNode()),
+                    child: RoundClippedButton(
+                      isMain: false,
+                      onPress: () => widget.moveToNextPage(),
+                    ))
+                : Container(),
+          ),
         ],
       ),
     );

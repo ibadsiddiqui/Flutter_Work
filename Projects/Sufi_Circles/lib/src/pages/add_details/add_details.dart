@@ -19,7 +19,7 @@ class AddEventDetails extends StatefulWidget {
 }
 
 class _AddEventDetailsState extends State<AddEventDetails> {
-  final pageController = PageController(initialPage: 0);
+  final _pageController = PageController(initialPage: 0);
 
   @override
   void initState() {
@@ -28,12 +28,12 @@ class _AddEventDetailsState extends State<AddEventDetails> {
 
   @override
   void dispose() {
-    pageController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   moveToNextPage() {
-    pageController.nextPage(
+    _pageController.nextPage(
       duration: Duration(milliseconds: 500),
       curve: Curves.linear,
     );
@@ -63,24 +63,21 @@ class _AddEventDetailsState extends State<AddEventDetails> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
         child: PageView(
-          controller: pageController,
+          controller: _pageController,
           scrollDirection: Axis.horizontal,
           physics: new NeverScrollableScrollPhysics(),
           children: <Widget>[
             AddEventOrganiserName(
-              title: "Who is the organiser?",
+              title: "Tell us the Organiser's name.*",
               moveToNextPage: moveToNextPage,
             ),
             AddEventNameDetail(
               title: "Tell us your event name.*",
-              inputHint: "Enter a good name for the event.",
-              // value: eventModel.eventName.value,
-              // onChange: eventModel.setEventName,
+              moveToNextPage: moveToNextPage,
             ),
             AddEventDescDetail(
               title: "Describe your event.",
-              inputHint:
-                  "Enter a brief summary of your event so guests know what to expect. (optional)",
+              moveToNextPage: moveToNextPage,
             ),
             AddTargettedAudienceLimit(),
             AddEventCoverPhoto(),
