@@ -49,6 +49,7 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
             child: TextField(
               style: Theme.of(context).textTheme.body2,
               onChanged: eventModel.setEventOrganiserName,
+              autofocus: true,
               controller: eventNameController,
               decoration: InputDecoration(
                 hintText: "Enter name here...",
@@ -57,21 +58,21 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
             ),
           ),
           Observer(
-            builder: (_) => eventModel
-                    .organiserDetails.value["organiserName"].isNotEmpty
-                ? RoundClippedButton(
-                    isMain: false,
-                    onPress: () async {
-                      print(eventModel.organiserDetails.value["organiserName"]);
-                      bool isValid =
-                          await validateName(eventNameController.text);
-                      if (isValid)
-                        widget.moveToNextPage();
-                      else
-                        showDialogForWrongName(context);
-                    },
-                  )
-                : Container(),
+            builder: (_) =>
+                eventModel.organiserDetails.value["organiserName"].isNotEmpty
+                    ? RoundClippedButton(
+                        isMain: false,
+                        onPress: () async {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          bool isValid =
+                              await validateName(eventNameController.text);
+                          if (isValid)
+                            widget.moveToNextPage();
+                          else
+                            showDialogForWrongName(context);
+                        },
+                      )
+                    : Container(),
           ),
         ],
       ),
