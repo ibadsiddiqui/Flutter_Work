@@ -68,7 +68,7 @@ abstract class _EventModel with Store {
   void setEventName(String name) => this.eventName.value = name;
 
   @action
-  void setEventDesc(String name) => this.eventDesc = name as Observable<String>;
+  void setEventDesc(String name) => this.eventDesc.value = name;
 
   @action
   void setEventCoverPhoto(String name) => this.eventCoverPhoto = name;
