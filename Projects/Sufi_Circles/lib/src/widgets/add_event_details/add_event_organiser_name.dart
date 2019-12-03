@@ -4,6 +4,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dar
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/popup/dialog_show.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class AddEventOrganiserName extends StatefulWidget {
@@ -55,8 +56,9 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
               ),
             ),
           ),
-          Container(
-            child: !eventNameController.text.isNotEmpty
+          Observer(
+            builder: (_) => eventModel
+                    .organiserDetails.value["organiserName"].isNotEmpty
                 ? RoundClippedButton(
                     isMain: false,
                     onPress: () async {
@@ -69,7 +71,7 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
                         showDialogForWrongName(context);
                     },
                   )
-                : null,
+                : Container(),
           ),
         ],
       ),

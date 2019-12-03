@@ -6,7 +6,7 @@ showDialogForWrongName(context) {
     context: context,
     type: AlertType.warning,
     title: "Invalid Name",
-    desc: "Please enter correct name to proceed",
+    desc: "Please enter correct name to proceed.",
     style: AlertStyle(
         animationType: AnimationType.grow,
         animationDuration: Duration(milliseconds: 500)),
