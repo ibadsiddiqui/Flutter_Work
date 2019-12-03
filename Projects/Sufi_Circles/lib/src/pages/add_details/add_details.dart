@@ -79,7 +79,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
               title: "Describe your event.",
               moveToNextPage: moveToNextPage,
             ),
-            AddTargettedAudienceLimit(),
+            AddTargettedAudienceLimit(moveToNextPage: moveToNextPage,),
             AddEventCoverPhoto(),
             AddVenuePhotos(),
             AddEventDate(),

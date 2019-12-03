@@ -1,8 +1,6 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
-import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:Sufi_Circles/src/widgets/popup/dialog_show.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -56,13 +54,12 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
           ),
           Observer(
             builder: (_) => eventModel.eventName.value.isNotEmpty
-                ? GestureDetector(
-                    onTap: () =>
-                        FocusScope.of(context).requestFocus(FocusNode()),
-                    child: RoundClippedButton(
-                      isMain: false,
-                      onPress: () => widget.moveToNextPage(),
-                    ))
+                ? RoundClippedButton(
+                    isMain: false,
+                    onPress: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      widget.moveToNextPage();
+                    })
                 : Container(),
           ),
         ],

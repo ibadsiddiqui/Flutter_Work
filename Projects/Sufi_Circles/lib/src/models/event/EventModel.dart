@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/models/event/MetaData.dart';
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
@@ -8,10 +9,16 @@ class EventModel = _EventModel with _$EventModel;
 
 abstract class _EventModel with Store {
   @observable
-  Observable<String> eventName = Observable("");
+  Observable<String> eventName = Observable<String>("");
 
   @observable
-  Observable<String> eventDesc = Observable("");
+  Observable<String> eventDesc = Observable<String>("");
+
+  @observable
+  Observable<String> eventAudience = Observable<String>(UNLIMITED);
+
+  @observable
+  Observable<String> eventAudienceLimitRange = Observable<String>(ZEROTO50);
 
   @observable
   String eventCoverPhoto = 'asset/images/placeholder/cover/index.png';
@@ -68,7 +75,14 @@ abstract class _EventModel with Store {
   void setEventName(String name) => this.eventName.value = name;
 
   @action
-  void setEventDesc(String name) => this.eventDesc.value = name;
+  void setEventDesc(String desc) => this.eventDesc.value = desc;
+
+  @action
+  void setEventAudience(String txt) => this.eventAudience.value = txt;
+
+  @action
+  void setEventAudienceLimit(String txt) =>
+      this.eventAudienceLimitRange.value = txt;
 
   @action
   void setEventCoverPhoto(String name) => this.eventCoverPhoto = name;
@@ -78,7 +92,7 @@ abstract class _EventModel with Store {
       this.eventCoverPhoto = 'asset/images/placeholder/cover/index.png';
 
   @action
-  void addEventVenuePhoto(String name) => this.eventVenuePhoto.add(name);
+  void addEventVenuePhoto(String path) => this.eventVenuePhoto.add(path);
 
   @action
   void resetEventVenuePhoto() =>

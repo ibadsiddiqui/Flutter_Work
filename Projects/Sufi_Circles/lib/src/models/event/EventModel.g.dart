@@ -62,6 +62,43 @@ mixin _$EventModel on _EventModel, Store {
     }, _$eventDescAtom, name: '${_$eventDescAtom.name}_set');
   }
 
+  final _$eventAudienceAtom = Atom(name: '_EventModel.eventAudience');
+
+  @override
+  Observable<String> get eventAudience {
+    _$eventAudienceAtom.context.enforceReadPolicy(_$eventAudienceAtom);
+    _$eventAudienceAtom.reportObserved();
+    return super.eventAudience;
+  }
+
+  @override
+  set eventAudience(Observable<String> value) {
+    _$eventAudienceAtom.context.conditionallyRunInAction(() {
+      super.eventAudience = value;
+      _$eventAudienceAtom.reportChanged();
+    }, _$eventAudienceAtom, name: '${_$eventAudienceAtom.name}_set');
+  }
+
+  final _$eventAudienceLimitRangeAtom =
+      Atom(name: '_EventModel.eventAudienceLimitRange');
+
+  @override
+  Observable<String> get eventAudienceLimitRange {
+    _$eventAudienceLimitRangeAtom.context
+        .enforceReadPolicy(_$eventAudienceLimitRangeAtom);
+    _$eventAudienceLimitRangeAtom.reportObserved();
+    return super.eventAudienceLimitRange;
+  }
+
+  @override
+  set eventAudienceLimitRange(Observable<String> value) {
+    _$eventAudienceLimitRangeAtom.context.conditionallyRunInAction(() {
+      super.eventAudienceLimitRange = value;
+      _$eventAudienceLimitRangeAtom.reportChanged();
+    }, _$eventAudienceLimitRangeAtom,
+        name: '${_$eventAudienceLimitRangeAtom.name}_set');
+  }
+
   final _$eventCoverPhotoAtom = Atom(name: '_EventModel.eventCoverPhoto');
 
   @override
@@ -255,10 +292,30 @@ mixin _$EventModel on _EventModel, Store {
   }
 
   @override
-  void setEventDesc(String name) {
+  void setEventDesc(String desc) {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
-      return super.setEventDesc(name);
+      return super.setEventDesc(desc);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventAudience(String txt) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventAudience(txt);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventAudienceLimit(String txt) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventAudienceLimit(txt);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
@@ -285,10 +342,10 @@ mixin _$EventModel on _EventModel, Store {
   }
 
   @override
-  void addEventVenuePhoto(String name) {
+  void addEventVenuePhoto(String path) {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
-      return super.addEventVenuePhoto(name);
+      return super.addEventVenuePhoto(path);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
