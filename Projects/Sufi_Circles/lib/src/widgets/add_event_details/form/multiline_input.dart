@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MultiLineInput extends StatelessWidget {
   final int maxLength;
@@ -7,7 +8,7 @@ class MultiLineInput extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
 
-  final Function onFieldSubmit;
+  final Function onChanged;
 
   const MultiLineInput({
     Key key,
@@ -16,14 +17,14 @@ class MultiLineInput extends StatelessWidget {
     this.hintText,
     this.maxLength,
     this.controller,
-    this.onFieldSubmit,
+    this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      onFieldSubmitted: onFieldSubmit,
+      onChanged: onChanged,
       keyboardType: TextInputType.multiline,
       maxLines: maxLines,
       minLines: minLines,
@@ -31,8 +32,7 @@ class MultiLineInput extends StatelessWidget {
       textInputAction: TextInputAction.done,
       style: TextStyle(fontFamily: "Comfortaa"),
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: 10, bottom: 120),
-          focusedBorder: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 10, bottom: 10),
           hintText: hintText),
     );
   }

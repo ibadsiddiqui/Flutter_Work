@@ -1,11 +1,15 @@
-import 'package:Sufi_Circles/src/widgets/add_event_details/form/form.dart';
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/form/multiline_input.dart';
+import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class AddEventDescDetail extends StatefulWidget {
-  final String inputHint;
   final String title;
-
-  const AddEventDescDetail({Key key, this.inputHint, this.title})
+  final Function moveToNextPage;
+  AddEventDescDetail({Key key, this.title, this.moveToNextPage})
       : super(key: key);
 
   @override
@@ -13,22 +17,41 @@ class AddEventDescDetail extends StatefulWidget {
 }
 
 class _AddEventDescDetailState extends State<AddEventDescDetail> {
-  TextEditingController eventNameController = TextEditingController(text: "");
+  TextEditingController _eventNameController = TextEditingController(text: "");
 
-  onNameSubmit(String name) {
-    print(name);
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    String desc = Provider.of<EventModel>(context).eventDesc.value;
+    _eventNameController = TextEditingController(text: desc);
   }
 
   @override
   Widget build(BuildContext context) {
-    return EventDetailForm(
-      maxLength: 500,
-      maxLine: 15,
-      minLines: 2,
-      controller: eventNameController,
-      hint: widget.inputHint,
-      onFieldSubmit: onNameSubmit,
-      title: widget.title,
+    EventModel eventModel = Provider.of<EventModel>(context);
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      alignment: Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          FormHeading(heading: widget.title),
+          MultiLineInput(
+            maxLength: 750,
+            maxLines: 10,
+            minLines: 2,
+            controller: _eventNameController,
+            hintText:
+                "Enter a brief summary of your event so guests know what to expect. (optional)",
+            onChanged: eventModel.setEventDesc,
+          ),
+          RoundClippedButton(
+            isMain: false,
+            onPress: () => widget.moveToNextPage(),
+          ),
+        ],
+      ),
     );
   }
 }
