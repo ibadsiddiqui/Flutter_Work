@@ -11,23 +11,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
 import 'package:provider/provider.dart';
 
-class AddEventCoverPhoto extends StatefulWidget {
-  AddEventCoverPhoto({Key key}) : super(key: key);
+class AddEventCoverPhoto extends StatelessWidget {
+  final Function moveToNextPage;
 
-  @override
-  _AddEventCoverStatePhoto createState() => _AddEventCoverStatePhoto();
-}
-
-class _AddEventCoverStatePhoto extends State<AddEventCoverPhoto> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  AddEventCoverPhoto({Key key, this.moveToNextPage}) : super(key: key);
 
   void setImage(context, String from, {String cameraPath = ""}) async {
     EventModel eventModel = Provider.of<EventModel>(context);
@@ -54,8 +41,7 @@ class _AddEventCoverStatePhoto extends State<AddEventCoverPhoto> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: FormHeading(
-                  heading: "Add a cover photo for the event.(optional)"),
+              child: FormHeading(heading: "Add cover photo for the event.*"),
             ),
             Observer(
               builder: (_) => Container(
@@ -66,33 +52,35 @@ class _AddEventCoverStatePhoto extends State<AddEventCoverPhoto> {
             ),
             Observer(
               builder: (_) => BottomFABs(
-                toolTip1: isPicPlaceholder(data.eventCoverPhoto)
-                    ? "Add photo image from Photos"
-                    : "Cancel",
-                toolTip2: isPicPlaceholder(data.eventCoverPhoto)
-                    ? "Add photo image from Camera"
-                    : "Confirm",
-                icon1: isPicPlaceholder(data.eventCoverPhoto)
-                    ? Icon(Icons.add_photo_alternate)
-                    : Icon(Icons.close),
-                icon2: isPicPlaceholder(data.eventCoverPhoto)
-                    ? Icon(Icons.camera)
-                    : Icon(Icons.check),
-                onPress1: () => isPicPlaceholder(data.eventCoverPhoto)
-                    ? setImage(context, "media")
-                    : data.resetEventCoverPhoto(),
-                onPress2: () async {
-                  final cameras = await availableCameras();
-                  pushScreen(
-                    context,
-                    screen: TakePictureScreen(
-                      camera: cameras.first,
-                      setImage: (String path) =>
-                          setImage(context, "camera", cameraPath: path),
-                    ),
-                  );
-                },
-              ),
+                  toolTip1: isPicPlaceholder(data.eventCoverPhoto)
+                      ? "Add photo image from Photos"
+                      : "Cancel",
+                  toolTip2: isPicPlaceholder(data.eventCoverPhoto)
+                      ? "Add photo image from Camera"
+                      : "Confirm",
+                  icon1: isPicPlaceholder(data.eventCoverPhoto)
+                      ? Icon(Icons.add_photo_alternate)
+                      : Icon(Icons.close),
+                  icon2: isPicPlaceholder(data.eventCoverPhoto)
+                      ? Icon(Icons.camera)
+                      : Icon(Icons.check),
+                  onPress1: () => isPicPlaceholder(data.eventCoverPhoto)
+                      ? setImage(context, "media")
+                      : data.resetEventCoverPhoto(),
+                  onPress2: () async {
+                    if (isPicPlaceholder(data.eventCoverPhoto)) {
+                      final cameras = await availableCameras();
+                      pushScreen(
+                        context,
+                        screen: TakePictureScreen(
+                          camera: cameras.first,
+                          setImage: (String path) =>
+                              setImage(context, "camera", cameraPath: path),
+                        ),
+                      );
+                    } else
+                      moveToNextPage();
+                  }),
             ),
           ],
         ),

@@ -12,7 +12,7 @@ class ImageViewer extends StatelessWidget {
     return Container(
       child: imagePath.isNotEmpty
           ? Image.file(File(imagePath),
-              height: size.height * 0.5, fit: BoxFit.cover)
+              height: size.height * 0.5, fit: BoxFit.scaleDown)
           : Image.asset("asset/images/placeholder/cover/index.png",
               height: size.height * 0.5, fit: BoxFit.cover),
     );

@@ -3,7 +3,6 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dar
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/multiline_input.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class AddEventDescDetail extends StatefulWidget {
@@ -48,7 +47,10 @@ class _AddEventDescDetailState extends State<AddEventDescDetail> {
           ),
           RoundClippedButton(
             isMain: false,
-            onPress: () => widget.moveToNextPage(),
+            onPress: () {
+              FocusScope.of(context).requestFocus(new FocusNode());
+              widget.moveToNextPage();
+            },
           ),
         ],
       ),
