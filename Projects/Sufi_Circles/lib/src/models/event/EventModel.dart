@@ -27,10 +27,10 @@ abstract class _EventModel with Store {
   ObservableList<String> eventVenuePhoto = ObservableList<String>();
 
   @observable
-  Observable<String> dateFrom = Observable<String>("");
+  Observable<DateTime> dateFrom = Observable<DateTime>(DateTime.now());
 
   @observable
-  Observable<String> dateTo = Observable<String>("");
+  Observable<DateTime> dateTo = Observable<DateTime>(DateTime.now());
 
   @observable
   Observable<Map<String, dynamic>> startTime =
@@ -99,10 +99,10 @@ abstract class _EventModel with Store {
       this.eventVenuePhoto = ObservableList<String>();
 
   @action
-  void setEventFromDate(String date) => this.dateFrom.value = date;
+  void setEventFromDate(DateTime date) => this.dateFrom.value = date;
 
   @action
-  void setEventToDate(String date) => this.dateTo.value = date;
+  void setEventToDate(DateTime date) => this.dateTo.value = date;
 
   @action
   void setEventStartTime(int hour, int minute) {
