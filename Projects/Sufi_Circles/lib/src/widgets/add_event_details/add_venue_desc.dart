@@ -63,7 +63,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
                             Text(
-                              venueDetails.locationDetails.value["name"],
+                              venueDetails.locationDetails["name"],
                               style: TextStyle(
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
@@ -78,7 +78,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
                             Text(
-                              venueDetails.locationDetails.value["area"],
+                              venueDetails.locationDetails["area"],
                               style: TextStyle(
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
@@ -93,7 +93,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
                             Text(
-                              venueDetails.locationDetails.value["city"],
+                              venueDetails.locationDetails["city"],
                               style: TextStyle(
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
@@ -108,7 +108,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
                             Text(
-                              venueDetails.locationDetails.value["state"],
+                              venueDetails.locationDetails["state"],
                               style: TextStyle(
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
@@ -123,7 +123,7 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),
                             Text(
-                              venueDetails.locationDetails.value["country"],
+                              venueDetails.locationDetails["country"],
                               style: TextStyle(
                                   fontSize: 17.0, fontFamily: "CreteRound"),
                             ),

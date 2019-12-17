@@ -5,6 +5,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dar
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/dropdown/dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class VenueDetailForm extends StatefulWidget {
@@ -33,28 +34,18 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
   @mustCallSuper
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    Map details = Provider.of<EventModel>(context).locationDetails.value;
-    if (details.isEmpty) {
+    EventModel data = Provider.of<EventModel>(context);
+    if (data.locationDetails.isEmpty) {
       this.setState(() {
         _selectedState = (getStateUsingCountry(_selectedCountry))[1];
-        _selectedCity = (getCitiesUsingCountry(_selectedState))[1];
+        _selectedCity = (getCitiesUsingState(_selectedState))[1];
       });
     } else {
-      _setCountrySelection(details["country"]);
-      _setStateOnSelection(details["state"]);
-      _setCitySelection(details["city"]);
-      _setAddress(details["address"]);
-      _setVenueName(details["name"]);
+      _setStateOnSelection(data.locationDetails["state"]);
+      _setCitySelection(data.locationDetails["city"]);
+      _setAddress(data.locationDetails["address"]);
+      _setVenueName(data.locationDetails["name"]);
     }
-  }
-
-  _setCountrySelection(text) {
-    this.setState(() => _selectedCountry = text);
-    String state = (getStateUsingCountry(text))[1];
-    String city = (getCitiesUsingCountry(text))[1];
-
-    _setStateOnSelection(state);
-    _setCitySelection(city);
   }
 
   _setCitySelection(text) => this.setState(() => _selectedCity = text);
@@ -65,131 +56,159 @@ class _VenueDetailFormState extends State<VenueDetailForm> {
 
   _setVenueName(name) => this.setState(() => _venueName = name);
 
+//
+  _setCountry(String value, EventModel data) {
+    data.locationDetails.addAll({
+      "country": value,
+      "state": (getStateUsingCountry(value))[1],
+    });
+  }
+
+  _setStateForCountry(String value, EventModel data) {
+    data.locationDetails.addAll({"state": value});
+  }
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FormHeading(heading: "Add venue details.*"),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              child: PickerText(
-                text: "Please venues details in following below...",
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.center,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Add country from below:",
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  DropDown(
-                    list: countriesList,
-                    onChanged: this._setCountrySelection,
-                    value: this._selectedCountry,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.center,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Add state from below:",
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  DropDown(
-                    list: getStateUsingCountry(this._selectedCountry),
-                    onChanged: this._setStateOnSelection,
-                    value: this._selectedState,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.center,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Add city from below:",
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  DropDown(
-                    list: getCitiesUsingCountry(this._selectedCountry),
-                    onChanged: this._setCitySelection,
-                    value: this._selectedCity,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Enter location/address:",
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  TextField(
-                    style: Theme.of(context).textTheme.body2,
-                    onChanged: _setAddress,
-                    decoration: InputDecoration(
-                      hintText: "Enter here...",
-                      hintStyle: Theme.of(context).textTheme.body2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Enter venue name:",
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  TextField(
-                    style: Theme.of(context).textTheme.body2,
-                    onChanged: _setVenueName,
-                    decoration: InputDecoration(
-                      hintText: "Enter here...",
-                      hintStyle: Theme.of(context).textTheme.body2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RoundClippedButton(
-                  isMain: true,
-                  onPress: () => widget.toggleSelectionType(""),
-                  title: "cancel",
-                  child: Icon(Icons.close, color: Colors.white),
+    return Consumer<EventModel>(
+      builder: (__, data, ____) => Container(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FormHeading(heading: "Add venue details.*"),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18),
+                child: PickerText(
+                  text: "Please venues details in following below...",
                 ),
-                SizedBox(width: size.width * .2),
-                RoundClippedButton(isMain: false, onPress: () {}),
-              ],
-            ),
-          ],
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Add country from below:",
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Observer(
+                      builder: (_) => DropDown(
+                        list: countriesList,
+                        onChanged: (country) => this._setCountry(country, data),
+                        value: data.locationDetails["country"],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Add state from below:",
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Observer(
+                      builder: (_) => DropDown(
+                        list: getStateUsingCountry(
+                            data.locationDetails["country"]),
+                        onChanged: (state) =>
+                            this._setStateForCountry(state, data),
+                        value: data.locationDetails["state"],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Add city from below:",
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Observer(
+                      builder: (_) =>
+                          getCitiesUsingState(data.locationDetails["state"])
+                                      .length !=
+                                  0
+                              ? DropDown(
+                                  list: getCitiesUsingState(
+                                      data.locationDetails["state"]),
+                                  onChanged: (city) => data.locationDetails
+                                      .addAll({"city": city}),
+                                  value: data.locationDetails["city"],
+                                )
+                              : Container(),
+                    ),
+                  ],
+                ),
+              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: <Widget>[
+              //       Text(
+              //         "Enter location/address:",
+              //         style: Theme.of(context).textTheme.body2,
+              //       ),
+              //       TextField(
+              //         style: Theme.of(context).textTheme.body2,
+              //         onChanged: _setAddress,
+              //         decoration: InputDecoration(
+              //           hintText: "Enter here...",
+              //           hintStyle: Theme.of(context).textTheme.body2,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: <Widget>[
+              //       Text(
+              //         "Enter venue name:",
+              //         style: Theme.of(context).textTheme.body2,
+              //       ),
+              //       TextField(
+              //         style: Theme.of(context).textTheme.body2,
+              //         onChanged: _setVenueName,
+              //         decoration: InputDecoration(
+              //           hintText: "Enter here...",
+              //           hintStyle: Theme.of(context).textTheme.body2,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     RoundClippedButton(
+              //       isMain: true,
+              //       onPress: () => widget.toggleSelectionType(""),
+              //       title: "cancel",
+              //       child: Icon(Icons.close, color: Colors.white),
+              //     ),
+              //     SizedBox(width: size.width * .2),
+              //     RoundClippedButton(isMain: false, onPress: () {}),
+              //   ],
+              // ),
+            ],
+          ),
         ),
       ),
     );

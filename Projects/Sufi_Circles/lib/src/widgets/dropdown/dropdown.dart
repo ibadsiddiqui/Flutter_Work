@@ -23,7 +23,8 @@ class DropDown extends StatelessWidget {
               value: value,
               child: Text(value, style: TextStyle(fontSize: 15.0)),
             ),
-          ).toList(),
+          )
+          .toList(),
     );
   }
 }
