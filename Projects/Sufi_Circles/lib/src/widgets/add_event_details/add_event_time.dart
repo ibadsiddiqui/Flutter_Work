@@ -8,7 +8,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class AddEventTime extends StatelessWidget {
-  const AddEventTime({Key key}) : super(key: key);
+  final Function moveToNextPage;
+
+  AddEventTime({Key key, this.moveToNextPage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,12 @@ class AddEventTime extends StatelessWidget {
                   minute: data.startTime.value["minute"],
                   onPressed: () => DatePicker.showTimePicker(
                     context,
-                    theme: DatePickerTheme(containerHeight: 210.0),
                     showTitleActions: true,
+                    theme: DatePickerTheme(containerHeight: 210.0),
+                    locale: LocaleType.en,
+                    currentTime: DateTime.now().toLocal(),
                     onConfirm: (time) =>
                         data.setEventStartTime(time.hour, time.minute),
-                    currentTime: DateTime.now().toLocal(),
-                    locale: LocaleType.en,
                   ),
                 ),
               ),
@@ -43,20 +45,20 @@ class AddEventTime extends StatelessWidget {
               Observer(
                 builder: (_) => TimePicker(
                     heading: "At what time will it end?",
-                    hour: data.startTime.value["hour"],
-                    minute: data.startTime.value["minute"],
+                    hour: data.endTime.value["hour"],
+                    minute: data.endTime.value["minute"],
                     onPressed: () => DatePicker.showTimePicker(
                           context,
+                          locale: LocaleType.en,
                           theme: DatePickerTheme(containerHeight: 210.0),
+                          currentTime: DateTime.now().toLocal(),
                           showTitleActions: true,
                           onConfirm: (time) =>
                               data.setEventEndTime(time.hour, time.minute),
-                          currentTime: DateTime.now().toLocal(),
-                          locale: LocaleType.en,
                         )),
               ),
               SizedBox(height: 20),
-              RoundClippedButton(isMain: false, onPress: () {}),
+              RoundClippedButton(isMain: false, onPress: moveToNextPage),
             ],
           );
         },
