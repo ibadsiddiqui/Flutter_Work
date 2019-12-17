@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/models/event/MetaData.dart';
+import 'package:Sufi_Circles/src/utils/countries_city_list.dart';
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
@@ -53,8 +54,14 @@ abstract class _EventModel with Store {
   };
 
   @observable
-  Observable<Map<String, dynamic>> locationDetails =
-      Observable<Map<String, dynamic>>({});
+  ObservableMap<String, dynamic> locationDetails =
+      ObservableMap.splayTreeMapFrom({
+    "country": "Andorra",
+    "state": "Escaldes-Engordany",
+    "city": "les Escaldes",
+    "address": "",
+    "name": "",
+  });
 
   @observable
   Observable<Map<String, String>> organiserDetails =
@@ -121,7 +128,7 @@ abstract class _EventModel with Store {
   @action
   void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
     print(placemark);
-    this.locationDetails.value = {
+    this.locationDetails = ObservableMap.splayTreeMapFrom({
       "lat": position.latitude,
       "long": position.longitude,
       "name": placemark.name,
@@ -129,19 +136,23 @@ abstract class _EventModel with Store {
       "city": placemark.locality,
       "state": placemark.administrativeArea,
       "country": placemark.country,
-    };
+    });
   }
 
   @action
-  void setEventVenueDetails(Map<String, String> data) {
-    this.locationDetails.value = {
-      "country": data["country"],
-      "state": data["state"],
-      "city": data['city'],
-      "address": data['address'],
-      "name": data['name'],
-    };
-  }
+  void setEventVenueCountry(String d) => this.locationDetails["country"] = d;
+
+  @action
+  void setEventVenueCountryState(String s) => this.locationDetails["state"] = s;
+
+  @action
+  void setEventVenueCountryCity(String c) => this.locationDetails["city"] = c;
+
+  @action
+  void setEventVenueAddress(String ad) => this.locationDetails["address"] = ad;
+
+  @action
+  void setEventVenueName(String name) => this.locationDetails["name"] = name;
 
   // TODO: add reset model state
 

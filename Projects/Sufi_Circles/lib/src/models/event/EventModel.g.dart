@@ -221,14 +221,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$locationDetailsAtom = Atom(name: '_EventModel.locationDetails');
 
   @override
-  Observable<Map<String, dynamic>> get locationDetails {
+  ObservableMap<String, dynamic> get locationDetails {
     _$locationDetailsAtom.context.enforceReadPolicy(_$locationDetailsAtom);
     _$locationDetailsAtom.reportObserved();
     return super.locationDetails;
   }
 
   @override
-  set locationDetails(Observable<Map<String, dynamic>> value) {
+  set locationDetails(ObservableMap<String, dynamic> value) {
     _$locationDetailsAtom.context.conditionallyRunInAction(() {
       super.locationDetails = value;
       _$locationDetailsAtom.reportChanged();
@@ -412,10 +412,50 @@ mixin _$EventModel on _EventModel, Store {
   }
 
   @override
-  void setEventVenueDetails(Map<String, String> data) {
+  void setEventVenueCountry(String d) {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
-      return super.setEventVenueDetails(data);
+      return super.setEventVenueCountry(d);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventVenueCountryState(String s) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventVenueCountryState(s);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventVenueCountryCity(String c) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventVenueCountryCity(c);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventVenueAddress(String ad) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventVenueAddress(ad);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventVenueName(String name) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventVenueName(name);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
