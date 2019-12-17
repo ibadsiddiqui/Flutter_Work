@@ -9,74 +9,71 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class AddEventDate extends StatelessWidget {
-  const AddEventDate({Key key}) : super(key: key);
+  final Function moveToNextPage;
+  
+  AddEventDate({Key key, this.moveToNextPage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    EventModel data = Provider.of<EventModel>(context);
-    DateTime dateTo = data.dateTo.value;
-    DateTime dateFrom = data.dateFrom.value;
-    return Container(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: FormHeading(heading: "Add dates of the event.*"),
-          ),
-          Observer(
-            builder: (_) => EventDatePicker(
-              heading: "At what date will it start?",
-              date: getFullDateString(dateFrom),
-              onPressed: () {
-                DatePicker.showDatePicker(
-                  context,
-                  theme: DatePickerTheme(containerHeight: 210.0),
-                  showTitleActions: true,
-                  minTime: DateTime(2000, 1, 1),
-                  maxTime: DateTime(2022, 12, 31),
-                  onConfirm: (date) {
-                    data.setEventFromDate(date);
-                    data.setEventToDate(date);
-                  },
-                  currentTime: DateTime.now(),
-                  locale: LocaleType.en,
-                );
-              },
+    return Consumer<EventModel>(
+      builder: (_, data, __) => Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: FormHeading(heading: "Add dates of the event.*"),
             ),
-          ),
-          SizedBox(height: 20),
-          Observer(
-            builder: (_) => EventDatePicker(
-              heading: "At what date will it end?",
-              date: getFullDateString(dateTo),
-              onPressed: () {
-                DateTime pickedDate = dateFrom;
-                DatePicker.showDatePicker(
-                  context,
-                  theme: DatePickerTheme(containerHeight: 210.0),
-                  showTitleActions: true,
-                  minTime: DateTime(
-                      pickedDate.year, pickedDate.month, pickedDate.day),
-                  onConfirm: (date) => data.setEventToDate(date),
-                  currentTime: DateTime.now(),
-                  locale: LocaleType.en,
-                );
-              },
+            Observer(
+              builder: (_) => EventDatePicker(
+                heading: "At what date will it start?",
+                date: data.dateFrom.value.toString().split(" ")[0],
+                onPressed: () {
+                  DatePicker.showDatePicker(
+                    context,
+                    theme: DatePickerTheme(containerHeight: 210.0),
+                    showTitleActions: true,
+                    minTime: DateTime(2000, 1, 1),
+                    maxTime: DateTime(2022, 12, 31),
+                    onConfirm: (date) {
+                      data.setEventFromDate(date);
+                      data.setEventToDate(date);
+                    },
+                    currentTime: DateTime.now(),
+                    locale: LocaleType.en,
+                  );
+                },
+              ),
             ),
-          ),
-          SizedBox(height: 20),
-          dateTo.toString().isEmpty
-              ? Container()
-              : RoundClippedButton(
-                  isMain: false,
-                  onPress: () {
-                    print(compareDate(dateTo, dateFrom));
-                    if (compareDate(dateTo, dateFrom)) {}
-                  }),
-        ],
+            SizedBox(height: 20),
+            Observer(
+              builder: (_) => EventDatePicker(
+                heading: "At what date will it end?",
+                date: data.dateTo.value.toString().split(" ")[0],
+                onPressed: () {
+                  DateTime pickedDate = data.dateFrom.value;
+                  DatePicker.showDatePicker(
+                    context,
+                    theme: DatePickerTheme(containerHeight: 210.0),
+                    showTitleActions: true,
+                    minTime: DateTime(
+                        pickedDate.year, pickedDate.month, pickedDate.day),
+                    onConfirm: (date) => data.setEventToDate(date),
+                    currentTime: DateTime.now(),
+                    locale: LocaleType.en,
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 15),
+            RoundClippedButton(
+              isMain: false,
+              onPress: moveToNextPage,
+            ),
+          ],
+        ),
       ),
     );
   }
