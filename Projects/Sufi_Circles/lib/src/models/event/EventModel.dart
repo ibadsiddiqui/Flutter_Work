@@ -126,17 +126,28 @@ abstract class _EventModel with Store {
       };
 
   @action
+  void resetEventVenueDetail() {
+    this.locationDetails = ObservableMap<String, dynamic>.linkedHashMapFrom({
+      "country": "Andorra",
+      "state": "Escaldes-Engordany",
+      "city": "les Escaldes",
+      "address": "",
+      "name": "",
+      "lat": "",
+      "long": ""
+    });
+  }
+
+  @action
   void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
     print(placemark);
-    this.locationDetails = ObservableMap.splayTreeMapFrom({
-      "lat": position.latitude,
-      "long": position.longitude,
-      "name": placemark.name,
-      "area": placemark.thoroughfare,
-      "city": placemark.locality,
-      "state": placemark.administrativeArea,
-      "country": placemark.country,
-    });
+    this.setEventVenueName(placemark.name);
+    this.setEventVenueCountry(placemark.country);
+    this.setEventVenueCountryCity(placemark.locality);
+    this.setEventVenueCountryState(placemark.administrativeArea);
+    this.setEventVenueAddress(placemark.thoroughfare);
+    this.locationDetails["lat"] = position.latitude;
+    this.locationDetails["long"] = position.longitude;
   }
 
   @action
@@ -153,8 +164,6 @@ abstract class _EventModel with Store {
 
   @action
   void setEventVenueName(String name) => this.locationDetails["name"] = name;
-
-  // TODO: add reset model state
 
   @computed
   get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);

@@ -402,6 +402,16 @@ mixin _$EventModel on _EventModel, Store {
   }
 
   @override
+  void resetEventVenueDetail() {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.resetEventVenueDetail();
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
