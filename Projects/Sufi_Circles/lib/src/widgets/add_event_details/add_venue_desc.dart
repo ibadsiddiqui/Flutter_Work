@@ -1,17 +1,19 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/map_view/MapView.dart';
-import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/picker_text.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/info_sec_view.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/show_type_selection_for_venue.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/venue_detail_form.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class AddVenueDesc extends StatefulWidget {
+  final Function moveToNextPage;
+
+  AddVenueDesc({Key key, this.moveToNextPage}) : super(key: key);
   @override
   _AddVenueDescState createState() => _AddVenueDescState();
 }
@@ -31,127 +33,66 @@ class _AddVenueDescState extends State<AddVenueDesc> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final venueDetails = Provider.of<EventModel>(context);
-
+    final data = Provider.of<EventModel>(context);
+    print(data.locationDetails);
     switch (selectionType) {
       case "View Details From Maps":
         return Container(
           margin: EdgeInsets.only(top: size.width * 0.1),
-          child: Padding(
+          child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FormHeading(heading: "Add venue details.*"),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18),
-                  child:
-                      PickerText(text: "following is the data from the map..."),
-                ),
-                Observer(
-                  builder: (context) => Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    alignment: Alignment.center,
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Venue Name:",
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                            Text(
-                              venueDetails.locationDetails["name"],
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Area:",
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                            Text(
-                              venueDetails.locationDetails["area"],
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "City:",
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                            Text(
-                              venueDetails.locationDetails["city"],
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "State:",
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                            Text(
-                              venueDetails.locationDetails["state"],
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Country:",
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                            Text(
-                              venueDetails.locationDetails["country"],
-                              style: TextStyle(
-                                  fontSize: 17.0, fontFamily: "CreteRound"),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 Container(
-                  margin: EdgeInsets.only(top: 25),
-                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(vertical: 7.5),
                   child: Text(
-                    "Are you sure about this?",
-                    style: TextStyle(fontSize: 17.0, fontFamily: "CreteRound"),
+                    "Venue details from map",
+                    style: Theme.of(context)
+                        .textTheme
+                        .body2
+                        .apply(fontWeightDelta: 900),
                   ),
+                ),
+                InfoSecView(
+                  text: data.locationDetails["name"],
+                  placeholder: "Name:",
+                ),
+                InfoSecView(
+                  text: data.locationDetails["address"],
+                  placeholder: "Address (optional):",
+                ),
+                InfoSecView(
+                  text: data.locationDetails["city"],
+                  placeholder: "City:",
+                ),
+                InfoSecView(
+                  text: data.locationDetails["state"],
+                  placeholder: "State:",
+                ),
+                InfoSecView(
+                  text: data.locationDetails["country"],
+                  placeholder: "Country:",
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     RoundClippedButton(
                       isMain: true,
+                      onPress: () {
+                        this.setSelectionType("none");
+                        data.resetEventVenueDetail();
+                      },
                       title: "cancel",
-                      onPress: () => setSelectionType(""),
                       child: Icon(Icons.close, color: Colors.white),
                     ),
                     SizedBox(width: size.width * .2),
-                    RoundClippedButton(isMain: false, onPress: () {}),
+                    RoundClippedButton(
+                      isMain: false,
+                      onPress: widget.moveToNextPage,
+                    ),
                   ],
                 ),
               ],
@@ -159,7 +100,10 @@ class _AddVenueDescState extends State<AddVenueDesc> {
           ),
         );
       case "Inputs":
-        return VenueDetailForm(toggleSelectionType: setSelectionType);
+        return VenueDetailForm(
+          toggleSelectionType: setSelectionType,
+          moveToNextPage: widget.moveToNextPage,
+        );
       default:
         return ShowTypeSelectionForVenue(
           onPress2: () => this.setState(() => selectionType = "Inputs"),
