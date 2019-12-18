@@ -8,18 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-class VenueDetailFormState extends StatelessWidget {
+class VenueDetailForm extends StatelessWidget {
   final List<String> countriesList = getCountriesList();
   final Function toggleSelectionType;
+  final Function moveToNextPage;
 
-  VenueDetailFormState({Key key, this.toggleSelectionType}) : super(key: key);
-  _setCountry(String value, EventModel data) {
-    data.locationDetails.addAll({
-      "country": value,
-      "state": (getStateUsingCountry(value))[1],
-      "city": (getCitiesUsingCountry(value))[1],
-    });
-  }
+  VenueDetailForm({Key key, this.toggleSelectionType, this.moveToNextPage})
+      : super(key: key);
+
+  _setCountry(String value, EventModel data) => data.locationDetails.addAll({
+        "country": value,
+        "state": (getStateUsingCountry(value))[1],
+        "city": (getCitiesUsingCountry(value))[1],
+      });
 
   _setStateForCountry(String value, EventModel data) =>
       data.locationDetails.addAll({"state": value});
@@ -118,7 +119,7 @@ class VenueDetailFormState extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -138,6 +139,7 @@ class VenueDetailFormState extends StatelessWidget {
               ),
             ),
             Container(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -161,12 +163,25 @@ class VenueDetailFormState extends StatelessWidget {
               children: <Widget>[
                 RoundClippedButton(
                   isMain: true,
-                  onPress: () => toggleSelectionType(""),
+                  onPress: () {
+                    toggleSelectionType("");
+                    data.resetEventVenueDetail();
+                  },
                   title: "cancel",
                   child: Icon(Icons.close, color: Colors.white),
                 ),
                 SizedBox(width: size.width * .2),
-                RoundClippedButton(isMain: false, onPress: () {}),
+                RoundClippedButton(
+                  isMain: false,
+                  onPress: () {
+                    if (data.locationDetails["name"].toString().isNotEmpty)
+                      moveToNextPage();
+                    else
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text("Please enter venue name."),
+                      ));
+                  },
+                ),
               ],
             ),
           ],
