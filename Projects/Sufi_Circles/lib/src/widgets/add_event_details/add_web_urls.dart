@@ -7,6 +7,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class AddEventWebURLs extends StatefulWidget {
+  final Function moveToNextPage;
+
+  AddEventWebURLs({Key key, this.moveToNextPage}) : super(key: key);
   @override
   _AddEventWebURLsState createState() => _AddEventWebURLsState();
 }
@@ -80,7 +83,7 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
                 ),
               ),
             ),
-            RoundClippedButton(isMain: false, onPress: () {}),
+            RoundClippedButton(isMain: false, onPress: widget.moveToNextPage),
           ],
         ),
       ),

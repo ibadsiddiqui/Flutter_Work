@@ -24,9 +24,8 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Map eventModel = Provider.of<EventModel>(context).organiserDetails.value;
-    String organiserName = eventModel["organiserName"];
-    eventNameController = TextEditingController(text: organiserName);
+    String name = Provider.of<EventModel>(context).organiserName.value;
+    eventNameController = TextEditingController(text: name);
   }
 
   @override
@@ -38,6 +37,7 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
   @override
   Widget build(BuildContext context) {
     EventModel eventModel = Provider.of<EventModel>(context);
+    // print(eventModel.organiserDetails.);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
@@ -58,21 +58,20 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
             ),
           ),
           Observer(
-            builder: (_) =>
-                eventModel.organiserDetails.value["organiserName"].isNotEmpty
-                    ? RoundClippedButton(
-                        isMain: false,
-                        onPress: () async {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          bool isValid =
-                              await validateName(eventNameController.text);
-                          if (isValid)
-                            widget.moveToNextPage();
-                          else
-                            showDialogForWrongName(context);
-                        },
-                      )
-                    : Container(),
+            builder: (_) => eventModel.organiserName.value != ""
+                ? RoundClippedButton(
+                    isMain: false,
+                    onPress: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      bool isValid =
+                          await validateName(eventNameController.text);
+                      if (isValid)
+                        widget.moveToNextPage();
+                      else
+                        showDialogForWrongName(context);
+                    },
+                  )
+                : Container(),
           ),
         ],
       ),

@@ -7,6 +7,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class AddOrganisersDetails extends StatefulWidget {
+  final Function moveToNextPage;
+
+  AddOrganisersDetails({Key key, this.moveToNextPage}) : super(key: key);
   @override
   _AddOrganisersDetailsState createState() => _AddOrganisersDetailsState();
 }
@@ -49,7 +52,7 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
-                        hintStyle: TextStyle(fontSize: 17),
+                        hintStyle: Theme.of(context).textTheme.body2,
                       ),
                     ),
                     SizedBox(height: 20),
@@ -61,14 +64,14 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
-                        hintStyle: TextStyle(fontSize: 17),
+                        hintStyle: Theme.of(context).textTheme.body2,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            RoundClippedButton(isMain: false, onPress: () {}),
+            RoundClippedButton(isMain: false, onPress: widget.moveToNextPage),
           ],
         ),
       ),
