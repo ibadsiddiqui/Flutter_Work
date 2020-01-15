@@ -42,21 +42,21 @@ class AddEventTime extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Observer(
-                builder: (_) => TimePicker(
-                    heading: "At what time will it end?",
-                    hour: data.endTime.value["hour"],
-                    minute: data.endTime.value["minute"],
-                    onPressed: () => DatePicker.showTimePicker(
-                          context,
-                          locale: LocaleType.en,
-                          theme: DatePickerTheme(containerHeight: 210.0),
-                          currentTime: DateTime.now().toLocal(),
-                          showTitleActions: true,
-                          onConfirm: (time) =>
-                              data.setEventEndTime(time.hour, time.minute),
-                        )),
-              ),
+              // Observer(
+              //   builder: (_) => TimePicker(
+              //       heading: "At what time will it end?",
+              //       hour: data.endTime.value["hour"],
+              //       minute: data.endTime.value["minute"],
+              //       onPressed: () => DatePicker.showTimePicker(
+              //             context,
+              //             locale: LocaleType.en,
+              //             theme: DatePickerTheme(containerHeight: 210.0),
+              //             currentTime: DateTime.now().toLocal(),
+              //             showTitleActions: true,
+              //             onConfirm: (time) =>
+              //                 data.setEventEndTime(time.hour, time.minute),
+              //           )),
+              // ),
               SizedBox(height: 20),
               RoundClippedButton(isMain: false, onPress: moveToNextPage),
             ],

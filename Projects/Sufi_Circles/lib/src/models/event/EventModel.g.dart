@@ -184,23 +184,6 @@ mixin _$EventModel on _EventModel, Store {
     }, _$startTimeAtom, name: '${_$startTimeAtom.name}_set');
   }
 
-  final _$endTimeAtom = Atom(name: '_EventModel.endTime');
-
-  @override
-  Observable<Map<String, dynamic>> get endTime {
-    _$endTimeAtom.context.enforceReadPolicy(_$endTimeAtom);
-    _$endTimeAtom.reportObserved();
-    return super.endTime;
-  }
-
-  @override
-  set endTime(Observable<Map<String, dynamic>> value) {
-    _$endTimeAtom.context.conditionallyRunInAction(() {
-      super.endTime = value;
-      _$endTimeAtom.reportChanged();
-    }, _$endTimeAtom, name: '${_$endTimeAtom.name}_set');
-  }
-
   final _$addressDetailsAtom = Atom(name: '_EventModel.addressDetails');
 
   @override
@@ -386,16 +369,6 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.setEventStartTime(hour, minute);
-    } finally {
-      _$_EventModelActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setEventEndTime(int hour, int minute) {
-    final _$actionInfo = _$_EventModelActionController.startAction();
-    try {
-      return super.setEventEndTime(hour, minute);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }

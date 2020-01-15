@@ -40,11 +40,11 @@ abstract class _EventModel with Store {
     "minute": 0,
   });
 
-  @observable
-  Observable<Map<String, dynamic>> endTime = Observable<Map<String, dynamic>>({
-    "hour": 0,
-    "minute": 0,
-  });
+  // @observable
+  // Observable<Map<String, dynamic>> endTime = Observable<Map<String, dynamic>>({
+  //   "hour": 0,
+  //   "minute": 0,
+  // });
 
   @observable
   Map<String, dynamic> addressDetails = {
@@ -119,11 +119,11 @@ abstract class _EventModel with Store {
     };
   }
 
-  @action
-  void setEventEndTime(int hour, int minute) => this.endTime.value = {
-        "hour": hour,
-        "minute": minute,
-      };
+  // @action
+  // void setEventEndTime(int hour, int minute) => this.endTime.value = {
+  //       "hour": hour,
+  //       "minute": minute,
+  //     };
 
   @action
   void resetEventVenueDetail() {
