@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_cover_photo.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_event_dates.dart';
@@ -10,6 +11,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_web_urls.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddEventDetails extends StatefulWidget {
   AddEventDetails({Key key}) : super(key: key);
@@ -41,6 +43,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
 
   @override
   Widget build(BuildContext context) {
+    EventModel eventModel = Provider.of<EventModel>(context);
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -54,7 +57,10 @@ class _AddEventDetailsState extends State<AddEventDetails> {
           ),
           IconButton(
             icon: Icon(Icons.close, color: Color(0xFF072247)),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              eventModel.resetAll();
+              Navigator.pop(context);
+            },
           ),
         ],
         elevation: 0,
@@ -85,8 +91,8 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             AddEventDate(moveToNextPage: moveToNextPage),
             AddEventTime(moveToNextPage: moveToNextPage),
             AddVenueDesc(moveToNextPage: moveToNextPage),
-            AddOrganisersDetails(),
-            AddEventWebURLs(),
+            AddOrganisersDetails(moveToNextPage: moveToNextPage),
+            AddEventWebURLs(moveToNextPage: moveToNextPage),
           ],
         ),
       ),
