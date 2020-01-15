@@ -218,21 +218,56 @@ mixin _$EventModel on _EventModel, Store {
     }, _$locationDetailsAtom, name: '${_$locationDetailsAtom.name}_set');
   }
 
-  final _$organiserDetailsAtom = Atom(name: '_EventModel.organiserDetails');
+  final _$organiserNameAtom = Atom(name: '_EventModel.organiserName');
 
   @override
-  Observable<Map<String, String>> get organiserDetails {
-    _$organiserDetailsAtom.context.enforceReadPolicy(_$organiserDetailsAtom);
-    _$organiserDetailsAtom.reportObserved();
-    return super.organiserDetails;
+  Observable<String> get organiserName {
+    _$organiserNameAtom.context.enforceReadPolicy(_$organiserNameAtom);
+    _$organiserNameAtom.reportObserved();
+    return super.organiserName;
   }
 
   @override
-  set organiserDetails(Observable<Map<String, String>> value) {
-    _$organiserDetailsAtom.context.conditionallyRunInAction(() {
-      super.organiserDetails = value;
-      _$organiserDetailsAtom.reportChanged();
-    }, _$organiserDetailsAtom, name: '${_$organiserDetailsAtom.name}_set');
+  set organiserName(Observable<String> value) {
+    _$organiserNameAtom.context.conditionallyRunInAction(() {
+      super.organiserName = value;
+      _$organiserNameAtom.reportChanged();
+    }, _$organiserNameAtom, name: '${_$organiserNameAtom.name}_set');
+  }
+
+  final _$organiserEmailAtom = Atom(name: '_EventModel.organiserEmail');
+
+  @override
+  Observable<String> get organiserEmail {
+    _$organiserEmailAtom.context.enforceReadPolicy(_$organiserEmailAtom);
+    _$organiserEmailAtom.reportObserved();
+    return super.organiserEmail;
+  }
+
+  @override
+  set organiserEmail(Observable<String> value) {
+    _$organiserEmailAtom.context.conditionallyRunInAction(() {
+      super.organiserEmail = value;
+      _$organiserEmailAtom.reportChanged();
+    }, _$organiserEmailAtom, name: '${_$organiserEmailAtom.name}_set');
+  }
+
+  final _$organiserContactNoAtom = Atom(name: '_EventModel.organiserContactNo');
+
+  @override
+  Observable<String> get organiserContactNo {
+    _$organiserContactNoAtom.context
+        .enforceReadPolicy(_$organiserContactNoAtom);
+    _$organiserContactNoAtom.reportObserved();
+    return super.organiserContactNo;
+  }
+
+  @override
+  set organiserContactNo(Observable<String> value) {
+    _$organiserContactNoAtom.context.conditionallyRunInAction(() {
+      super.organiserContactNo = value;
+      _$organiserContactNoAtom.reportChanged();
+    }, _$organiserContactNoAtom, name: '${_$organiserContactNoAtom.name}_set');
   }
 
   final _$additionalLinksAtom = Atom(name: '_EventModel.additionalLinks');
@@ -259,6 +294,26 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.setEventOrganiserName(name);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventOrganiserEmail(String email) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventOrganiserEmail(email);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventOrganiserContact(String contact) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventOrganiserContact(contact);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }
@@ -439,6 +494,16 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.setEventVenueName(name);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void resetAll() {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.resetAll();
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }

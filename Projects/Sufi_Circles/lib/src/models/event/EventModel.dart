@@ -36,8 +36,8 @@ abstract class _EventModel with Store {
   @observable
   Observable<Map<String, dynamic>> startTime =
       Observable<Map<String, dynamic>>({
-    "hour": 0,
-    "minute": 0,
+    "hour": DateTime.now().hour,
+    "minute": DateTime.now().minute,
   });
 
   // @observable
@@ -64,19 +64,27 @@ abstract class _EventModel with Store {
   });
 
   @observable
-  Observable<Map<String, String>> organiserDetails =
-      Observable<Map<String, String>>({
-    "organiserName": "",
-    "organiserEmail": "",
-    "organiserContactNo": "",
-  });
+  Observable<String> organiserName = Observable("");
+
+  @observable
+  Observable<String> organiserEmail = Observable("");
+
+  @observable
+  Observable<String> organiserContactNo = Observable("");
 
   @observable
   Map<String, String> additionalLinks = {};
 
   @action
-  void setEventOrganiserName(String name) =>
-      this.organiserDetails.value = {"organiserName": name};
+  void setEventOrganiserName(String name) => this.organiserName.value = name;
+
+  @action
+  void setEventOrganiserEmail(String email) =>
+      this.organiserEmail.value = email;
+
+  @action
+  void setEventOrganiserContact(String contact) =>
+      this.organiserContactNo.value = contact;
 
   @action
   void setEventName(String name) => this.eventName.value = name;
@@ -127,7 +135,7 @@ abstract class _EventModel with Store {
 
   @action
   void resetEventVenueDetail() {
-    this.locationDetails = ObservableMap<String, dynamic>.linkedHashMapFrom({
+    this.locationDetails = ObservableMap.splayTreeMapFrom({
       "country": "Andorra",
       "state": "Escaldes-Engordany",
       "city": "les Escaldes",
@@ -140,7 +148,6 @@ abstract class _EventModel with Store {
 
   @action
   void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
-    print(placemark);
     this.setEventVenueName(placemark.name);
     this.setEventVenueCountry(placemark.country);
     this.setEventVenueCountryCity(placemark.locality);
@@ -164,6 +171,23 @@ abstract class _EventModel with Store {
 
   @action
   void setEventVenueName(String name) => this.locationDetails["name"] = name;
+
+  @action
+  void resetAll() {
+    this.setEventOrganiserName("");
+    this.setEventOrganiserEmail("");
+    this.setEventOrganiserContact("");
+    this.setEventName("");
+    this.setEventDesc("");
+    this.setEventAudience(UNLIMITED);
+    this.setEventAudienceLimit(ZEROTO50);
+    this.resetEventCoverPhoto();
+    this.resetEventVenuePhoto();
+    // this.resetEventVenueDetail();
+    this.setEventFromDate(DateTime.now());
+    this.setEventToDate(DateTime.now());
+    this.setEventStartTime(0, 0);
+  }
 
   @computed
   get isVenuePhotosEmpty => isListEmpty(eventVenuePhoto);
