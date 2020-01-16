@@ -1,5 +1,4 @@
 import 'package:Sufi_Circles/src/models/event/MetaData.dart';
-import 'package:Sufi_Circles/src/utils/countries_city_list.dart';
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
@@ -73,7 +72,13 @@ abstract class _EventModel with Store {
   Observable<String> organiserContactNo = Observable("");
 
   @observable
-  Map<String, String> additionalLinks = {};
+  String faceboookLink = "";
+
+  @observable
+  String webLink = "";
+
+  @observable
+  String instagramLink = "";
 
   @action
   void setEventOrganiserName(String name) => this.organiserName.value = name;
@@ -173,6 +178,15 @@ abstract class _EventModel with Store {
   void setEventVenueName(String name) => this.locationDetails["name"] = name;
 
   @action
+  void setEventFacebookLink(String name) => this.faceboookLink = name;
+
+  @action
+  void setEventWebLink(String name) => this.webLink = name;
+
+  @action
+  void setEventInstagramLink(String name) => this.instagramLink = name;
+
+  @action
   void resetAll() {
     this.setEventOrganiserName("");
     this.setEventOrganiserEmail("");
@@ -187,6 +201,9 @@ abstract class _EventModel with Store {
     this.setEventFromDate(DateTime.now());
     this.setEventToDate(DateTime.now());
     this.setEventStartTime(0, 0);
+    this.setEventFacebookLink("");
+    this.setEventWebLink("");
+    this.setEventInstagramLink("");
   }
 
   @computed

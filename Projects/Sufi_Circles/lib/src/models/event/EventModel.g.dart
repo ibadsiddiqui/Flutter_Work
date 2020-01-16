@@ -270,21 +270,55 @@ mixin _$EventModel on _EventModel, Store {
     }, _$organiserContactNoAtom, name: '${_$organiserContactNoAtom.name}_set');
   }
 
-  final _$additionalLinksAtom = Atom(name: '_EventModel.additionalLinks');
+  final _$faceboookLinkAtom = Atom(name: '_EventModel.faceboookLink');
 
   @override
-  Map<String, String> get additionalLinks {
-    _$additionalLinksAtom.context.enforceReadPolicy(_$additionalLinksAtom);
-    _$additionalLinksAtom.reportObserved();
-    return super.additionalLinks;
+  String get faceboookLink {
+    _$faceboookLinkAtom.context.enforceReadPolicy(_$faceboookLinkAtom);
+    _$faceboookLinkAtom.reportObserved();
+    return super.faceboookLink;
   }
 
   @override
-  set additionalLinks(Map<String, String> value) {
-    _$additionalLinksAtom.context.conditionallyRunInAction(() {
-      super.additionalLinks = value;
-      _$additionalLinksAtom.reportChanged();
-    }, _$additionalLinksAtom, name: '${_$additionalLinksAtom.name}_set');
+  set faceboookLink(String value) {
+    _$faceboookLinkAtom.context.conditionallyRunInAction(() {
+      super.faceboookLink = value;
+      _$faceboookLinkAtom.reportChanged();
+    }, _$faceboookLinkAtom, name: '${_$faceboookLinkAtom.name}_set');
+  }
+
+  final _$webLinkAtom = Atom(name: '_EventModel.webLink');
+
+  @override
+  String get webLink {
+    _$webLinkAtom.context.enforceReadPolicy(_$webLinkAtom);
+    _$webLinkAtom.reportObserved();
+    return super.webLink;
+  }
+
+  @override
+  set webLink(String value) {
+    _$webLinkAtom.context.conditionallyRunInAction(() {
+      super.webLink = value;
+      _$webLinkAtom.reportChanged();
+    }, _$webLinkAtom, name: '${_$webLinkAtom.name}_set');
+  }
+
+  final _$instagramLinkAtom = Atom(name: '_EventModel.instagramLink');
+
+  @override
+  String get instagramLink {
+    _$instagramLinkAtom.context.enforceReadPolicy(_$instagramLinkAtom);
+    _$instagramLinkAtom.reportObserved();
+    return super.instagramLink;
+  }
+
+  @override
+  set instagramLink(String value) {
+    _$instagramLinkAtom.context.conditionallyRunInAction(() {
+      super.instagramLink = value;
+      _$instagramLinkAtom.reportChanged();
+    }, _$instagramLinkAtom, name: '${_$instagramLinkAtom.name}_set');
   }
 
   final _$_EventModelActionController = ActionController(name: '_EventModel');
@@ -494,6 +528,36 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.setEventVenueName(name);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventFacebookLink(String name) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventFacebookLink(name);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventWebLink(String name) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventWebLink(name);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventInstagramLink(String name) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventInstagramLink(name);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }

@@ -3,7 +3,6 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dar
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class AddEventWebURLs extends StatefulWidget {
@@ -15,16 +14,28 @@ class AddEventWebURLs extends StatefulWidget {
 }
 
 class _AddEventWebURLsState extends State<AddEventWebURLs> {
-  String selectionType = "none";
+  TextEditingController eventFacebookLinkController;
+  TextEditingController eventWebLinkController;
+  TextEditingController eventInstagramLinkController;
 
-  void setVenueDetails(Position position, Placemark placemark) {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     EventModel eventModel = Provider.of<EventModel>(context);
-    eventModel.setEventVenueDetailsUsingMap(position, placemark);
-    Navigator.of(context).pop();
-    setSelectionType("View Details From Maps");
+    eventFacebookLinkController =
+        TextEditingController(text: eventModel.faceboookLink);
+    eventWebLinkController = TextEditingController(text: eventModel.webLink);
+    eventInstagramLinkController =
+        TextEditingController(text: eventModel.instagramLink);
   }
 
-  setSelectionType(text) => this.setState(() => selectionType = text);
+  @override
+  void dispose() {
+    eventFacebookLinkController.dispose();
+    eventWebLinkController.dispose();
+    eventInstagramLinkController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +61,7 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
                     ),
                     TextField(
                       style: Theme.of(context).textTheme.body2,
+                      controller: eventFacebookLinkController,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
                         hintStyle: TextStyle(fontSize: 17),
@@ -61,6 +73,7 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
                       style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
+                      controller: eventWebLinkController,
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
@@ -73,6 +86,7 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
                       style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
+                      controller: eventInstagramLinkController,
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
