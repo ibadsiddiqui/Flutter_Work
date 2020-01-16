@@ -42,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
   loader() => this.setState(() => attempLogin = !attempLogin);
 
   void validateLogin({Function resetPass}) async {
+    FocusScope.of(context).requestFocus(FocusNode());
     _validateAPIControllers.validateLogin(context,
         load: loader, resetPass: resetPass);
   }
@@ -70,13 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 ForgotPasswordButton(),
                 Expanded(child: Divider()),
-                new GestureDetector(
-                  onTap: () =>
-                      FocusScope.of(context).requestFocus(new FocusNode()),
-                  child: BottomButton(
-                    title: "Don't have an account? Create One",
-                    onPressed: pushSignUpScreen,
-                  ),
+                BottomButton(
+                  title: "Don't have an account? Create One",
+                  onPressed: () => pushSignUpScreen(context),
                 ),
               ],
             ),
