@@ -3,7 +3,6 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dar
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class AddOrganisersDetails extends StatefulWidget {
@@ -15,19 +14,9 @@ class AddOrganisersDetails extends StatefulWidget {
 }
 
 class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
-  String selectionType = "none";
-
-  void setVenueDetails(Position position, Placemark placemark) {
-    EventModel eventModel = Provider.of<EventModel>(context);
-    eventModel.setEventVenueDetailsUsingMap(position, placemark);
-    Navigator.of(context).pop();
-    setSelectionType("View Details From Maps");
-  }
-
-  setSelectionType(text) => this.setState(() => selectionType = text);
-
   @override
   Widget build(BuildContext context) {
+    EventModel eventModel = Provider.of<EventModel>(context);
     return Container(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -49,6 +38,7 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                       style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
+                      onChanged: eventModel.setEventOrganiserEmail,
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",
@@ -61,6 +51,7 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                       style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
+                      onChanged: eventModel.setEventOrganiserContact,
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",

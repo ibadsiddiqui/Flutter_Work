@@ -10,6 +10,7 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/add_targetted_audienc
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_desc.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_venue_photos.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/add_web_urls.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/submit_event.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,6 +74,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
           scrollDirection: Axis.horizontal,
           physics: new NeverScrollableScrollPhysics(),
           children: <Widget>[
+            SubmitEvent(),
             AddEventOrganiserName(
               title: "Tell us the Organiser's name.*",
               moveToNextPage: moveToNextPage,
