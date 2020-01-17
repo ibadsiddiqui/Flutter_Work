@@ -74,7 +74,6 @@ class _AddEventDetailsState extends State<AddEventDetails> {
           scrollDirection: Axis.horizontal,
           physics: new NeverScrollableScrollPhysics(),
           children: <Widget>[
-            SubmitEvent(),
             AddEventOrganiserName(
               title: "Tell us the Organiser's name.*",
               moveToNextPage: moveToNextPage,
@@ -95,6 +94,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             AddVenueDesc(moveToNextPage: moveToNextPage),
             AddOrganisersDetails(moveToNextPage: moveToNextPage),
             AddEventWebURLs(moveToNextPage: moveToNextPage),
+            SubmitEvent(),
           ],
         ),
       ),
