@@ -12,7 +12,7 @@ class AppIcon extends StatelessWidget {
         child: new ClipRRect(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           borderRadius: new BorderRadius.circular(20.0),
-          child: Image.asset("asset/icons/app icon/app_icon.png"),
+          child: Image.asset("asset/icons/app_icons/app_icon.png"),
         ),
       ),
       decoration: BoxDecoration(
