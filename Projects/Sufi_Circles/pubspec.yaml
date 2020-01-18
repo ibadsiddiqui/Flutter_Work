@@ -22,6 +22,7 @@ dependencies:
   flutter_localizations: # add this
     sdk: flutter
 
+  uuid:
   google_maps_flutter:
   cupertino_icons: ^0.1.2
   image_picker_modern:
