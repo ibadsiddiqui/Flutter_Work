@@ -184,23 +184,6 @@ mixin _$EventModel on _EventModel, Store {
     }, _$startTimeAtom, name: '${_$startTimeAtom.name}_set');
   }
 
-  final _$addressDetailsAtom = Atom(name: '_EventModel.addressDetails');
-
-  @override
-  Map<String, dynamic> get addressDetails {
-    _$addressDetailsAtom.context.enforceReadPolicy(_$addressDetailsAtom);
-    _$addressDetailsAtom.reportObserved();
-    return super.addressDetails;
-  }
-
-  @override
-  set addressDetails(Map<String, dynamic> value) {
-    _$addressDetailsAtom.context.conditionallyRunInAction(() {
-      super.addressDetails = value;
-      _$addressDetailsAtom.reportChanged();
-    }, _$addressDetailsAtom, name: '${_$addressDetailsAtom.name}_set');
-  }
-
   final _$locationDetailsAtom = Atom(name: '_EventModel.locationDetails');
 
   @override
@@ -568,6 +551,16 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.resetAll();
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Map<String, dynamic> getEventModel() {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.getEventModel();
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }

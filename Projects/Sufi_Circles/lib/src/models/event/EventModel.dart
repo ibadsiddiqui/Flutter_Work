@@ -46,13 +46,6 @@ abstract class _EventModel with Store {
   // });
 
   @observable
-  Map<String, dynamic> addressDetails = {
-    "venue": "",
-    "city": "",
-    "country": "",
-  };
-
-  @observable
   ObservableMap<String, dynamic> locationDetails =
       ObservableMap.splayTreeMapFrom({
     "country": "Andorra",
@@ -204,6 +197,30 @@ abstract class _EventModel with Store {
     this.setEventFacebookLink("");
     this.setEventWebLink("");
     this.setEventInstagramLink("");
+  }
+
+  @action
+  Map<String, dynamic> getEventModel() {
+    return {
+      "name": this.eventName,
+      "desc": this.eventDesc,
+      "audience": this.eventAudience,
+      "audienceRange": this.eventAudienceLimitRange,
+      "dateFrom": this.dateFrom,
+      "dateTo": this.dateTo,
+      "startTime": this.startTime,
+      "locationDetails": this.locationDetails,
+      "organiserDetails": {
+        "organiserName": this.organiserName,
+        "organiserEmail": this.organiserEmail,
+        "organiserContactNo": this.organiserContactNo,
+      },
+      "eventLinks": {
+        "instagram": this.instagramLink,
+        "facebook": this.faceboookLink,
+        "website": this.webLink
+      }
+    };
   }
 
   @computed
