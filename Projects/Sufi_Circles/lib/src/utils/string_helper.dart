@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:Sufi_Circles/src/constants/keys.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_string_encryption/flutter_string_encryption.dart';
+import 'package:path/path.dart';
 
 String replaceUnderscore(String str) => str.replaceAll("_", " ");
 
@@ -50,3 +53,5 @@ Future<bool> validateName(String name) async {
   );
   return regExp.hasMatch(name);
 }
+
+String getFilename(String fullPath) => basename(new File(fullPath).path);
