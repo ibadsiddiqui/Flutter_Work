@@ -51,6 +51,7 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                       style: Theme.of(context).textTheme.body2,
                     ),
                     TextField(
+                      keyboardType: TextInputType.number,
                       onChanged: eventModel.setEventOrganiserContact,
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
