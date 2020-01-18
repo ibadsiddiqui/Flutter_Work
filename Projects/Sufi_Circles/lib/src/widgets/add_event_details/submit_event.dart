@@ -1,3 +1,5 @@
+import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
+import 'package:Sufi_Circles/src/controllers/validate.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
@@ -13,10 +15,14 @@ class SubmitEvent extends StatefulWidget {
 }
 
 class _SubmitEventState extends State<SubmitEvent> {
-  PublishEvent publishingEvent = PublishEvent.unpublished;
+  PublishEvent _publishingEvent = PublishEvent.unpublished;
+  EventDBController _eventDBController = new EventDBController();
 
-  _submitEventForPublication() {
-    this.setState(() => publishingEvent = PublishEvent.publishing);
+  _submitEventForPublication(context) async {
+    this.setState(() => _publishingEvent = PublishEvent.publishing);
+    bool isCreated = await _eventDBController.createEvent(context);
+    if (isCreated)
+      this.setState(() => _publishingEvent = PublishEvent.published);
   }
 
   Widget giveDescription(String text) {
@@ -30,7 +36,7 @@ class _SubmitEventState extends State<SubmitEvent> {
   @override
   Widget build(BuildContext context) {
     print(Provider.of<UserModel>(context).userID);
-    switch (publishingEvent) {
+    switch (_publishingEvent) {
       case PublishEvent.publishing:
         return Container(
           alignment: Alignment.center,
@@ -82,7 +88,7 @@ class _SubmitEventState extends State<SubmitEvent> {
                   alignment: Alignment.center,
                   child: RoundClippedButton(
                     isMain: true,
-                    onPress: this._submitEventForPublication,
+                    onPress: () => this._submitEventForPublication(context),
                     child:
                         Text("Publish", style: TextStyle(color: Colors.white)),
                   ),
