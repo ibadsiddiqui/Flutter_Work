@@ -7,9 +7,10 @@ class EventDBService {
   CollectionReference eventDB = Firestore.instance.collection("events");
   Uuid uuid = new Uuid();
 
-  Future<void> createEvent(Map<String, String> eventDetails) async {
+  Future<bool> createEvent(Map<String, String> details) async {
     try {
-      return (await eventDB.document(uuid.v4()).setData(eventDetails));
+      await eventDB.document(details["eventID"]).setData(details);
+      return true;
     } catch (e) {
       throw e;
     }
