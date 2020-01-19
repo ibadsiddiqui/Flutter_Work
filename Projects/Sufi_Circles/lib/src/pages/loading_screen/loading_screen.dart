@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
 import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/models/events_list/EventsListModel.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
@@ -17,6 +18,7 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   UserDBController _userDBController = UserDBController();
+  EventDBController _eventDBController = EventDBController();
 
   @override
   void initState() {
@@ -60,7 +62,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getUserDetails() async {
     await _userDBController.setUserDetailsUsingID(context, widget.uid);
-    // Provider.of<EventsListModel>(context).setAllEvent();
+    List events = await _eventDBController.getAllEvent();
+    Provider.of<EventsListModel>(context).setAllEvent(events);
     TimeNavigation.navigate(context, DashboardScreen(), second: 4);
   }
 }

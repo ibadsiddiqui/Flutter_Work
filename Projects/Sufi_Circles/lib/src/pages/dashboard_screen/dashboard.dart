@@ -1,4 +1,4 @@
-import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
+import 'package:Sufi_Circles/src/models/events_list/EventsListModel.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
@@ -27,7 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   toggleSearch() => this.setState(() => isSearching = !isSearching);
 
-  Widget _buildHeader(recommendedEventsModel, size) {
+  Widget _buildHeader(eventsModel, size) {
     return Container(
       height: size.height * 0.5,
       child: GridView.count(
@@ -36,16 +36,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
         mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
         crossAxisSpacing: MediaQuery.of(context).size.height * 0.015,
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-        children: _generateHeaderList(recommendedEventsModel),
+        children: _generateHeaderList(eventsModel),
       ),
     );
   }
 
-  List<Widget> _generateHeaderList(recommendedEventsModel) {
-    return List.generate(recommendedEventsModel.recommendedEvents.length - 1,
-        (idx) {
-      String desc = recommendedEventsModel.getEventDesc(idx);
-      String coverPhoto = recommendedEventsModel.getEventCoverPhoto(idx);
+  List<Widget> _generateHeaderList(EventsListModel eventsModel) {
+    return List.generate(eventsModel.allEvents.length - 1, (idx) {
+      String desc = eventsModel.getEventDesc(idx);
+      String coverPhoto = eventsModel.getEventCoverPhoto(idx);
       return DashboardTopTile(
         eventDesc: desc,
         eventCoverPhoto: coverPhoto,
@@ -53,12 +52,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }, growable: true);
   }
 
-  Widget _buildBody(recommendedEventsModel, size) {
+  Widget _buildBody(EventsListModel eventsModel, size) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       height: size.height * 0.6,
       child: ListView.builder(
-          itemCount: recommendedEventsModel.recommendedEvents.length,
+          itemCount: eventsModel.allEvents.length,
           itemBuilder: (context, int idx) => LatestEventTiles(index: idx)),
     );
   }
@@ -66,8 +65,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    RecommendedEventsModel recommendedEventsModel =
-        Provider.of<RecommendedEventsModel>(context);
+    EventsListModel eventsModel = Provider.of<EventsListModel>(context);
     return Scaffold(
       appBar: dashboardAppBar(context,
           isSearching: isSearching, onPress: toggleSearch),
@@ -80,12 +78,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
             child: DashboardHeadings(title: "Recommended Events"),
           ),
-          _buildHeader(recommendedEventsModel, size),
+          _buildHeader(eventsModel, size),
           Padding(
             padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
             child: DashboardHeadings(title: "Latest Events"),
           ),
-          _buildBody(recommendedEventsModel, size),
+          _buildBody(eventsModel, size),
         ],
       ),
     );
