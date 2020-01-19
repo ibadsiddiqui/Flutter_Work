@@ -7,50 +7,28 @@ class EventsListModel = _EventsListModel with _$EventsListModel;
 
 abstract class _EventsListModel with Store {
   @observable
-  List<Map<String, dynamic>> allEvents = [
-    {
-      "eventName": "New Event 1",
-      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
-      "eventCoverPhoto": "asset/images/dummy_events/event_1.jpg",
-      "eventVenuePhoto": List(),
-    },
-    {
-      "eventName": "New Event 2",
-      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
-      "eventCoverPhoto": "asset/images/dummy_events/event_2.png",
-      "eventVenuePhoto": List(),
-    },
-    {
-      "eventName": "New Event 3",
-      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
-      "eventCoverPhoto": "asset/images/dummy_events/event_3.png",
-      "eventVenuePhoto": List(),
-    },
-    {
-      "eventName": "New Event 4",
-      "eventDesc": "akjsduiasld jasd andandasnd ljansd lnas djnasld",
-      "eventCoverPhoto": "asset/images/dummy_events/event_4.png",
-      "eventVenuePhoto": List(),
-    },
-  ];
+  List<Map<String, dynamic>> allEvents = List();
 
   @computed
-  get checkIfEventsExist => allEvents.isEmpty;
+  get checkIfEventsExist => this.allEvents.isEmpty;
 
   @action
-  void getEventName(int idx) => (allEvents[idx])["eventName"];
+  void setAllEvent(List events) => this.allEvents = events;
 
   @action
-  void getEventDesc(int idx) => (allEvents[idx])["eventDesc"];
+  void getEventName(int idx) => (this.allEvents[idx])["eventName"];
 
   @action
-  void getEventCoverPhoto(int idx) => (allEvents[idx])["eventCoverPhoto"];
+  void getEventDesc(int idx) => (this.allEvents[idx])["eventDesc"];
 
   @action
-  void getEventVenuePhotos(int idx) => (allEvents[idx])["eventVenuePhoto"];
+  void getEventCoverPhoto(int idx) => (this.allEvents[idx])["eventCoverPhoto"];
+
+  @action
+  void getEventVenuePhotos(int idx) => (this.allEvents[idx])["eventVenuePhoto"];
 
   @action
   Map<String, dynamic> getEventDetails(int idx) {
-    return getEventDetailsUsingIndex(allEvents[idx]);
+    return getEventDetailsUsingIndex(this.allEvents[idx]);
   }
 }
