@@ -19,14 +19,14 @@ mixin _$EventsListModel on _EventsListModel, Store {
   final _$allEventsAtom = Atom(name: '_EventsListModel.allEvents');
 
   @override
-  List<Map<String, dynamic>> get allEvents {
+  List get allEvents {
     _$allEventsAtom.context.enforceReadPolicy(_$allEventsAtom);
     _$allEventsAtom.reportObserved();
     return super.allEvents;
   }
 
   @override
-  set allEvents(List<Map<String, dynamic>> value) {
+  set allEvents(List value) {
     _$allEventsAtom.context.conditionallyRunInAction(() {
       super.allEvents = value;
       _$allEventsAtom.reportChanged();
@@ -37,7 +37,17 @@ mixin _$EventsListModel on _EventsListModel, Store {
       ActionController(name: '_EventsListModel');
 
   @override
-  void getEventName(int idx) {
+  void setAllEvent(List events) {
+    final _$actionInfo = _$_EventsListModelActionController.startAction();
+    try {
+      return super.setAllEvent(events);
+    } finally {
+      _$_EventsListModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String getEventName(int idx) {
     final _$actionInfo = _$_EventsListModelActionController.startAction();
     try {
       return super.getEventName(idx);
@@ -47,7 +57,7 @@ mixin _$EventsListModel on _EventsListModel, Store {
   }
 
   @override
-  void getEventDesc(int idx) {
+  String getEventDesc(int idx) {
     final _$actionInfo = _$_EventsListModelActionController.startAction();
     try {
       return super.getEventDesc(idx);
@@ -57,7 +67,7 @@ mixin _$EventsListModel on _EventsListModel, Store {
   }
 
   @override
-  void getEventCoverPhoto(int idx) {
+  String getEventCoverPhoto(int idx) {
     final _$actionInfo = _$_EventsListModelActionController.startAction();
     try {
       return super.getEventCoverPhoto(idx);
@@ -67,7 +77,7 @@ mixin _$EventsListModel on _EventsListModel, Store {
   }
 
   @override
-  void getEventVenuePhotos(int idx) {
+  String getEventVenuePhotos(int idx) {
     final _$actionInfo = _$_EventsListModelActionController.startAction();
     try {
       return super.getEventVenuePhotos(idx);

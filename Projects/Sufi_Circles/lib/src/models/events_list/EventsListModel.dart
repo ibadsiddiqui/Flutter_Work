@@ -7,7 +7,7 @@ class EventsListModel = _EventsListModel with _$EventsListModel;
 
 abstract class _EventsListModel with Store {
   @observable
-  List<Map<String, dynamic>> allEvents = List();
+  List allEvents = List();
 
   @computed
   get checkIfEventsExist => this.allEvents.isEmpty;
@@ -16,16 +16,16 @@ abstract class _EventsListModel with Store {
   void setAllEvent(List events) => this.allEvents = events;
 
   @action
-  void getEventName(int idx) => (this.allEvents[idx])["eventName"];
+  String getEventName(int idx) => (this.allEvents[idx])["name"];
 
   @action
-  void getEventDesc(int idx) => (this.allEvents[idx])["eventDesc"];
+  String getEventDesc(int idx) => (this.allEvents[idx])["desc"];
 
   @action
-  void getEventCoverPhoto(int idx) => (this.allEvents[idx])["eventCoverPhoto"];
+  String getEventCoverPhoto(int idx) => (this.allEvents[idx])["coverPhotoURL"];
 
   @action
-  void getEventVenuePhotos(int idx) => (this.allEvents[idx])["eventVenuePhoto"];
+  String getEventVenuePhotos(int idx) => (this.allEvents[idx])["venuePhotosURLList"];
 
   @action
   Map<String, dynamic> getEventDetails(int idx) {
