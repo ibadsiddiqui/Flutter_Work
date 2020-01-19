@@ -28,7 +28,7 @@ class EventDBController {
         "coverPhotoURL": coverPhotoURL,
         "venuePhotosURLList": venuePhotosList,
       });
-      await _eventDBService.createEvent(eventModel.getEventModel());
+      await _eventDBService.createEvent(eventData);
       return true;
     } catch (e) {
       throw e;

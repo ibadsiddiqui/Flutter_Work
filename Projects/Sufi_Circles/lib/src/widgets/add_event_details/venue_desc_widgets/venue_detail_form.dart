@@ -16,20 +16,21 @@ class VenueDetailForm extends StatelessWidget {
   VenueDetailForm({Key key, this.toggleSelectionType, this.moveToNextPage})
       : super(key: key);
 
-  _setCountry(String value, EventModel data) => data.locationDetails.addAll({
+  _setCountry(String value, EventModel data) =>
+      data.locationDetails.value.addAll({
         "country": value,
         "state": (getStateUsingCountry(value))[1],
         "city": (getCitiesUsingCountry(value))[1],
       });
 
   _setStateForCountry(String value, EventModel data) =>
-      data.locationDetails.addAll({"state": value});
+      data.locationDetails.value.addAll({"state": value});
 
   _setAddress(String value, EventModel data) =>
-      data.locationDetails.addAll({"address": value});
+      data.locationDetails.value.addAll({"address": value});
 
   _setVenueName(String value, EventModel data) =>
-      data.locationDetails.addAll({"name": value});
+      data.locationDetails.value.addAll({"name": value});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class VenueDetailForm extends StatelessWidget {
                     builder: (_) => DropDown(
                       list: countriesList,
                       onChanged: (country) => this._setCountry(country, data),
-                      value: data.locationDetails["country"],
+                      value: data.locationDetails.value["country"],
                     ),
                   ),
                 ],
@@ -81,11 +82,11 @@ class VenueDetailForm extends StatelessWidget {
                   ),
                   Observer(
                     builder: (_) => DropDown(
-                      list:
-                          getStateUsingCountry(data.locationDetails["country"]),
+                      list: getStateUsingCountry(
+                          data.locationDetails.value["country"]),
                       onChanged: (state) =>
                           this._setStateForCountry(state, data),
-                      value: data.locationDetails["state"],
+                      value: data.locationDetails.value["state"],
                     ),
                   ),
                 ],
@@ -96,7 +97,7 @@ class VenueDetailForm extends StatelessWidget {
               alignment: Alignment.center,
               child: Observer(
                 builder: (_) =>
-                    getCitiesUsingCountry(data.locationDetails["country"])
+                    getCitiesUsingCountry(data.locationDetails.value["country"])
                                 .length !=
                             0
                         ? Column(
@@ -108,10 +109,10 @@ class VenueDetailForm extends StatelessWidget {
                               ),
                               DropDown(
                                 list: getCitiesUsingCountry(
-                                    data.locationDetails["country"]),
-                                onChanged: (city) =>
-                                    data.locationDetails.addAll({"city": city}),
-                                value: data.locationDetails["city"],
+                                    data.locationDetails.value["country"]),
+                                onChanged: (city) => data.locationDetails.value
+                                    .addAll({"city": city}),
+                                value: data.locationDetails.value["city"],
                               )
                             ],
                           )
@@ -174,7 +175,9 @@ class VenueDetailForm extends StatelessWidget {
                 RoundClippedButton(
                   isMain: false,
                   onPress: () {
-                    if (data.locationDetails["name"].toString().isNotEmpty)
+                    if (data.locationDetails.value["name"]
+                        .toString()
+                        .isNotEmpty)
                       moveToNextPage();
                     else
                       Scaffold.of(context).showSnackBar(SnackBar(

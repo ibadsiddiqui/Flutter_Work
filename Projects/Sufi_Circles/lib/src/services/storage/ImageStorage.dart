@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:Sufi_Circles/src/services/db/UserDBServices.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:path/path.dart';
 
 class ImageStorage {
   StorageReference storageRef = FirebaseStorage.instance.ref();

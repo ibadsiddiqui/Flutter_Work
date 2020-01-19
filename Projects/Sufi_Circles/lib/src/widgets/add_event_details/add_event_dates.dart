@@ -1,5 +1,4 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
-import 'package:Sufi_Circles/src/utils/date_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/date_picker.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';

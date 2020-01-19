@@ -37,7 +37,6 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
   @override
   Widget build(BuildContext context) {
     EventModel eventModel = Provider.of<EventModel>(context);
-    // print(eventModel.organiserDetails.);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(

@@ -39,6 +39,7 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
                     ),
                     TextField(
                       onChanged: eventModel.setEventOrganiserEmail,
+                      keyboardType: TextInputType.emailAddress,
                       style: Theme.of(context).textTheme.body2,
                       decoration: InputDecoration(
                         hintText: "Enter here...",

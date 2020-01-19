@@ -34,7 +34,6 @@ class _AddVenueDescState extends State<AddVenueDesc> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final data = Provider.of<EventModel>(context);
-    print(data.locationDetails);
     switch (selectionType) {
       case "View Details From Maps":
         return Container(
@@ -57,23 +56,23 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                   ),
                 ),
                 InfoSecView(
-                  text: data.locationDetails["name"],
+                  text: data.locationDetails.value["name"],
                   placeholder: "Name:",
                 ),
                 InfoSecView(
-                  text: data.locationDetails["address"],
+                  text: data.locationDetails.value["address"],
                   placeholder: "Address (optional):",
                 ),
                 InfoSecView(
-                  text: data.locationDetails["city"],
+                  text: data.locationDetails.value["city"],
                   placeholder: "City:",
                 ),
                 InfoSecView(
-                  text: data.locationDetails["state"],
+                  text: data.locationDetails.value["state"],
                   placeholder: "State:",
                 ),
                 InfoSecView(
-                  text: data.locationDetails["country"],
+                  text: data.locationDetails.value["country"],
                   placeholder: "Country:",
                 ),
                 Row(
