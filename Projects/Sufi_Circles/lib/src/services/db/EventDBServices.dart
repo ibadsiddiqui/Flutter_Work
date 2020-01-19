@@ -15,4 +15,11 @@ class EventDBService {
       throw e;
     }
   }
+    Future<QuerySnapshot> getAllEvent(Map<String, dynamic> details) async {
+    try {
+      return await eventDB.getDocuments();
+    } catch (e) {
+      throw e;
+    }
+  }
 }
