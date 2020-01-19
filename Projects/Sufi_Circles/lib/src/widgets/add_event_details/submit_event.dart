@@ -1,11 +1,10 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
-import 'package:Sufi_Circles/src/controllers/validate.dart';
-import 'package:Sufi_Circles/src/models/user/UserModel.dart';
+import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
+import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 enum PublishEvent { unpublished, publishing, published }
 
@@ -20,9 +19,22 @@ class _SubmitEventState extends State<SubmitEvent> {
 
   _submitEventForPublication(context) async {
     this.setState(() => _publishingEvent = PublishEvent.publishing);
-    bool isCreated = await _eventDBController.createEvent(context);
-    if (isCreated)
-      this.setState(() => _publishingEvent = PublishEvent.published);
+    try {
+      bool isCreated = await _eventDBController.createEvent(context);
+      if (isCreated) {
+        this.setState(() => _publishingEvent = PublishEvent.published);
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Event successfully created."),
+          backgroundColor: Colors.green,
+        ));
+        TimeNavigation.navigate(context, DashboardScreen(), second: 4);
+      }
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Something went wrong. Please try again."),
+      ));
+      this.setState(() => _publishingEvent = PublishEvent.unpublished);
+    }
   }
 
   Widget giveDescription(String text) {
@@ -35,7 +47,6 @@ class _SubmitEventState extends State<SubmitEvent> {
 
   @override
   Widget build(BuildContext context) {
-    print(Provider.of<UserModel>(context).userID);
     switch (_publishingEvent) {
       case PublishEvent.publishing:
         return Container(
