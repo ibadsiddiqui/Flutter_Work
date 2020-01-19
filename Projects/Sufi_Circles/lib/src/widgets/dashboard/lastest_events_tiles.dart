@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/models/events_list/EventsListModel.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
@@ -41,13 +42,10 @@ class LatestEventTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RecommendedEventsModel recommendedEventsModel =
-        Provider.of<RecommendedEventsModel>(context);
+    EventsListModel eventModel = Provider.of<EventsListModel>(context);
     final size = MediaQuery.of(context).size;
-    if (recommendedEventsModel.recommendedEvents.length - 1 > index) {
-      final detail = getEventDetailsUsingIndex(
-          recommendedEventsModel.recommendedEvents[index]);
-
+    if (eventModel.allEvents.length - 1 > index) {
+      final detail = getEventDetailsUsingIndex(eventModel.allEvents[index]);
       return new Container(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: ClipRRect(
@@ -57,15 +55,15 @@ class LatestEventTiles extends StatelessWidget {
             width: size.width * 0.9,
             height: size.height * 0.225,
             decoration:
-                dashboardTopTabBackground(path: detail['eventCoverPhoto']),
+                dashboardTopTabBackground(path: detail['coverPhotoURL']),
             child: FlatButton(
               onPressed: () {},
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  _buildEventHeading(context, detail['eventName']),
-                  _buildDivider(context, detail['eventName']),
-                  _buildEventDesc(context, detail['eventDesc']),
+                  _buildEventHeading(context, detail['name']),
+                  _buildDivider(context, detail['name']),
+                  _buildEventDesc(context, detail['desc']),
                 ],
               ),
             ),
