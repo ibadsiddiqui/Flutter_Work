@@ -7,7 +7,7 @@ class EventDBService {
   CollectionReference eventDB = Firestore.instance.collection("events");
   Uuid uuid = new Uuid();
 
-  Future<bool> createEvent(Map<String, String> details) async {
+  Future<bool> createEvent(Map<String, dynamic> details) async {
     try {
       await eventDB.document(details["eventID"]).setData(details);
       return true;
