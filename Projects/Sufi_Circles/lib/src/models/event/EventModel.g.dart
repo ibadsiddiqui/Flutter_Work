@@ -21,12 +21,6 @@ mixin _$EventModel on _EventModel, Store {
   dynamic get getPhotosLength => (_$getPhotosLengthComputed ??=
           Computed<dynamic>(() => super.getPhotosLength))
       .value;
-  Computed<dynamic> _$getEventDetailComputed;
-
-  @override
-  dynamic get getEventDetail => (_$getEventDetailComputed ??=
-          Computed<dynamic>(() => super.getEventDetail))
-      .value;
 
   final _$eventNameAtom = Atom(name: '_EventModel.eventName');
 
@@ -187,14 +181,14 @@ mixin _$EventModel on _EventModel, Store {
   final _$locationDetailsAtom = Atom(name: '_EventModel.locationDetails');
 
   @override
-  ObservableMap<String, dynamic> get locationDetails {
+  Observable<Map<String, dynamic>> get locationDetails {
     _$locationDetailsAtom.context.enforceReadPolicy(_$locationDetailsAtom);
     _$locationDetailsAtom.reportObserved();
     return super.locationDetails;
   }
 
   @override
-  set locationDetails(ObservableMap<String, dynamic> value) {
+  set locationDetails(Observable<Map<String, dynamic>> value) {
     _$locationDetailsAtom.context.conditionallyRunInAction(() {
       super.locationDetails = value;
       _$locationDetailsAtom.reportChanged();

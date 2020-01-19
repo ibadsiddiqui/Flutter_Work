@@ -39,15 +39,9 @@ abstract class _EventModel with Store {
     "minute": DateTime.now().minute,
   });
 
-  // @observable
-  // Observable<Map<String, dynamic>> endTime = Observable<Map<String, dynamic>>({
-  //   "hour": 0,
-  //   "minute": 0,
-  // });
-
   @observable
-  ObservableMap<String, dynamic> locationDetails =
-      ObservableMap.splayTreeMapFrom({
+  Observable<Map<String, dynamic>> locationDetails =
+      Observable<Map<String, dynamic>>({
     "country": "Andorra",
     "state": "Escaldes-Engordany",
     "city": "les Escaldes",
@@ -133,7 +127,7 @@ abstract class _EventModel with Store {
 
   @action
   void resetEventVenueDetail() {
-    this.locationDetails = ObservableMap.splayTreeMapFrom({
+    this.locationDetails.value.addAll({
       "country": "Andorra",
       "state": "Escaldes-Engordany",
       "city": "les Escaldes",
@@ -151,24 +145,24 @@ abstract class _EventModel with Store {
     this.setEventVenueCountryCity(placemark.locality);
     this.setEventVenueCountryState(placemark.administrativeArea);
     this.setEventVenueAddress(placemark.thoroughfare);
-    this.locationDetails["lat"] = position.latitude;
-    this.locationDetails["long"] = position.longitude;
+    this.locationDetails.value["lat"] = position.latitude;
+    this.locationDetails.value["long"] = position.longitude;
   }
 
   @action
-  void setEventVenueCountry(String d) => this.locationDetails["country"] = d;
+  void setEventVenueCountry(String d) => this.locationDetails.value["country"] = d;
 
   @action
-  void setEventVenueCountryState(String s) => this.locationDetails["state"] = s;
+  void setEventVenueCountryState(String s) => this.locationDetails.value["state"] = s;
 
   @action
-  void setEventVenueCountryCity(String c) => this.locationDetails["city"] = c;
+  void setEventVenueCountryCity(String c) => this.locationDetails.value["city"] = c;
 
   @action
-  void setEventVenueAddress(String ad) => this.locationDetails["address"] = ad;
+  void setEventVenueAddress(String ad) => this.locationDetails.value["address"] = ad;
 
   @action
-  void setEventVenueName(String name) => this.locationDetails["name"] = name;
+  void setEventVenueName(String name) => this.locationDetails.value["name"] = name;
 
   @action
   void setEventFacebookLink(String name) => this.faceboookLink = name;
@@ -190,10 +184,9 @@ abstract class _EventModel with Store {
     this.setEventAudienceLimit(ZEROTO50);
     this.resetEventCoverPhoto();
     this.resetEventVenuePhoto();
-    // this.resetEventVenueDetail();
     this.setEventFromDate(DateTime.now());
     this.setEventToDate(DateTime.now());
-    this.setEventStartTime(0, 0);
+    this.setEventStartTime(DateTime.now().hour, DateTime.now().minute);
     this.setEventFacebookLink("");
     this.setEventWebLink("");
     this.setEventInstagramLink("");
@@ -202,18 +195,18 @@ abstract class _EventModel with Store {
   @action
   Map<String, dynamic> getEventModel() {
     return {
-      "name": this.eventName,
-      "desc": this.eventDesc,
-      "audience": this.eventAudience,
-      "audienceRange": this.eventAudienceLimitRange,
-      "dateFrom": this.dateFrom,
-      "dateTo": this.dateTo,
-      "startTime": this.startTime,
-      "locationDetails": this.locationDetails,
+      "name": this.eventName.value,
+      "desc": this.eventDesc.value,
+      "audience": this.eventAudience.value,
+      "audienceRange": this.eventAudienceLimitRange.value,
+      "dateFrom": this.dateFrom.value,
+      "dateTo": this.dateTo.value,
+      "startTime": this.startTime.value,
+      "locationDetails": this.locationDetails.value,
       "organiserDetails": {
-        "organiserName": this.organiserName,
-        "organiserEmail": this.organiserEmail,
-        "organiserContactNo": this.organiserContactNo,
+        "organiserName": this.organiserName.value,
+        "organiserEmail": this.organiserEmail.value,
+        "organiserContactNo": this.organiserContactNo.value,
       },
       "eventLinks": {
         "instagram": this.instagramLink,
@@ -228,12 +221,4 @@ abstract class _EventModel with Store {
 
   @computed
   get getPhotosLength => eventVenuePhoto.length;
-
-  @computed
-  get getEventDetail => {
-        eventName = this.eventName,
-        eventDesc = this.eventDesc,
-        eventCoverPhoto = this.eventCoverPhoto,
-        eventVenuePhoto = List(),
-      };
 }
