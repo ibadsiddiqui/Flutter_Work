@@ -1,6 +1,7 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/services/db/EventDBServices.dart';
 import 'package:Sufi_Circles/src/services/storage/ImageStorage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -31,6 +32,16 @@ class EventDBController {
       await _eventDBService.createEvent(eventData);
       return true;
     } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<List> getAllEvent() async {
+    try {
+      QuerySnapshot events = await _eventDBService.getAllEvent();
+      return events.documents;
+    } catch (e) {
+      print(e);
       throw e;
     }
   }
