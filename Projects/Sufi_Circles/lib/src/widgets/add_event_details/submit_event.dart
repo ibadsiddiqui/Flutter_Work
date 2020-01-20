@@ -1,10 +1,12 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
+import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum PublishEvent { unpublished, publishing, published }
 
@@ -27,6 +29,7 @@ class _SubmitEventState extends State<SubmitEvent> {
           content: Text("Event successfully created."),
           backgroundColor: Colors.green,
         ));
+        Provider.of<EventModel>(context).resetAll();
         TimeNavigation.navigate(context, DashboardScreen(), second: 4);
       }
     } catch (e) {

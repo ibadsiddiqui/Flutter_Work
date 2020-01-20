@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
@@ -64,9 +65,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
       stream: _eventDBController.getAllEvent(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData)
-          return Container(
-            alignment: Alignment.center,
-            child: new Text('Loading...'),
+          return Scaffold(
+            body: Container(
+              alignment: Alignment.center,
+              child: new Text(
+                'Loading...',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
           );
         else
           return Scaffold(
@@ -79,12 +85,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
                   child: DashboardHeadings(title: "Recommended Events"),
                 ),
-                _buildHeader(snapshot.data.documents, size),
+                _buildHeader(reversedArray(snapshot.data.documents), size),
                 Padding(
                   padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
                   child: DashboardHeadings(title: "Latest Events"),
                 ),
-                _buildBody(snapshot.data.documents, size),
+                _buildBody(reversedArray(snapshot.data.documents), size),
               ],
             ),
           );
