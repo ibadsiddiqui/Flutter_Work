@@ -36,12 +36,10 @@ class EventDBController {
     }
   }
 
-  Future<List> getAllEvent() async {
+  Stream<QuerySnapshot> getAllEvent() {
     try {
-      QuerySnapshot events = await _eventDBService.getAllEvent();
-      return events.documents;
+      return _eventDBService.getAllEvent();
     } catch (e) {
-      print(e);
       throw e;
     }
   }

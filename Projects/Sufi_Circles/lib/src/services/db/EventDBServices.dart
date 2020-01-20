@@ -15,9 +15,10 @@ class EventDBService {
       throw e;
     }
   }
-    Future<QuerySnapshot> getAllEvent() async {
+
+  Stream<QuerySnapshot> getAllEvent() {
     try {
-      return await eventDB.getDocuments();
+      return eventDB.snapshots();
     } catch (e) {
       throw e;
     }
