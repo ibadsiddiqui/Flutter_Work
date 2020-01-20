@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Sufi_Circles/src/constants/keys.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_string_encryption/flutter_string_encryption.dart';
 import 'package:path/path.dart';
@@ -58,4 +59,12 @@ String getFilename(String fullPath) => basename(new File(fullPath).path);
 
 String truncateStrings(String source, int size) {
   return source.length > size ? source.substring(0, size - 1) + "..." : source;
+}
+
+List<DocumentSnapshot> reversedArray(input) {
+  List<DocumentSnapshot> ret = List<DocumentSnapshot>();
+  for (var i = input.length - 1; i >= 0; i--) {
+    ret.add(input[i]);
+  }
+  return ret;
 }
