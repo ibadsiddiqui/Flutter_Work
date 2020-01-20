@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class DashboardTopTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              eventDesc,
+              truncateStrings(eventDesc, 50),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.body1,
             ),
