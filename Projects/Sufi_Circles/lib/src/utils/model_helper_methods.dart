@@ -1,9 +1,9 @@
-Map<String, dynamic> getEventDetailsUsingIndex(Map<String, dynamic> details) {
+Map<String, dynamic> getEventDetailsUsingIndex(details) {
   return {
-    "eventName": details['name'],
-    "eventDesc": details['desc'],
-    "eventCoverPhoto": details['coverPhotoURL'],
-    "eventVenuePhoto": details["venuePhotosURLList"],
+    "name": details['name'],
+    "desc": details['desc'],
+    "coverPhotoURL": details['coverPhotoURL'],
+    "venuePhotosURLList": details["venuePhotosURLList"],
   };
 }
 
