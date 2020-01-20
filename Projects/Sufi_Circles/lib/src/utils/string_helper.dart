@@ -55,3 +55,7 @@ Future<bool> validateName(String name) async {
 }
 
 String getFilename(String fullPath) => basename(new File(fullPath).path);
+
+String truncateStrings(String source, int size) {
+  return source.length > size ? source.substring(0, size - 1) + "..." : source;
+}
