@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class LoadingScreen extends StatefulWidget {
   final String uid;
 
-  const LoadingScreen({Key key, this.uid = ""}) : super(key: key);
+  LoadingScreen({Key key, this.uid = ""}) : super(key: key);
 
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
@@ -17,21 +17,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
   UserDBController _userDBController = UserDBController();
 
   @override
-  void initState() {
-    super.initState();
-  }
+  void initState() => super.initState();
 
   @protected
   @mustCallSuper
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    getUserDetails();
+    await this._getUserDetails();
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
+  void dispose() => super.dispose();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +52,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 
-  void getUserDetails() async {
+  Future<void> _getUserDetails() async {
     await _userDBController.setUserDetailsUsingID(context, widget.uid);
     TimeNavigation.navigate(context, DashboardScreen(), second: 4);
   }
