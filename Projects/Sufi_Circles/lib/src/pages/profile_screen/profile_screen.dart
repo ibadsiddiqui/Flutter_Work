@@ -10,7 +10,7 @@ import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker_modern/image_picker_modern.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
