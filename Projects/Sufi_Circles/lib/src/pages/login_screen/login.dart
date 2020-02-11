@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Expanded(child: Divider()),
                 BottomButton(
                   title: "Don't have an account? Create One",
-                  onPressed: () => pushSignUpScreen(context),
+                  onPressed: pushSignUpScreen,
                 ),
               ],
             ),
