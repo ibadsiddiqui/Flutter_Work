@@ -11,6 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DashboardDrawer extends StatelessWidget {
+  void _navigateTo(context, {Widget screen}) {
+    Navigator.pop(context);
+    pushScreen(context, screen: screen);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -53,33 +58,25 @@ class DashboardDrawer extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.025),
                 DrawerItem(
-                    title: "Profile",
-                    leftIcon: Icon(Icons.person),
-                    onPress: () {
-                      Navigator.pop(context);
-                      pushScreen(context, screen: ProfileScreen());
-                    }),
+                  title: "Profile",
+                  leftIcon: Icon(Icons.person),
+                  onPress: () => _navigateTo(context, screen: ProfileScreen()),
+                ),
                 DrawerItem(
-                    title: "Create Event",
-                    leftIcon: Icon(Icons.event),
-                    onPress: () {
-                      Navigator.pop(context);
-                      pushScreen(context, screen: CreateEvent());
-                    }),
+                  title: "Create Event",
+                  leftIcon: Icon(Icons.event),
+                  onPress: () => _navigateTo(context, screen: CreateEvent()),
+                ),
+                // DrawerItem(
+                //   title: "See All Events",
+                //   leftIcon: Icon(Icons.event),
+                //   onPress: () => _navigateTo(context, screen: SettingScreen()),
+                // ),
                 DrawerItem(
-                    title: "See All Events",
-                    leftIcon: Icon(Icons.event),
-                    onPress: () {
-                      Navigator.pop(context);
-                      pushScreen(context, screen: SettingScreen());
-                    }),
-                DrawerItem(
-                    title: "Setting",
-                    leftIcon: Icon(Icons.settings),
-                    onPress: () {
-                      Navigator.pop(context);
-                      pushScreen(context, screen: SettingScreen());
-                    }),
+                  title: "Setting",
+                  leftIcon: Icon(Icons.settings),
+                  onPress: () => _navigateTo(context, screen: SettingScreen()),
+                ),
               ],
             );
           },
