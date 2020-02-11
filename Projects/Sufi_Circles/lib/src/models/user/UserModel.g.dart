@@ -9,6 +9,13 @@ part of 'UserModel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserModel on _UserModel, Store {
+  Computed<bool> _$isProfileImageEmptyComputed;
+
+  @override
+  bool get isProfileImageEmpty => (_$isProfileImageEmptyComputed ??=
+          Computed<bool>(() => super.isProfileImageEmpty))
+      .value;
+
   final _$userIDAtom = Atom(name: '_UserModel.userID');
 
   @override

@@ -67,4 +67,7 @@ abstract class _UserModel with Store {
         ? user["profile_picture"]
         : profilePicture);
   }
+
+  @computed
+  bool get isProfileImageEmpty => profilePicture == "asset/images/placeholder/cover/index.png";
 }
