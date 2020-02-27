@@ -1,7 +1,4 @@
-String getFullDateString(DateTime date) {
-  return date.toString().split(" ")[0];
-}
-
-bool compareDate(DateTime dateTo, DateTime dateFrom) {
-  return dateTo.compareTo(dateFrom) == 1;
+DateTime getCurrentDate() {
+  DateTime now = new DateTime.now();
+  return new DateTime(now.year, now.month, now.day);
 }

@@ -23,4 +23,12 @@ class EventDBService {
       throw e;
     }
   }
+
+  Future<QuerySnapshot> getLatestEventsSnapShot() {
+    try {
+      return eventDB.getDocuments();
+    } catch (e) {
+      throw e;
+    }
+  }
 }

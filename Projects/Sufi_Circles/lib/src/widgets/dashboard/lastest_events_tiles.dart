@@ -16,7 +16,7 @@ class LatestEventTiles extends StatelessWidget {
       width: title.length.toDouble() * 20,
       child: Text(
         truncateStrings(title, 15),
-        style: Theme.of(context).textTheme.display1,
+        style: Theme.of(context).textTheme.display1.apply(color: Colors.white),
       ),
     );
   }
@@ -35,7 +35,7 @@ class LatestEventTiles extends StatelessWidget {
   Widget _buildEventDesc(context, String desc) {
     return Text(
       desc,
-      style: Theme.of(context).textTheme.body1.apply(color: Colors.black),
+      style: Theme.of(context).textTheme.body1.apply(color: Colors.white),
       textAlign: TextAlign.center,
     );
   }

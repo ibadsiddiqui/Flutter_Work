@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
+import 'package:Sufi_Circles/src/utils/date_helper.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
@@ -18,7 +19,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   EventDBController _eventDBController = EventDBController();
 
   @override
-  void initState() => super.initState();
+  void initState() {
+    super.initState();
+    //TODO: handle this
+    _eventDBController.getLatestEventsSnap();
+  }
 
   @override
   void dispose() => super.dispose();
