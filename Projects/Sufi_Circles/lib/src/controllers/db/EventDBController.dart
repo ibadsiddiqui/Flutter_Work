@@ -49,13 +49,14 @@ class EventDBController {
     }
   }
 
-  Future<List> getLatestEventsSnap() async {
+  Future<List<DocumentSnapshot>> getLatestEventsSnap() async {
     try {
       QuerySnapshot data = await _eventDBService.getLatestEventsSnapShot();
       print(data);
       return data.documents;
     } catch (e) {
       print(e);
+      return [];
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
-import 'package:Sufi_Circles/src/utils/date_helper.dart';
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/search_events/search_events.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
-import 'package:Sufi_Circles/src/widgets/dashboard/appbar.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/lastest_events_tiles.dart';
@@ -29,6 +29,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void dispose() => super.dispose();
 
   toggleSearch() => this.setState(() => isSearching = !isSearching);
+
+  void _navigateTo(context, {Widget screen}) {
+    // Navigator.pop(context);
+    pushScreen(context, screen: screen);
+  }
 
   Widget _buildHeader(List items, Size size) {
     return Container(
@@ -81,8 +86,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
           );
         else
           return Scaffold(
-            appBar: dashboardAppBar(context,
-                isSearching: isSearching, onPress: toggleSearch),
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: Color(0xFF072247),
+              title:
+                  DashboardHeadings(title: "Sufi Circles", color: Colors.white),
+              actions: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.search, color: Colors.white),
+                    tooltip: "Seach Events",
+                    onPressed: () =>
+                        _navigateTo(context, screen: SearchEvents())),
+                SizedBox(height: 10, width: 10)
+              ],
+            ),
             drawer: DashboardDrawer(),
             body: ListView(
               children: [
