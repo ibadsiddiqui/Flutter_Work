@@ -1,6 +1,6 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
-import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
+import 'package:Sufi_Circles/src/widgets/events_list/events_list.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -57,48 +57,7 @@ class _SearchEventsState extends State<SearchEvents> {
                   stream: _eventDBController.getAllEvent(),
                   builder: (context, snapshot) => !snapshot.hasData
                       ? Container()
-                      : ListView.builder(
-                          itemCount: snapshot.data.documents.length,
-                          itemBuilder: (_, idx) {
-                            Map<String, dynamic> document =
-                                reversedArray(snapshot.data.documents)[idx]
-                                    .data;
-                            return Container(
-                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                              height: 120,
-                              width: double.maxFinite,
-                              child: Card(
-                                elevation: 5,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(40.0)),
-                                      child: Image.network(
-                                        document["coverPhotoURL"],
-                                        width: size.width * 0.2,
-                                        height: size.height * 0.1,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Container(
-                                        width: 100,
-                                        child: Text(
-                                          document["name"],
-                                          style:
-                                              Theme.of(context).textTheme.body2,
-                                          textAlign: TextAlign.left,
-                                          textDirection: TextDirection.ltr,
-                                        ))
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                      : EventsList(documents: snapshot.data.documents),
                 ),
               ),
             ],
