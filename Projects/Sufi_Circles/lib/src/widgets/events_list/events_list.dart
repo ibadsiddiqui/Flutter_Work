@@ -1,3 +1,5 @@
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/event_details/event_details.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,8 @@ class EventsList extends StatelessWidget {
           height: 120,
           width: double.maxFinite,
           child: InkWell(
-            onTap: () => print(document),
+            onTap: () =>
+                pushScreen(context, screen: EventDetails(event: document)),
             splashColor: Theme.of(context).backgroundColor,
             child: Card(
               elevation: 5,

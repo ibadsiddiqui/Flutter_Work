@@ -54,24 +54,20 @@ class HeroAnimation extends StatelessWidget {
       body: Center(
         child: PhotoHero(
           photo: photoPath,
-          // width: 300.0,
-          onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute<void>(builder: (BuildContext context) {
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (BuildContext context) {
               return Scaffold(
                 body: Container(
                   alignment: Alignment.center,
                   color: Colors.black,
                   child: PhotoHero(
                     photo: photoPath,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
+                    onTap: () => Navigator.of(context).pop(),
                   ),
                 ),
               );
-            }));
-          },
+            }),
+          ),
         ),
       ),
     );
