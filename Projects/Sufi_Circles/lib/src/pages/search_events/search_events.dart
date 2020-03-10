@@ -15,6 +15,20 @@ class _SearchEventsState extends State<SearchEvents> {
 
   String searchQuery = "";
 
+  void _resetSearch() {
+    this._searchController.clear();
+    this.setState(() => searchQuery = "");
+  }
+
+  List<DocumentSnapshot> _getList(List<DocumentSnapshot> documents) {
+    return searchQuery.isEmpty
+        ? documents
+        : documents.where((DocumentSnapshot doc) {
+            String name = doc.data["name"].toLowerCase();
+            return name.contains(searchQuery.toLowerCase());
+          }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -33,7 +47,7 @@ class _SearchEventsState extends State<SearchEvents> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
-                  controller: _searchController,
+                  controller: this._searchController,
                   style: TextStyle(color: Colors.black),
                   textAlignVertical: TextAlignVertical.center,
                   onChanged: (val) => this.setState(() => searchQuery = val),
@@ -44,7 +58,7 @@ class _SearchEventsState extends State<SearchEvents> {
                     suffixIcon: IconButton(
                       padding: EdgeInsets.only(top: 15),
                       tooltip: "Clear",
-                      onPressed: () => _searchController.clear(),
+                      onPressed: this._resetSearch,
                       icon: Icon(Icons.close, color: Colors.black),
                     ),
                   ),
@@ -55,9 +69,13 @@ class _SearchEventsState extends State<SearchEvents> {
                 height: size.height * 0.75,
                 child: StreamBuilder<QuerySnapshot>(
                   stream: _eventDBController.getAllEvent(),
-                  builder: (context, snapshot) => !snapshot.hasData
-                      ? Container()
-                      : EventsList(documents: snapshot.data.documents),
+                  builder: (_, snapshot) {
+                    return !snapshot.hasData
+                        ? Container()
+                        : EventsList(
+                            documents: this._getList(snapshot.data.documents),
+                          );
+                  },
                 ),
               ),
             ],
