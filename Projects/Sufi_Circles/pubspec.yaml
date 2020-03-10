@@ -23,6 +23,7 @@ dependencies:
     sdk: flutter
 
   uuid:
+  timeago:
   google_maps_flutter:
   cupertino_icons: ^0.1.2
   image_picker:
