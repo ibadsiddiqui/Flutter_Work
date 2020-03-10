@@ -39,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Container(
       height: size.height * 0.5,
       child: GridView.count(
-        scrollDirection: Axis.horizontal,
+        physics: null,
         crossAxisCount: 2,
         mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
         crossAxisSpacing: MediaQuery.of(context).size.height * 0.015,
@@ -107,7 +107,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
                   child: DashboardHeadings(title: "Recommended Events"),
                 ),
-                _buildHeader(reversedArray(snapshot.data.documents).sublist(0, 5), size),
+                _buildHeader(
+                    reversedArray(snapshot.data.documents).sublist(0, 5), size),
                 Padding(
                   padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
                   child: DashboardHeadings(title: "Latest Events"),
