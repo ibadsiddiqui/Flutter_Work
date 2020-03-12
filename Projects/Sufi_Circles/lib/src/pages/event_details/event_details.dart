@@ -11,8 +11,9 @@ class EventDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    String startDate = format(formatTimestamp(event["dateFrom"]));
-    Map<String, int> startTime = event["starTime"];
+    print(event["startTime"]);
+    String startDate = format(formatTimestamp(event["dateFrom"])).toString();
+    String startTime = formateDateAndTimeForEvent(event["startTime"]);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
@@ -38,7 +39,7 @@ class EventDetails extends StatelessWidget {
               Container(
                 color: Colors.red,
                 padding: EdgeInsets.all(10),
-                child: Text('$startDate $startTime["hour"] - $startTime["minute"]'),
+                child: Text(startDate + " " + startTime),
               )
             ],
           ),
