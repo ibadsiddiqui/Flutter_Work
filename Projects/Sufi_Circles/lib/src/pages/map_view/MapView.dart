@@ -2,6 +2,7 @@ import 'package:Sufi_Circles/src/services/maps/MapSerivce.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
+import 'package:Sufi_Circles/src/widgets/map/camera_position.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -21,7 +22,6 @@ class _MapViewState extends State<MapView> {
   final Set<Marker> _markers = new Set();
   bool _isPickingLocation = false;
 
-  GoogleMapController myMapController;
   Placemark _placemark;
   Position _currentLocation;
 
@@ -67,7 +67,7 @@ class _MapViewState extends State<MapView> {
         markerId: MarkerId("EventLocation"),
         position: LatLng(_currentLocation.latitude, _currentLocation.longitude),
         infoWindow: InfoWindow(
-          title: _placemark.name,
+          title: _placemark.name.isEmpty ? "Unknown" : _placemark.name,
           snippet: _placemark.subLocality +
               " " +
               _placemark.thoroughfare +
@@ -114,18 +114,20 @@ class _MapViewState extends State<MapView> {
               children: <Widget>[
                 Expanded(
                   child: GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(_currentLocation.latitude,
-                          _currentLocation.longitude),
-                      // zoom: 10.0,
+                    initialCameraPosition: cameraPostionForMap(
+                      _currentLocation.latitude,
+                      _currentLocation.longitude,
+                      zoom: 10.0,
                     ),
                     markers: this.myMarker(),
                     mapType: MapType.normal,
                     zoomGesturesEnabled: true,
                     onMapCreated: (controller) {
-                      setState(() {
-                        myMapController = controller;
-                      });
+                      controller.animateCamera(updateCamera(
+                        _currentLocation.latitude,
+                        _currentLocation.longitude,
+                        zoom: 10,
+                      ));
                     },
                   ),
                 ),
