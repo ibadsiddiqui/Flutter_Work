@@ -11,8 +11,11 @@ class ImageViewer extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       child: imagePath.isNotEmpty
-          ? Image.file(File(imagePath),
-              height: size.height * 0.5, fit: BoxFit.scaleDown)
+          ? imagePath.contains("https")
+              ? Image.network(imagePath,
+                  height: size.height * 0.5, fit: BoxFit.scaleDown)
+              : Image.file(File(imagePath),
+                  height: size.height * 0.5, fit: BoxFit.scaleDown)
           : Image.asset("asset/images/placeholder/cover/index.png",
               height: size.height * 0.5, fit: BoxFit.cover),
     );

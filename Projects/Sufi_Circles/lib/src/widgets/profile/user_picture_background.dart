@@ -7,8 +7,33 @@ class PhotoHero extends StatelessWidget {
   final String photo;
   final VoidCallback onTap;
 
+  Widget renderImage() {
+    bool isHttpImage = photo.contains("https");
+    if (isHttpImage)
+      return Image.network(
+        photo,
+        fit: BoxFit.cover,
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes
+                  : null,
+            ),
+          );
+        },
+      );
+    else
+      return Image.network(photo, fit: BoxFit.cover);
+  }
+
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
+    bool isPlaceholder =
+        photo.contains('asset/images/placeholder/cover/index.png');
     return SizedBox(
       width: size.width,
       child: Hero(
@@ -17,24 +42,9 @@ class PhotoHero extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            child: photo.contains('asset/images/placeholder/cover/index.png')
+            child: isPlaceholder
                 ? Image.asset(photo, fit: BoxFit.cover)
-                : Image.network(
-                    photo,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes
-                              : null,
-                        ),
-                      );
-                    },
-                  ),
+                : renderImage(),
           ),
         ),
       ),
