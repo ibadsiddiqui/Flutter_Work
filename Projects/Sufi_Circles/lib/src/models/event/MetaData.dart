@@ -1,4 +1,4 @@
-const String UNLIMITED = "No Limit.";
+const String UNLIMITED = "No Limit";
 const String LIMITED = "Limited";
 const String ZEROTO50 = "0 - 50";
 const String FIFTYTO100 = "50 - 100";
