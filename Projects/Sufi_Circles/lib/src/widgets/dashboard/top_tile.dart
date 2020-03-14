@@ -23,7 +23,7 @@ class DashboardTopTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              truncateStrings(eventDesc, 50),
+              truncateStrings(eventDesc, 20),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.body1,
             ),

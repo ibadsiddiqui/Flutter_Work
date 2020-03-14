@@ -6,12 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-// TODO: Add loader                         -Done
-// TODO : add current location name on pin  -Done
-// TODO : make PIN draggable                -Done
-// TODO : Pick PIN location on PIN drop     -Done
-// TODO : Add dont button to select current location -Done
-
 class MapView extends StatefulWidget {
   final Function onSubmit;
   final Function onCancel;
