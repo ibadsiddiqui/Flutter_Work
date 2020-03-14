@@ -2,6 +2,7 @@ import 'package:Sufi_Circles/src/utils/date_helper.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
 import 'package:Sufi_Circles/src/widgets/map/camera_position.dart';
+import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -23,7 +24,8 @@ class _EventDetailsState extends State<EventDetails> {
     String _audience = isAudienceLimited(widget.event["audience"])
         ? widget.event["audienceRange"]
         : widget.event["audience"];
-    return "$_audience Person";
+
+    return _audience.contains("No Limit") ? _audience : "$_audience Person";
   }
 
   Set<Marker> eventMarker(String lat, String long) {
@@ -37,8 +39,6 @@ class _EventDetailsState extends State<EventDetails> {
     return _markers;
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -47,7 +47,8 @@ class _EventDetailsState extends State<EventDetails> {
     String startTime = formateDateAndTimeForEvent(widget.event["startTime"]);
     String audience = getAudience();
     Map<dynamic, dynamic> location = widget.event["locationDetails"];
-    print(widget.event["venuePhotosURLList"].length);
+    List<dynamic> photos = widget.event["venuePhotosURLList"];
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
@@ -181,18 +182,53 @@ class _EventDetailsState extends State<EventDetails> {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 10, top: 10),
             child: Text(
-              "Event details",
+              "Photos",
               style: Theme.of(context).textTheme.display1,
               textAlign: TextAlign.left,
             ),
           ),
           Container(
-            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(top: 10.0),
             padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              "askdbasdb jhasbdasbd habsdlansdjl  asdajsndlasj las lasndl nasjkldn asjkdnjkasnd klasnld",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.blueGrey),
+            alignment: Alignment.center,
+            height: size.height * 0.3,
+            child: new ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: photos.length,
+              itemBuilder: (context, int idx) {
+                return Container(
+                  padding: EdgeInsets.symmetric(horizontal: 2),
+                  // color: Colors.red,
+                  child: InkWell(
+                    onTap: () => HeroAnimation(photoPath: photos[idx]),
+                    child: Image.network(
+                      photos[idx],
+                      fit: BoxFit.fill,
+                      alignment: Alignment.center,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text("Loading.."),
+                              CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes
+                                    : null,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
