@@ -63,8 +63,26 @@ String truncateStrings(String source, int size) {
 
 List<DocumentSnapshot> reversedArray(input) {
   List<DocumentSnapshot> ret = List<DocumentSnapshot>();
-  for (var i = input.length - 1; i >= 0; i--) {
-    ret.add(input[i]);
-  }
+  for (var i = input.length - 1; i >= 0; i--) ret.add(input[i]);
   return ret;
+}
+
+bool isAudienceLimited(String limit) => limit == "Limited";
+
+String toTitleCase(String text) {
+  // TODO: fix this
+  return text;
+}
+
+String getFullAddress(Map<dynamic, dynamic> location) {
+  String address = "";
+  if (location["address"].toString().isNotEmpty)
+    address = location["address"] + ", ";
+  if (location["city"].toString().isNotEmpty)
+    address = address + location["city"] + ", ";
+  if (location["state"].toString().isNotEmpty)
+    address = address + location["state"] + ", ";
+  if (location["country"].toString().isNotEmpty)
+    address = address + location["country"];
+  return address;
 }
