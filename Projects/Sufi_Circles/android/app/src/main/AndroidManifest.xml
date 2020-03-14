@@ -13,6 +13,7 @@
         android:label="Sufi Circles"
         android:icon="@mipmap/icon">
         <!-- API - Key =>  AIzaSyBDr4FQWfKStucaqrUhmjcnJJHqWt3rO0g -->
+            <!-- AIzaSyDKymeBXNeiFWY5jRUejv6zItpmr2MVyQ0 -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBDr4FQWfKStucaqrUhmjcnJJHqWt3rO0g"/>
