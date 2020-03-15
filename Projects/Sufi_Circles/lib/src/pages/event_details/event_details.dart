@@ -178,58 +178,90 @@ class _EventDetailsState extends State<EventDetails> {
                   fontWeight: FontWeight.bold, color: Colors.blueGrey),
             ),
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 10, top: 10),
-            child: Text(
-              "Photos",
-              style: Theme.of(context).textTheme.display1,
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 10.0),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            alignment: Alignment.center,
-            height: size.height * 0.3,
-            child: new ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: photos.length,
-              itemBuilder: (context, int idx) {
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 2),
-                  // color: Colors.red,
-                  child: InkWell(
-                    onTap: () => HeroAnimation(photoPath: photos[idx]),
-                    child: Image.network(
-                      photos[idx],
-                      fit: BoxFit.fill,
-                      alignment: Alignment.center,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text("Loading.."),
-                              CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes
-                                    : null,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+          Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: Text(
+                      "Photos",
+                      style: Theme.of(context).textTheme.display1,
+                      textAlign: TextAlign.left,
                     ),
                   ),
-                );
-              },
-            ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "See all",
+                            style: TextStyle(color: Colors.black),
+                            textAlign: TextAlign.left,
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            color: Theme.of(context).primaryColor,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                alignment: Alignment.center,
+                height: size.height * 0.3,
+                child: new ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount:
+                      photos.length < 4 ? photos.length : photos.length - 3,
+                  itemBuilder: (context, int idx) {
+                    return Container(
+                      padding: EdgeInsets.symmetric(horizontal: 2),
+                      child: InkWell(
+                        onTap: () => HeroAnimation(photoPath: photos[idx]),
+                        child: Image.network(
+                          photos[idx],
+                          fit: BoxFit.fill,
+                          alignment: Alignment.center,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("Loading.."),
+                                  CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes
+                                        : null,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
