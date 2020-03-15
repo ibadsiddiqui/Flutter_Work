@@ -17,7 +17,6 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  GoogleMapController myMapController;
   final Set<Marker> _markers = new Set();
 
   String getAudience() {
@@ -37,6 +36,28 @@ class _EventDetailsState extends State<EventDetails> {
       ));
     });
     return _markers;
+  }
+
+  Widget renderHeadings(String heading) {
+    return Container(
+      padding: EdgeInsets.only(left: 10, top: 10),
+      child: Text(
+        heading,
+        style: Theme.of(context).textTheme.display1,
+        textAlign: TextAlign.left,
+      ),
+    );
+  }
+
+  Widget renderSubHeadings(String text) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Text(
+        text,
+        style: TextStyle(color: Theme.of(context).primaryColor),
+        textAlign: TextAlign.left,
+      ),
+    );
   }
 
   @override
@@ -91,7 +112,9 @@ class _EventDetailsState extends State<EventDetails> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.red),
-                        child: Text(startDate + " at " + startTime),
+                        child: Text(startDate.replaceAll("about", "") +
+                            " at " +
+                            startTime),
                       )
                     ],
                   ),
@@ -113,15 +136,7 @@ class _EventDetailsState extends State<EventDetails> {
               ],
             ),
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 10, top: 10),
-            child: Text(
-              toTitleCase(location["name"]),
-              style: Theme.of(context).textTheme.display1,
-              textAlign: TextAlign.left,
-            ),
-          ),
+          renderHeadings(location["name"]),
           Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -160,15 +175,7 @@ class _EventDetailsState extends State<EventDetails> {
                   )
                 : Container(),
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 10, top: 10),
-            child: Text(
-              "Event details",
-              style: Theme.of(context).textTheme.display1,
-              textAlign: TextAlign.left,
-            ),
-          ),
+          renderHeadings("Event details"),
           Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -184,15 +191,7 @@ class _EventDetailsState extends State<EventDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 10, top: 10),
-                    child: Text(
-                      "Photos",
-                      style: Theme.of(context).textTheme.display1,
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
+                  renderHeadings("Photos"),
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     child: FlatButton(
@@ -217,7 +216,6 @@ class _EventDetailsState extends State<EventDetails> {
                 ],
               ),
               Container(
-                margin: EdgeInsets.only(top: 10.0),
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.center,
                 height: size.height * 0.3,
@@ -260,6 +258,45 @@ class _EventDetailsState extends State<EventDetails> {
                     );
                   },
                 ),
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              renderHeadings("Event Links"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.adjust,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  renderSubHeadings("Facebook:"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.adjust,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  renderSubHeadings("Instagram:"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.adjust,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  renderSubHeadings("Website: "),
+                ],
               ),
             ],
           ),
