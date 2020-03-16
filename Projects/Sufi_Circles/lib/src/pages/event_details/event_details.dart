@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/utils/date_helper.dart';
+import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
 import 'package:Sufi_Circles/src/widgets/map/camera_position.dart';
@@ -63,7 +64,8 @@ class _EventDetailsState extends State<EventDetails> {
   }
 
   openURI(String url) async {
-    if (await canLaunch(url))
+    bool urlStatus = await ShareUtils.openURI(url);
+    if (urlStatus)
       await launch(url);
     else {
       final snackBar = SnackBar(
@@ -84,7 +86,6 @@ class _EventDetailsState extends State<EventDetails> {
     Map<dynamic, dynamic> location = widget.event["locationDetails"];
     List<dynamic> photos = widget.event["venuePhotosURLList"];
     Map eventLinks = widget.event["eventLinks"];
-    print(eventLinks);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -320,15 +321,18 @@ class _EventDetailsState extends State<EventDetails> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.adjust, color: Theme.of(context).primaryColor),
-                    renderSubHeadings("Website"),
-                    Text(eventLinks["website"],
-                        style: TextStyle(color: Colors.blueGrey))
-                  ],
+                child: FlatButton(
+                  onPressed: () => openURI("http://facebook.com"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.adjust, color: Theme.of(context).primaryColor),
+                      renderSubHeadings("Website"),
+                      Text(eventLinks["website"],
+                          style: TextStyle(color: Colors.blueGrey))
+                    ],
+                  ),
                 ),
               ),
             ],

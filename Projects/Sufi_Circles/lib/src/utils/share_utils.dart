@@ -2,9 +2,17 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:Sufi_Circles/src/constants/keys.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShareUtils {
-  Future<void> clearAll() async{
+  static Future<bool> openURI(String url) async {
+    if (await canLaunch(url))
+      return true;
+    else
+      return false;
+  }
+
+  Future<void> clearAll() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
   }
