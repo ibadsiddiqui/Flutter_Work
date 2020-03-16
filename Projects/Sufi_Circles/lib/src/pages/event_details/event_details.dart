@@ -6,6 +6,7 @@ import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetails extends StatefulWidget {
   final Map<String, dynamic> event;
@@ -18,6 +19,7 @@ class EventDetails extends StatefulWidget {
 
 class _EventDetailsState extends State<EventDetails> {
   final Set<Marker> _markers = new Set();
+  final globalKey = GlobalKey<ScaffoldState>();
 
   String getAudience() {
     String _audience = isAudienceLimited(widget.event["audience"])
@@ -60,6 +62,18 @@ class _EventDetailsState extends State<EventDetails> {
     );
   }
 
+  openURI(String url) async {
+    if (await canLaunch(url))
+      await launch(url);
+    else {
+      final snackBar = SnackBar(
+        content: Text('Are you talkin\' to me?'),
+        backgroundColor: Colors.red,
+      );
+      return globalKey.currentState.showSnackBar(snackBar);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -69,15 +83,20 @@ class _EventDetailsState extends State<EventDetails> {
     String audience = getAudience();
     Map<dynamic, dynamic> location = widget.event["locationDetails"];
     List<dynamic> photos = widget.event["venuePhotosURLList"];
+    Map eventLinks = widget.event["eventLinks"];
+    print(eventLinks);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
+      key: globalKey,
       appBar: AppBar(
         backgroundColor: Colors.white.withOpacity(0.01),
         elevation: 0,
       ),
       body: ListView(
+        primary: true,
+        addAutomaticKeepAlives: true,
         padding: EdgeInsets.all(0),
         children: <Widget>[
           Container(
@@ -157,7 +176,8 @@ class _EventDetailsState extends State<EventDetails> {
             child: location["long"].toString().isNotEmpty
                 ? GoogleMap(
                     myLocationEnabled: true,
-                    myLocationButtonEnabled: false,
+                    myLocationButtonEnabled: true,
+                    mapToolbarEnabled: true,
                     initialCameraPosition: cameraPostionForMap(
                       location["lat"].toString(),
                       location["long"].toString(),
@@ -261,45 +281,59 @@ class _EventDetailsState extends State<EventDetails> {
               ),
             ],
           ),
+          renderHeadings("Links"),
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              renderHeadings("Event Links"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.adjust,
-                    color: Theme.of(context).primaryColor,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: FlatButton(
+                  onPressed: () => openURI("http://facebook.com"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.adjust, color: Theme.of(context).primaryColor),
+                      renderSubHeadings("Facebook"),
+                      Text(eventLinks["facebook"],
+                          style: TextStyle(color: Colors.blueGrey))
+                    ],
                   ),
-                  renderSubHeadings("Facebook:"),
-                ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.adjust,
-                    color: Theme.of(context).primaryColor,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: FlatButton(
+                  onPressed: () => openURI("http://facebook.com"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.adjust, color: Theme.of(context).primaryColor),
+                      renderSubHeadings("Instagram"),
+                      Text(eventLinks["instagram"],
+                          style: TextStyle(color: Colors.blueGrey))
+                    ],
                   ),
-                  renderSubHeadings("Instagram:"),
-                ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.adjust,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  renderSubHeadings("Website: "),
-                ],
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.adjust, color: Theme.of(context).primaryColor),
+                    renderSubHeadings("Website"),
+                    Text(eventLinks["website"],
+                        style: TextStyle(color: Colors.blueGrey))
+                  ],
+                ),
               ),
             ],
           ),
+          SizedBox(height: 10)
         ],
       ),
     );
