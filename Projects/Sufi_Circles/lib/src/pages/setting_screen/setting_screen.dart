@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,7 +16,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final AuthController authController = AuthController();
+  AuthController authController = AuthController();
+  ShareUtils utils = ShareUtils();
 
   @override
   void initState() {
@@ -126,7 +128,8 @@ class _SettingScreenState extends State<SettingScreen> {
             UserDetailItem(
               inputLabel: "Sign out",
               value: "clear my session.",
-              toggleEdit: () {
+              toggleEdit: () async {
+                await utils.setStringPreference("SET_TOKEN_EXPIRY", null);
                 authController.signOutUser();
                 pushLoginScreen(context);
               },
