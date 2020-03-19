@@ -1,6 +1,7 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/map_view/MapView.dart';
+import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/info_sec_view.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_desc_widgets/show_type_selection_for_venue.dart';
@@ -56,23 +57,26 @@ class _AddVenueDescState extends State<AddVenueDesc> {
                   ),
                 ),
                 InfoSecView(
-                  text: data.locationDetails.value["name"],
+                  text: truncateStrings(data.locationDetails.value["name"], 10),
                   placeholder: "Name:",
                 ),
                 InfoSecView(
-                  text: data.locationDetails.value["address"],
-                  placeholder: "Address (optional):",
+                  text: truncateStrings(
+                      data.locationDetails.value["address"], 20),
+                  placeholder: "Address:",
                 ),
                 InfoSecView(
-                  text: data.locationDetails.value["city"],
+                  text: truncateStrings(data.locationDetails.value["city"], 20),
                   placeholder: "City:",
                 ),
                 InfoSecView(
-                  text: data.locationDetails.value["state"],
+                  text:
+                      truncateStrings(data.locationDetails.value["state"], 20),
                   placeholder: "State:",
                 ),
                 InfoSecView(
-                  text: data.locationDetails.value["country"],
+                  text: truncateStrings(
+                      data.locationDetails.value["country"], 20),
                   placeholder: "Country:",
                 ),
                 Row(
