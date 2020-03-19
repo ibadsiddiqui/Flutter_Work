@@ -71,37 +71,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return StreamBuilder<QuerySnapshot>(
-      stream: _eventDBController.getAllEvent(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (!snapshot.hasData)
-          return Scaffold(
-            body: Container(
-              alignment: Alignment.center,
-              child: new Text(
-                'Loading...',
-                style: TextStyle(color: Colors.black),
+    return Scaffold(
+      drawer: DashboardDrawer(),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Color(0xFF072247),
+        title: DashboardHeadings(title: "Sufi Circles", color: Colors.white),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.search, color: Colors.white),
+              tooltip: "Seach Events",
+              onPressed: () => _navigateTo(context, screen: SearchEvents())),
+          SizedBox(height: 10, width: 10)
+        ],
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _eventDBController.getAllEvent(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData)
+            return new Text('Loading', style: TextStyle(color: Colors.black));
+          else if (snapshot.data.documents.isEmpty) {
+            return Center(
+              child: Text(
+                "Currently no events are happening around. Please try again later",
+                style: TextStyle(color: Colors.blueGrey),
+                textAlign: TextAlign.center,
               ),
-            ),
-          );
-        else
-          return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              backgroundColor: Color(0xFF072247),
-              title:
-                  DashboardHeadings(title: "Sufi Circles", color: Colors.white),
-              actions: <Widget>[
-                IconButton(
-                    icon: Icon(Icons.search, color: Colors.white),
-                    tooltip: "Seach Events",
-                    onPressed: () =>
-                        _navigateTo(context, screen: SearchEvents())),
-                SizedBox(height: 10, width: 10)
-              ],
-            ),
-            drawer: DashboardDrawer(),
-            body: ListView(
+            );
+          } else
+            return ListView(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
@@ -115,9 +113,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 _buildBody(reversedArray(snapshot.data.documents), size),
               ],
-            ),
-          );
-      },
+            );
+        },
+      ),
     );
   }
 }
