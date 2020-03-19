@@ -127,7 +127,6 @@ class _EventDetailsState extends State<EventDetails> {
     Map<dynamic, dynamic> location = widget.event["locationDetails"];
     List<dynamic> photos = widget.event["venuePhotosURLList"];
     Map eventLinks = widget.event["eventLinks"];
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,

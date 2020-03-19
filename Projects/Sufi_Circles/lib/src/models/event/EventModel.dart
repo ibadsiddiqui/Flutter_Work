@@ -140,29 +140,43 @@ abstract class _EventModel with Store {
 
   @action
   void setEventVenueDetailsUsingMap(Position position, Placemark placemark) {
+    String subArea = placemark.subLocality.isEmpty ? "" : placemark.subLocality;
+    String localArea = placemark.thoroughfare.isEmpty
+        ? subArea
+        : (placemark.thoroughfare + ", " + subArea);
+
+    String localAreaWithCode = placemark.postalCode.isEmpty
+        ? localArea
+        : localArea + ", " + placemark.postalCode;
+
     this.setEventVenueName(placemark.name);
+    this.setEventVenueAddress(localAreaWithCode);
     this.setEventVenueCountry(placemark.country);
     this.setEventVenueCountryCity(placemark.locality);
     this.setEventVenueCountryState(placemark.administrativeArea);
-    this.setEventVenueAddress(placemark.thoroughfare);
     this.locationDetails.value["lat"] = position.latitude;
     this.locationDetails.value["long"] = position.longitude;
   }
 
   @action
-  void setEventVenueCountry(String d) => this.locationDetails.value["country"] = d;
+  void setEventVenueCountry(String d) =>
+      this.locationDetails.value["country"] = d;
 
   @action
-  void setEventVenueCountryState(String s) => this.locationDetails.value["state"] = s;
+  void setEventVenueCountryState(String s) =>
+      this.locationDetails.value["state"] = s;
 
   @action
-  void setEventVenueCountryCity(String c) => this.locationDetails.value["city"] = c;
+  void setEventVenueCountryCity(String c) =>
+      this.locationDetails.value["city"] = c;
 
   @action
-  void setEventVenueAddress(String ad) => this.locationDetails.value["address"] = ad;
+  void setEventVenueAddress(String ad) =>
+      this.locationDetails.value["address"] = ad;
 
   @action
-  void setEventVenueName(String name) => this.locationDetails.value["name"] = name;
+  void setEventVenueName(String name) =>
+      this.locationDetails.value["name"] = name;
 
   @action
   void setEventFacebookLink(String name) => this.faceboookLink = name;
