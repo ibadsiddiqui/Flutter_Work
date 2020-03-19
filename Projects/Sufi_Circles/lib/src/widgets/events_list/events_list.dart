@@ -11,7 +11,7 @@ class EventsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return ListView.builder(
       itemCount: documents.length,
       itemBuilder: (_, idx) {

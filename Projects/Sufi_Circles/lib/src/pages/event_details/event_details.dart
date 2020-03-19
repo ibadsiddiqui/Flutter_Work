@@ -22,6 +22,22 @@ class _EventDetailsState extends State<EventDetails> {
   final Set<Marker> _markers = new Set();
   final globalKey = GlobalKey<ScaffoldState>();
 
+  @override
+  void dispose() => super.dispose();
+
+  openURI(String url) async {
+    bool urlStatus = await ShareUtils.openURI(url);
+    if (urlStatus)
+      await launch(url);
+    else {
+      final snackBar = SnackBar(
+        content: Text('Are you talkin\' to me?'),
+        backgroundColor: Colors.red,
+      );
+      return globalKey.currentState.showSnackBar(snackBar);
+    }
+  }
+
   String getAudience() {
     String _audience = isAudienceLimited(widget.event["audience"])
         ? widget.event["audienceRange"]
@@ -63,17 +79,42 @@ class _EventDetailsState extends State<EventDetails> {
     );
   }
 
-  openURI(String url) async {
-    bool urlStatus = await ShareUtils.openURI(url);
-    if (urlStatus)
-      await launch(url);
+  Widget _buildEventLinks(String link, String heading) {
+    Widget child;
+    if (link.isEmpty)
+      child = null;
     else {
-      final snackBar = SnackBar(
-        content: Text('Are you talkin\' to me?'),
-        backgroundColor: Colors.red,
+      child = FlatButton(
+        onPressed: () => openURI(link),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.adjust, color: Theme.of(context).primaryColor),
+            renderSubHeadings(heading),
+            Text(link, style: TextStyle(color: Colors.blueGrey))
+          ],
+        ),
       );
-      return globalKey.currentState.showSnackBar(snackBar);
     }
+    return new Container(
+        padding: EdgeInsets.symmetric(horizontal: 10), child: child);
+  }
+
+  Widget _buildEventLinkSection(Map links) {
+    List<Widget> linkLists = [];
+    if (links["website"].toString().isNotEmpty)
+      linkLists.add(_buildEventLinks(links["website"], "Website"));
+    if (links["facebook"].toString().isNotEmpty)
+      linkLists.add(_buildEventLinks(links["facebook"], "Facebook"));
+    if (links["instagram"].toString().isNotEmpty)
+      linkLists.add(_buildEventLinks(links["instagram"], "Instagram"));
+    if (linkLists.isNotEmpty) linkLists.add(renderHeadings("Links"));
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: linkLists,
+    );
   }
 
   @override
@@ -120,11 +161,11 @@ class _EventDetailsState extends State<EventDetails> {
                       Container(
                         child: Text(
                           widget.event["name"],
+                          textAlign: TextAlign.left,
                           style: Theme.of(context)
                               .textTheme
                               .display1
                               .apply(color: Colors.white),
-                          textAlign: TextAlign.left,
                         ),
                       ),
                       Container(
@@ -282,61 +323,7 @@ class _EventDetailsState extends State<EventDetails> {
               ),
             ],
           ),
-          renderHeadings("Links"),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: FlatButton(
-                  onPressed: () => openURI("http://facebook.com"),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.adjust, color: Theme.of(context).primaryColor),
-                      renderSubHeadings("Facebook"),
-                      Text(eventLinks["facebook"],
-                          style: TextStyle(color: Colors.blueGrey))
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: FlatButton(
-                  onPressed: () => openURI("http://facebook.com"),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.adjust, color: Theme.of(context).primaryColor),
-                      renderSubHeadings("Instagram"),
-                      Text(eventLinks["instagram"],
-                          style: TextStyle(color: Colors.blueGrey))
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: FlatButton(
-                  onPressed: () => openURI("http://facebook.com"),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.adjust, color: Theme.of(context).primaryColor),
-                      renderSubHeadings("Website"),
-                      Text(eventLinks["website"],
-                          style: TextStyle(color: Colors.blueGrey))
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _buildEventLinkSection(eventLinks),
           SizedBox(height: 10)
         ],
       ),

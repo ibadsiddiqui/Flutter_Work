@@ -37,9 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  resetPassword() => passwordController.text = "";
+  void resetPassword() => passwordController.text = "";
 
-  loader() => this.setState(() => attempLogin = !attempLogin);
+  void loader() => this.setState(() => attempLogin = !attempLogin);
 
   void validateLogin({Function resetPass}) async {
     FocusScope.of(context).requestFocus(FocusNode());
