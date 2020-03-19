@@ -70,8 +70,13 @@ List<DocumentSnapshot> reversedArray(input) {
 bool isAudienceLimited(String limit) => limit == "Limited";
 
 String toTitleCase(String text) {
-  // TODO: fix this
-  return text;
+  List splitedText = text
+      .split(" ")
+      .map(
+          (a) => a.substring(0, 1).toUpperCase() + a.substring(1).toLowerCase())
+      .toList();
+
+  return splitedText.join();
 }
 
 String getFullAddress(Map<dynamic, dynamic> location) {
