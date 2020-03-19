@@ -70,7 +70,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       drawer: DashboardDrawer(),
       appBar: AppBar(
@@ -106,7 +106,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: DashboardHeadings(title: "Recommended Events"),
                 ),
                 _buildHeader(
-                    reversedArray(snapshot.data.documents).sublist(0, 5), size),
+                    reversedArray(snapshot.data.documents.take(4)).toList(),
+                    size),
                 Padding(
                   padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
                   child: DashboardHeadings(title: "Latest Events"),
