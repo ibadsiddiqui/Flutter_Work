@@ -41,6 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   loader() => this.setState(() => attemptSignup = !attemptSignup);
 
   Future validateSignup({Function resetPass}) async {
+    FocusScope.of(context).requestFocus(FocusNode());
     _validateAPIControllers.validateSignup(context,
         resetPass: resetPassword, load: loader);
   }
