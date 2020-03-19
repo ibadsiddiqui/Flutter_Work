@@ -89,7 +89,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         stream: _eventDBController.getAllEvent(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData)
-            return new Text('Loading', style: TextStyle(color: Colors.black));
+            return Center(
+              child: new Text('Loading', style: TextStyle(color: Colors.black)),
+            );
           else if (snapshot.data.documents.isEmpty) {
             return Center(
               child: Text(
