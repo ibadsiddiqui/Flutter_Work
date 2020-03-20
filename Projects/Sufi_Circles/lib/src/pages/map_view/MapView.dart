@@ -26,7 +26,10 @@ class _MapViewState extends State<MapView> {
   Position _currentLocation;
 
   @override
-  void initState() =>super.initState();
+  void initState() => super.initState();
+
+  @override
+  void dispose() => super.dispose();
 
   @protected
   @mustCallSuper
