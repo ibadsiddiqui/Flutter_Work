@@ -50,11 +50,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   List<Widget> _generateHeaderList(List snapshot) {
-    return List.generate(snapshot.length, (idx) {
-      String desc = (snapshot[idx])['desc'];
-      String coverPhoto = (snapshot[idx])['coverPhotoURL'];
-      return DashboardTopTile(eventDesc: desc, eventCoverPhoto: coverPhoto);
-    }, growable: true);
+    return List.generate(
+        snapshot.length, (idx) => DashboardTopTile(event: snapshot[idx].data),
+        growable: true);
   }
 
   Widget _buildBody(List snapshot, size) {
