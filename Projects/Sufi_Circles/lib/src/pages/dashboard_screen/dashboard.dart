@@ -50,7 +50,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   List<Widget> _generateHeaderList(List snapshot) {
-    return List.generate(snapshot.length - 1, (idx) {
+    return List.generate(snapshot.length, (idx) {
       String desc = (snapshot[idx])['desc'];
       String coverPhoto = (snapshot[idx])['coverPhotoURL'];
       return DashboardTopTile(eventDesc: desc, eventCoverPhoto: coverPhoto);
@@ -92,31 +92,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
             return Center(
               child: new Text('Loading', style: TextStyle(color: Colors.black)),
             );
-          else if (snapshot.data.documents.isEmpty) {
-            return Center(
-              child: Text(
-                "Currently no events are happening around. Please try again later",
-                style: TextStyle(color: Colors.blueGrey),
-                textAlign: TextAlign.center,
-              ),
-            );
-          } else
-            return ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
-                  child: DashboardHeadings(title: "Recommended Events"),
+          else {
+            if (snapshot.data.documents.length == 0) {
+              return Center(
+                child: Text(
+                  "Currently no events are happening around. Please try again later",
+                  style: TextStyle(color: Colors.blueGrey),
+                  textAlign: TextAlign.center,
                 ),
-                _buildHeader(
-                    reversedArray(snapshot.data.documents.take(4)).toList(),
-                    size),
-                Padding(
-                  padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
-                  child: DashboardHeadings(title: "Latest Events"),
-                ),
-                _buildBody(reversedArray(snapshot.data.documents), size),
-              ],
-            );
+              );
+            } else
+              return ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
+                    child: DashboardHeadings(title: "Recommended Events"),
+                  ),
+                  _buildHeader(
+                      reversedArray(snapshot.data.documents.take(4).toList()),
+                      size),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
+                    child: DashboardHeadings(title: "Latest Events"),
+                  ),
+                  _buildBody(reversedArray(snapshot.data.documents), size),
+                ],
+              );
+          }
         },
       ),
     );
