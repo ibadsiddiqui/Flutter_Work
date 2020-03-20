@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/common/photos/load_photos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -13,17 +14,8 @@ class PhotoHero extends StatelessWidget {
       return Image.network(
         photo,
         fit: BoxFit.cover,
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent loadingProgress) {
-          if (loadingProgress == null) return child;
-          return Center(
-            child: CircularProgressIndicator(
-              value: loadingProgress.expectedTotalBytes != null
-                  ? loadingProgress.cumulativeBytesLoaded /
-                      loadingProgress.expectedTotalBytes
-                  : null,
-            ),
-          );
+        loadingBuilder: (_, child, progress) {
+          return progress == null ? child : Center(child: loadPhotos(progress));
         },
       );
     else
