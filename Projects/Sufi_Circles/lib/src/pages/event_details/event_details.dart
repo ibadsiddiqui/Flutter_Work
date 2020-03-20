@@ -2,10 +2,11 @@ import 'package:Sufi_Circles/src/utils/date_helper.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
-import 'package:Sufi_Circles/src/widgets/map/camera_position.dart';
-import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
+import 'package:Sufi_Circles/src/widgets/event_details/headings.dart';
+import 'package:Sufi_Circles/src/widgets/event_details/links.dart';
+import 'package:Sufi_Circles/src/widgets/event_details/photos_list.dart';
+import 'package:Sufi_Circles/src/widgets/map/small_map.dart';
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -46,82 +47,25 @@ class _EventDetailsState extends State<EventDetails> {
     return _audience.contains("No Limit") ? _audience : "$_audience Person";
   }
 
-  Set<Marker> eventMarker(String lat, String long) {
+  Set<Marker> eventMarker(double lat, double long) {
     setState(() {
       _markers.add(Marker(
         markerId: MarkerId("event"),
-        position: LatLng(double.parse(lat), double.parse(long)),
+        position: LatLng(lat, long),
         icon: BitmapDescriptor.defaultMarker,
       ));
     });
     return _markers;
   }
 
-  Widget renderHeadings(String heading) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, top: 10),
-      child: Text(
-        heading,
-        style: Theme.of(context).textTheme.display1,
-        textAlign: TextAlign.left,
-      ),
-    );
-  }
-
-  Widget renderSubHeadings(String text) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Text(
-        text,
-        style: TextStyle(color: Theme.of(context).primaryColor),
-        textAlign: TextAlign.left,
-      ),
-    );
-  }
-
-  Widget _buildEventLinks(String link, String heading) {
-    Widget child;
-    if (link.isEmpty)
-      child = null;
-    else {
-      child = FlatButton(
-        onPressed: () => openURI(link),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(Icons.adjust, color: Theme.of(context).primaryColor),
-            renderSubHeadings(heading),
-            Text(link, style: TextStyle(color: Colors.blueGrey))
-          ],
-        ),
-      );
-    }
-    return new Container(
-        padding: EdgeInsets.symmetric(horizontal: 10), child: child);
-  }
-
-  Widget _buildEventLinkSection(Map links) {
-    List<Widget> linkLists = [];
-    if (links["website"].toString().isNotEmpty)
-      linkLists.add(_buildEventLinks(links["website"], "Website"));
-    if (links["facebook"].toString().isNotEmpty)
-      linkLists.add(_buildEventLinks(links["facebook"], "Facebook"));
-    if (links["instagram"].toString().isNotEmpty)
-      linkLists.add(_buildEventLinks(links["instagram"], "Instagram"));
-    if (linkLists.isNotEmpty) linkLists.add(renderHeadings("Links"));
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: linkLists,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    String startDate =
-        format(formatTimestamp(widget.event["dateFrom"])).toString();
+    String formattedDate = formatTimestamp(widget.event["dateFrom"]).toString();
+
+    String startDate = formattedDate
+        .substring(0, formattedDate.indexOf(" "))
+        .replaceAll("-", "/");
     String startTime = formateDateAndTimeForEvent(widget.event["startTime"]);
     String audience = getAudience();
     Map<dynamic, dynamic> location = widget.event["locationDetails"];
@@ -196,133 +140,25 @@ class _EventDetailsState extends State<EventDetails> {
               ],
             ),
           ),
-          renderHeadings(location["name"]),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Text(
-              getFullAddress(location),
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.blueGrey),
-            ),
-          ),
+          buildHeadings(context, location["name"]),
+          buildDescription(getFullAddress(location)),
           Container(
             padding: location["long"].toString().isEmpty
                 ? EdgeInsets.all(0)
                 : EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            // color: Colors.red,
             width: size.width,
             height:
                 location["long"].toString().isNotEmpty ? size.height * 0.3 : 0,
             child: location["long"].toString().isNotEmpty
-                ? GoogleMap(
-                    myLocationEnabled: true,
-                    myLocationButtonEnabled: true,
-                    mapToolbarEnabled: true,
-                    initialCameraPosition: cameraPostionForMap(
-                      location["lat"].toString(),
-                      location["long"].toString(),
-                      zoom: 13.0,
-                    ),
-                    markers: this.eventMarker(location["lat"].toString(),
-                        location["long"].toString()),
-                    mapType: MapType.normal,
-                    onMapCreated: (controller) =>
-                        controller.animateCamera(updateCamera(
-                      location["lat"].toString(),
-                      location["long"].toString(),
-                      zoom: 13.0,
-                    )),
-                  )
+                ? buildSmallMap(location["lat"], location["long"],
+                    eventMarker(location["lat"], location["long"]))
                 : Container(),
           ),
-          renderHeadings("Event details"),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              "askdbasdb jhasbdasbd habsdlansdjl  asdajsndlasj las lasndl nasjkldn asjkdnjkasnd klasnld",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.blueGrey),
-            ),
-          ),
-          Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  renderHeadings("Photos"),
-                  Container(
-                    margin: EdgeInsets.only(top: 15),
-                    child: FlatButton(
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "See all",
-                            style: TextStyle(color: Colors.black),
-                            textAlign: TextAlign.left,
-                          ),
-                          Icon(
-                            Icons.chevron_right,
-                            color: Theme.of(context).primaryColor,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                alignment: Alignment.center,
-                height: size.height * 0.3,
-                child: new ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount:
-                      photos.length < 4 ? photos.length : photos.length - 3,
-                  itemBuilder: (context, int idx) {
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 2),
-                      child: InkWell(
-                        onTap: () => HeroAnimation(photoPath: photos[idx]),
-                        child: Image.network(
-                          photos[idx],
-                          fit: BoxFit.fill,
-                          alignment: Alignment.center,
-                          loadingBuilder: (BuildContext context, Widget child,
-                              ImageChunkEvent loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text("Loading.."),
-                                  CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes !=
-                                            null
-                                        ? loadingProgress
-                                                .cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes
-                                        : null,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-          _buildEventLinkSection(eventLinks),
+          buildHeadings(context, "Event details"),
+          buildDescription(widget.event["desc"]),
+          buildPhotosList(context,
+              heading: buildHeadings(context, "Photos"), photos: photos),
+          buildEventLinkSection(context, eventLinks),
           SizedBox(height: 10)
         ],
       ),
