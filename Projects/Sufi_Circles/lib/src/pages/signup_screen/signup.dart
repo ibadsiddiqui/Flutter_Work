@@ -57,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: EdgeInsets.only(top: size.height * 0.075),
           decoration: buildAuthBackground(),
           height: MediaQuery.of(context).size.height,
-          child: new Column(
+          child:  Column(
             children: <Widget>[
               AppIcon(),
               AppTitle(color: Colors.white),

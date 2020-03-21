@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: size.height,
           child: new GestureDetector(
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
-            child: new Column(
+            child: Column(
               children: <Widget>[
                 AppIcon(),
                 AppTitle(color: Colors.white),

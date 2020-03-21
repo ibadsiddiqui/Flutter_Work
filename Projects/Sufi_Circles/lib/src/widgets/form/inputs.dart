@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AuthInput extends StatefulWidget {
+class AuthInput extends StatelessWidget {
   final String label;
   final Function validator;
   final Function handleChange;
@@ -20,21 +20,6 @@ class AuthInput extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AuthInputState createState() => _AuthInputState();
-}
-
-class _AuthInputState extends State<AuthInput> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new Container(
       width: MediaQuery.of(context).size.width,
@@ -52,21 +37,21 @@ class _AuthInputState extends State<AuthInput> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           new Padding(
+            child: icon,
             padding: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 00.0),
-            child: widget.icon,
           ),
           new Expanded(
             child: TextFormField(
-              controller: widget.controller,
-              validator: widget.validator,
-              obscureText: widget.obscure,
-              onChanged: widget.handleChange,
-              keyboardType: widget.keyboardType,
+              controller: controller,
+              validator: validator,
+              obscureText: obscure,
+              onChanged: handleChange,
+              keyboardType: keyboardType,
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: widget.label,
+                hintText: label,
                 hintStyle: TextStyle(
                   color: Colors.white,
                   fontFamily: "Comfortaa",
