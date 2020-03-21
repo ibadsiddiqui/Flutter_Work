@@ -26,9 +26,11 @@ class ValidateAPIControllers {
     authModel.validateAll();
     if (authModel.canLogin) {
       load();
-      _authController.userSignup(context, toggle: load, resetPassword: resetPass);
+      _authController.userSignup(context,
+          toggle: load, resetPassword: resetPass);
     } else {
-      showPopUp.incorrectCredentials(context);
+      showPopUp.incorrectCredentials(context,
+          msg: "Please enter details to Sign Up");
       authModel.setPassword("");
     }
   }
