@@ -6,7 +6,7 @@ import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
 import 'package:Sufi_Circles/src/widgets/auth/ForgotPassword.dart';
-import 'package:Sufi_Circles/src/widgets/form/auth_form.dart';
+import 'package:Sufi_Circles/src/widgets/form/login.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 AppIcon(),
                 AppTitle(color: Colors.white),
-                AuthForm(
+                LoginForm(
                   title: "SIGN IN",
                   onPress: this.validateLogin,
                   isLoading: attempLogin,

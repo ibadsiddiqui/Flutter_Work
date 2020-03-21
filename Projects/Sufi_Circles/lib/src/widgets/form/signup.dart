@@ -4,25 +4,23 @@ import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AuthForm extends StatefulWidget {
+class SignUpForm extends StatefulWidget {
   final Function onPress;
   final bool isLoading;
   final String title;
-  const AuthForm({Key key, this.onPress, this.isLoading, this.title})
+  const SignUpForm({Key key, this.onPress, this.isLoading, this.title})
       : super(key: key);
 
   @override
-  _AuthFormState createState() => _AuthFormState();
+  _SignUpFormState createState() => _SignUpFormState();
 }
 
-class _AuthFormState extends State<AuthForm> {
+class _SignUpFormState extends State<SignUpForm> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController passwordController = TextEditingController(text: "");
 
   @override
-  void initState() {
-    super.initState();
-  }
+  void initState() => super.initState();
 
   @override
   void dispose() {
@@ -40,7 +38,8 @@ class _AuthFormState extends State<AuthForm> {
       children: <Widget>[
         AuthInput(
           label: "Email",
-          validator: (String value) {},
+          // TODO: add correct validation
+          // validator: (String value) {},
           handleChange: (String value) => authProvider.setEmail(value),
           icon: Icon(Icons.alternate_email, color: Colors.white),
           keyboardType: TextInputType.emailAddress,
@@ -49,7 +48,7 @@ class _AuthFormState extends State<AuthForm> {
         AuthInput(
           label: "Password",
           controller: passwordController,
-          validator: (String value) {},
+          // validator: (String value) {},
           obscure: true,
           handleChange: (String value) => authProvider.setPassword(value),
           icon: Icon(
