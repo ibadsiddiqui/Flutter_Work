@@ -10,33 +10,10 @@ import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingLoadingScreen extends StatefulWidget {
-  @override
-  _OnBoardingLoadingScreenState createState() =>
-      new _OnBoardingLoadingScreenState();
-}
+class OnBoardingLoadingScreen extends StatelessWidget {
+  final ShareUtils utils = ShareUtils();
 
-class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
-  ShareUtils utils = ShareUtils();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @protected
-  @mustCallSuper
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-    checkUserSession();
-  }
-
-  Future<void> checkUserSession() async {
+  Future _checkUserSession(context) async {
     String time = await utils.getStringPreference(SET_TOKEN_EXPIRY);
     if (time != null) {
       if (DateTime.now().compareTo(DateTime.parse(time)) != 0) {
@@ -45,10 +22,10 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
       } else
         TimeNavigation.navigate(context, LoginScreen(), second: 2);
     } else
-      navigateToOnBoard();
+      this._navigateToOnBoard(context);
   }
 
-  Future<void> navigateToOnBoard() async {
+  Future _navigateToOnBoard(context) async {
     bool isInstalled = await utils.getBoolPreference(IsInstalled);
     if (isInstalled != null)
       TimeNavigation.navigate(context, LoginScreen(), second: 2);
@@ -60,6 +37,7 @@ class _OnBoardingLoadingScreenState extends State<OnBoardingLoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    this._checkUserSession(context);
     return Scaffold(
       body: Container(
         color: Theme.of(context).backgroundColor,

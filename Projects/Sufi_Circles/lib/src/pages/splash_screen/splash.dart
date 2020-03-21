@@ -3,25 +3,10 @@ import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => new _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    TimeNavigation.navigate(context, OnBoardingLoadingScreen());
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    TimeNavigation.navigate(context, OnBoardingLoadingScreen(), second: 4);
     return new Scaffold(
       body: Container(
         child: ClipRRect(
