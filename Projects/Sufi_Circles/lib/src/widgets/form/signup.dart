@@ -56,6 +56,17 @@ class _SignUpFormState extends State<SignUpForm> {
             color: Colors.white,
           ),
         ),
+        AuthInput(
+          label: "Confirm Password",
+          controller: passwordController,
+          // validator: (String value) {},
+          obscure: true,
+          handleChange: (String value) => authProvider.setPassword(value),
+          icon: Icon(
+            Icons.lock_open,
+            color: Colors.white,
+          ),
+        ),
         SubmitButton(
           title: widget.title,
           onPressed: () => widget.onPress(resetPass: resetPassword),
