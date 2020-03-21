@@ -6,7 +6,7 @@ import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
-import 'package:Sufi_Circles/src/widgets/forms/auth_form.dart';
+import 'package:Sufi_Circles/src/widgets/form/auth_form.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
