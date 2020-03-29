@@ -21,7 +21,7 @@ class ValidateAPIControllers {
     }
   }
 
-  void validateSignup(context, {Function load, Function resetPass}) async {
+  void validateSignup(context, load, resetPass) async {
     final authModel = Provider.of<AuthModel>(context);
     authModel.validateAll();
     if (authModel.canLogin) {

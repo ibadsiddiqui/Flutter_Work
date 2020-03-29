@@ -6,10 +6,8 @@ import 'package:provider/provider.dart';
 
 class SignUpForm extends StatefulWidget {
   final Function onPress;
-  final bool isLoading;
   final String title;
-  const SignUpForm({Key key, this.onPress, this.isLoading, this.title})
-      : super(key: key);
+  const SignUpForm({Key key, this.onPress, this.title}) : super(key: key);
 
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -18,6 +16,7 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController passwordController = TextEditingController(text: "");
+  bool attemptSignup = false;
 
   @override
   void initState() => super.initState();
@@ -28,6 +27,8 @@ class _SignUpFormState extends State<SignUpForm> {
     passwordController.dispose();
     super.dispose();
   }
+
+  loader() => this.setState(() => attemptSignup = !attemptSignup);
 
   resetPassword() => passwordController.text = "";
 
@@ -62,15 +63,12 @@ class _SignUpFormState extends State<SignUpForm> {
           // validator: (String value) {},
           obscure: true,
           handleChange: (String value) => authProvider.setPassword(value),
-          icon: Icon(
-            Icons.lock_open,
-            color: Colors.white,
-          ),
+          icon: Icon(Icons.lock_open, color: Colors.white),
         ),
         SubmitButton(
           title: widget.title,
-          onPressed: () => widget.onPress(resetPass: resetPassword),
-          isLoading: widget.isLoading,
+          onPressed: () => widget.onPress(context, resetPassword, loader),
+          isLoading: attemptSignup,
         ),
       ],
     );
