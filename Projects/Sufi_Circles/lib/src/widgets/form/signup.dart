@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 class SignUpForm extends StatefulWidget {
   final Function onPress;
   final String title;
-  const SignUpForm({Key key, this.onPress, this.title}) : super(key: key);
+
+  SignUpForm({Key key, this.onPress, this.title}) : super(key: key);
 
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -16,6 +17,8 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController passwordController = TextEditingController(text: "");
+  TextEditingController confirmPasswordController =
+      TextEditingController(text: "");
   bool attemptSignup = false;
 
   @override
@@ -25,12 +28,19 @@ class _SignUpFormState extends State<SignUpForm> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
   loader() => this.setState(() => attemptSignup = !attemptSignup);
 
-  resetPassword() => passwordController.text = "";
+  resetPassword() {
+    final authProvider = Provider.of<AuthModel>(context);
+    authProvider.setPassword("");
+    authProvider.setConfirmPassword("");
+    confirmPasswordController.text = "";
+    passwordController.text = "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +69,10 @@ class _SignUpFormState extends State<SignUpForm> {
         ),
         AuthInput(
           label: "Confirm Password",
-          controller: passwordController,
+          controller: confirmPasswordController,
           // validator: (String value) {},
           obscure: true,
-          handleChange: (String value) => authProvider.setPassword(value),
+          handleChange: authProvider.setConfirmPassword,
           icon: Icon(Icons.lock_open, color: Colors.white),
         ),
         SubmitButton(
