@@ -1,36 +1,20 @@
 import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
+import 'package:Sufi_Circles/src/pages/login_screen/login.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 import 'package:flutter/material.dart';
 
-class LoadingScreen extends StatefulWidget {
+class LoadingScreen extends StatelessWidget {
   final String uid;
+
+  final UserDBController _userDBController = UserDBController();
 
   LoadingScreen({Key key, this.uid = ""}) : super(key: key);
 
   @override
-  _LoadingScreenState createState() => _LoadingScreenState();
-}
-
-class _LoadingScreenState extends State<LoadingScreen> {
-  UserDBController _userDBController = UserDBController();
-
-  @override
-  void initState() => super.initState();
-
-  @protected
-  @mustCallSuper
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-    await this._getUserDetails();
-  }
-
-  @override
-  void dispose() => super.dispose();
-
-  @override
   Widget build(BuildContext context) {
+    this._getUserDetails(context);
     return Scaffold(
       body: Container(
         color: Theme.of(context).backgroundColor,
@@ -52,8 +36,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 
-  Future<void> _getUserDetails() async {
-    await _userDBController.setUserDetailsUsingID(context, widget.uid);
-    TimeNavigation.navigate(context, DashboardScreen(), second: 4);
+  Future<void> _getUserDetails(BuildContext context) async {
+    if (uid.isNotEmpty) {
+      bool doesUser =
+          await _userDBController.setUserDetailsUsingID(context, uid);
+      if (doesUser)
+        return TimeNavigation.navigate(context, DashboardScreen(), second: 4);
+    }
+    return TimeNavigation.navigate(context, LoginScreen(), second: 3);
   }
 }

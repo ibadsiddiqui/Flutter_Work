@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
@@ -20,7 +21,7 @@ class UserDBController {
     await _userDBServices.createUserInDB(userJson);
   }
 
-  updateUserLastLogin(FirebaseUser user) async {
+  Future<void> updateUserLastLogin(FirebaseUser user) async {
     Map<String, dynamic> userJson = {
       "uid": user.uid,
       "lastSignInTime": user.metadata.lastSignInTime,
@@ -28,14 +29,15 @@ class UserDBController {
     await _userDBServices.updateUserLastLogin(userJson);
   }
 
-  Future<void> setUserDetailsUsingID(context, String userID) async {
+  Future<bool> setUserDetailsUsingID(context, String userID) async {
     try {
       Map<String, dynamic> data =
           await _userDBServices.getUserDetailsUsingID(userID);
       UserModel userModel = Provider.of<UserModel>(context);
       userModel.setAllDetails(data);
-    } catch (e) {
-      throw e;
+      return true;
+    } on PlatformException catch (e) {
+      if (e.message.contains("Failed to get document")) return false;
     }
   }
 
