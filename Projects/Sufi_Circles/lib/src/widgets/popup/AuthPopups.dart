@@ -30,6 +30,7 @@ class ShowPopUp {
   showSuccessFulSignupPopUp(context) {
     new Alert(
       context: context,
+      closeFunction: pushLoginScreen,
       type: AlertType.success,
       title: "Signup Successful",
       desc: "You have successfully been registered. You can sign in now.",

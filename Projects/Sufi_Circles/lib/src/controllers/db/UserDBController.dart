@@ -37,7 +37,7 @@ class UserDBController {
       userModel.setAllDetails(data);
       return true;
     } on PlatformException catch (e) {
-      if (e.message.contains("Failed to get document")) return false;
+      return false;
     }
   }
 

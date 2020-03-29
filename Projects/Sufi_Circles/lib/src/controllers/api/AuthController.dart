@@ -34,8 +34,9 @@ class AuthController extends ChangeNotifier {
     }
   }
 
-  void userSignup(context, {Function toggle, Function resetPassword}) async {
+  void userSignup(context, toggle, resetPassword) async {
     AuthModel authModel = Provider.of<AuthModel>(context);
+    toggle();
     try {
       FirebaseUser user = await _authService.createUser(authModel.authDetails);
       await _userDBController.createUserInDB(user, authModel);

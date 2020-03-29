@@ -16,6 +16,9 @@ abstract class _AuthModel with Store {
   String password = '';
 
   @observable
+  String confirmPassword = '';
+
+  @observable
   bool userLoggedIn = false;
 
   @action
@@ -23,6 +26,9 @@ abstract class _AuthModel with Store {
 
   @action
   void setPassword(String password) => this.password = password;
+
+  @action
+  void setConfirmPassword(String password) => this.confirmPassword = password;
 
   @action
   void setLoginStatus(bool loggedIn) => this.userLoggedIn = loggedIn;
@@ -62,6 +68,10 @@ abstract class _AuthModel with Store {
   }
 
   @computed
-  Map<String, String> get authDetails =>
-      {"email": email, "password": password};
+  Map<String, String> get authDetails => {"email": email, "password": password};
+
+  @computed
+  bool doesPasswordMatch() {
+    return this.confirmPassword == this.password;
+  }
 }

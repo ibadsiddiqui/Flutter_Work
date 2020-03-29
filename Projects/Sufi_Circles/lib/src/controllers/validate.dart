@@ -20,18 +20,4 @@ class ValidateAPIControllers {
       authModel.setPassword("");
     }
   }
-
-  void validateSignup(context, load, resetPass) async {
-    final authModel = Provider.of<AuthModel>(context);
-    authModel.validateAll();
-    if (authModel.canLogin) {
-      load();
-      _authController.userSignup(context,
-          toggle: load, resetPassword: resetPass);
-    } else {
-      showPopUp.incorrectCredentials(context,
-          msg: "Please enter details to Sign Up");
-      authModel.setPassword("");
-    }
-  }
 }
