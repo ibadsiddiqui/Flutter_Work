@@ -2,6 +2,7 @@ import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
+import 'package:Sufi_Circles/src/utils/message.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
@@ -25,17 +26,14 @@ class _SubmitEventState extends State<SubmitEvent> {
       bool isCreated = await _eventDBController.createEvent(context);
       if (isCreated) {
         this.setState(() => _publishingEvent = PublishEvent.published);
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Event successfully created."),
-          backgroundColor: Colors.green,
-        ));
+        Scaffold.of(context)
+            .showSnackBar(showSuccessMessage("Event successfully created."));
         Provider.of<EventModel>(context).resetAll();
         TimeNavigation.navigate(context, DashboardScreen(), second: 4);
       }
     } catch (e) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Something went wrong. Please try again."),
-      ));
+      Scaffold.of(context).showSnackBar(
+          showErrorMessage("Something went wrong. Please try again."));
       this.setState(() => _publishingEvent = PublishEvent.unpublished);
     }
   }

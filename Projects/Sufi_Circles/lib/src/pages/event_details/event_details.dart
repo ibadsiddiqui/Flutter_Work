@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/utils/date_helper.dart';
+import 'package:Sufi_Circles/src/utils/message.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
@@ -31,11 +32,8 @@ class _EventDetailsState extends State<EventDetails> {
     if (urlStatus)
       await launch(url);
     else {
-      final snackBar = SnackBar(
-        content: Text('Are you talkin\' to me?'),
-        backgroundColor: Colors.red,
-      );
-      return globalKey.currentState.showSnackBar(snackBar);
+      return globalKey.currentState
+          .showSnackBar(showErrorMessage('Sorry, invalid URL.'));
     }
   }
 

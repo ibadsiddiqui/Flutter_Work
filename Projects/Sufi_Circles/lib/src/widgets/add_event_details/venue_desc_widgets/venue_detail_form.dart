@@ -1,5 +1,6 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/utils/countries_city_list.dart';
+import 'package:Sufi_Circles/src/utils/message.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/picker_text.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
@@ -180,9 +181,8 @@ class VenueDetailForm extends StatelessWidget {
                         .isNotEmpty)
                       moveToNextPage();
                     else
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("Please enter venue name."),
-                      ));
+                      Scaffold.of(context).showSnackBar(
+                          showErrorMessage("Please enter venue name."));
                   },
                 ),
               ],
