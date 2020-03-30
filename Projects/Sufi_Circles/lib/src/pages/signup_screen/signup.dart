@@ -13,7 +13,7 @@ import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 class SignUpScreen extends StatelessWidget {
   final AuthController _authController = AuthController();
 
-  ScaffoldFeatureController buildSnackMessage(context, msg, bool isError) {
+  ScaffoldFeatureController buildSnackMessage(context, String msg, bool isError) {
     if (isError)
       return Scaffold.of(context).showSnackBar(
           showErrorMessage("Please enter same passwords to proceed."));
@@ -40,7 +40,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => true,
       child: new Scaffold(

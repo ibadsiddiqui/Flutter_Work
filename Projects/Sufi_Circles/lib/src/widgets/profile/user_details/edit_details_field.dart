@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
 
-class EditDetailsField extends StatelessWidget {
+class EditDetailsField extends StatefulWidget {
   final String label;
   final Function edit;
   final Function onSubmit;
-  const EditDetailsField({Key key, this.label, this.edit, this.onSubmit})
+  final String value;
+  EditDetailsField({Key key, this.label, this.edit, this.onSubmit, this.value})
       : super(key: key);
+
+  @override
+  _EditDetailsFieldState createState() => _EditDetailsFieldState();
+}
+
+class _EditDetailsFieldState extends State<EditDetailsField> {
+  TextEditingController controller = TextEditingController(text: "");
+
+  @override
+  void initState() {
+    super.initState();
+    this.setState(() {
+      controller = TextEditingController(text: widget.value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +35,8 @@ class EditDetailsField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
-        onFieldSubmitted: onSubmit,
+        controller: controller,
+        onFieldSubmitted: widget.onSubmit,
         style: TextStyle(color: Colors.black),
         textAlign: TextAlign.left,
         textInputAction: TextInputAction.done,
@@ -28,13 +45,13 @@ class EditDetailsField extends StatelessWidget {
           hasFloatingPlaceholder: true,
           alignLabelWithHint: true,
           contentPadding: EdgeInsets.all(0),
-          labelText: label,
+          labelText: widget.label,
           labelStyle: Theme.of(context).textTheme.subhead,
           hintMaxLines: 1,
           suffixIcon: IconButton(
             padding: EdgeInsets.only(top: 20, left: 20),
             tooltip: "Save",
-            onPressed: edit,
+            onPressed: widget.edit,
             icon: Icon(Icons.close, color: Colors.black),
           ),
         ),

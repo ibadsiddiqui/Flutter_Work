@@ -57,14 +57,12 @@ abstract class _AuthModel with Store {
 
   @override
   void dispose() {
-    for (final d in _disposers) {
-      d();
-    }
+    for (final d in _disposers) d();
   }
 
   void validateAll() {
-    validatePassword(this.password);
     validateEmail(this.email);
+    validatePassword(this.password);
   }
 
   @computed

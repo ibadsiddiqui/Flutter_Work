@@ -24,7 +24,11 @@ class UserDetailItem extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     if (isEditable)
       return EditDetailsField(
-          label: inputLabel, onSubmit: onSubmit, edit: toggleEdit);
+        label: inputLabel,
+        onSubmit: onSubmit,
+        edit: toggleEdit,
+        value: value,
+      );
     else
       return Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
