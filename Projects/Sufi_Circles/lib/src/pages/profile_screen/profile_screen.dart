@@ -24,23 +24,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ImageStorage imageStorage = ImageStorage();
 
   bool _isFullNameEdit = false;
-  bool _isEmailEdit = false;
   bool _isCountryEdit = false;
   bool _isCityEdit = false;
   bool _isUploading = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
+  void initState() => super.initState();
 
   @override
-  void dispose() {
-    super.dispose();
-  }
+  void dispose() => super.dispose();
 
   _toggleNameEdit() => this.setState(() => _isFullNameEdit = !_isFullNameEdit);
-  _toggleEmailEdit() => this.setState(() => _isEmailEdit = !_isEmailEdit);
   _toggleCountryEdit() => this.setState(() => _isCountryEdit = !_isCountryEdit);
   _toggleCityEdit() => this.setState(() => _isCityEdit = !_isCityEdit);
 
@@ -70,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     UserModel userModel = Provider.of<UserModel>(context);
-    final size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -125,16 +119,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   await userDBController.updateUserName(context);
                 }),
             UserDetailItem(
-              isEditable: _isEmailEdit,
+              isEditable: false,
               inputLabel: "Email",
+              toggleEdit: () {},
               value: userModel.email,
-              toggleEdit: _toggleEmailEdit,
-              onSubmit: (String email) async {
-                userModel.setUserEmail(email);
-                _toggleEmailEdit();
-                await userDBController.updateUserEmail(context);
-                await authController.updateFirebaseUserEmail(email, context);
-              },
             ),
             UserDetailItem(
               isEditable: _isCountryEdit,

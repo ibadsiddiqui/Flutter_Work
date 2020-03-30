@@ -62,10 +62,6 @@ class AuthController extends ChangeNotifier {
     }
   }
 
-  Future<void> updateFirebaseUserEmail(String newEmail, context) async {
-    await _authService.updateFirebaseUserEmail(newEmail);
-  }
-
   Future<void> signOutUser() async {
     await _authService.signOut();
   }

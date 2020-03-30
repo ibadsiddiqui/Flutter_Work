@@ -47,11 +47,6 @@ class UserDBController {
     await _userDBServices.updateUserName(userModel.userID, userModel.name);
   }
 
-  Future<void> updateUserEmail(context) async {
-    UserModel userModel = Provider.of(context);
-    await _userDBServices.updateUserEmail(userModel.userID, userModel.email);
-  }
-
   Future<void> updateUserCountry(context) async {
     UserModel userModel = Provider.of(context);
     await _userDBServices.updateUserCountry(

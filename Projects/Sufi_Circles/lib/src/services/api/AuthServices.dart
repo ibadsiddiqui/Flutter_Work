@@ -37,11 +37,6 @@ class AuthService {
     return user != null ? user.uid : null;
   }
 
-  Future<void> updateFirebaseUserEmail(String email) async {
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    await user.updateEmail(email);
-  }
-
   Future<void> signOut() async {
     try {
       return _firebaseAuth.signOut();
