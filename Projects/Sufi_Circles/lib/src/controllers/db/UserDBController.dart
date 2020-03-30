@@ -64,7 +64,6 @@ class UserDBController {
   }
 
   Future<bool> isAccountDisabled(String uid) async {
-    // UserModel userModel = Provider.of(context);
     bool isDisabled = await _userDBServices.isAccountDisabledAsync(uid);
     return isDisabled;
   }

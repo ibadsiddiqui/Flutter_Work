@@ -28,7 +28,7 @@ class AuthController extends ChangeNotifier {
       _showPopUp.showSuccessFulSigninPopUp(context, _user.uid);
       toggle();
       resetPassword();
-    } on PlatformException catch (e) {
+    } on PlatformException catch (e) {  
       resetPassword();
       toggle();
       authModel.setPassword("");
@@ -38,9 +38,9 @@ class AuthController extends ChangeNotifier {
       toggle();
       _showPopUp.incorrectCredentials(
         context,
-        title: "Account Does Not Exist",
+        title: "Account does not exist",
         msg:
-            "The account you are trying to login is either delete or does not exist.",
+            "The account you are trying to login is either deleted or does not exist.",
       );
     }
   }

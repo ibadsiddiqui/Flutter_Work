@@ -56,6 +56,10 @@ class ShowPopUp {
       type: AlertType.success,
       title: "Signin Successful",
       desc: "You have successfully been signed in.",
+      closeFunction: () {
+        Navigator.pop(context);
+        startRouteWihLoading(context, uid);
+      },
       buttons: [
         DialogButton(
           child: Text(
