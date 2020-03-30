@@ -1,3 +1,5 @@
+import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/event_details/event_details.dart';
 import 'package:Sufi_Circles/src/utils/model_helper_methods.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/background.dart';
@@ -45,23 +47,27 @@ class LatestEventTiles extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     if (this.snapshots.length - 1 > index) {
       final detail = getEventDetailsUsingIndex(this.snapshots[index]);
-      return new Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            width: size.width * 0.95,
-            height: size.height * 0.25,
-            decoration:
-                dashboardTopTabBackground(path: detail['coverPhotoURL']),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                _buildEventHeading(context, detail['name']),
-                _buildDivider(context, detail['name']),
-                _buildEventDesc(context, detail['desc']),
-              ],
+      return FlatButton(
+        onPressed: () =>
+            pushScreen(context, screen: EventDetails(event: snapshots[index].data)),
+        child: new Container(
+          margin: EdgeInsets.symmetric(vertical: 10.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              width: size.width * 0.95,
+              height: size.height * 0.25,
+              decoration:
+                  dashboardTopTabBackground(path: detail['coverPhotoURL']),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  _buildEventHeading(context, detail['name']),
+                  _buildDivider(context, detail['name']),
+                  _buildEventDesc(context, detail['desc']),
+                ],
+              ),
             ),
           ),
         ),
