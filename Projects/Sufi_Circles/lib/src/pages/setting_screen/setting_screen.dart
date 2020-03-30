@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/controllers/db/UserDBController.dart';
 import 'package:Sufi_Circles/src/utils/share_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,16 +19,13 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   AuthController authController = AuthController();
   ShareUtils utils = ShareUtils();
+  UserDBController userDBController = UserDBController();
 
   @override
-  void initState() {
-    super.initState();
-  }
+  void initState() => super.initState();
 
   @override
-  void dispose() {
-    super.dispose();
-  }
+  void dispose() => super.dispose();
 
   openURI(url) async {
     if (await canLaunch(url)) {
@@ -131,6 +129,16 @@ class _SettingScreenState extends State<SettingScreen> {
               toggleEdit: () async {
                 await utils.setStringPreference("SET_TOKEN_EXPIRY", null);
                 authController.signOutUser();
+                pushLoginScreen(context);
+              },
+            ),
+            UserDetailItem(
+              inputLabel: "Delete Account",
+              value: "your account deleted from our app.",
+              toggleEdit: () async {
+                utils.clearAll();
+                authController.signOutUser();
+                userDBController.disableUserAccount(context);
                 pushLoginScreen(context);
               },
             ),

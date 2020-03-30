@@ -15,11 +15,14 @@ class AuthController extends ChangeNotifier {
   UserDBController _userDBController = UserDBController();
   ShareUtils utils = ShareUtils();
 
-  Future<void> userSignIn(context,
-      {Function toggle, Function resetPassword}) async {
+  Future userSignIn(context, {Function toggle, Function resetPassword}) async {
     final authModel = Provider.of<AuthModel>(context);
     try {
       FirebaseUser _user = await _authService.userSignIn(authModel.authDetails);
+      bool isDisabled = await _userDBController.isAccountDisabled(_user.uid);
+      if (isDisabled) {
+        throw Exception;
+      }
       await utils.setUserTokenDetails(_user);
       await _userDBController.updateUserLastLogin(_user);
       _showPopUp.showSuccessFulSigninPopUp(context, _user.uid);
@@ -31,6 +34,14 @@ class AuthController extends ChangeNotifier {
       authModel.setPassword("");
       _showPopUp.incorrectCredentials(context,
           title: replaceUnderscore(e.code), msg: e.message);
+    } catch (e) {
+      toggle();
+      _showPopUp.incorrectCredentials(
+        context,
+        title: "Account Does Not Exist",
+        msg:
+            "The account you are trying to login is either delete or does not exist.",
+      );
     }
   }
 
