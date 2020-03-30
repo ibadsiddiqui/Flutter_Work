@@ -37,8 +37,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildHeader(List items, Size size) {
     return Container(
-      height: size.height * 0.5,
+      height: size.height * 0.6,
       child: GridView.count(
+        primary: false,
         physics: null,
         crossAxisCount: 2,
         mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
@@ -52,17 +53,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<Widget> _generateHeaderList(List snapshot) {
     return List.generate(
         snapshot.length, (idx) => DashboardTopTile(event: snapshot[idx].data),
-        growable: true);
+        growable: false);
   }
 
-  Widget _buildBody(List snapshot, size) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      height: size.height * 0.6,
-      child: ListView.builder(
-          itemCount: snapshot.length,
-          itemBuilder: (_, idx) =>
-              LatestEventTiles(snapshots: snapshot, index: idx)),
+  Widget _buildBody(List snapshot) {
+    return Column(
+      children: List.generate(snapshot.length,
+          (idx) => LatestEventTiles(snapshots: snapshot, index: idx)),
     );
   }
 
@@ -88,7 +85,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData)
             return Center(
-              child: new Text('Loading', style: TextStyle(color: Colors.black)),
+              child: Text('Loading', style: TextStyle(color: Colors.black)),
             );
           else {
             if (snapshot.data.documents.length == 0) {
@@ -101,6 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               );
             } else
               return ListView(
+                primary: true,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
@@ -109,11 +107,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   _buildHeader(
                       reversedArray(snapshot.data.documents.take(4).toList()),
                       size),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
+                  Container(
+                    margin: EdgeInsets.only(top: 2.5, bottom: 5.0),
                     child: DashboardHeadings(title: "Latest Events"),
                   ),
-                  _buildBody(reversedArray(snapshot.data.documents), size),
+                  _buildBody(reversedArray(snapshot.data.documents)),
                 ],
               );
           }

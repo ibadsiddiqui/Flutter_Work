@@ -46,25 +46,22 @@ class LatestEventTiles extends StatelessWidget {
     if (this.snapshots.length - 1 > index) {
       final detail = getEventDetailsUsingIndex(this.snapshots[index]);
       return new Container(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        margin: EdgeInsets.symmetric(vertical: 10.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Container(
             padding: EdgeInsets.all(10.0),
-            width: size.width * 0.9,
-            height: size.height * 0.225,
+            width: size.width * 0.95,
+            height: size.height * 0.25,
             decoration:
                 dashboardTopTabBackground(path: detail['coverPhotoURL']),
-            child: FlatButton(
-              onPressed: () {},
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  _buildEventHeading(context, detail['name']),
-                  _buildDivider(context, detail['name']),
-                  _buildEventDesc(context, detail['desc']),
-                ],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _buildEventHeading(context, detail['name']),
+                _buildDivider(context, detail['name']),
+                _buildEventDesc(context, detail['desc']),
+              ],
             ),
           ),
         ),
