@@ -8,7 +8,9 @@ class UserDetailLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: Theme.of(context).textTheme.subhead,
+      style: Theme.of(context).textTheme.subhead.apply(
+            color: label.toLowerCase().contains("delete") ? Colors.red : null,
+          ),
       textAlign: TextAlign.left,
     );
   }
