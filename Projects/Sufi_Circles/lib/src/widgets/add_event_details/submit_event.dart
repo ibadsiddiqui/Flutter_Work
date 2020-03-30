@@ -29,7 +29,7 @@ class _SubmitEventState extends State<SubmitEvent> {
         Scaffold.of(context)
             .showSnackBar(showSuccessMessage("Event successfully created."));
         Provider.of<EventModel>(context).resetAll();
-        TimeNavigation.navigate(context, DashboardScreen(), second: 4);
+        timeNavigation(context, DashboardScreen(), second: 4);
       }
     } catch (e) {
       Scaffold.of(context).showSnackBar(

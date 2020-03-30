@@ -41,8 +41,8 @@ class LoadingScreen extends StatelessWidget {
       bool doesUser =
           await _userDBController.setUserDetailsUsingID(context, uid);
       if (doesUser)
-        return TimeNavigation.navigate(context, DashboardScreen(), second: 4);
+        return timeNavigation(context, DashboardScreen(), second: 4);
     }
-    return TimeNavigation.navigate(context, LoginScreen(), second: 3);
+    return timeNavigation(context, LoginScreen(), second: 3);
   }
 }

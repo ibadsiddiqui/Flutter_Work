@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    TimeNavigation.navigate(context, OnBoardingLoadingScreen(), second: 4);
+    timeNavigation(context, OnBoardingLoadingScreen(), second: 4);
     return new Scaffold(
       body: Container(
         child: ClipRRect(

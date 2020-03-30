@@ -18,9 +18,9 @@ class OnBoardingLoadingScreen extends StatelessWidget {
     if (time != null) {
       if (DateTime.now().compareTo(DateTime.parse(time)) != 0) {
         String uid = await utils.getStringPreference(SET_USER_ID);
-        TimeNavigation.navigate(context, LoadingScreen(uid: uid), second: 2);
+        timeNavigation(context, LoadingScreen(uid: uid), second: 2);
       } else
-        TimeNavigation.navigate(context, LoginScreen(), second: 2);
+        timeNavigation(context, LoginScreen(), second: 2);
     } else
       this._navigateToOnBoard(context);
   }
@@ -28,10 +28,10 @@ class OnBoardingLoadingScreen extends StatelessWidget {
   Future _navigateToOnBoard(context) async {
     bool isInstalled = await utils.getBoolPreference(IsInstalled);
     if (isInstalled != null)
-      TimeNavigation.navigate(context, LoginScreen(), second: 2);
+      timeNavigation(context, LoginScreen(), second: 2);
     else {
       await utils.setBoolPreference(IsInstalled, true);
-      TimeNavigation.navigate(context, OnBoardingScreen(), second: 2);
+      timeNavigation(context, OnBoardingScreen(), second: 2);
     }
   }
 
