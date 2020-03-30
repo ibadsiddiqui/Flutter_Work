@@ -68,11 +68,6 @@ class DashboardDrawer extends StatelessWidget {
                   onPress: () => _navigateTo(context, screen: CreateEvent()),
                 ),
                 DrawerItem(
-                  title: "See All Events",
-                  leftIcon: Icon(Icons.event),
-                  onPress: () => _navigateTo(context, screen: SettingScreen()),
-                ),
-                DrawerItem(
                   title: "Setting",
                   leftIcon: Icon(Icons.settings),
                   onPress: () => _navigateTo(context, screen: SettingScreen()),
