@@ -23,12 +23,12 @@ class AuthController extends ChangeNotifier {
       if (isDisabled) {
         throw Exception;
       }
-      await utils.setUserTokenDetails(_user);
-      await _userDBController.updateUserLastLogin(_user);
+      utils.setUserTokenDetails(_user);
+      _userDBController.updateUserLastLogin(_user);
       _showPopUp.showSuccessFulSigninPopUp(context, _user.uid);
       toggle();
       resetPassword();
-    } on PlatformException catch (e) {  
+    } on PlatformException catch (e) {
       resetPassword();
       toggle();
       authModel.setPassword("");
@@ -50,7 +50,8 @@ class AuthController extends ChangeNotifier {
     toggle();
     try {
       FirebaseUser user = await _authService.createUser(authModel.authDetails);
-      await _userDBController.createUserInDB(user, authModel);
+      user.sendEmailVerification();
+      _userDBController.createUserInDB(user, authModel);
       toggle();
       _showPopUp.showSuccessFulSignupPopUp(context);
     } on PlatformException catch (e) {
