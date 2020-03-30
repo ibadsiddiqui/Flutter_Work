@@ -9,7 +9,7 @@ import 'package:Sufi_Circles/src/utils/string_helper.dart';
 class UserDBController {
   UserDBServices _userDBServices = UserDBServices();
 
-  createUserInDB(FirebaseUser user, AuthModel authModel) async {
+  Future<void> createUserInDB(FirebaseUser user, AuthModel authModel) async {
     final String encryptedPassword = await encryptKey(authModel.password);
     Map<String, dynamic> userJson = {
       "uid": user.uid,
@@ -19,7 +19,7 @@ class UserDBController {
       "creationTimeStamp": user.metadata.creationTime,
       "isDisabled": false
     };
-    await _userDBServices.createUserInDB(userJson);
+    _userDBServices.createUserInDB(userJson);
   }
 
   Future<void> updateUserLastLogin(FirebaseUser user) async {
@@ -44,18 +44,17 @@ class UserDBController {
 
   Future<void> updateUserName(context) async {
     UserModel userModel = Provider.of<UserModel>(context);
-    await _userDBServices.updateUserName(userModel.userID, userModel.name);
+    _userDBServices.updateUserName(userModel.userID, userModel.name);
   }
 
   Future<void> updateUserCountry(context) async {
     UserModel userModel = Provider.of(context);
-    await _userDBServices.updateUserCountry(
-        userModel.userID, userModel.country);
+    _userDBServices.updateUserCountry(userModel.userID, userModel.country);
   }
 
   Future<void> updateUserCity(context) async {
     UserModel userModel = Provider.of(context);
-    await _userDBServices.updateUserCity(userModel.userID, userModel.city);
+    _userDBServices.updateUserCity(userModel.userID, userModel.city);
   }
 
   Future<bool> isAccountDisabled(String uid) async {
@@ -65,6 +64,6 @@ class UserDBController {
 
   Future<void> disableUserAccount(context) async {
     UserModel userModel = Provider.of(context);
-    await _userDBServices.disableUserAccountAsync(userModel.userID);
+    _userDBServices.disableUserAccountAsync(userModel.userID);
   }
 }
