@@ -17,6 +17,7 @@ class UserDBController {
       "password": encryptedPassword,
       "isEmailVerified": user.isEmailVerified,
       "creationTimeStamp": user.metadata.creationTime,
+      "isDisabled": false
     };
     await _userDBServices.createUserInDB(userJson);
   }
@@ -60,5 +61,16 @@ class UserDBController {
   Future<void> updateUserCity(context) async {
     UserModel userModel = Provider.of(context);
     await _userDBServices.updateUserCity(userModel.userID, userModel.city);
+  }
+
+  Future<bool> isAccountDisabled(String uid) async {
+    // UserModel userModel = Provider.of(context);
+    bool isDisabled = await _userDBServices.isAccountDisabledAsync(uid);
+    return isDisabled;
+  }
+
+  Future<void> disableUserAccount(context) async {
+    UserModel userModel = Provider.of(context);
+    await _userDBServices.disableUserAccountAsync(userModel.userID);
   }
 }

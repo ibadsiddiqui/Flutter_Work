@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserDBServices {
   CollectionReference userDB = Firestore.instance.collection("users");
+
   Future<void> createUserInDB(Map<String, dynamic> user) async {
     try {
       return (await userDB.document(user["uid"]).setData(user));
@@ -65,6 +66,23 @@ class UserDBServices {
   Future<void> updateUserProfilePicture(String uid, String url) async {
     try {
       return (await userDB.document(uid).updateData({"profile_picture": url}));
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<bool> isAccountDisabledAsync(String uid) async {
+    try {
+      DocumentSnapshot user = await userDB.document(uid).get();
+      return user.data["isDisabled"];
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> disableUserAccountAsync(String uid) async {
+    try {
+      return (await userDB.document(uid).updateData({"isDisabled": true}));
     } catch (e) {
       throw e;
     }
