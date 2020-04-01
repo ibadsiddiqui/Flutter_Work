@@ -18,12 +18,19 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController passwordController = TextEditingController(text: "");
+  final AuthModel store = AuthModel();
+
   final _formKey = GlobalKey<FormState>();
+
   @override
-  void initState() => super.initState();
+  void initState() {
+    super.initState();
+    store.setupValidations();
+  }
 
   @override
   void dispose() {
+    store.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -60,7 +67,10 @@ class _LoginFormState extends State<LoginForm> {
           ),
           SubmitButton(
             title: widget.title,
-            onPressed: () => widget.onPress(resetPass: resetPassword),
+            onPressed: () {
+              store.validateAll();
+              widget.onPress(context, resetPassword, store);
+            },
             isLoading: widget.isLoading,
           ),
         ],

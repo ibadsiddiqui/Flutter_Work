@@ -15,10 +15,9 @@ class AuthController extends ChangeNotifier {
   UserDBController _userDBController = UserDBController();
   ShareUtils utils = ShareUtils();
 
-  Future userSignIn(context, {Function toggle, Function resetPassword}) async {
-    final authModel = Provider.of<AuthModel>(context);
+  Future userSignIn(context, AuthModel store, toggle, resetPass) async {
     try {
-      FirebaseUser _user = await _authService.userSignIn(authModel.authDetails);
+      FirebaseUser _user = await _authService.userSignIn(store.authDetails);
       bool isDisabled = await _userDBController.isAccountDisabled(_user.uid);
       if (isDisabled) {
         throw Exception;
@@ -27,11 +26,11 @@ class AuthController extends ChangeNotifier {
       _userDBController.updateUserLastLogin(_user);
       _showPopUp.showSuccessFulSigninPopUp(context, _user.uid);
       toggle();
-      resetPassword();
+      resetPass();
     } on PlatformException catch (e) {
-      resetPassword();
+      resetPass();
       toggle();
-      authModel.setPassword("");
+      store.setPassword("");
       _showPopUp.incorrectCredentials(context,
           title: replaceUnderscore(e.code), msg: e.message);
     } catch (e) {

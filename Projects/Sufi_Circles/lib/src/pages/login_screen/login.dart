@@ -1,6 +1,7 @@
-import 'package:Sufi_Circles/src/controllers/validate.dart';
+import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/utils/message.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
@@ -15,41 +16,32 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  ValidateAPIControllers _validateAPIControllers = ValidateAPIControllers();
-
-  final AuthModel store = AuthModel();
-  final TextEditingController emailController = TextEditingController(text: "");
-  final TextEditingController passwordController =
-      TextEditingController(text: "");
+  AuthController _authController = AuthController();
   bool attempLogin = false;
 
   @override
-  void initState() {
-    super.initState();
-    store.setupValidations();
-  }
+  void initState() => super.initState();
 
   @override
-  void dispose() {
-    store.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  void resetPassword() => passwordController.text = "";
+  void dispose() => super.dispose();
 
   void loader() => this.setState(() => attempLogin = !attempLogin);
 
-  void validateLogin({Function resetPass}) async {
-    FocusScope.of(context).requestFocus(FocusNode());
-    _validateAPIControllers.validateLogin(context,
-        load: loader, resetPass: resetPass);
+  Future validateLogin(context, Function resetPass, AuthModel store) async {
+    if (store.canLogin) {
+      this.loader();
+      await _authController.userSignIn(context, store, loader, resetPass);
+    } else {
+      resetPass();
+      store.setPassword("");
+      return Scaffold.of(context).showSnackBar(showErrorMessage(
+          "Please enter correct email and password to login."));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return new WillPopScope(
       onWillPop: () async => false,
       child: new Scaffold(
