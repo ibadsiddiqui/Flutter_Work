@@ -1,23 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/utils/message.dart';
-import 'package:flutter/material.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
 import 'package:Sufi_Circles/src/widgets/form/signup.dart';
-import 'package:provider/provider.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 
 class SignUpScreen extends StatelessWidget {
   final AuthController _authController = AuthController();
+  final globalKey = GlobalKey<ScaffoldState>();
 
-  ScaffoldFeatureController buildSnackMessage(context, String msg, bool isError) {
+  ScaffoldFeatureController buildSnackMessage(
+      context, String msg, bool isError) {
     if (isError)
-      return Scaffold.of(context).showSnackBar(
+      return globalKey.currentState.showSnackBar(
           showErrorMessage("Please enter same passwords to proceed."));
-    return Scaffold.of(context).showSnackBar(showSuccessMessage(
+    return globalKey.currentState.showSnackBar(showSuccessMessage(
         "You have successfully been registered. You can sign in now."));
   }
 

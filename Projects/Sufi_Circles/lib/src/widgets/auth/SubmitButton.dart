@@ -29,7 +29,7 @@ class SubmitButton extends StatelessWidget {
                 color: Color.fromRGBO(8, 51, 88, 1),
                 splashColor: Color.fromRGBO(7, 34, 71, 1),
                 padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-                onPressed: isLoading == false ? onPressed : () => false,
+                onPressed: !isLoading ? onPressed : () {},
                 child: isLoading
                     ? Loader(
                         dotOneColor: Colors.redAccent,

@@ -1,12 +1,12 @@
 import 'package:Sufi_Circles/src/controllers/api/AuthController.dart';
 import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/forgot_password/forgot_password_screen.dart';
 import 'package:Sufi_Circles/src/utils/message.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppIcon.dart';
 import 'package:Sufi_Circles/src/widgets/auth/AppTitle.dart';
 import 'package:Sufi_Circles/src/widgets/auth/Background.dart';
 import 'package:Sufi_Circles/src/widgets/auth/BottomButton.dart';
-import 'package:Sufi_Circles/src/widgets/auth/ForgotPassword.dart';
 import 'package:Sufi_Circles/src/widgets/form/login.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  AuthController _authController = AuthController();
   bool attempLogin = false;
+  final globalKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() => super.initState();
@@ -31,11 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
     FocusScope.of(context).requestFocus(FocusNode());
     if (store.canLogin) {
       this.loader();
+      AuthController _authController = AuthController();
       await _authController.userSignIn(context, store, loader, resetPass);
     } else {
       resetPass();
       store.setPassword("");
-      return Scaffold.of(context).showSnackBar(showErrorMessage(
+      return globalKey.currentState.showSnackBar(showErrorMessage(
           "Please enter correct email and password to login."));
     }
   }
@@ -62,7 +63,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPress: this.validateLogin,
                   isLoading: attempLogin,
                 ),
-                ForgotPasswordButton(),
+                Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                  alignment: Alignment.center,
+                  child: FlatButton(
+                    padding: EdgeInsets.all(20.0),
+                    onPressed: () =>
+                        pushScreen(context, screen: ForgotPasswordScreen()),
+                    child: Text("Forgot your password?",
+                        style: Theme.of(context)
+                            .textTheme
+                            .button
+                            .apply(fontFamily: "Comfortta")),
+                  ),
+                ),
                 Expanded(child: Divider()),
                 BottomButton(
                   title: "Don't have an account? Create One",
