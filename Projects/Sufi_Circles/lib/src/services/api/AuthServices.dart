@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -34,6 +35,15 @@ class AuthService {
       return _firebaseAuth.signOut();
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future sendPasswordResetEmailAsync(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return true;
+    } on PlatformException catch (e) {
+      throw e.message;
     }
   }
 }
