@@ -18,11 +18,11 @@ class SubmitEvent extends StatefulWidget {
 
 class _SubmitEventState extends State<SubmitEvent> {
   PublishEvent _publishingEvent = PublishEvent.unpublished;
-  EventDBController _eventDBController = new EventDBController();
 
   _submitEventForPublication(context) async {
     this.setState(() => _publishingEvent = PublishEvent.publishing);
     try {
+      EventDBController _eventDBController = new EventDBController();
       bool isCreated = await _eventDBController.createEvent(context);
       if (isCreated) {
         this.setState(() => _publishingEvent = PublishEvent.published);

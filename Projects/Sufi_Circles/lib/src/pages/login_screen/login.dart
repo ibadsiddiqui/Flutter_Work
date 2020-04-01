@@ -50,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
         resizeToAvoidBottomInset: false,
         body: new Container(
           decoration: buildAuthBackground(),
-          padding: EdgeInsets.only(top: size.height * 0.075),
           height: size.height,
           child: new GestureDetector(
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),

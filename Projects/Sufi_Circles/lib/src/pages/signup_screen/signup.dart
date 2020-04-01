@@ -48,7 +48,6 @@ class SignUpScreen extends StatelessWidget {
       child: new Scaffold(
         resizeToAvoidBottomInset: false,
         body: new Container(
-          padding: EdgeInsets.only(top: size.height * 0.075),
           decoration: buildAuthBackground(),
           height: MediaQuery.of(context).size.height,
           child: Column(
