@@ -40,7 +40,6 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthModel>(context);
     return Form(
       key: _formKey,
       child: new Column(
@@ -49,7 +48,7 @@ class _LoginFormState extends State<LoginForm> {
             label: "Email",
             //TODO: Add validation
             // validator: (String value)=> value.is,
-            handleChange: (String value) => authProvider.setEmail(value),
+            handleChange: (String value) => store.setEmail(value),
             icon: Icon(Icons.alternate_email, color: Colors.white),
             keyboardType: TextInputType.emailAddress,
             controller: emailController,
@@ -59,7 +58,7 @@ class _LoginFormState extends State<LoginForm> {
             controller: passwordController,
             // validator: (String value) {},
             obscure: true,
-            handleChange: (String value) => authProvider.setPassword(value),
+            handleChange: (String value) => store.setPassword(value),
             icon: Icon(
               Icons.lock_open,
               color: Colors.white,
