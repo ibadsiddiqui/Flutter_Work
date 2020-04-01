@@ -28,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void loader() => this.setState(() => attempLogin = !attempLogin);
 
   Future validateLogin(context, Function resetPass, AuthModel store) async {
+    FocusScope.of(context).requestFocus(FocusNode());
     if (store.canLogin) {
       this.loader();
       await _authController.userSignIn(context, store, loader, resetPass);
