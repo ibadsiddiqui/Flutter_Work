@@ -3,7 +3,6 @@ import 'package:Sufi_Circles/src/models/events_list/EventsListModel.dart';
 import 'package:Sufi_Circles/src/models/recommended_events/RecommendedEventsModel.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/pages/dashboard_screen/dashboard.dart';
-import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
 import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
 import 'package:Sufi_Circles/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,6 @@ class App extends StatelessWidget {
           '/OnBoardingScreen': (_) => OnBoardingScreen(),
           '/LoginScreen': (_) => LoginScreen(),
           '/SignUpScreen': (_) => SignUpScreen(),
-          '/LoadingScreen': (_) => LoadingScreen(),
           '/DashboardScreen': (_) => DashboardScreen(),
         },
       ),

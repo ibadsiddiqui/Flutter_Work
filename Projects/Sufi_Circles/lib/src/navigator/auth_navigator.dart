@@ -1,4 +1,5 @@
-import 'package:Sufi_Circles/src/pages/loading_screen/loading_screen.dart';
+import 'package:Sufi_Circles/src/navigator/timed_navigation.dart';
+import 'package:Sufi_Circles/src/pages/onboard_loading_screen/onboarding_loading.dart';
 import 'package:flutter/material.dart';
 
 Route createRoute({Widget screen}) {
@@ -31,5 +32,10 @@ void pushScreen(context, {Widget screen}) {
 }
 
 void startRouteWihLoading(context, uid) {
-  Navigator.push(context, createRoute(screen: LoadingScreen(uid: uid)));
+  Navigator.push(
+      context,
+      createRoute(
+          screen: OnBoardingLoadingScreen(
+        newRoute: NavigationType.ToDashboard,
+      )));
 }
