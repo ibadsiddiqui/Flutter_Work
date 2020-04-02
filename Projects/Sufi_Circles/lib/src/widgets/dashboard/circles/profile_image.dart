@@ -1,3 +1,4 @@
+import 'package:Sufi_Circles/src/widgets/common/photos/load_photos.dart';
 import 'package:flutter/material.dart';
 
 class RoundProfileImage extends StatelessWidget {
@@ -12,7 +13,10 @@ class RoundProfileImage extends StatelessWidget {
       child: Container(
         height: 100,
         width: 100,
-        child: Image.network(image, fit: BoxFit.cover),
+        child: Image.network(image, fit: BoxFit.cover,
+            loadingBuilder: (_, child, progress) {
+          return progress == null ? child : Center(child: loadPhotos(progress));
+        }),
       ),
     );
   }
