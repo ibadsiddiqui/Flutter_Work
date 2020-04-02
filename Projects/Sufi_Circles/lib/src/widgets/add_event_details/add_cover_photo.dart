@@ -19,9 +19,7 @@ class AddEventCoverPhoto extends StatelessWidget {
   setImage(context, EventModel store, String from, String cameraPath) async {
     if (from == "media") {
       var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
-      if (_image != null) {
-        store.setEventCoverPhoto(_image.path);
-      }
+      if (_image != null) store.setEventCoverPhoto(_image.path);
     } else {
       Navigator.of(context).pop();
       store.setEventCoverPhoto(cameraPath);

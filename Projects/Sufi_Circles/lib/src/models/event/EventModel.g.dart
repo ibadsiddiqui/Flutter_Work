@@ -144,23 +144,6 @@ mixin _$EventModel on _EventModel, Store {
     }, _$dateFromAtom, name: '${_$dateFromAtom.name}_set');
   }
 
-  final _$dateToAtom = Atom(name: '_EventModel.dateTo');
-
-  @override
-  Observable<DateTime> get dateTo {
-    _$dateToAtom.context.enforceReadPolicy(_$dateToAtom);
-    _$dateToAtom.reportObserved();
-    return super.dateTo;
-  }
-
-  @override
-  set dateTo(Observable<DateTime> value) {
-    _$dateToAtom.context.conditionallyRunInAction(() {
-      super.dateTo = value;
-      _$dateToAtom.reportChanged();
-    }, _$dateToAtom, name: '${_$dateToAtom.name}_set');
-  }
-
   final _$startTimeAtom = Atom(name: '_EventModel.startTime');
 
   @override
@@ -415,16 +398,6 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.setEventFromDate(date);
-    } finally {
-      _$_EventModelActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setEventToDate(DateTime date) {
-    final _$actionInfo = _$_EventModelActionController.startAction();
-    try {
-      return super.setEventToDate(date);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }

@@ -68,8 +68,6 @@ abstract class _AuthModel with Store {
   @computed
   Map<String, String> get authDetails => {"email": email, "password": password};
 
-  @computed
-  bool doesPasswordMatch() {
-    return this.confirmPassword == this.password;
-  }
+  @action
+  bool doesPasswordMatch() => this.confirmPassword == this.password;
 }

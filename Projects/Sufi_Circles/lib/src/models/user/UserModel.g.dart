@@ -152,6 +152,23 @@ mixin _$UserModel on _UserModel, Store {
     }, _$profilePictureAtom, name: '${_$profilePictureAtom.name}_set');
   }
 
+  final _$placeHolderAtom = Atom(name: '_UserModel.placeHolder');
+
+  @override
+  String get placeHolder {
+    _$placeHolderAtom.context.enforceReadPolicy(_$placeHolderAtom);
+    _$placeHolderAtom.reportObserved();
+    return super.placeHolder;
+  }
+
+  @override
+  set placeHolder(String value) {
+    _$placeHolderAtom.context.conditionallyRunInAction(() {
+      super.placeHolder = value;
+      _$placeHolderAtom.reportChanged();
+    }, _$placeHolderAtom, name: '${_$placeHolderAtom.name}_set');
+  }
+
   final _$setAllDetailsAsyncAction = AsyncAction('setAllDetails');
 
   @override

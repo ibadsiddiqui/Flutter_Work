@@ -30,9 +30,6 @@ abstract class _EventModel with Store {
   Observable<DateTime> dateFrom = Observable<DateTime>(DateTime.now());
 
   @observable
-  Observable<DateTime> dateTo = Observable<DateTime>(DateTime.now());
-
-  @observable
   Observable<Map<String, dynamic>> startTime =
       Observable<Map<String, dynamic>>({
     "hour": DateTime.now().hour,
@@ -109,21 +106,12 @@ abstract class _EventModel with Store {
   void setEventFromDate(DateTime date) => this.dateFrom.value = date;
 
   @action
-  void setEventToDate(DateTime date) => this.dateTo.value = date;
-
-  @action
   void setEventStartTime(int hour, int minute) {
     this.startTime.value = {
       "hour": hour,
       "minute": minute,
     };
   }
-
-  // @action
-  // void setEventEndTime(int hour, int minute) => this.endTime.value = {
-  //       "hour": hour,
-  //       "minute": minute,
-  //     };
 
   @action
   void resetEventVenueDetail() {
@@ -199,7 +187,6 @@ abstract class _EventModel with Store {
     this.resetEventCoverPhoto();
     this.resetEventVenuePhoto();
     this.setEventFromDate(DateTime.now());
-    this.setEventToDate(DateTime.now());
     this.setEventStartTime(DateTime.now().hour, DateTime.now().minute);
     this.setEventFacebookLink("");
     this.setEventWebLink("");
@@ -214,7 +201,6 @@ abstract class _EventModel with Store {
       "audience": this.eventAudience.value,
       "audienceRange": this.eventAudienceLimitRange.value,
       "dateFrom": this.dateFrom.value,
-      "dateTo": this.dateTo.value,
       "startTime": this.startTime.value,
       "locationDetails": this.locationDetails.value,
       "organiserDetails": {

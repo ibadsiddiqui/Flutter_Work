@@ -58,6 +58,7 @@ class _AddEventDetailsState extends State<AddEventDetails> {
             icon: Icon(Icons.close, color: Color(0xFF072247)),
             onPressed: () {
               eventModel.resetAll();
+              this.setState(() {});
               Navigator.pop(context);
             },
           ),

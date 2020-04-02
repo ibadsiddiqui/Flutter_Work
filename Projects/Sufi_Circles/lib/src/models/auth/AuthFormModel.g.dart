@@ -55,6 +55,23 @@ mixin _$AuthModel on _AuthModel, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
+  final _$confirmPasswordAtom = Atom(name: '_AuthModel.confirmPassword');
+
+  @override
+  String get confirmPassword {
+    _$confirmPasswordAtom.context.enforceReadPolicy(_$confirmPasswordAtom);
+    _$confirmPasswordAtom.reportObserved();
+    return super.confirmPassword;
+  }
+
+  @override
+  set confirmPassword(String value) {
+    _$confirmPasswordAtom.context.conditionallyRunInAction(() {
+      super.confirmPassword = value;
+      _$confirmPasswordAtom.reportChanged();
+    }, _$confirmPasswordAtom, name: '${_$confirmPasswordAtom.name}_set');
+  }
+
   final _$userLoggedInAtom = Atom(name: '_AuthModel.userLoggedIn');
 
   @override
@@ -95,6 +112,16 @@ mixin _$AuthModel on _AuthModel, Store {
   }
 
   @override
+  void setConfirmPassword(String password) {
+    final _$actionInfo = _$_AuthModelActionController.startAction();
+    try {
+      return super.setConfirmPassword(password);
+    } finally {
+      _$_AuthModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setLoginStatus(bool loggedIn) {
     final _$actionInfo = _$_AuthModelActionController.startAction();
     try {
@@ -119,6 +146,16 @@ mixin _$AuthModel on _AuthModel, Store {
     final _$actionInfo = _$_AuthModelActionController.startAction();
     try {
       return super.validateEmail(value);
+    } finally {
+      _$_AuthModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool doesPasswordMatch() {
+    final _$actionInfo = _$_AuthModelActionController.startAction();
+    try {
+      return super.doesPasswordMatch();
     } finally {
       _$_AuthModelActionController.endAction(_$actionInfo);
     }
