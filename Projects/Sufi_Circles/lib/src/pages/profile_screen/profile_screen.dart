@@ -4,7 +4,7 @@ import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/services/storage/ImageStorage.dart';
-import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
+import 'package:Sufi_Circles/src/widgets/common/speed_dial/speed_dial_fab.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_detail_item.dart';
 import 'package:Sufi_Circles/src/widgets/profile/user_picture_background.dart';
@@ -35,10 +35,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void dispose() => super.dispose();
 
   _toggleNameEdit() => this.setState(() => _isFullNameEdit = !_isFullNameEdit);
+
   _toggleCountryEdit() => this.setState(() => _isCountryEdit = !_isCountryEdit);
+
   _toggleCityEdit() => this.setState(() => _isCityEdit = !_isCityEdit);
 
-  void setImage(context, String from, {String cameraPath = ""}) async {
+  void _setImage(context, String from, {String cameraPath = ""}) async {
     UserModel userModel = Provider.of<UserModel>(context);
     if (from == "media") {
       var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -67,22 +69,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: BottomFABs(
-          toolTip1: "Add profile image from Photos",
-          toolTip2: "Add profile image from Camera",
-          icon1: Icon(Icons.add_photo_alternate),
-          icon2: Icon(Icons.camera),
-          onPress1: () => setImage(context, "media"),
-          onPress2: () async {
+      floatingActionButton: SpeedDialFab(
+        icons: [Icons.add_photo_alternate, Icons.camera],
+        mainToopTip: "Add Profile Picture",
+        tooltips: ["Gallery", "Camera"],
+        functions: [
+          () => _setImage(context, "media"),
+          () async {
             final cameras = await availableCameras();
             pushScreen(context,
                 screen: TakePictureScreen(
                   camera: cameras.first,
                   setImage: (String path) =>
-                      setImage(context, "camera", cameraPath: path),
+                      _setImage(context, "camera", cameraPath: path),
                 ));
-          }),
+          },
+        ],
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[

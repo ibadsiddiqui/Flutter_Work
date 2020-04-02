@@ -1,7 +1,6 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/search_events/search_events.dart';
-import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/lastest_events_tiles.dart';
@@ -37,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildHeader(List items, Size size) {
     return Container(
-      height: size.height * 0.5,
+      height: size.width,
       child: GridView.count(
         primary: false,
         physics: null,
@@ -104,11 +103,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     padding: const EdgeInsets.only(top: 2.5, bottom: 5.0),
                     child: DashboardHeadings(title: "Recommended Events"),
                   ),
-                  _buildHeader(
-                      reversedArray(snapshot.data.documents.take(4).toList()),
-                      size),
+                  _buildHeader(snapshot.data.documents.take(4).toList(), size),
                   DashboardHeadings(title: "Latest Events"),
-                  _buildBody(reversedArray(snapshot.data.documents)),
+                  _buildBody(snapshot.data.documents.take(5).toList()),
                 ],
               );
           }
