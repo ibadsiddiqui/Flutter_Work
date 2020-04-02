@@ -207,6 +207,7 @@ abstract class _EventModel with Store {
       "audience": this.eventAudience.value,
       "audienceRange": this.eventAudienceLimitRange.value,
       "dateFrom": this.dateFrom.value,
+      "duration": this.duration.value,
       "startTime": this.startTime.value,
       "locationDetails": this.locationDetails.value,
       "organiserDetails": {

@@ -38,7 +38,7 @@ class _SubmitEventState extends State<SubmitEvent> {
     }
   }
 
-  Widget giveDescription(String text) {
+  Widget _giveDescription(String text) {
     return Text(
       text,
       textAlign: TextAlign.center,
@@ -56,7 +56,7 @@ class _SubmitEventState extends State<SubmitEvent> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              giveDescription("Publishing..."),
+              this._giveDescription("Publishing..."),
               Divider(color: Colors.white),
               Loader(
                 dotOneColor: Colors.redAccent,
@@ -77,7 +77,8 @@ class _SubmitEventState extends State<SubmitEvent> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              giveDescription("The event has successfully been published."),
+              this._giveDescription(
+                  "The event has successfully been published."),
               Container(
                 alignment: Alignment.center,
                 child: Icon(Icons.check, color: Colors.green),
@@ -94,7 +95,7 @@ class _SubmitEventState extends State<SubmitEvent> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                giveDescription(
+                this._giveDescription(
                     "Click on the button below to publish your event."),
                 Container(
                   alignment: Alignment.center,

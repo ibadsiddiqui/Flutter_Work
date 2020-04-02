@@ -13,18 +13,15 @@ class ShowTypeSelectionForVenue extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
             FormHeading(heading: "Add venue details.*"),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 20.0),
-              child: PickerText(
-                text:
-                    "Please select from options below on how do you want to add the venue details?",
-              ),
+            PickerText(
+              text:
+                  "Please select from options below on how do you want to add the venue details?",
             ),
             RaisedButton(
               color: Colors.white,
