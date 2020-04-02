@@ -18,7 +18,7 @@ class DashboardDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Drawer(
       child: Container(
         child: Consumer<UserModel>(

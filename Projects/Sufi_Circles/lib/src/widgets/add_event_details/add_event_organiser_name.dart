@@ -2,6 +2,7 @@ import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
+import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:Sufi_Circles/src/widgets/popup/dialog_show.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -56,8 +57,8 @@ class _AddEventOrganiserNameState extends State<AddEventOrganiserName> {
               ),
             ),
           ),
-          Observer(
-            builder: (_) => eventModel.organiserName.value != ""
+          ObserveWidget(
+            child: eventModel.organiserName.value != ""
                 ? RoundClippedButton(
                     isMain: false,
                     onPress: () async {

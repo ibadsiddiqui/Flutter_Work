@@ -30,6 +30,9 @@ abstract class _UserModel with Store {
   @observable
   String profilePicture = 'asset/images/placeholder/cover/index.png';
 
+  @observable
+  String placeHolder = 'asset/images/placeholder/cover/index.png';
+
   @action
   void setUserID(String userID) => this.userID = userID;
 
@@ -52,7 +55,8 @@ abstract class _UserModel with Store {
   void setUserCity(String city) => this.city = city;
 
   @action
-  void setUserProfilePic(String picture) => this.profilePicture = picture;
+  void setUserProfilePic(String picture) =>
+      this.profilePicture = picture == null ? placeHolder : picture;
 
   @action
   Future setAllDetails(Map<String, dynamic> user) async {
@@ -69,5 +73,6 @@ abstract class _UserModel with Store {
   }
 
   @computed
-  bool get isProfileImageEmpty => profilePicture == "asset/images/placeholder/cover/index.png";
+  bool get isProfileImageEmpty =>
+      profilePicture == "asset/images/placeholder/cover/index.png";
 }

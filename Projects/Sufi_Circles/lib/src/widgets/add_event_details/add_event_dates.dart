@@ -2,6 +2,7 @@ import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/date_picker.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
+import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -9,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class AddEventDate extends StatelessWidget {
   final Function moveToNextPage;
-  
+
   AddEventDate({Key key, this.moveToNextPage}) : super(key: key);
 
   @override
@@ -25,8 +26,8 @@ class AddEventDate extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: FormHeading(heading: "Add dates of the event.*"),
             ),
-            Observer(
-              builder: (_) => EventDatePicker(
+            ObserveWidget(
+              child: EventDatePicker(
                 heading: "At what date will it start?",
                 date: data.dateFrom.value.toString().split(" ")[0],
                 onPressed: () {
@@ -47,8 +48,8 @@ class AddEventDate extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            Observer(
-              builder: (_) => EventDatePicker(
+            ObserveWidget(
+              child: EventDatePicker(
                 heading: "At what date will it end?",
                 date: data.dateTo.value.toString().split(" ")[0],
                 onPressed: () {

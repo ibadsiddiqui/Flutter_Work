@@ -4,10 +4,10 @@ import 'package:Sufi_Circles/src/pages/camera/camera.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_photos_widgets/image_viewer.dart';
+import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -43,15 +43,15 @@ class AddEventCoverPhoto extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: FormHeading(heading: "Add cover photo for the event.*"),
             ),
-            Observer(
-              builder: (_) => Container(
+            ObserveWidget(
+              child: Container(
                 child: isPicPlaceholder(data.eventCoverPhoto)
                     ? ImageViewer(imagePath: "")
                     : ImageViewer(imagePath: data.eventCoverPhoto),
               ),
             ),
-            Observer(
-              builder: (_) => BottomFABs(
+            ObserveWidget(
+              child: BottomFABs(
                   toolTip1: isPicPlaceholder(data.eventCoverPhoto)
                       ? "Add photo image from Photos"
                       : "Cancel",

@@ -66,4 +66,11 @@ class UserDBController {
     UserModel userModel = Provider.of(context);
     _userDBServices.disableUserAccountAsync(userModel.userID);
   }
+
+  Future resetProfilePicture(context) async {
+    UserModel userModel = Provider.of(context);
+    userModel.setUserProfilePic(null);
+    _userDBServices.updateUserProfilePicture(
+        userModel.userID, userModel.placeHolder);
+  }
 }
