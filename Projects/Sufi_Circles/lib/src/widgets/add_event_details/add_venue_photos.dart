@@ -5,7 +5,6 @@ import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dar
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_photos_widgets/image_viewer.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/venue_photos_widgets/photos_list.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -87,8 +86,8 @@ class _AddVenuePhotosState extends State<AddVenuePhotos> {
               ),
               ImageViewer(imagePath: selectedPhoto),
               Container(
-                child: ObserveWidget(
-                  child: Column(
+                child: Observer(
+                  builder: (_) => Column(
                     children: <Widget>[
                       data.eventVenuePhoto.isNotEmpty
                           ? PhotosListView(

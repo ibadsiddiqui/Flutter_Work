@@ -22,12 +22,10 @@ class AddEventDetails extends StatefulWidget {
 }
 
 class _AddEventDetailsState extends State<AddEventDetails> {
-  final _pageController = PageController(initialPage: 0);
+  PageController _pageController = PageController(initialPage: 0);
 
   @override
-  void initState() {
-    super.initState();
-  }
+  void initState() => super.initState();
 
   @override
   void dispose() {

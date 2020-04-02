@@ -3,7 +3,6 @@ import 'package:Sufi_Circles/src/models/event/MetaData.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/radio_button.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -18,11 +17,11 @@ class AddTargettedAudienceLimit extends StatelessWidget {
     EventModel eventModel = Provider.of<EventModel>(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
-      child: ObserveWidget(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      child: Observer(
+        builder: (_) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
             FormHeading(heading: "Describe the audience limit?*"),
             RadioButton(
               value: UNLIMITED,

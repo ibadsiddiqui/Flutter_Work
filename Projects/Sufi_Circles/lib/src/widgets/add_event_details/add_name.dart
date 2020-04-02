@@ -1,7 +1,6 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -17,14 +16,10 @@ class AddEventNameDetail extends StatefulWidget {
 }
 
 class _AddEventNameDetailState extends State<AddEventNameDetail> {
-  TextEditingController eventNameController;
+  TextEditingController eventNameController = TextEditingController(text: "");
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    String eventName = Provider.of<EventModel>(context).eventName.value;
-    eventNameController = TextEditingController(text: eventName);
-  }
+  void initState() => super.initState();
 
   @override
   void dispose() {
@@ -38,9 +33,9 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           FormHeading(heading: widget.title),
           Container(
             child: TextField(
@@ -53,8 +48,8 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
               ),
             ),
           ),
-          ObserveWidget(
-            child: eventModel.eventName.value.isNotEmpty
+          Observer(
+            builder: (_) => eventModel.eventName.value.isNotEmpty
                 ? RoundClippedButton(
                     isMain: false,
                     onPress: () {

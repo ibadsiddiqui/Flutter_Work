@@ -4,7 +4,6 @@ import 'package:Sufi_Circles/src/utils/message.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/picker_text.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:Sufi_Circles/src/widgets/dropdown/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -62,8 +61,8 @@ class VenueDetailForm extends StatelessWidget {
                     "Add country from below:",
                     style: Theme.of(context).textTheme.body2,
                   ),
-                  ObserveWidget(
-                    child: DropDown(
+                  Observer(
+                    builder: (_) => DropDown(
                       list: countriesList,
                       onChanged: (country) => this._setCountry(country, data),
                       value: data.locationDetails.value["country"],
@@ -82,8 +81,8 @@ class VenueDetailForm extends StatelessWidget {
                     "Add state from below:",
                     style: Theme.of(context).textTheme.body2,
                   ),
-                  ObserveWidget(
-                    child: DropDown(
+                  Observer(
+                    builder: (_) => DropDown(
                       list: getStateUsingCountry(
                           data.locationDetails.value["country"]),
                       onChanged: (state) =>
@@ -97,8 +96,8 @@ class VenueDetailForm extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               alignment: Alignment.center,
-              child: ObserveWidget(
-                child:
+              child: Observer(
+                builder: (_) =>
                     getCitiesUsingCountry(data.locationDetails.value["country"])
                                 .length !=
                             0

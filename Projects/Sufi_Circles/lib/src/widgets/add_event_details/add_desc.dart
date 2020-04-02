@@ -19,13 +19,6 @@ class _AddEventDescDetailState extends State<AddEventDescDetail> {
   TextEditingController _eventNameController = TextEditingController(text: "");
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    String desc = Provider.of<EventModel>(context).eventDesc.value;
-    _eventNameController = TextEditingController(text: desc);
-  }
-
-  @override
   Widget build(BuildContext context) {
     EventModel eventModel = Provider.of<EventModel>(context);
     return Container(
@@ -33,8 +26,8 @@ class _AddEventDescDetailState extends State<AddEventDescDetail> {
       alignment: Alignment.centerLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           FormHeading(heading: widget.title),
           MultiLineInput(
             maxLength: 750,

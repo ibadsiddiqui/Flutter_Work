@@ -1,7 +1,6 @@
 import 'package:Sufi_Circles/src/models/event/EventModel.dart';
 import 'package:Sufi_Circles/src/widgets/add_event_details/form/form_heading.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
-import 'package:Sufi_Circles/src/widgets/common/observer/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +25,8 @@ class _AddOrganisersDetailsState extends State<AddOrganisersDetails> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FormHeading(heading: "Add Organiser's details. (optional)"),
-            ObserveWidget(
-              child: Container(
+            Observer(
+              builder: (_) => Container(
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 alignment: Alignment.center,
                 child: Column(
