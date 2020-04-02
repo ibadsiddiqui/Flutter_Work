@@ -10,56 +10,53 @@ class EventDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          PickerText(text: heading),
-          RaisedButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-            elevation: 4.0,
-            onPressed: onPressed,
-            child: Container(
-              alignment: Alignment.center,
-              height: 50.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.date_range,
-                                size: 18.0, color: Color(0xFF072247)),
-                            Text(
-                              " $date",
-                              style: TextStyle(
-                                  color: Color(0xFF072247),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Text(
-                    "Change",
-                    style: TextStyle(
-                        color: Color(0xFF072247),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0),
-                  ),
-                ],
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        PickerText(text: heading),
+        RaisedButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 4.0,
+          onPressed: onPressed,
+          child: Container(
+            alignment: Alignment.center,
+            height: 50.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.date_range,
+                              size: 18.0, color: Color(0xFF072247)),
+                          Text(
+                            " $date",
+                            style: TextStyle(
+                                color: Color(0xFF072247),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Text(
+                  "Change",
+                  style: TextStyle(
+                      color: Color(0xFF072247),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0),
+                ),
+              ],
             ),
-            color: Colors.white,
           ),
-        ],
-      ),
+          color: Colors.white,
+        ),
+      ],
     );
   }
 }

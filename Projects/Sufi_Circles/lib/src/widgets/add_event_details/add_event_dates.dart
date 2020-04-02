@@ -16,15 +16,12 @@ class AddEventDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<EventModel>(
       builder: (_, data, __) => Container(
-        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: FormHeading(heading: "Add dates of the event.*"),
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            FormHeading(heading: "Add dates of the event.*"),
             Observer(
               builder: (_) => EventDatePicker(
                 heading: "At what date will it start?",
@@ -38,7 +35,6 @@ class AddEventDate extends StatelessWidget {
                     maxTime: DateTime(2022, 12, 31),
                     onConfirm: (date) {
                       data.setEventFromDate(date);
-                      data.setEventToDate(date);
                     },
                     currentTime: DateTime.now(),
                     locale: LocaleType.en,
@@ -47,30 +43,7 @@ class AddEventDate extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            Observer(
-              builder: (_) => EventDatePicker(
-                heading: "At what date will it end?",
-                date: data.dateTo.value.toString().split(" ")[0],
-                onPressed: () {
-                  DateTime pickedDate = data.dateFrom.value;
-                  DatePicker.showDatePicker(
-                    context,
-                    theme: DatePickerTheme(containerHeight: 210.0),
-                    showTitleActions: true,
-                    minTime: DateTime(
-                        pickedDate.year, pickedDate.month, pickedDate.day),
-                    onConfirm: (date) => data.setEventToDate(date),
-                    currentTime: DateTime.now(),
-                    locale: LocaleType.en,
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 15),
-            RoundClippedButton(
-              isMain: false,
-              onPress: moveToNextPage,
-            ),
+            RoundClippedButton(isMain: false, onPress: moveToNextPage),
           ],
         ),
       ),

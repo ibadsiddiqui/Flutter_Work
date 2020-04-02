@@ -16,7 +16,7 @@ class AddTargettedAudienceLimit extends StatelessWidget {
   Widget build(BuildContext context) {
     EventModel eventModel = Provider.of<EventModel>(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Observer(
         builder: (_) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,

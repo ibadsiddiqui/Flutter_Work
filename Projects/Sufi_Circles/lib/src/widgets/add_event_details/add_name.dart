@@ -31,7 +31,7 @@ class _AddEventNameDetailState extends State<AddEventNameDetail> {
   Widget build(BuildContext context) {
     EventModel eventModel = Provider.of<EventModel>(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

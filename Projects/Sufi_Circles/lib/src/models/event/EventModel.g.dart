@@ -144,6 +144,23 @@ mixin _$EventModel on _EventModel, Store {
     }, _$dateFromAtom, name: '${_$dateFromAtom.name}_set');
   }
 
+  final _$durationAtom = Atom(name: '_EventModel.duration');
+
+  @override
+  Observable<String> get duration {
+    _$durationAtom.context.enforceReadPolicy(_$durationAtom);
+    _$durationAtom.reportObserved();
+    return super.duration;
+  }
+
+  @override
+  set duration(Observable<String> value) {
+    _$durationAtom.context.conditionallyRunInAction(() {
+      super.duration = value;
+      _$durationAtom.reportChanged();
+    }, _$durationAtom, name: '${_$durationAtom.name}_set');
+  }
+
   final _$startTimeAtom = Atom(name: '_EventModel.startTime');
 
   @override
@@ -408,6 +425,16 @@ mixin _$EventModel on _EventModel, Store {
     final _$actionInfo = _$_EventModelActionController.startAction();
     try {
       return super.setEventStartTime(hour, minute);
+    } finally {
+      _$_EventModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEventDuration(String duration) {
+    final _$actionInfo = _$_EventModelActionController.startAction();
+    try {
+      return super.setEventDuration(duration);
     } finally {
       _$_EventModelActionController.endAction(_$actionInfo);
     }

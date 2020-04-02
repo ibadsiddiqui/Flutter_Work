@@ -32,7 +32,6 @@ class AddEventCoverPhoto extends StatelessWidget {
       builder: (_, data, __) => Container(
         padding: EdgeInsets.only(left: 2, right: 2),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Padding(

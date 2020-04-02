@@ -30,6 +30,9 @@ abstract class _EventModel with Store {
   Observable<DateTime> dateFrom = Observable<DateTime>(DateTime.now());
 
   @observable
+  Observable<String> duration = Observable<String>("1");
+
+  @observable
   Observable<Map<String, dynamic>> startTime =
       Observable<Map<String, dynamic>>({
     "hour": DateTime.now().hour,
@@ -112,6 +115,9 @@ abstract class _EventModel with Store {
       "minute": minute,
     };
   }
+
+  @action
+  void setEventDuration(String duration) => this.duration.value = duration;
 
   @action
   void resetEventVenueDetail() {

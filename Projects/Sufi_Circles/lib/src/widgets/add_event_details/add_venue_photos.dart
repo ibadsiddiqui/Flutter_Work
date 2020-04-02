@@ -76,7 +76,6 @@ class _AddVenuePhotosState extends State<AddVenuePhotos> {
         padding: EdgeInsets.only(left: 2, right: 2),
         child: Consumer<EventModel>(
           builder: (_, data, __) => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Padding(
