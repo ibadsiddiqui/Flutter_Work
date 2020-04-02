@@ -7,14 +7,12 @@ class DashboardHeadings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: color != null
-            ? TextStyle(fontFamily: "CreteRound", fontSize: 25, color: color)
-            : Theme.of(context).textTheme.display1,
-      ),
+    return Text(
+      title,
+      textAlign: TextAlign.center,
+      style: color != null
+          ? TextStyle(fontFamily: "CreteRound", fontSize: 25, color: color)
+          : Theme.of(context).textTheme.display1,
     );
   }
 }

@@ -37,14 +37,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildHeader(List items, Size size) {
     return Container(
-      height: size.height * 0.6,
+      height: size.height * 0.5,
       child: GridView.count(
         primary: false,
         physics: null,
         crossAxisCount: 2,
         mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
         crossAxisSpacing: MediaQuery.of(context).size.height * 0.015,
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         children: _generateHeaderList(items),
       ),
     );
@@ -107,10 +107,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   _buildHeader(
                       reversedArray(snapshot.data.documents.take(4).toList()),
                       size),
-                  Container(
-                    margin: EdgeInsets.only(top: 2.5, bottom: 5.0),
-                    child: DashboardHeadings(title: "Latest Events"),
-                  ),
+                  DashboardHeadings(title: "Latest Events"),
                   _buildBody(reversedArray(snapshot.data.documents)),
                 ],
               );

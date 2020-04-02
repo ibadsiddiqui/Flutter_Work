@@ -2,7 +2,6 @@ import 'package:Sufi_Circles/src/models/auth/AuthFormModel.dart';
 import 'package:Sufi_Circles/src/widgets/form/inputs.dart';
 import 'package:Sufi_Circles/src/widgets/auth/SubmitButton.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget {
   final Function onPress;

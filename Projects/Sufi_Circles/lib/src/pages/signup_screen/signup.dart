@@ -42,7 +42,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => true,
       child: new Scaffold(
