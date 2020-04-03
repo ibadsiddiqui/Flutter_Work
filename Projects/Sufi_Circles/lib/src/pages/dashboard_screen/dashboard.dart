@@ -1,5 +1,6 @@
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
+import 'package:Sufi_Circles/src/pages/create_event/create_event.dart';
 import 'package:Sufi_Circles/src/pages/search_events/search_events.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/drawer/drawer.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
@@ -67,6 +68,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       drawer: DashboardDrawer(),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Create Event",
+        child: Icon(Icons.add, color: Colors.white,),
+        onPressed: () => pushScreen(context, screen: CreateEvent()),
+        backgroundColor: Color(0xFF072247),
+      ),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color(0xFF072247),

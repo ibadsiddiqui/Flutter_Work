@@ -1,6 +1,7 @@
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/add_details/add_details.dart';
 import 'package:Sufi_Circles/src/widgets/buttons/round_clipped_button.dart';
+import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 import 'package:flutter/material.dart';
 
 class CreateEvent extends StatelessWidget {
@@ -10,9 +11,9 @@ class CreateEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF072247)),
+        centerTitle: true,
+        backgroundColor: Color(0xFF072247),
+        title: DashboardHeadings(title: "Create Event", color: Colors.white),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
