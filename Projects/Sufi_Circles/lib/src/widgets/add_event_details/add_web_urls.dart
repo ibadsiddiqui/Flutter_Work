@@ -40,66 +40,63 @@ class _AddEventWebURLsState extends State<AddEventWebURLs> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FormHeading(heading: "Add Event URLs. (optional)"),
-            Observer(
-              builder: (_) => Container(
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                alignment: Alignment.center,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 20),
-                    Text(
-                      "Facebook URL:",
-                      style: Theme.of(context).textTheme.body2,
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          FormHeading(heading: "Add Event URLs. (optional)"),
+          Observer(
+            builder: (_) => Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              alignment: Alignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // SizedBox(height: 20),
+                  Text(
+                    "Facebook URL:",
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                  TextField(
+                    style: Theme.of(context).textTheme.body2,
+                    controller: eventFacebookLinkController,
+                    decoration: InputDecoration(
+                      hintText: "Enter here...",
+                      hintStyle: TextStyle(fontSize: 17),
                     ),
-                    TextField(
-                      style: Theme.of(context).textTheme.body2,
-                      controller: eventFacebookLinkController,
-                      decoration: InputDecoration(
-                        hintText: "Enter here...",
-                        hintStyle: TextStyle(fontSize: 17),
-                      ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    "Website URL:",
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                  TextField(
+                    controller: eventWebLinkController,
+                    style: Theme.of(context).textTheme.body2,
+                    decoration: InputDecoration(
+                      hintText: "Enter here...",
+                      hintStyle: TextStyle(fontSize: 17),
                     ),
-                    SizedBox(height: 20),
-                    Text(
-                      "Website URL:",
-                      style: Theme.of(context).textTheme.body2,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    "Instagram URL:",
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                  TextField(
+                    controller: eventInstagramLinkController,
+                    style: Theme.of(context).textTheme.body2,
+                    decoration: InputDecoration(
+                      hintText: "Enter here...",
+                      hintStyle: TextStyle(fontSize: 17),
                     ),
-                    TextField(
-                      controller: eventWebLinkController,
-                      style: Theme.of(context).textTheme.body2,
-                      decoration: InputDecoration(
-                        hintText: "Enter here...",
-                        hintStyle: TextStyle(fontSize: 17),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      "Instagram URL:",
-                      style: Theme.of(context).textTheme.body2,
-                    ),
-                    TextField(
-                      controller: eventInstagramLinkController,
-                      style: Theme.of(context).textTheme.body2,
-                      decoration: InputDecoration(
-                        hintText: "Enter here...",
-                        hintStyle: TextStyle(fontSize: 17),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            RoundClippedButton(isMain: false, onPress: widget.moveToNextPage),
-          ],
-        ),
+          ),
+          RoundClippedButton(isMain: false, onPress: widget.moveToNextPage),
+        ],
       ),
     );
   }
