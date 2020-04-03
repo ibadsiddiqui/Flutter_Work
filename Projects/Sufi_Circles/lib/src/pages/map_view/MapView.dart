@@ -1,4 +1,5 @@
 import 'package:Sufi_Circles/src/services/maps/MapSerivce.dart';
+import 'package:Sufi_Circles/src/utils/message.dart';
 import 'package:Sufi_Circles/src/widgets/fab/fab.dart';
 import 'package:Sufi_Circles/src/widgets/loader/dot_type.dart';
 import 'package:Sufi_Circles/src/widgets/loader/loader.dart';
@@ -19,11 +20,12 @@ class MapView extends StatefulWidget {
 
 class _MapViewState extends State<MapView> {
   MapServices _mapServices = MapServices();
-  final Set<Marker> _markers = new Set();
-  bool _isPickingLocation = false;
-
+  bool _isPickingLocation = true;
   Placemark _placemark;
   Position _currentLocation;
+
+  final Set<Marker> _markers = new Set();
+  final globalKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() => super.initState();
@@ -35,14 +37,14 @@ class _MapViewState extends State<MapView> {
   @mustCallSuper
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    this.setState(() => _isPickingLocation = true);
     Position position = await _mapServices.getCurrentLocation();
-    await setPlaceMarks(position.latitude, position.longitude);
-
+    setPlaceMarks(position.latitude, position.longitude);
     this.setState(() {
       _isPickingLocation = false;
       _currentLocation = position;
     });
+    globalKey.currentState.showSnackBar(showSuccessMessage(
+        "Hold and move the pointer to the event's location"));
   }
 
   setPlaceMarks(double lat, double long, {dragOn = false}) async {
@@ -60,25 +62,27 @@ class _MapViewState extends State<MapView> {
   }
 
   Set<Marker> myMarker() {
-    setState(() {
+    this.setState(() {
       _markers.add(Marker(
         draggable: true,
         onDragEnd: (latlong) =>
             setPlaceMarks(latlong.latitude, latlong.longitude, dragOn: true),
         markerId: MarkerId("EventLocation"),
         position: LatLng(_currentLocation.latitude, _currentLocation.longitude),
-        infoWindow: InfoWindow(
-          title: _placemark.name.isEmpty ? "Unknown" : _placemark.name,
-          snippet: _placemark.subLocality +
-              " " +
-              _placemark.thoroughfare +
-              " " +
-              _placemark.subAdministrativeArea +
-              " " +
-              _placemark.administrativeArea +
-              " " +
-              _placemark.country,
-        ),
+        infoWindow: _placemark != null
+            ? InfoWindow(
+                title: _placemark.name.isEmpty ? "Unknown" : _placemark.name,
+                snippet: _placemark.subLocality +
+                    " " +
+                    _placemark.thoroughfare +
+                    " " +
+                    _placemark.subAdministrativeArea +
+                    " " +
+                    _placemark.administrativeArea +
+                    " " +
+                    _placemark.country,
+              )
+            : null,
         icon: BitmapDescriptor.defaultMarker,
       ));
     });
@@ -88,6 +92,7 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: globalKey,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: _isPickingLocation
           ? null

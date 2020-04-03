@@ -2,19 +2,30 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 
 class MapServices {
-  Future<List<Placemark>> getCurrentPlacemark(double lat, double long) async {
+  Geolocator _geolocator = new Geolocator();
+  Future getCurrentPlacemark(double lat, double long) async {
     try {
       List<Placemark> placemark =
-          await Geolocator().placemarkFromCoordinates(lat, long);
+          await _geolocator.placemarkFromCoordinates(lat, long);
       return placemark;
-    } on PlatformException {
+    } on PlatformException catch (e) {
+      print(e);
       return [];
+    } catch (e) {
+      print(e);
+      return e;
     }
   }
 
-  Future<Position> getCurrentLocation() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    return position;
+  Future getCurrentLocation() async {
+    try {
+      return await _geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+    } on PlatformException catch (e) {
+      print(e);
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 }
