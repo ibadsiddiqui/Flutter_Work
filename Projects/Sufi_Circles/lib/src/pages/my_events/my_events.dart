@@ -2,10 +2,10 @@ import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/create_event/create_event.dart';
+import 'package:Sufi_Circles/src/widgets/add_event_details/event_date_widgets/picker_text.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 import 'package:Sufi_Circles/src/widgets/events_list/events_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,12 +18,41 @@ class MyEvents extends StatefulWidget {
 
 class _MyEventsState extends State<MyEvents> {
   EventDBController _eventDBController = EventDBController();
-  // TextEditingController _searchController = TextEditingController();
 
   List _getList(List<DocumentSnapshot> documents, String id) {
     return documents.where((DocumentSnapshot doc) {
-      return doc["createdBy"] == id;
+      return doc.data["createdBy"] == id;
     }).toList();
+  }
+
+  Future<Widget> _buildAlertBox(String id) {
+    return showDialog(
+      context: context,
+      child: AlertDialog(
+        title: Text('Are you sure?'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Archive', style: TextStyle(color: Color(0xFF072247))),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text('Delete', style: TextStyle(color: Colors.red)),
+            onPressed: () {
+              _eventDBController.deleteEvent(id);
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -49,7 +78,6 @@ class _MyEventsState extends State<MyEvents> {
             else if (snapshot.data.documents.isEmpty)
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     "You haven't created any events yet. \nWould You like to create one?",
@@ -65,43 +93,17 @@ class _MyEventsState extends State<MyEvents> {
                 ],
               );
             else
-              return EventsList(
-                onLongPress: () {
-                  showDialog(
-                    context: context,
-                    child: AlertDialog(
-                      title: Text('Are you sure?'),
-                      actions: <Widget>[
-                        FlatButton(
-                          child: Text(
-                            'Archive',
-                            style: TextStyle(color: Color(0xFF072247)),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        FlatButton(
-                          child: Text(
-                            'Delete',
-                            style: TextStyle(color: Colors.red),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        FlatButton(
-                          child: Text('Cancel'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
+              return Column(
+                children: <Widget>[
+                  PickerText(text: "Press and hold to see other options"),
+                  Expanded(
+                    child: EventsList(
+                      onLongPress: this._buildAlertBox,
+                      documents: this
+                          ._getList(snapshot.data.documents, userModel.userID),
                     ),
-                  );
-                },
-                documents:
-                    this._getList(snapshot.data.documents, userModel.userID),
+                  ),
+                ],
               );
           },
         ),

@@ -58,4 +58,14 @@ class EventDBController {
       return [];
     }
   }
+
+  Future<bool> deleteEvent(String eventID) async {
+    try {
+      bool data = await _eventDBService.deleteEventAsync(eventID);
+      return data;
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
 }

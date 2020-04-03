@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uuid/uuid.dart';
 
 class EventDBService {
   CollectionReference eventDB = Firestore.instance.collection("events");
-  Uuid uuid = new Uuid();
 
   Future<bool> createEvent(Map<String, dynamic> details) async {
     try {
@@ -27,6 +24,24 @@ class EventDBService {
   Future<QuerySnapshot> getLatestEventsSnapShot() {
     try {
       return eventDB.getDocuments();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<bool> deleteEventAsync(String id) async {
+    try {
+      CollectionReference deletedEvents =
+          Firestore.instance.collection("deleted-events");
+
+      DocumentReference documentRef = eventDB.document(id);
+
+      DocumentSnapshot document = await documentRef.get();
+      await deletedEvents.document(document.documentID).setData(document.data);
+
+      documentRef.delete();
+
+      return true;
     } catch (e) {
       throw e;
     }
