@@ -1,6 +1,7 @@
 import 'package:Sufi_Circles/src/models/user/UserModel.dart';
 import 'package:Sufi_Circles/src/navigator/auth_navigator.dart';
 import 'package:Sufi_Circles/src/pages/create_event/create_event.dart';
+import 'package:Sufi_Circles/src/pages/my_events/my_events.dart';
 import 'package:Sufi_Circles/src/pages/profile_screen/profile_screen.dart';
 import 'package:Sufi_Circles/src/pages/setting_screen/setting_screen.dart';
 import 'package:Sufi_Circles/src/utils/string_helper.dart';
@@ -61,6 +62,11 @@ class DashboardDrawer extends StatelessWidget {
                   title: "Profile",
                   leftIcon: Icon(Icons.person),
                   onPress: () => _navigateTo(context, screen: ProfileScreen()),
+                ),
+                DrawerItem(
+                  title: "My Events",
+                  leftIcon: Icon(Icons.assignment),
+                  onPress: () => _navigateTo(context, screen: MyEvents()),
                 ),
                 DrawerItem(
                   title: "Create Event",

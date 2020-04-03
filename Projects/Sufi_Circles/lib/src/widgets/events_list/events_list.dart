@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class EventsList extends StatelessWidget {
   final List<DocumentSnapshot> documents;
+  final Function onLongPress;
 
-  EventsList({Key key, this.documents}) : super(key: key);
+  EventsList({Key key, this.documents, this.onLongPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class EventsList extends StatelessWidget {
           height: 120,
           width: double.maxFinite,
           child: InkWell(
+            onLongPress: onLongPress,
             onTap: () =>
                 pushScreen(context, screen: EventDetails(event: document)),
             splashColor: Theme.of(context).backgroundColor,
@@ -31,11 +33,11 @@ class EventsList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
                     child: Image.network(
                       document["coverPhotoURL"],
-                      width: size.width * 0.2,
-                      height: size.height * 0.1,
+                      width: size.width * 0.15,
+                      height: size.width * 0.15,
                       fit: BoxFit.cover,
                     ),
                   ),
