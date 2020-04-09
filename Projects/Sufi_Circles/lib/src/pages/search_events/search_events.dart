@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Sufi_Circles/src/controllers/db/EventDBController.dart';
 import 'package:Sufi_Circles/src/widgets/dashboard/heading.dart';
 import 'package:Sufi_Circles/src/widgets/events_list/events_list.dart';
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SearchEvents extends StatefulWidget {
   @override
@@ -14,6 +14,7 @@ class _SearchEventsState extends State<SearchEvents> {
   TextEditingController _searchController = TextEditingController();
 
   String searchQuery = "";
+  String searchTags = "";
 
   void _resetSearch() {
     this._searchController.clear();
